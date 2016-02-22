@@ -1,3 +1,4 @@
+### Unity ###
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -24,3 +25,11 @@ ExportedObj/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+# FMOD Generated Files
+/Assets/FMODAssets/*
+/Assets/Resources/*
+/Assets/StreamingAssets/*
+/Assets/FMODStudioCache.asset
+fmod_editor.log
+fmod.log
