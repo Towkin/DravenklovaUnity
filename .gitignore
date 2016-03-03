@@ -33,3 +33,5 @@ sysinfo.txt
 /Assets/FMODStudioCache.asset
 fmod_editor.log
 fmod.log
+Assets/Temporary_character/
+Assets/Temporary_character.meta
