@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Camera))]
 public class Player : Pawn {
 
-    Camera m_Cam = Camera.main;
+    
     [SerializeField]
     private float m_SearchDist = 100f;
     public float SearchDist
@@ -11,15 +13,30 @@ public class Player : Pawn {
         get { return m_SearchDist; } 
     }
 
-	// Use this for initialization
-	void Start ()
+    #region Components
+    private Rigidbody m_PhysicsBody;
+    public Rigidbody PhysicsBody
     {
-	    
+        get { return m_PhysicsBody; }
+        set { m_PhysicsBody = value; }
+    }
+    private Camera m_Cam;
+    public Camera Cam
+    {
+        get { return m_Cam; }
+        set { m_Cam = value; }
+    }
+    #endregion
+
+    void Start ()
+    {
+        Cam = GetComponent<Camera>();
+        PhysicsBody = GetComponent<Rigidbody>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+	    
 	}
 
     void FixedUpdate ()
@@ -45,6 +62,12 @@ public class Player : Pawn {
             }
         }
 
+
         //TODO: Functionality for taking sanity damage
     }
+
+    //void OnTriggerEnter(Collider Coll)
+    //{
+    //     TODO: Any and all code for player collision, if we decide to have such
+    //}
 }
