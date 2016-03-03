@@ -1,24 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// public abstract class Pawn : MonoBehaviour <- Use this one later
-public class Pawn : MonoBehaviour
+public abstract class Pawn : MonoBehaviour
 {
 
     #region All move attributes
     #region Basic move attributes
     [Header("Basic move attributes")]
 
+
     [SerializeField]
-    [Range(0f, 50f)]
-    protected float m_MaxSpeed = 5f;
-    public float MaxSpeed
+    [Range(0f, 5f)]
+    private float m_SprintSpeedMultiplier = 2f;
+    private float SprintSpeedMultiplier
     {
-        get { return m_MaxSpeed; }
+        get { return m_SprintSpeedMultiplier; }
+        //protected set { m_SprintSpeedMultiplier = value; }
+    }
+
+    private float MaxSpeedMultiplier
+    {
+        get
+        {
+            float Mult = 1f;
+            Mult *= InputSprint ? m_SprintSpeedMultiplier : 1f;
+            return Mult;
+        }
     }
 
     [SerializeField]
-    [Range(0f, 10f)]
+    [Range(0f, 20f)]
+    protected float m_MaxSpeed = 5f;
+    public float MaxSpeed
+    {
+        get { return m_MaxSpeed * MaxSpeedMultiplier; }
+    }
+
+    [SerializeField]
+    [Range(0f, 100f)]
     protected float m_Acceleration = 1f;
     public float Acceleration
     {
@@ -26,7 +45,7 @@ public class Pawn : MonoBehaviour
     }
 
     [SerializeField]
-    [Range(0f, 10f)]
+    [Range(0f, 100f)]
     protected float m_Deacceleration = 1f;
     public float Deacceleration
     {
@@ -40,8 +59,10 @@ public class Pawn : MonoBehaviour
     {
         get { return m_Decay; }
     }
+
     protected Vector3 m_Velocity = Vector3.zero;
     protected Vector3 m_LastDirection = Vector3.forward;
+    protected Vector2 m_LastPlanarDirection = Vector2.up;
     public Vector3 Velocity
     {
         get { return m_Velocity; }
@@ -51,14 +72,31 @@ public class Pawn : MonoBehaviour
             if (m_Velocity != Vector3.zero)
             {
                 m_LastDirection = m_Velocity.normalized;
+
+                if(m_LastDirection != Vector3.up && m_LastDirection != Vector3.down)
+                {
+                    m_LastPlanarDirection = new Vector2(m_LastDirection.x, m_LastDirection.z).normalized;
+                }
             }
         }
+    }
+    public Vector2 PlanarVelocity
+    {
+        get { return new Vector2(Velocity.x, Velocity.z); }
+        set { Velocity = new Vector3(value.x, Velocity.y, value.y); }
     }
     public float Speed
     {
         get { return Velocity.magnitude; }
-        // TODO: Change m_Velocity.normalized to something better
-        protected set { Velocity = Velocity.normalized * value; }
+        protected set { Velocity = VelocityDirection * value; }
+    }
+    public float PlanarSpeed
+    {
+        get { return new Vector2(Velocity.x, Velocity.z).magnitude; }
+        protected set {
+            Vector2 NewPlanarSpeed = PlanarVelocityDirection * value;
+            Velocity = new Vector3(NewPlanarSpeed.x, Velocity.y, NewPlanarSpeed.y);
+        }
     }
 
     public Vector3 VelocityDirection
@@ -66,10 +104,51 @@ public class Pawn : MonoBehaviour
         get { return m_LastDirection; }
         protected set { Velocity = value.normalized * Speed; }
     }
+    public Vector2 PlanarVelocityDirection
+    {
+        get { return m_LastPlanarDirection; }
+        protected set
+        {
+            Vector2 NormalizedValue = value.normalized;
+            Velocity = new Vector3(NormalizedValue.x, Velocity.y, NormalizedValue.y);
+        }
+    }
 
     public Vector3 ForwardVelocity
     {
         get { return transform.rotation * Velocity; }
+        set
+        {
+            Velocity = transform.rotation * value;
+        }
+    }
+    public Vector2 PlanarForwardVelocity
+    {
+        get
+        {
+            float Rad = Mathf.PI * (transform.eulerAngles.y / 180f);
+            Vector2 Base = PlanarVelocity;
+
+            var ca = Mathf.Cos(Rad);
+            var sa = Mathf.Sin(Rad);
+
+            float NewX = ca * Base.x - sa * Base.y;
+            float NewY = sa * Base.x + ca * Base.y;
+
+            return new Vector2(NewX, NewY);
+        }
+        set
+        {
+            float Rad = -Mathf.PI * (transform.eulerAngles.y / 180f);
+            
+            var ca = Mathf.Cos(Rad);
+            var sa = Mathf.Sin(Rad);
+
+            float NewX = ca * value.x - sa * value.y;
+            float NewY = sa * value.x + ca * value.y;
+
+            PlanarVelocity = new Vector2(NewX, NewY);
+        }
     }
 
     #endregion
@@ -77,10 +156,19 @@ public class Pawn : MonoBehaviour
     #region Jump and gravity attributes
     [Header("Jump and gravity attributes")]
     [SerializeField]
-    protected float m_JumpForce = 10f;
-    public float JumpForce
+    [Range(0f, 100f)]
+    protected float m_JumpAcceleration = 10f;
+    public float JumpAcceleration
     {
-        get { return m_JumpForce; }
+        get { return m_JumpAcceleration; }
+    }
+    [SerializeField]
+    [Range(0f, 1f)]
+    protected float m_AirControl = 0.05f;
+    public float AirControl
+    {
+        get { return m_AirControl; }
+        protected set { m_AirControl = value; }
     }
     protected float m_JumpTime = 0f;
     public float JumpTime
@@ -89,6 +177,7 @@ public class Pawn : MonoBehaviour
         protected set { m_JumpTime = value; }
     }
     [SerializeField]
+    [Range(0f, 1f)]
     protected float m_JumpTimeMax = 0.2f;
     public float JumpTimeMax
     {
@@ -99,6 +188,19 @@ public class Pawn : MonoBehaviour
     {
         get { return m_IsGrounded; }
         protected set { m_IsGrounded = value; }
+    }
+    protected bool m_IsJumping = false;
+    public bool IsJumping
+    {
+        get { return m_IsJumping; }
+        set
+        {
+            if(IsGrounded && value)
+            {
+                JumpTime = 0f;
+            }
+            m_IsJumping = value;
+        }
     }
     [SerializeField]
     protected Vector3 m_PawnGravity = new Vector3(0f, -9.82f, 0f);
@@ -144,6 +246,10 @@ public class Pawn : MonoBehaviour
     public Vector3 ViewDirection
     {
         get { return m_ViewDirection; }
+        set
+        {
+            m_ViewDirection = value.normalized;
+        }
     }
     #endregion
     #endregion
@@ -214,34 +320,47 @@ public class Pawn : MonoBehaviour
         Holy = 1;
         Oil = 1;
     }
-    
+
     #endregion
 
-    
-    void Start ()
-    {
-     
-	}
-    
-    void Update()
-    {
-        #region Test movement variable code
-        Vector3 VelocityAdd = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized * Acceleration * Time.deltaTime;
-        if (VelocityAdd == Vector3.zero)
-        {
-            Speed -= Mathf.Min(Time.deltaTime * Deacceleration, Speed);
-            Speed *= Mathf.Pow(1f - Decay, Time.deltaTime);
-        }
-        else
-        {
-            Velocity += VelocityAdd;
-            Speed = Mathf.Min(MaxSpeed, Speed);
+    #region Input variables
 
+    protected Vector2 m_InputMoveDirection = Vector2.zero;
+    protected Vector2 InputMoveDirection
+    {
+        get { return m_InputMoveDirection; }
+        set
+        {
+            Vector2 InputVal = value;
+            if(InputVal.magnitude > 1f)
+            {
+                InputVal = InputVal.normalized;
+            }
+            m_InputMoveDirection = InputVal;
         }
-
-        
-        transform.position += Velocity * Time.deltaTime;
-        #endregion
-        
     }
+    protected float InputMoveScale
+    {
+        get { return InputMoveDirection.magnitude; }
+        set
+        {
+            InputMoveDirection = InputMoveDirection.normalized * Mathf.Clamp01(value);
+        }
+    }
+    protected bool m_InputJump = false;
+    public bool InputJump
+    {
+        get { return m_InputJump; }
+        protected set { m_InputJump = value; }
+    }
+    protected bool m_InputSprint = false;
+    public bool InputSprint
+    {
+        get { return m_InputSprint; }
+        set { m_InputSprint = value; }
+    }
+
+
+    #endregion
+
 }
