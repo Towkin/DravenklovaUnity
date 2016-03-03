@@ -11,15 +11,17 @@ public class Player : Pawn {
         get { return m_SearchDist; } 
     }
 
-	// Use this for initialization
+
+        
 	void Start ()
     {
-	    
+        
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+	    
 	}
 
     void FixedUpdate ()
@@ -45,6 +47,12 @@ public class Player : Pawn {
             }
         }
 
+
         //TODO: Functionality for taking sanity damage
     }
+
+    //void OnTriggerEnter(Collider Coll)
+    //{
+    //     TODO: Any and all code for player collision, if we decide to have such
+    //}
 }
