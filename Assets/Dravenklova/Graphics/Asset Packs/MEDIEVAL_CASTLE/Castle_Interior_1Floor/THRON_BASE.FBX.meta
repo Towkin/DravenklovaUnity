@@ -1,0 +1,2481 @@
+fileFormatVersion: 2
+guid: 32f245b4519eb2247b83eb6fa261cb73
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Arc_Long_00
+    100002: Arc_Long_01
+    100004: Arc_Long_02
+    100006: Arc_Romb_Wood_A_00
+    100008: Arc_Romb_Wood_A_01
+    100010: Arc_Romb_Wood_A_02
+    100012: Arc_Romb_Wood_A_03
+    100014: Arc_Romb_Wood_A_04
+    100016: Arc_Romb_Wood_A_05
+    100018: Arc_Romb_Wood_A_06
+    100020: Arc_Romb_Wood_A_07
+    100022: Arc_Romb_Wood_A_08
+    100024: Arc_Wood_A_00
+    100026: Arc_Wood_A_01
+    100028: Arc_Wood_A_02
+    100030: Arc_Wood_A_03
+    100032: Arc_Wood_A_04
+    100034: Arc_Wood_A_05
+    100036: Arc_Wood_A_06
+    100038: Arc_Wood_A_07
+    100040: Arc_Wood_A_08
+    100042: Arc_Wood_A_09
+    100044: Arc_Wood_A_10
+    100046: Arc_Wood_A_11
+    100048: Arc_Wood_A_12
+    100050: Arc_Wood_A_13
+    100052: Arc_Wood_A_14
+    100054: Arc_Wood_A_15
+    100056: Arc_Wood_A_16
+    100058: Arc_Wood_A_17
+    100060: Barracks
+    100062: Barracks_Pass
+    100064: Block_D_02
+    100066: Bordur_B
+    100068: Bordur_B_00
+    100070: Bordur_B_01
+    100072: Castle_Ornament_A_00
+    100074: Castle_Ornament_A_01
+    100076: Castle_Ornament_A_02
+    100078: Castle_Ornament_A_03
+    100080: Castle_Ornament_B_04
+    100082: Castle_Ornament_B_05
+    100084: Castle_Ornament_B_06
+    100086: Castle_Ornament_B_07
+    100088: Castle_Ornament_B_08
+    100090: Castle_Ornament_B_09
+    100092: Castle_Ornament_B_10
+    100094: Castle_Ornament_B_11
+    100096: Castle_Ornament_B_12
+    100098: Castle_Ornament_B_13
+    100100: Castle_Ornament_B_14
+    100102: Castle_Ornament_B_15
+    100104: Castle_Ornament_B_16
+    100106: Castle_Ornament_B_17
+    100108: Castle_Ornament_B_18
+    100110: Castle_Ornament_B_19
+    100112: Castle_Ornament_B_20
+    100114: Castle_Ornament_B_21
+    100116: Castle_Ornament_B_22
+    100118: Castle_Ornament_B_23
+    100120: Colomn_Main_00
+    100122: Colomn_Main_01
+    100124: Colomn_Main_02
+    100126: Colomn_Main_03
+    100128: Colomn_Main_04
+    100130: Colomn_Main_05
+    100132: Colomn_Main_06
+    100134: Colomn_Main_07
+    100136: Colomn_Main_08
+    100138: Colomn_Main_09
+    100140: Colomn_Main_10
+    100142: Colomn_Main_11
+    100144: Colomn_Main_12
+    100146: Colomn_Main_13
+    100148: Colomn_Main_14
+    100150: Colomn_Main_15
+    100152: Colomn_Main_16
+    100154: Colomn_Main_17
+    100156: Colomn_Main_18
+    100158: Colomn_Wooden _A_00
+    100160: Colomn_Wooden _A_01
+    100162: Colomn_Wooden _A_02
+    100164: Colomn_Wooden _A_03
+    100166: Colomn_Wooden _A_04
+    100168: Colomn_Wooden _A_05
+    100170: Colomn_Wooden _A_06
+    100172: Colomn_Wooden _A_07
+    100174: Colomn_Wooden _A_08
+    100176: Colomn_Wooden _A_09
+    100178: Colomn_Wooden _A_10
+    100180: Colomn_Wooden _A_11
+    100182: Colomn_Wooden _A_12
+    100184: Colomn_Wooden _A_13
+    100186: Colomn_Wooden _A_14
+    100188: Colomn_Wooden _A_15
+    100190: Colomn_Wooden _A_16
+    100192: Colomn_Wooden _A_17
+    100194: Colomn_Wooden _A_18
+    100196: Colomn_Wooden _A_19
+    100198: Colomn_Wooden _A_20
+    100200: Colomn_Wooden _A_21
+    100202: Colomn_Wooden _A_22
+    100204: Colomn_Wooden _A_23
+    100206: Colomn_Wooden _A_24
+    100208: Colomn_Wooden _A_25
+    100210: Colomn_Wooden _A_26
+    100212: Colomn_Wooden _A_27
+    100214: Colomn_Wooden _A_28
+    100216: Colomn_Wooden _A_29
+    100218: Colomn_Wooden _A_30
+    100220: Colomn_Wooden _A_31
+    100222: Colomn_Wooden _A_32
+    100224: Colomn_Wooden _A_33
+    100226: Colomn_Wooden _A_34
+    100228: Colomn_Wooden _A_35
+    100230: Colomn_Wooden _A_36
+    100232: Colomn_Wooden _A_37
+    100234: Colomn_Wooden _A_38
+    100236: Colomn_Wooden _A_39
+    100238: Colomn_Wooden _A_40
+    100240: Colomn_Wooden _A_41
+    100242: Colomn_Wooden _A_42
+    100244: Colomn_Wooden _A_43
+    100246: Colomn_Wooden _A_44
+    100248: Colomn_Wooden _A_45
+    100250: Colomn_Wooden _A_46
+    100252: Colomn_Wooden _A_47
+    100254: Colomn_Wooden _A_48
+    100256: Colomn_Wooden _A_49
+    100258: Colomn_Wooden _A_50
+    100260: Colomn_Wooden _A_51
+    100262: Colomn_Wooden _A_52
+    100264: Column_Wood_Long_00
+    100266: Column_Wood_Long_01
+    100268: Column_Wood_Long_02
+    100270: Column_Wood_Long_03
+    100272: Column_Wood_Long_04
+    100274: Column_Wood_Long_05
+    100276: Column_Wood_Long_06
+    100278: Column_Wood_Long_07
+    100280: Column_Wood_Long_08
+    100282: Column_Wood_Long_09
+    100284: Column_Wood_Long_10
+    100286: Column_Wood_Long_11
+    100288: Column_Wood_Long_12
+    100290: Column_Wood_Long_13
+    100292: Column_Wood_Long_14
+    100294: Column_Wood_Long_15
+    100296: Column_Wood_Long_16
+    100298: Column_Wood_Long_17
+    100300: Column_Wood_Long_18
+    100302: Column_Wood_Long_20
+    100304: Column_Wood_Long_21
+    100306: Column_Wood_Long_22
+    100308: Column_Wood_Long_23
+    100310: Column_Wood_Long_24
+    100312: Column_Wood_Long_25
+    100314: Column_Wood_Long_27
+    100316: Column_Wood_Long_C_00
+    100318: Column_Wood_Long_C_01
+    100320: Column_Wood_Long_C_02
+    100322: Column_Wood_Long_C_03
+    100324: Column_Wood_Long_C_04
+    100326: Column_Wood_Long_C_05
+    100328: Column_Wood_Long_C_06
+    100330: Column_Wooden_Stair_00
+    100332: Column_Wooden_Stair_01
+    100334: Column_Wooden_Stair_02
+    100336: Column_Wooden_Stair_03
+    100338: Column_Wooden_Stair_04
+    100340: Column_Wooden_Stair_05
+    100342: Column_Wooden_Stair_06
+    100344: Column_Wooden_Stair_07
+    100346: Column_Wooden_Stair_08
+    100348: Column_Wooden_Stair_09
+    100350: Column_Wooden_Stair_10
+    100352: Column_Wooden_Stair_11
+    100354: Column_Wooden_Stair_12
+    100356: Column_Wooden_Stair_13
+    100358: Column_Wooden_Stair_14
+    100360: Column_Wooden_Stair_15
+    100362: Column_Wooden_Stair_16
+    100364: Column_Wooden_Stair_17
+    100366: Column_Wooden_Stair_18
+    100368: Column_Wooden_Stair_19
+    100370: Column_Wooden_Stair_20
+    100372: Column_Wooden_Stair_21
+    100374: Column_Wooden_Stair_22
+    100376: Column_Wooden_Stair_23
+    100378: Column_Wooden_Stair_24
+    100380: Column_Wooden_Stair_25
+    100382: Column_Wooden_Stair_26
+    100384: Column_Wooden_Stair_27
+    100386: Column_Wooden_Stair_28
+    100388: Column_Wooden_Stair_29
+    100390: Column_Wooden_Stair_30
+    100392: Column_Wooden_Stair_31
+    100394: Column_Wooden_Stair_32
+    100396: Column_Wooden_Stair_33
+    100398: Column_Wooden_Stair_34
+    100400: Column_Wooden_Stair_35
+    100402: Column_Wooden_Stair_36
+    100404: Column_Wooden_Stair_37
+    100406: Column_Wooden_Stair_38
+    100408: Column_Wooden_Stair_39
+    100410: Column_Wooden_Stair_40
+    100412: Column_Wooden_Stair_41
+    100414: Column_Wooden_Stair_42
+    100416: Column_Wooden_Stair_43
+    100418: Column_Wooden_Stair_44
+    100420: Column_Wooden_Stair_45
+    100422: Column_Wooden_Stair_46
+    100424: Column_Wooden_Stair_47
+    100426: Column_Wooden_Stair_48
+    100428: Column_Wooden_Stair_49
+    100430: Column_Wooden_Stair_50
+    100432: Column_Wooden_Stair_51
+    100434: Column_Wooden_Stair_52
+    100436: Column_Wooden_Stair_53
+    100438: Column_Wooden_Stair_54
+    100440: Column_Wooden_Stair_55
+    100442: Column_Wooden_Stair_56
+    100444: Column_Wooden_Stair_57
+    100446: Column_Wooden_Stair_58
+    100448: Column_Wooden_Stair_59
+    100450: Column_Wooden_Stair_60
+    100452: Column_Wooden_Stair_61
+    100454: Column_Wooden_Stair_62
+    100456: Column_Wooden_Stair_63
+    100458: Column_Wooden_Stair_64
+    100460: Column_Wooden_Stair_65
+    100462: Column_Wooden_Stair_66
+    100464: Column_Wooden_Stair_67
+    100466: Column_Wooden_Stair_68
+    100468: Column_Wooden_Stair_69
+    100470: Column_Wooden_Stair_70
+    100472: Column_Wooden_Stair_71
+    100474: Column_Wooden_Stair_72
+    100476: Column_Wooden_Stair_73
+    100478: Column_Wooden_Stair_74
+    100480: Column_Wooden_Stair_75
+    100482: Door_Ark_000
+    100484: Door_Ark_Long_000
+    100486: Door_Ark_Long_02
+    100488: Door_Ark_Long_04
+    100490: Door_Ark_Long_05
+    100492: Door_Ark_Long_07
+    100494: Door_Ark_Long_08
+    100496: Door_Ark_Long_09
+    100498: Door_Ark_Long_10
+    100500: Hatch_Wooden_04
+    100502: Multi_Arc_00
+    100504: Multi_Arc_01
+    100506: Plinth_A_00
+    100508: Plinth_A_01
+    100510: Plinth_A_02
+    100512: Rail_Wooden Staircase_01
+    100514: Rail_Wooden Staircase_02
+    100516: Rail_Wooden Staircase_04
+    100518: Rail_Wooden Staircase_05
+    100520: Rail_Wooden Staircase_06
+    100522: Rail_Wooden Staircase_07
+    100524: Rail_Wooden Staircase_08
+    100526: Rail_Wooden Staircase_09
+    100528: Rail_Wooden Staircase_10
+    100530: Rail_Wooden Staircase_1000
+    100532: Rail_Wooden Staircase_1001
+    100534: Rail_Wooden Staircase_11
+    100536: Rail_Wooden Staircase_12
+    100538: Rail_Wooden Staircase_13
+    100540: Raile__A_Big_00
+    100542: Raile__A_Big_01
+    100544: Raile__A_Big_02
+    100546: Raile_Base _A_Small_00
+    100548: Raile_Base _A_Small_01
+    100550: Raile_Base _A_Small_02
+    100552: Raile_Base _A_Small_03
+    100554: Raile_Base _A_Small_04
+    100556: Raile_Base _A_Small_05
+    100558: Raile_Base _A_Small_06
+    100560: Raile_Base _A_Small_07
+    100562: Raile_Base _A_Small_08
+    100564: Raile_Base _A_Small_09
+    100566: Raile_Base_A_Big_0100
+    100568: Raile_Base_A_Big_0101
+    100570: Raile_Base_A_Big_0102
+    100572: Raile_Wooden _A_Small_00
+    100574: Raile_Wooden _A_Small_01
+    100576: Raile_Wooden _A_Small_02
+    100578: Raile_Wooden _A_Small_03
+    100580: Raile_Wooden _A_Small_04
+    100582: Raile_Wooden _A_Small_05
+    100584: Raile_Wooden _A_Small_06
+    100586: Raile_Wooden _A_Small_07
+    100588: Raile_Wooden _A_Small_08
+    100590: Raile_Wooden _A_Small_09
+    100592: Rails_Wooden _Base_00
+    100594: Rails_Wooden _Base_01
+    100596: Rails_Wooden _Base_03
+    100598: Rails_Wooden _Base_05
+    100600: Ramp_Floor_Wood
+    100602: Simple_columns_barack_00
+    100604: Stair_Wooden _A_Base
+    100606: Stair_Wooden _A_stair
+    100608: Stair_Wooden _A_stair_00
+    100610: Stair_Wooden _A_stair_01
+    100612: Stair_Wooden _A_stair_02
+    100614: Stair_Wooden _A_stair_03
+    100616: Stair_Wooden _A_stair_04
+    100618: Stair_Wooden _A_stair_05
+    100620: Stair_Wooden _A_stair_06
+    100622: Stair_Wooden _A_stair_07
+    100624: Stair_Wooden _A_stair_08
+    100626: Stair_Wooden _A_stair_09
+    100628: Stair_Wooden _A_stair_10
+    100630: Stair_Wooden _A_stair_11
+    100632: Stair_Wooden _A_stair_12
+    100634: Stair_Wooden _A_stair_13
+    100636: Stair_Wooden _A_stair_14
+    100638: Stair_Wooden _A_stair_15
+    100640: Stair_Wooden _A_stair_16
+    100642: Stair_Wooden _A_stair_17
+    100644: Stair_Wooden _A_stair_18
+    100646: Stair_Wooden _A_stair_19
+    100648: Stair_Wooden _A_stair_20
+    100650: Stair_Wooden _A_stair_21
+    100652: Stair_Wooden _A_stair_22
+    100654: Stair_Wooden _A_stair_23
+    100656: Stair_Wooden _A_stair_24
+    100658: Stair_Wooden _A_stair_25
+    100660: Stair_Wooden _B_stair_00
+    100662: Stair_Wooden _B_stair_01
+    100664: Stair_Wooden _B_stair_02
+    100666: Stair_Wooden _B_stair_03
+    100668: Stair_Wooden _B_stair_04
+    100670: Stair_Wooden _B_stair_05
+    100672: Stair_Wooden _B_stair_06
+    100674: Stair_Wooden _B_stair_07
+    100676: Stair_Wooden _B_stair_08
+    100678: Stair_Wooden _B_stair_09
+    100680: Stair_Wooden _B_stair_10
+    100682: Stair_Wooden _C_stair_00
+    100684: Stair_Wooden _C_stair_01
+    100686: Stair_Wooden _C_stair_02
+    100688: Stair_Wooden _C_stair_03
+    100690: Stair_Wooden _C_stair_04
+    100692: Stair_Wooden _C_stair_05
+    100694: Stair_Wooden _C_stair_06
+    100696: Stair_Wooden _C_stair_07
+    100698: Stair_Wooden _C_stair_08
+    100700: Stair_Wooden _C_stair_09
+    100702: Stair_Wooden _C_stair_10
+    100704: Stair_Wooden _C_stair_11
+    100706: Stair_Wooden _C_stair_12
+    100708: Stair_Wooden _C_stair_13
+    100710: Stair_Wooden _C_stair_14
+    100712: Stair_Wooden _C_stair_15
+    100714: Stair_Wooden _C_stair_16
+    100716: Stair_Wooden _C_stair_17
+    100718: Stair_Wooden _C_stair_18
+    100720: Stair_Wooden _C_stair_19
+    100722: Stair_Wooden _C_stair_20
+    100724: Stair_Wooden _C_stair_21
+    100726: Stair_Wooden _C_stair_22
+    100728: Stair_Wooden _C_stair_23
+    100730: Stairs_Wooden _B_Base
+    100732: Stairs_Wooden _C_Base
+    100734: TH_sealing_ornament_00
+    100736: TH_sealing_ornament_01
+    100738: Thin_wall_01
+    100740: Thin_wall_03
+    100742: Thin_wall_04
+    100744: Thin_wall_06
+    100746: Thron__Gallery_Left
+    100748: //RootNode
+    100750: Thron_Base_00
+    100752: Thron_Gallery_Right
+    100754: Thron_Room_Back_Wall_f1
+    100756: Thron_Room_Back_Wall_f2
+    100758: Thron_Room_Base
+    100760: Thron_Room_Front_Wall_f1
+    100762: Thron_Room_Front_Wall_f2
+    100764: Thron_Room_Left_Wall_f1
+    100766: Thron_Room_Right_Wall_f1
+    100768: Thron_Room_Selling
+    100770: Wall_Conterforce_Big_00
+    100772: Wall_Conterforce_Big_01
+    100774: Wall_Conterforce_Big_02
+    100776: Wall_Conterforce_Big_03
+    100778: Wall_Conterforce_Big_04
+    100780: Wall_Conterforce_Big_05
+    100782: Wall_Conterforce_Big_06
+    100784: Wall_Conterforce_Big_07
+    100786: Wall_Conterforce_Big_08
+    100788: Wall_Conterforce_Big_09
+    100790: Wall_Conterforce_Big_10
+    100792: Wall_Conterforce_Big_11
+    100794: Wall_Conterforce_Big_12
+    100796: Wall_Conterforce_Big_13
+    100798: Wall_Conterforce_Big_14
+    100800: Wall_Conterforce_Big_15
+    100802: Wall_Conterforce_Big_16
+    100804: Wall_Conterforce_Big_17
+    100806: Wall_Conterforce_Big_18
+    100808: Wall_Conterforce_Small_00
+    100810: Wall_Conterforce_Small_01
+    100812: Wall_Conterforce_Small_02
+    100814: Wall_Conterforce_Small_03
+    100816: Wall_Conterforce_Small_04
+    100818: Wall_Conterforce_Small_05
+    100820: Window_A_00
+    100822: Window_A_08
+    100824: Window_A_09
+    100826: Window_D_01
+    100828: Window_D_03
+    100830: Window_D_05
+    100832: Window_D_07
+    100834: Window_D_09
+    100836: Window_D_10
+    100838: Window_D_11
+    100840: Window_D_12
+    100842: Window_D_13
+    100844: Window_D_14
+    100846: Window_D_15
+    100848: Window_D_16
+    100850: Window_Light
+    100852: Window_Light01
+    100854: Window_Light02
+    100856: Window_Light_baraks_00
+    100858: Window_Light_baraks_01
+    100860: Window_Light_baraks_02
+    100862: Window_Light_baraks_03
+    100864: Window_Light_baraks_04
+    100866: Window_Light_baraks_05
+    100868: Window_Light_baraks_06
+    100870: Window_Light_baraks_07
+    100872: Window_Light_baraks_08
+    100874: Window_Light_baraks_09
+    100876: Window_Light_baraks_10
+    100878: Window_Light_baraks_11
+    100880: Wooden _Bordur_barak
+    100882: Wooden _Plank_B_Small_01
+    100884: Wooden _Plank_B_Small_02
+    100886: Wooden _Plank_B_Small_03
+    100888: Wooden _Plank_B_Small_05
+    100890: Wooden _Plank_B_Small_06
+    100892: Wooden _Plank_B_Small_07
+    100894: Wooden _Plank_B_Small_08
+    100896: Wooden _Plank_B_Small_09
+    100898: Wooden _Plank_B_Small_10
+    100900: Wooden _Plank_B_Small_11
+    100902: Wooden _Plank_B_Small_12
+    100904: Wooden _Plank_B_Small_13
+    100906: Wooden _Plank_B_Small_14
+    100908: Wooden _Plank_B_Small_16
+    100910: Wooden _Plank_B_Small_17
+    100912: Wooden _Plank_B_Small_18
+    100914: Wooden _Plank_B_Small_19
+    100916: Wooden _Plank_B_Small_20
+    100918: Wooden _Plank_B_Small_21
+    100920: Wooden _Plank_B_Small_22
+    100922: Wooden _Plank_B_Small_23
+    100924: Wooden _Plank_B_Small_24
+    100926: Wooden _Plank_B_Small_26
+    100928: Wooden _Plank_B_Small_27
+    100930: Wooden _Plank_B_Small_28
+    100932: Wooden _Plank_B_Small_29
+    100934: Wooden _Plank_B_Small_30
+    100936: Wooden _Plank_B_Small_31
+    100938: Wooden _Plank_B_Small_32
+    100940: Wooden _Plank_B_Small_33
+    100942: Wooden _Plank_B_Small_34
+    100944: Wooden _Roof_Base_Barack_00
+    100946: Wooden _Roof_Base_Barack_01
+    100948: Wooden _Roof_Base_Barack_02
+    100950: Wooden _Roof_Base_Barack_03
+    100952: Wooden _Roof_Base_Barack_04
+    100954: Wooden _Roof_Base_Barack_05
+    100956: Wooden _Roof_Base_Barack_06
+    100958: Wooden_simple_column_00
+    100960: Wooden_simple_column_01
+    100962: Wooden_simple_column_02
+    100964: Wooden_simple_column_03
+    100966: Wooden_simple_column_04
+    400000: Arc_Long_00
+    400002: Arc_Long_01
+    400004: Arc_Long_02
+    400006: Arc_Romb_Wood_A_00
+    400008: Arc_Romb_Wood_A_01
+    400010: Arc_Romb_Wood_A_02
+    400012: Arc_Romb_Wood_A_03
+    400014: Arc_Romb_Wood_A_04
+    400016: Arc_Romb_Wood_A_05
+    400018: Arc_Romb_Wood_A_06
+    400020: Arc_Romb_Wood_A_07
+    400022: Arc_Romb_Wood_A_08
+    400024: Arc_Wood_A_00
+    400026: Arc_Wood_A_01
+    400028: Arc_Wood_A_02
+    400030: Arc_Wood_A_03
+    400032: Arc_Wood_A_04
+    400034: Arc_Wood_A_05
+    400036: Arc_Wood_A_06
+    400038: Arc_Wood_A_07
+    400040: Arc_Wood_A_08
+    400042: Arc_Wood_A_09
+    400044: Arc_Wood_A_10
+    400046: Arc_Wood_A_11
+    400048: Arc_Wood_A_12
+    400050: Arc_Wood_A_13
+    400052: Arc_Wood_A_14
+    400054: Arc_Wood_A_15
+    400056: Arc_Wood_A_16
+    400058: Arc_Wood_A_17
+    400060: Barracks
+    400062: Barracks_Pass
+    400064: Block_D_02
+    400066: Bordur_B
+    400068: Bordur_B_00
+    400070: Bordur_B_01
+    400072: Castle_Ornament_A_00
+    400074: Castle_Ornament_A_01
+    400076: Castle_Ornament_A_02
+    400078: Castle_Ornament_A_03
+    400080: Castle_Ornament_B_04
+    400082: Castle_Ornament_B_05
+    400084: Castle_Ornament_B_06
+    400086: Castle_Ornament_B_07
+    400088: Castle_Ornament_B_08
+    400090: Castle_Ornament_B_09
+    400092: Castle_Ornament_B_10
+    400094: Castle_Ornament_B_11
+    400096: Castle_Ornament_B_12
+    400098: Castle_Ornament_B_13
+    400100: Castle_Ornament_B_14
+    400102: Castle_Ornament_B_15
+    400104: Castle_Ornament_B_16
+    400106: Castle_Ornament_B_17
+    400108: Castle_Ornament_B_18
+    400110: Castle_Ornament_B_19
+    400112: Castle_Ornament_B_20
+    400114: Castle_Ornament_B_21
+    400116: Castle_Ornament_B_22
+    400118: Castle_Ornament_B_23
+    400120: Colomn_Main_00
+    400122: Colomn_Main_01
+    400124: Colomn_Main_02
+    400126: Colomn_Main_03
+    400128: Colomn_Main_04
+    400130: Colomn_Main_05
+    400132: Colomn_Main_06
+    400134: Colomn_Main_07
+    400136: Colomn_Main_08
+    400138: Colomn_Main_09
+    400140: Colomn_Main_10
+    400142: Colomn_Main_11
+    400144: Colomn_Main_12
+    400146: Colomn_Main_13
+    400148: Colomn_Main_14
+    400150: Colomn_Main_15
+    400152: Colomn_Main_16
+    400154: Colomn_Main_17
+    400156: Colomn_Main_18
+    400158: Colomn_Wooden _A_00
+    400160: Colomn_Wooden _A_01
+    400162: Colomn_Wooden _A_02
+    400164: Colomn_Wooden _A_03
+    400166: Colomn_Wooden _A_04
+    400168: Colomn_Wooden _A_05
+    400170: Colomn_Wooden _A_06
+    400172: Colomn_Wooden _A_07
+    400174: Colomn_Wooden _A_08
+    400176: Colomn_Wooden _A_09
+    400178: Colomn_Wooden _A_10
+    400180: Colomn_Wooden _A_11
+    400182: Colomn_Wooden _A_12
+    400184: Colomn_Wooden _A_13
+    400186: Colomn_Wooden _A_14
+    400188: Colomn_Wooden _A_15
+    400190: Colomn_Wooden _A_16
+    400192: Colomn_Wooden _A_17
+    400194: Colomn_Wooden _A_18
+    400196: Colomn_Wooden _A_19
+    400198: Colomn_Wooden _A_20
+    400200: Colomn_Wooden _A_21
+    400202: Colomn_Wooden _A_22
+    400204: Colomn_Wooden _A_23
+    400206: Colomn_Wooden _A_24
+    400208: Colomn_Wooden _A_25
+    400210: Colomn_Wooden _A_26
+    400212: Colomn_Wooden _A_27
+    400214: Colomn_Wooden _A_28
+    400216: Colomn_Wooden _A_29
+    400218: Colomn_Wooden _A_30
+    400220: Colomn_Wooden _A_31
+    400222: Colomn_Wooden _A_32
+    400224: Colomn_Wooden _A_33
+    400226: Colomn_Wooden _A_34
+    400228: Colomn_Wooden _A_35
+    400230: Colomn_Wooden _A_36
+    400232: Colomn_Wooden _A_37
+    400234: Colomn_Wooden _A_38
+    400236: Colomn_Wooden _A_39
+    400238: Colomn_Wooden _A_40
+    400240: Colomn_Wooden _A_41
+    400242: Colomn_Wooden _A_42
+    400244: Colomn_Wooden _A_43
+    400246: Colomn_Wooden _A_44
+    400248: Colomn_Wooden _A_45
+    400250: Colomn_Wooden _A_46
+    400252: Colomn_Wooden _A_47
+    400254: Colomn_Wooden _A_48
+    400256: Colomn_Wooden _A_49
+    400258: Colomn_Wooden _A_50
+    400260: Colomn_Wooden _A_51
+    400262: Colomn_Wooden _A_52
+    400264: Column_Wood_Long_00
+    400266: Column_Wood_Long_01
+    400268: Column_Wood_Long_02
+    400270: Column_Wood_Long_03
+    400272: Column_Wood_Long_04
+    400274: Column_Wood_Long_05
+    400276: Column_Wood_Long_06
+    400278: Column_Wood_Long_07
+    400280: Column_Wood_Long_08
+    400282: Column_Wood_Long_09
+    400284: Column_Wood_Long_10
+    400286: Column_Wood_Long_11
+    400288: Column_Wood_Long_12
+    400290: Column_Wood_Long_13
+    400292: Column_Wood_Long_14
+    400294: Column_Wood_Long_15
+    400296: Column_Wood_Long_16
+    400298: Column_Wood_Long_17
+    400300: Column_Wood_Long_18
+    400302: Column_Wood_Long_20
+    400304: Column_Wood_Long_21
+    400306: Column_Wood_Long_22
+    400308: Column_Wood_Long_23
+    400310: Column_Wood_Long_24
+    400312: Column_Wood_Long_25
+    400314: Column_Wood_Long_27
+    400316: Column_Wood_Long_C_00
+    400318: Column_Wood_Long_C_01
+    400320: Column_Wood_Long_C_02
+    400322: Column_Wood_Long_C_03
+    400324: Column_Wood_Long_C_04
+    400326: Column_Wood_Long_C_05
+    400328: Column_Wood_Long_C_06
+    400330: Column_Wooden_Stair_00
+    400332: Column_Wooden_Stair_01
+    400334: Column_Wooden_Stair_02
+    400336: Column_Wooden_Stair_03
+    400338: Column_Wooden_Stair_04
+    400340: Column_Wooden_Stair_05
+    400342: Column_Wooden_Stair_06
+    400344: Column_Wooden_Stair_07
+    400346: Column_Wooden_Stair_08
+    400348: Column_Wooden_Stair_09
+    400350: Column_Wooden_Stair_10
+    400352: Column_Wooden_Stair_11
+    400354: Column_Wooden_Stair_12
+    400356: Column_Wooden_Stair_13
+    400358: Column_Wooden_Stair_14
+    400360: Column_Wooden_Stair_15
+    400362: Column_Wooden_Stair_16
+    400364: Column_Wooden_Stair_17
+    400366: Column_Wooden_Stair_18
+    400368: Column_Wooden_Stair_19
+    400370: Column_Wooden_Stair_20
+    400372: Column_Wooden_Stair_21
+    400374: Column_Wooden_Stair_22
+    400376: Column_Wooden_Stair_23
+    400378: Column_Wooden_Stair_24
+    400380: Column_Wooden_Stair_25
+    400382: Column_Wooden_Stair_26
+    400384: Column_Wooden_Stair_27
+    400386: Column_Wooden_Stair_28
+    400388: Column_Wooden_Stair_29
+    400390: Column_Wooden_Stair_30
+    400392: Column_Wooden_Stair_31
+    400394: Column_Wooden_Stair_32
+    400396: Column_Wooden_Stair_33
+    400398: Column_Wooden_Stair_34
+    400400: Column_Wooden_Stair_35
+    400402: Column_Wooden_Stair_36
+    400404: Column_Wooden_Stair_37
+    400406: Column_Wooden_Stair_38
+    400408: Column_Wooden_Stair_39
+    400410: Column_Wooden_Stair_40
+    400412: Column_Wooden_Stair_41
+    400414: Column_Wooden_Stair_42
+    400416: Column_Wooden_Stair_43
+    400418: Column_Wooden_Stair_44
+    400420: Column_Wooden_Stair_45
+    400422: Column_Wooden_Stair_46
+    400424: Column_Wooden_Stair_47
+    400426: Column_Wooden_Stair_48
+    400428: Column_Wooden_Stair_49
+    400430: Column_Wooden_Stair_50
+    400432: Column_Wooden_Stair_51
+    400434: Column_Wooden_Stair_52
+    400436: Column_Wooden_Stair_53
+    400438: Column_Wooden_Stair_54
+    400440: Column_Wooden_Stair_55
+    400442: Column_Wooden_Stair_56
+    400444: Column_Wooden_Stair_57
+    400446: Column_Wooden_Stair_58
+    400448: Column_Wooden_Stair_59
+    400450: Column_Wooden_Stair_60
+    400452: Column_Wooden_Stair_61
+    400454: Column_Wooden_Stair_62
+    400456: Column_Wooden_Stair_63
+    400458: Column_Wooden_Stair_64
+    400460: Column_Wooden_Stair_65
+    400462: Column_Wooden_Stair_66
+    400464: Column_Wooden_Stair_67
+    400466: Column_Wooden_Stair_68
+    400468: Column_Wooden_Stair_69
+    400470: Column_Wooden_Stair_70
+    400472: Column_Wooden_Stair_71
+    400474: Column_Wooden_Stair_72
+    400476: Column_Wooden_Stair_73
+    400478: Column_Wooden_Stair_74
+    400480: Column_Wooden_Stair_75
+    400482: Door_Ark_000
+    400484: Door_Ark_Long_000
+    400486: Door_Ark_Long_02
+    400488: Door_Ark_Long_04
+    400490: Door_Ark_Long_05
+    400492: Door_Ark_Long_07
+    400494: Door_Ark_Long_08
+    400496: Door_Ark_Long_09
+    400498: Door_Ark_Long_10
+    400500: Hatch_Wooden_04
+    400502: Multi_Arc_00
+    400504: Multi_Arc_01
+    400506: Plinth_A_00
+    400508: Plinth_A_01
+    400510: Plinth_A_02
+    400512: Rail_Wooden Staircase_01
+    400514: Rail_Wooden Staircase_02
+    400516: Rail_Wooden Staircase_04
+    400518: Rail_Wooden Staircase_05
+    400520: Rail_Wooden Staircase_06
+    400522: Rail_Wooden Staircase_07
+    400524: Rail_Wooden Staircase_08
+    400526: Rail_Wooden Staircase_09
+    400528: Rail_Wooden Staircase_10
+    400530: Rail_Wooden Staircase_1000
+    400532: Rail_Wooden Staircase_1001
+    400534: Rail_Wooden Staircase_11
+    400536: Rail_Wooden Staircase_12
+    400538: Rail_Wooden Staircase_13
+    400540: Raile__A_Big_00
+    400542: Raile__A_Big_01
+    400544: Raile__A_Big_02
+    400546: Raile_Base _A_Small_00
+    400548: Raile_Base _A_Small_01
+    400550: Raile_Base _A_Small_02
+    400552: Raile_Base _A_Small_03
+    400554: Raile_Base _A_Small_04
+    400556: Raile_Base _A_Small_05
+    400558: Raile_Base _A_Small_06
+    400560: Raile_Base _A_Small_07
+    400562: Raile_Base _A_Small_08
+    400564: Raile_Base _A_Small_09
+    400566: Raile_Base_A_Big_0100
+    400568: Raile_Base_A_Big_0101
+    400570: Raile_Base_A_Big_0102
+    400572: Raile_Wooden _A_Small_00
+    400574: Raile_Wooden _A_Small_01
+    400576: Raile_Wooden _A_Small_02
+    400578: Raile_Wooden _A_Small_03
+    400580: Raile_Wooden _A_Small_04
+    400582: Raile_Wooden _A_Small_05
+    400584: Raile_Wooden _A_Small_06
+    400586: Raile_Wooden _A_Small_07
+    400588: Raile_Wooden _A_Small_08
+    400590: Raile_Wooden _A_Small_09
+    400592: Rails_Wooden _Base_00
+    400594: Rails_Wooden _Base_01
+    400596: Rails_Wooden _Base_03
+    400598: Rails_Wooden _Base_05
+    400600: Ramp_Floor_Wood
+    400602: Simple_columns_barack_00
+    400604: Stair_Wooden _A_Base
+    400606: Stair_Wooden _A_stair
+    400608: Stair_Wooden _A_stair_00
+    400610: Stair_Wooden _A_stair_01
+    400612: Stair_Wooden _A_stair_02
+    400614: Stair_Wooden _A_stair_03
+    400616: Stair_Wooden _A_stair_04
+    400618: Stair_Wooden _A_stair_05
+    400620: Stair_Wooden _A_stair_06
+    400622: Stair_Wooden _A_stair_07
+    400624: Stair_Wooden _A_stair_08
+    400626: Stair_Wooden _A_stair_09
+    400628: Stair_Wooden _A_stair_10
+    400630: Stair_Wooden _A_stair_11
+    400632: Stair_Wooden _A_stair_12
+    400634: Stair_Wooden _A_stair_13
+    400636: Stair_Wooden _A_stair_14
+    400638: Stair_Wooden _A_stair_15
+    400640: Stair_Wooden _A_stair_16
+    400642: Stair_Wooden _A_stair_17
+    400644: Stair_Wooden _A_stair_18
+    400646: Stair_Wooden _A_stair_19
+    400648: Stair_Wooden _A_stair_20
+    400650: Stair_Wooden _A_stair_21
+    400652: Stair_Wooden _A_stair_22
+    400654: Stair_Wooden _A_stair_23
+    400656: Stair_Wooden _A_stair_24
+    400658: Stair_Wooden _A_stair_25
+    400660: Stair_Wooden _B_stair_00
+    400662: Stair_Wooden _B_stair_01
+    400664: Stair_Wooden _B_stair_02
+    400666: Stair_Wooden _B_stair_03
+    400668: Stair_Wooden _B_stair_04
+    400670: Stair_Wooden _B_stair_05
+    400672: Stair_Wooden _B_stair_06
+    400674: Stair_Wooden _B_stair_07
+    400676: Stair_Wooden _B_stair_08
+    400678: Stair_Wooden _B_stair_09
+    400680: Stair_Wooden _B_stair_10
+    400682: Stair_Wooden _C_stair_00
+    400684: Stair_Wooden _C_stair_01
+    400686: Stair_Wooden _C_stair_02
+    400688: Stair_Wooden _C_stair_03
+    400690: Stair_Wooden _C_stair_04
+    400692: Stair_Wooden _C_stair_05
+    400694: Stair_Wooden _C_stair_06
+    400696: Stair_Wooden _C_stair_07
+    400698: Stair_Wooden _C_stair_08
+    400700: Stair_Wooden _C_stair_09
+    400702: Stair_Wooden _C_stair_10
+    400704: Stair_Wooden _C_stair_11
+    400706: Stair_Wooden _C_stair_12
+    400708: Stair_Wooden _C_stair_13
+    400710: Stair_Wooden _C_stair_14
+    400712: Stair_Wooden _C_stair_15
+    400714: Stair_Wooden _C_stair_16
+    400716: Stair_Wooden _C_stair_17
+    400718: Stair_Wooden _C_stair_18
+    400720: Stair_Wooden _C_stair_19
+    400722: Stair_Wooden _C_stair_20
+    400724: Stair_Wooden _C_stair_21
+    400726: Stair_Wooden _C_stair_22
+    400728: Stair_Wooden _C_stair_23
+    400730: Stairs_Wooden _B_Base
+    400732: Stairs_Wooden _C_Base
+    400734: TH_sealing_ornament_00
+    400736: TH_sealing_ornament_01
+    400738: Thin_wall_01
+    400740: Thin_wall_03
+    400742: Thin_wall_04
+    400744: Thin_wall_06
+    400746: Thron__Gallery_Left
+    400748: //RootNode
+    400750: Thron_Base_00
+    400752: Thron_Gallery_Right
+    400754: Thron_Room_Back_Wall_f1
+    400756: Thron_Room_Back_Wall_f2
+    400758: Thron_Room_Base
+    400760: Thron_Room_Front_Wall_f1
+    400762: Thron_Room_Front_Wall_f2
+    400764: Thron_Room_Left_Wall_f1
+    400766: Thron_Room_Right_Wall_f1
+    400768: Thron_Room_Selling
+    400770: Wall_Conterforce_Big_00
+    400772: Wall_Conterforce_Big_01
+    400774: Wall_Conterforce_Big_02
+    400776: Wall_Conterforce_Big_03
+    400778: Wall_Conterforce_Big_04
+    400780: Wall_Conterforce_Big_05
+    400782: Wall_Conterforce_Big_06
+    400784: Wall_Conterforce_Big_07
+    400786: Wall_Conterforce_Big_08
+    400788: Wall_Conterforce_Big_09
+    400790: Wall_Conterforce_Big_10
+    400792: Wall_Conterforce_Big_11
+    400794: Wall_Conterforce_Big_12
+    400796: Wall_Conterforce_Big_13
+    400798: Wall_Conterforce_Big_14
+    400800: Wall_Conterforce_Big_15
+    400802: Wall_Conterforce_Big_16
+    400804: Wall_Conterforce_Big_17
+    400806: Wall_Conterforce_Big_18
+    400808: Wall_Conterforce_Small_00
+    400810: Wall_Conterforce_Small_01
+    400812: Wall_Conterforce_Small_02
+    400814: Wall_Conterforce_Small_03
+    400816: Wall_Conterforce_Small_04
+    400818: Wall_Conterforce_Small_05
+    400820: Window_A_00
+    400822: Window_A_08
+    400824: Window_A_09
+    400826: Window_D_01
+    400828: Window_D_03
+    400830: Window_D_05
+    400832: Window_D_07
+    400834: Window_D_09
+    400836: Window_D_10
+    400838: Window_D_11
+    400840: Window_D_12
+    400842: Window_D_13
+    400844: Window_D_14
+    400846: Window_D_15
+    400848: Window_D_16
+    400850: Window_Light
+    400852: Window_Light01
+    400854: Window_Light02
+    400856: Window_Light_baraks_00
+    400858: Window_Light_baraks_01
+    400860: Window_Light_baraks_02
+    400862: Window_Light_baraks_03
+    400864: Window_Light_baraks_04
+    400866: Window_Light_baraks_05
+    400868: Window_Light_baraks_06
+    400870: Window_Light_baraks_07
+    400872: Window_Light_baraks_08
+    400874: Window_Light_baraks_09
+    400876: Window_Light_baraks_10
+    400878: Window_Light_baraks_11
+    400880: Wooden _Bordur_barak
+    400882: Wooden _Plank_B_Small_01
+    400884: Wooden _Plank_B_Small_02
+    400886: Wooden _Plank_B_Small_03
+    400888: Wooden _Plank_B_Small_05
+    400890: Wooden _Plank_B_Small_06
+    400892: Wooden _Plank_B_Small_07
+    400894: Wooden _Plank_B_Small_08
+    400896: Wooden _Plank_B_Small_09
+    400898: Wooden _Plank_B_Small_10
+    400900: Wooden _Plank_B_Small_11
+    400902: Wooden _Plank_B_Small_12
+    400904: Wooden _Plank_B_Small_13
+    400906: Wooden _Plank_B_Small_14
+    400908: Wooden _Plank_B_Small_16
+    400910: Wooden _Plank_B_Small_17
+    400912: Wooden _Plank_B_Small_18
+    400914: Wooden _Plank_B_Small_19
+    400916: Wooden _Plank_B_Small_20
+    400918: Wooden _Plank_B_Small_21
+    400920: Wooden _Plank_B_Small_22
+    400922: Wooden _Plank_B_Small_23
+    400924: Wooden _Plank_B_Small_24
+    400926: Wooden _Plank_B_Small_26
+    400928: Wooden _Plank_B_Small_27
+    400930: Wooden _Plank_B_Small_28
+    400932: Wooden _Plank_B_Small_29
+    400934: Wooden _Plank_B_Small_30
+    400936: Wooden _Plank_B_Small_31
+    400938: Wooden _Plank_B_Small_32
+    400940: Wooden _Plank_B_Small_33
+    400942: Wooden _Plank_B_Small_34
+    400944: Wooden _Roof_Base_Barack_00
+    400946: Wooden _Roof_Base_Barack_01
+    400948: Wooden _Roof_Base_Barack_02
+    400950: Wooden _Roof_Base_Barack_03
+    400952: Wooden _Roof_Base_Barack_04
+    400954: Wooden _Roof_Base_Barack_05
+    400956: Wooden _Roof_Base_Barack_06
+    400958: Wooden_simple_column_00
+    400960: Wooden_simple_column_01
+    400962: Wooden_simple_column_02
+    400964: Wooden_simple_column_03
+    400966: Wooden_simple_column_04
+    2300000: Arc_Long_00
+    2300002: Arc_Long_01
+    2300004: Arc_Long_02
+    2300006: Arc_Romb_Wood_A_00
+    2300008: Arc_Romb_Wood_A_01
+    2300010: Arc_Romb_Wood_A_02
+    2300012: Arc_Romb_Wood_A_03
+    2300014: Arc_Romb_Wood_A_04
+    2300016: Arc_Romb_Wood_A_05
+    2300018: Arc_Romb_Wood_A_06
+    2300020: Arc_Romb_Wood_A_07
+    2300022: Arc_Romb_Wood_A_08
+    2300024: Arc_Wood_A_00
+    2300026: Arc_Wood_A_01
+    2300028: Arc_Wood_A_02
+    2300030: Arc_Wood_A_03
+    2300032: Arc_Wood_A_04
+    2300034: Arc_Wood_A_05
+    2300036: Arc_Wood_A_06
+    2300038: Arc_Wood_A_07
+    2300040: Arc_Wood_A_08
+    2300042: Arc_Wood_A_09
+    2300044: Arc_Wood_A_10
+    2300046: Arc_Wood_A_11
+    2300048: Arc_Wood_A_12
+    2300050: Arc_Wood_A_13
+    2300052: Arc_Wood_A_14
+    2300054: Arc_Wood_A_15
+    2300056: Arc_Wood_A_16
+    2300058: Arc_Wood_A_17
+    2300060: Barracks
+    2300062: Barracks_Pass
+    2300064: Block_D_02
+    2300066: Bordur_B
+    2300068: Bordur_B_00
+    2300070: Bordur_B_01
+    2300072: Castle_Ornament_A_00
+    2300074: Castle_Ornament_A_01
+    2300076: Castle_Ornament_A_02
+    2300078: Castle_Ornament_A_03
+    2300080: Castle_Ornament_B_04
+    2300082: Castle_Ornament_B_05
+    2300084: Castle_Ornament_B_06
+    2300086: Castle_Ornament_B_07
+    2300088: Castle_Ornament_B_08
+    2300090: Castle_Ornament_B_09
+    2300092: Castle_Ornament_B_10
+    2300094: Castle_Ornament_B_11
+    2300096: Castle_Ornament_B_12
+    2300098: Castle_Ornament_B_13
+    2300100: Castle_Ornament_B_14
+    2300102: Castle_Ornament_B_15
+    2300104: Castle_Ornament_B_16
+    2300106: Castle_Ornament_B_17
+    2300108: Castle_Ornament_B_18
+    2300110: Castle_Ornament_B_19
+    2300112: Castle_Ornament_B_20
+    2300114: Castle_Ornament_B_21
+    2300116: Castle_Ornament_B_22
+    2300118: Castle_Ornament_B_23
+    2300120: Colomn_Main_00
+    2300122: Colomn_Main_01
+    2300124: Colomn_Main_02
+    2300126: Colomn_Main_03
+    2300128: Colomn_Main_04
+    2300130: Colomn_Main_05
+    2300132: Colomn_Main_06
+    2300134: Colomn_Main_07
+    2300136: Colomn_Main_08
+    2300138: Colomn_Main_09
+    2300140: Colomn_Main_10
+    2300142: Colomn_Main_11
+    2300144: Colomn_Main_12
+    2300146: Colomn_Main_13
+    2300148: Colomn_Main_14
+    2300150: Colomn_Main_15
+    2300152: Colomn_Main_16
+    2300154: Colomn_Main_17
+    2300156: Colomn_Main_18
+    2300158: Colomn_Wooden _A_00
+    2300160: Colomn_Wooden _A_01
+    2300162: Colomn_Wooden _A_02
+    2300164: Colomn_Wooden _A_03
+    2300166: Colomn_Wooden _A_04
+    2300168: Colomn_Wooden _A_05
+    2300170: Colomn_Wooden _A_06
+    2300172: Colomn_Wooden _A_07
+    2300174: Colomn_Wooden _A_08
+    2300176: Colomn_Wooden _A_09
+    2300178: Colomn_Wooden _A_10
+    2300180: Colomn_Wooden _A_11
+    2300182: Colomn_Wooden _A_12
+    2300184: Colomn_Wooden _A_13
+    2300186: Colomn_Wooden _A_14
+    2300188: Colomn_Wooden _A_15
+    2300190: Colomn_Wooden _A_16
+    2300192: Colomn_Wooden _A_17
+    2300194: Colomn_Wooden _A_18
+    2300196: Colomn_Wooden _A_19
+    2300198: Colomn_Wooden _A_20
+    2300200: Colomn_Wooden _A_21
+    2300202: Colomn_Wooden _A_22
+    2300204: Colomn_Wooden _A_23
+    2300206: Colomn_Wooden _A_24
+    2300208: Colomn_Wooden _A_25
+    2300210: Colomn_Wooden _A_26
+    2300212: Colomn_Wooden _A_27
+    2300214: Colomn_Wooden _A_28
+    2300216: Colomn_Wooden _A_29
+    2300218: Colomn_Wooden _A_30
+    2300220: Colomn_Wooden _A_31
+    2300222: Colomn_Wooden _A_32
+    2300224: Colomn_Wooden _A_33
+    2300226: Colomn_Wooden _A_34
+    2300228: Colomn_Wooden _A_35
+    2300230: Colomn_Wooden _A_36
+    2300232: Colomn_Wooden _A_37
+    2300234: Colomn_Wooden _A_38
+    2300236: Colomn_Wooden _A_39
+    2300238: Colomn_Wooden _A_40
+    2300240: Colomn_Wooden _A_41
+    2300242: Colomn_Wooden _A_42
+    2300244: Colomn_Wooden _A_43
+    2300246: Colomn_Wooden _A_44
+    2300248: Colomn_Wooden _A_45
+    2300250: Colomn_Wooden _A_46
+    2300252: Colomn_Wooden _A_47
+    2300254: Colomn_Wooden _A_48
+    2300256: Colomn_Wooden _A_49
+    2300258: Colomn_Wooden _A_50
+    2300260: Colomn_Wooden _A_51
+    2300262: Colomn_Wooden _A_52
+    2300264: Column_Wood_Long_00
+    2300266: Column_Wood_Long_01
+    2300268: Column_Wood_Long_02
+    2300270: Column_Wood_Long_03
+    2300272: Column_Wood_Long_04
+    2300274: Column_Wood_Long_05
+    2300276: Column_Wood_Long_06
+    2300278: Column_Wood_Long_07
+    2300280: Column_Wood_Long_08
+    2300282: Column_Wood_Long_09
+    2300284: Column_Wood_Long_10
+    2300286: Column_Wood_Long_11
+    2300288: Column_Wood_Long_12
+    2300290: Column_Wood_Long_13
+    2300292: Column_Wood_Long_14
+    2300294: Column_Wood_Long_15
+    2300296: Column_Wood_Long_16
+    2300298: Column_Wood_Long_17
+    2300300: Column_Wood_Long_18
+    2300302: Column_Wood_Long_20
+    2300304: Column_Wood_Long_21
+    2300306: Column_Wood_Long_22
+    2300308: Column_Wood_Long_23
+    2300310: Column_Wood_Long_24
+    2300312: Column_Wood_Long_25
+    2300314: Column_Wood_Long_27
+    2300316: Column_Wood_Long_C_00
+    2300318: Column_Wood_Long_C_01
+    2300320: Column_Wood_Long_C_02
+    2300322: Column_Wood_Long_C_03
+    2300324: Column_Wood_Long_C_04
+    2300326: Column_Wood_Long_C_05
+    2300328: Column_Wood_Long_C_06
+    2300330: Column_Wooden_Stair_00
+    2300332: Column_Wooden_Stair_01
+    2300334: Column_Wooden_Stair_02
+    2300336: Column_Wooden_Stair_03
+    2300338: Column_Wooden_Stair_04
+    2300340: Column_Wooden_Stair_05
+    2300342: Column_Wooden_Stair_06
+    2300344: Column_Wooden_Stair_07
+    2300346: Column_Wooden_Stair_08
+    2300348: Column_Wooden_Stair_09
+    2300350: Column_Wooden_Stair_10
+    2300352: Column_Wooden_Stair_11
+    2300354: Column_Wooden_Stair_12
+    2300356: Column_Wooden_Stair_13
+    2300358: Column_Wooden_Stair_14
+    2300360: Column_Wooden_Stair_15
+    2300362: Column_Wooden_Stair_16
+    2300364: Column_Wooden_Stair_17
+    2300366: Column_Wooden_Stair_18
+    2300368: Column_Wooden_Stair_19
+    2300370: Column_Wooden_Stair_20
+    2300372: Column_Wooden_Stair_21
+    2300374: Column_Wooden_Stair_22
+    2300376: Column_Wooden_Stair_23
+    2300378: Column_Wooden_Stair_24
+    2300380: Column_Wooden_Stair_25
+    2300382: Column_Wooden_Stair_26
+    2300384: Column_Wooden_Stair_27
+    2300386: Column_Wooden_Stair_28
+    2300388: Column_Wooden_Stair_29
+    2300390: Column_Wooden_Stair_30
+    2300392: Column_Wooden_Stair_31
+    2300394: Column_Wooden_Stair_32
+    2300396: Column_Wooden_Stair_33
+    2300398: Column_Wooden_Stair_34
+    2300400: Column_Wooden_Stair_35
+    2300402: Column_Wooden_Stair_36
+    2300404: Column_Wooden_Stair_37
+    2300406: Column_Wooden_Stair_38
+    2300408: Column_Wooden_Stair_39
+    2300410: Column_Wooden_Stair_40
+    2300412: Column_Wooden_Stair_41
+    2300414: Column_Wooden_Stair_42
+    2300416: Column_Wooden_Stair_43
+    2300418: Column_Wooden_Stair_44
+    2300420: Column_Wooden_Stair_45
+    2300422: Column_Wooden_Stair_46
+    2300424: Column_Wooden_Stair_47
+    2300426: Column_Wooden_Stair_48
+    2300428: Column_Wooden_Stair_49
+    2300430: Column_Wooden_Stair_50
+    2300432: Column_Wooden_Stair_51
+    2300434: Column_Wooden_Stair_52
+    2300436: Column_Wooden_Stair_53
+    2300438: Column_Wooden_Stair_54
+    2300440: Column_Wooden_Stair_55
+    2300442: Column_Wooden_Stair_56
+    2300444: Column_Wooden_Stair_57
+    2300446: Column_Wooden_Stair_58
+    2300448: Column_Wooden_Stair_59
+    2300450: Column_Wooden_Stair_60
+    2300452: Column_Wooden_Stair_61
+    2300454: Column_Wooden_Stair_62
+    2300456: Column_Wooden_Stair_63
+    2300458: Column_Wooden_Stair_64
+    2300460: Column_Wooden_Stair_65
+    2300462: Column_Wooden_Stair_66
+    2300464: Column_Wooden_Stair_67
+    2300466: Column_Wooden_Stair_68
+    2300468: Column_Wooden_Stair_69
+    2300470: Column_Wooden_Stair_70
+    2300472: Column_Wooden_Stair_71
+    2300474: Column_Wooden_Stair_72
+    2300476: Column_Wooden_Stair_73
+    2300478: Column_Wooden_Stair_74
+    2300480: Column_Wooden_Stair_75
+    2300482: Door_Ark_000
+    2300484: Door_Ark_Long_000
+    2300486: Door_Ark_Long_02
+    2300488: Door_Ark_Long_04
+    2300490: Door_Ark_Long_05
+    2300492: Door_Ark_Long_07
+    2300494: Door_Ark_Long_08
+    2300496: Door_Ark_Long_09
+    2300498: Door_Ark_Long_10
+    2300500: Hatch_Wooden_04
+    2300502: Multi_Arc_00
+    2300504: Multi_Arc_01
+    2300506: Plinth_A_00
+    2300508: Plinth_A_01
+    2300510: Plinth_A_02
+    2300512: Rail_Wooden Staircase_01
+    2300514: Rail_Wooden Staircase_02
+    2300516: Rail_Wooden Staircase_04
+    2300518: Rail_Wooden Staircase_05
+    2300520: Rail_Wooden Staircase_06
+    2300522: Rail_Wooden Staircase_07
+    2300524: Rail_Wooden Staircase_08
+    2300526: Rail_Wooden Staircase_09
+    2300528: Rail_Wooden Staircase_10
+    2300530: Rail_Wooden Staircase_1000
+    2300532: Rail_Wooden Staircase_1001
+    2300534: Rail_Wooden Staircase_11
+    2300536: Rail_Wooden Staircase_12
+    2300538: Rail_Wooden Staircase_13
+    2300540: Raile__A_Big_00
+    2300542: Raile__A_Big_01
+    2300544: Raile__A_Big_02
+    2300546: Raile_Base _A_Small_00
+    2300548: Raile_Base _A_Small_01
+    2300550: Raile_Base _A_Small_02
+    2300552: Raile_Base _A_Small_03
+    2300554: Raile_Base _A_Small_04
+    2300556: Raile_Base _A_Small_05
+    2300558: Raile_Base _A_Small_06
+    2300560: Raile_Base _A_Small_07
+    2300562: Raile_Base _A_Small_08
+    2300564: Raile_Base _A_Small_09
+    2300566: Raile_Base_A_Big_0100
+    2300568: Raile_Base_A_Big_0101
+    2300570: Raile_Base_A_Big_0102
+    2300572: Raile_Wooden _A_Small_00
+    2300574: Raile_Wooden _A_Small_01
+    2300576: Raile_Wooden _A_Small_02
+    2300578: Raile_Wooden _A_Small_03
+    2300580: Raile_Wooden _A_Small_04
+    2300582: Raile_Wooden _A_Small_05
+    2300584: Raile_Wooden _A_Small_06
+    2300586: Raile_Wooden _A_Small_07
+    2300588: Raile_Wooden _A_Small_08
+    2300590: Raile_Wooden _A_Small_09
+    2300592: Rails_Wooden _Base_00
+    2300594: Rails_Wooden _Base_01
+    2300596: Rails_Wooden _Base_03
+    2300598: Rails_Wooden _Base_05
+    2300600: Ramp_Floor_Wood
+    2300602: Simple_columns_barack_00
+    2300604: Stair_Wooden _A_Base
+    2300606: Stair_Wooden _A_stair
+    2300608: Stair_Wooden _A_stair_00
+    2300610: Stair_Wooden _A_stair_01
+    2300612: Stair_Wooden _A_stair_02
+    2300614: Stair_Wooden _A_stair_03
+    2300616: Stair_Wooden _A_stair_04
+    2300618: Stair_Wooden _A_stair_05
+    2300620: Stair_Wooden _A_stair_06
+    2300622: Stair_Wooden _A_stair_07
+    2300624: Stair_Wooden _A_stair_08
+    2300626: Stair_Wooden _A_stair_09
+    2300628: Stair_Wooden _A_stair_10
+    2300630: Stair_Wooden _A_stair_11
+    2300632: Stair_Wooden _A_stair_12
+    2300634: Stair_Wooden _A_stair_13
+    2300636: Stair_Wooden _A_stair_14
+    2300638: Stair_Wooden _A_stair_15
+    2300640: Stair_Wooden _A_stair_16
+    2300642: Stair_Wooden _A_stair_17
+    2300644: Stair_Wooden _A_stair_18
+    2300646: Stair_Wooden _A_stair_19
+    2300648: Stair_Wooden _A_stair_20
+    2300650: Stair_Wooden _A_stair_21
+    2300652: Stair_Wooden _A_stair_22
+    2300654: Stair_Wooden _A_stair_23
+    2300656: Stair_Wooden _A_stair_24
+    2300658: Stair_Wooden _A_stair_25
+    2300660: Stair_Wooden _B_stair_00
+    2300662: Stair_Wooden _B_stair_01
+    2300664: Stair_Wooden _B_stair_02
+    2300666: Stair_Wooden _B_stair_03
+    2300668: Stair_Wooden _B_stair_04
+    2300670: Stair_Wooden _B_stair_05
+    2300672: Stair_Wooden _B_stair_06
+    2300674: Stair_Wooden _B_stair_07
+    2300676: Stair_Wooden _B_stair_08
+    2300678: Stair_Wooden _B_stair_09
+    2300680: Stair_Wooden _B_stair_10
+    2300682: Stair_Wooden _C_stair_00
+    2300684: Stair_Wooden _C_stair_01
+    2300686: Stair_Wooden _C_stair_02
+    2300688: Stair_Wooden _C_stair_03
+    2300690: Stair_Wooden _C_stair_04
+    2300692: Stair_Wooden _C_stair_05
+    2300694: Stair_Wooden _C_stair_06
+    2300696: Stair_Wooden _C_stair_07
+    2300698: Stair_Wooden _C_stair_08
+    2300700: Stair_Wooden _C_stair_09
+    2300702: Stair_Wooden _C_stair_10
+    2300704: Stair_Wooden _C_stair_11
+    2300706: Stair_Wooden _C_stair_12
+    2300708: Stair_Wooden _C_stair_13
+    2300710: Stair_Wooden _C_stair_14
+    2300712: Stair_Wooden _C_stair_15
+    2300714: Stair_Wooden _C_stair_16
+    2300716: Stair_Wooden _C_stair_17
+    2300718: Stair_Wooden _C_stair_18
+    2300720: Stair_Wooden _C_stair_19
+    2300722: Stair_Wooden _C_stair_20
+    2300724: Stair_Wooden _C_stair_21
+    2300726: Stair_Wooden _C_stair_22
+    2300728: Stair_Wooden _C_stair_23
+    2300730: Stairs_Wooden _B_Base
+    2300732: Stairs_Wooden _C_Base
+    2300734: TH_sealing_ornament_00
+    2300736: TH_sealing_ornament_01
+    2300738: Thin_wall_01
+    2300740: Thin_wall_03
+    2300742: Thin_wall_04
+    2300744: Thin_wall_06
+    2300746: Thron__Gallery_Left
+    2300748: Thron_Base_00
+    2300750: Thron_Gallery_Right
+    2300752: Thron_Room_Back_Wall_f1
+    2300754: Thron_Room_Back_Wall_f2
+    2300756: Thron_Room_Base
+    2300758: Thron_Room_Front_Wall_f1
+    2300760: Thron_Room_Front_Wall_f2
+    2300762: Thron_Room_Left_Wall_f1
+    2300764: Thron_Room_Right_Wall_f1
+    2300766: Thron_Room_Selling
+    2300768: Wall_Conterforce_Big_00
+    2300770: Wall_Conterforce_Big_01
+    2300772: Wall_Conterforce_Big_02
+    2300774: Wall_Conterforce_Big_03
+    2300776: Wall_Conterforce_Big_04
+    2300778: Wall_Conterforce_Big_05
+    2300780: Wall_Conterforce_Big_06
+    2300782: Wall_Conterforce_Big_07
+    2300784: Wall_Conterforce_Big_08
+    2300786: Wall_Conterforce_Big_09
+    2300788: Wall_Conterforce_Big_10
+    2300790: Wall_Conterforce_Big_11
+    2300792: Wall_Conterforce_Big_12
+    2300794: Wall_Conterforce_Big_13
+    2300796: Wall_Conterforce_Big_14
+    2300798: Wall_Conterforce_Big_15
+    2300800: Wall_Conterforce_Big_16
+    2300802: Wall_Conterforce_Big_17
+    2300804: Wall_Conterforce_Big_18
+    2300806: Wall_Conterforce_Small_00
+    2300808: Wall_Conterforce_Small_01
+    2300810: Wall_Conterforce_Small_02
+    2300812: Wall_Conterforce_Small_03
+    2300814: Wall_Conterforce_Small_04
+    2300816: Wall_Conterforce_Small_05
+    2300818: Window_A_00
+    2300820: Window_A_08
+    2300822: Window_A_09
+    2300824: Window_D_01
+    2300826: Window_D_03
+    2300828: Window_D_05
+    2300830: Window_D_07
+    2300832: Window_D_09
+    2300834: Window_D_10
+    2300836: Window_D_11
+    2300838: Window_D_12
+    2300840: Window_D_13
+    2300842: Window_D_14
+    2300844: Window_D_15
+    2300846: Window_D_16
+    2300848: Window_Light
+    2300850: Window_Light01
+    2300852: Window_Light02
+    2300854: Window_Light_baraks_00
+    2300856: Window_Light_baraks_01
+    2300858: Window_Light_baraks_02
+    2300860: Window_Light_baraks_03
+    2300862: Window_Light_baraks_04
+    2300864: Window_Light_baraks_05
+    2300866: Window_Light_baraks_06
+    2300868: Window_Light_baraks_07
+    2300870: Window_Light_baraks_08
+    2300872: Window_Light_baraks_09
+    2300874: Window_Light_baraks_10
+    2300876: Window_Light_baraks_11
+    2300878: Wooden _Bordur_barak
+    2300880: Wooden _Plank_B_Small_01
+    2300882: Wooden _Plank_B_Small_02
+    2300884: Wooden _Plank_B_Small_03
+    2300886: Wooden _Plank_B_Small_05
+    2300888: Wooden _Plank_B_Small_06
+    2300890: Wooden _Plank_B_Small_07
+    2300892: Wooden _Plank_B_Small_08
+    2300894: Wooden _Plank_B_Small_09
+    2300896: Wooden _Plank_B_Small_10
+    2300898: Wooden _Plank_B_Small_11
+    2300900: Wooden _Plank_B_Small_12
+    2300902: Wooden _Plank_B_Small_13
+    2300904: Wooden _Plank_B_Small_14
+    2300906: Wooden _Plank_B_Small_16
+    2300908: Wooden _Plank_B_Small_17
+    2300910: Wooden _Plank_B_Small_18
+    2300912: Wooden _Plank_B_Small_19
+    2300914: Wooden _Plank_B_Small_20
+    2300916: Wooden _Plank_B_Small_21
+    2300918: Wooden _Plank_B_Small_22
+    2300920: Wooden _Plank_B_Small_23
+    2300922: Wooden _Plank_B_Small_24
+    2300924: Wooden _Plank_B_Small_26
+    2300926: Wooden _Plank_B_Small_27
+    2300928: Wooden _Plank_B_Small_28
+    2300930: Wooden _Plank_B_Small_29
+    2300932: Wooden _Plank_B_Small_30
+    2300934: Wooden _Plank_B_Small_31
+    2300936: Wooden _Plank_B_Small_32
+    2300938: Wooden _Plank_B_Small_33
+    2300940: Wooden _Plank_B_Small_34
+    2300942: Wooden _Roof_Base_Barack_00
+    2300944: Wooden _Roof_Base_Barack_01
+    2300946: Wooden _Roof_Base_Barack_02
+    2300948: Wooden _Roof_Base_Barack_03
+    2300950: Wooden _Roof_Base_Barack_04
+    2300952: Wooden _Roof_Base_Barack_05
+    2300954: Wooden _Roof_Base_Barack_06
+    2300956: Wooden_simple_column_00
+    2300958: Wooden_simple_column_01
+    2300960: Wooden_simple_column_02
+    2300962: Wooden_simple_column_03
+    2300964: Wooden_simple_column_04
+    3300000: Arc_Long_00
+    3300002: Arc_Long_01
+    3300004: Arc_Long_02
+    3300006: Arc_Romb_Wood_A_00
+    3300008: Arc_Romb_Wood_A_01
+    3300010: Arc_Romb_Wood_A_02
+    3300012: Arc_Romb_Wood_A_03
+    3300014: Arc_Romb_Wood_A_04
+    3300016: Arc_Romb_Wood_A_05
+    3300018: Arc_Romb_Wood_A_06
+    3300020: Arc_Romb_Wood_A_07
+    3300022: Arc_Romb_Wood_A_08
+    3300024: Arc_Wood_A_00
+    3300026: Arc_Wood_A_01
+    3300028: Arc_Wood_A_02
+    3300030: Arc_Wood_A_03
+    3300032: Arc_Wood_A_04
+    3300034: Arc_Wood_A_05
+    3300036: Arc_Wood_A_06
+    3300038: Arc_Wood_A_07
+    3300040: Arc_Wood_A_08
+    3300042: Arc_Wood_A_09
+    3300044: Arc_Wood_A_10
+    3300046: Arc_Wood_A_11
+    3300048: Arc_Wood_A_12
+    3300050: Arc_Wood_A_13
+    3300052: Arc_Wood_A_14
+    3300054: Arc_Wood_A_15
+    3300056: Arc_Wood_A_16
+    3300058: Arc_Wood_A_17
+    3300060: Barracks
+    3300062: Barracks_Pass
+    3300064: Block_D_02
+    3300066: Bordur_B
+    3300068: Bordur_B_00
+    3300070: Bordur_B_01
+    3300072: Castle_Ornament_A_00
+    3300074: Castle_Ornament_A_01
+    3300076: Castle_Ornament_A_02
+    3300078: Castle_Ornament_A_03
+    3300080: Castle_Ornament_B_04
+    3300082: Castle_Ornament_B_05
+    3300084: Castle_Ornament_B_06
+    3300086: Castle_Ornament_B_07
+    3300088: Castle_Ornament_B_08
+    3300090: Castle_Ornament_B_09
+    3300092: Castle_Ornament_B_10
+    3300094: Castle_Ornament_B_11
+    3300096: Castle_Ornament_B_12
+    3300098: Castle_Ornament_B_13
+    3300100: Castle_Ornament_B_14
+    3300102: Castle_Ornament_B_15
+    3300104: Castle_Ornament_B_16
+    3300106: Castle_Ornament_B_17
+    3300108: Castle_Ornament_B_18
+    3300110: Castle_Ornament_B_19
+    3300112: Castle_Ornament_B_20
+    3300114: Castle_Ornament_B_21
+    3300116: Castle_Ornament_B_22
+    3300118: Castle_Ornament_B_23
+    3300120: Colomn_Main_00
+    3300122: Colomn_Main_01
+    3300124: Colomn_Main_02
+    3300126: Colomn_Main_03
+    3300128: Colomn_Main_04
+    3300130: Colomn_Main_05
+    3300132: Colomn_Main_06
+    3300134: Colomn_Main_07
+    3300136: Colomn_Main_08
+    3300138: Colomn_Main_09
+    3300140: Colomn_Main_10
+    3300142: Colomn_Main_11
+    3300144: Colomn_Main_12
+    3300146: Colomn_Main_13
+    3300148: Colomn_Main_14
+    3300150: Colomn_Main_15
+    3300152: Colomn_Main_16
+    3300154: Colomn_Main_17
+    3300156: Colomn_Main_18
+    3300158: Colomn_Wooden _A_00
+    3300160: Colomn_Wooden _A_01
+    3300162: Colomn_Wooden _A_02
+    3300164: Colomn_Wooden _A_03
+    3300166: Colomn_Wooden _A_04
+    3300168: Colomn_Wooden _A_05
+    3300170: Colomn_Wooden _A_06
+    3300172: Colomn_Wooden _A_07
+    3300174: Colomn_Wooden _A_08
+    3300176: Colomn_Wooden _A_09
+    3300178: Colomn_Wooden _A_10
+    3300180: Colomn_Wooden _A_11
+    3300182: Colomn_Wooden _A_12
+    3300184: Colomn_Wooden _A_13
+    3300186: Colomn_Wooden _A_14
+    3300188: Colomn_Wooden _A_15
+    3300190: Colomn_Wooden _A_16
+    3300192: Colomn_Wooden _A_17
+    3300194: Colomn_Wooden _A_18
+    3300196: Colomn_Wooden _A_19
+    3300198: Colomn_Wooden _A_20
+    3300200: Colomn_Wooden _A_21
+    3300202: Colomn_Wooden _A_22
+    3300204: Colomn_Wooden _A_23
+    3300206: Colomn_Wooden _A_24
+    3300208: Colomn_Wooden _A_25
+    3300210: Colomn_Wooden _A_26
+    3300212: Colomn_Wooden _A_27
+    3300214: Colomn_Wooden _A_28
+    3300216: Colomn_Wooden _A_29
+    3300218: Colomn_Wooden _A_30
+    3300220: Colomn_Wooden _A_31
+    3300222: Colomn_Wooden _A_32
+    3300224: Colomn_Wooden _A_33
+    3300226: Colomn_Wooden _A_34
+    3300228: Colomn_Wooden _A_35
+    3300230: Colomn_Wooden _A_36
+    3300232: Colomn_Wooden _A_37
+    3300234: Colomn_Wooden _A_38
+    3300236: Colomn_Wooden _A_39
+    3300238: Colomn_Wooden _A_40
+    3300240: Colomn_Wooden _A_41
+    3300242: Colomn_Wooden _A_42
+    3300244: Colomn_Wooden _A_43
+    3300246: Colomn_Wooden _A_44
+    3300248: Colomn_Wooden _A_45
+    3300250: Colomn_Wooden _A_46
+    3300252: Colomn_Wooden _A_47
+    3300254: Colomn_Wooden _A_48
+    3300256: Colomn_Wooden _A_49
+    3300258: Colomn_Wooden _A_50
+    3300260: Colomn_Wooden _A_51
+    3300262: Colomn_Wooden _A_52
+    3300264: Column_Wood_Long_00
+    3300266: Column_Wood_Long_01
+    3300268: Column_Wood_Long_02
+    3300270: Column_Wood_Long_03
+    3300272: Column_Wood_Long_04
+    3300274: Column_Wood_Long_05
+    3300276: Column_Wood_Long_06
+    3300278: Column_Wood_Long_07
+    3300280: Column_Wood_Long_08
+    3300282: Column_Wood_Long_09
+    3300284: Column_Wood_Long_10
+    3300286: Column_Wood_Long_11
+    3300288: Column_Wood_Long_12
+    3300290: Column_Wood_Long_13
+    3300292: Column_Wood_Long_14
+    3300294: Column_Wood_Long_15
+    3300296: Column_Wood_Long_16
+    3300298: Column_Wood_Long_17
+    3300300: Column_Wood_Long_18
+    3300302: Column_Wood_Long_20
+    3300304: Column_Wood_Long_21
+    3300306: Column_Wood_Long_22
+    3300308: Column_Wood_Long_23
+    3300310: Column_Wood_Long_24
+    3300312: Column_Wood_Long_25
+    3300314: Column_Wood_Long_27
+    3300316: Column_Wood_Long_C_00
+    3300318: Column_Wood_Long_C_01
+    3300320: Column_Wood_Long_C_02
+    3300322: Column_Wood_Long_C_03
+    3300324: Column_Wood_Long_C_04
+    3300326: Column_Wood_Long_C_05
+    3300328: Column_Wood_Long_C_06
+    3300330: Column_Wooden_Stair_00
+    3300332: Column_Wooden_Stair_01
+    3300334: Column_Wooden_Stair_02
+    3300336: Column_Wooden_Stair_03
+    3300338: Column_Wooden_Stair_04
+    3300340: Column_Wooden_Stair_05
+    3300342: Column_Wooden_Stair_06
+    3300344: Column_Wooden_Stair_07
+    3300346: Column_Wooden_Stair_08
+    3300348: Column_Wooden_Stair_09
+    3300350: Column_Wooden_Stair_10
+    3300352: Column_Wooden_Stair_11
+    3300354: Column_Wooden_Stair_12
+    3300356: Column_Wooden_Stair_13
+    3300358: Column_Wooden_Stair_14
+    3300360: Column_Wooden_Stair_15
+    3300362: Column_Wooden_Stair_16
+    3300364: Column_Wooden_Stair_17
+    3300366: Column_Wooden_Stair_18
+    3300368: Column_Wooden_Stair_19
+    3300370: Column_Wooden_Stair_20
+    3300372: Column_Wooden_Stair_21
+    3300374: Column_Wooden_Stair_22
+    3300376: Column_Wooden_Stair_23
+    3300378: Column_Wooden_Stair_24
+    3300380: Column_Wooden_Stair_25
+    3300382: Column_Wooden_Stair_26
+    3300384: Column_Wooden_Stair_27
+    3300386: Column_Wooden_Stair_28
+    3300388: Column_Wooden_Stair_29
+    3300390: Column_Wooden_Stair_30
+    3300392: Column_Wooden_Stair_31
+    3300394: Column_Wooden_Stair_32
+    3300396: Column_Wooden_Stair_33
+    3300398: Column_Wooden_Stair_34
+    3300400: Column_Wooden_Stair_35
+    3300402: Column_Wooden_Stair_36
+    3300404: Column_Wooden_Stair_37
+    3300406: Column_Wooden_Stair_38
+    3300408: Column_Wooden_Stair_39
+    3300410: Column_Wooden_Stair_40
+    3300412: Column_Wooden_Stair_41
+    3300414: Column_Wooden_Stair_42
+    3300416: Column_Wooden_Stair_43
+    3300418: Column_Wooden_Stair_44
+    3300420: Column_Wooden_Stair_45
+    3300422: Column_Wooden_Stair_46
+    3300424: Column_Wooden_Stair_47
+    3300426: Column_Wooden_Stair_48
+    3300428: Column_Wooden_Stair_49
+    3300430: Column_Wooden_Stair_50
+    3300432: Column_Wooden_Stair_51
+    3300434: Column_Wooden_Stair_52
+    3300436: Column_Wooden_Stair_53
+    3300438: Column_Wooden_Stair_54
+    3300440: Column_Wooden_Stair_55
+    3300442: Column_Wooden_Stair_56
+    3300444: Column_Wooden_Stair_57
+    3300446: Column_Wooden_Stair_58
+    3300448: Column_Wooden_Stair_59
+    3300450: Column_Wooden_Stair_60
+    3300452: Column_Wooden_Stair_61
+    3300454: Column_Wooden_Stair_62
+    3300456: Column_Wooden_Stair_63
+    3300458: Column_Wooden_Stair_64
+    3300460: Column_Wooden_Stair_65
+    3300462: Column_Wooden_Stair_66
+    3300464: Column_Wooden_Stair_67
+    3300466: Column_Wooden_Stair_68
+    3300468: Column_Wooden_Stair_69
+    3300470: Column_Wooden_Stair_70
+    3300472: Column_Wooden_Stair_71
+    3300474: Column_Wooden_Stair_72
+    3300476: Column_Wooden_Stair_73
+    3300478: Column_Wooden_Stair_74
+    3300480: Column_Wooden_Stair_75
+    3300482: Door_Ark_000
+    3300484: Door_Ark_Long_000
+    3300486: Door_Ark_Long_02
+    3300488: Door_Ark_Long_04
+    3300490: Door_Ark_Long_05
+    3300492: Door_Ark_Long_07
+    3300494: Door_Ark_Long_08
+    3300496: Door_Ark_Long_09
+    3300498: Door_Ark_Long_10
+    3300500: Hatch_Wooden_04
+    3300502: Multi_Arc_00
+    3300504: Multi_Arc_01
+    3300506: Plinth_A_00
+    3300508: Plinth_A_01
+    3300510: Plinth_A_02
+    3300512: Rail_Wooden Staircase_01
+    3300514: Rail_Wooden Staircase_02
+    3300516: Rail_Wooden Staircase_04
+    3300518: Rail_Wooden Staircase_05
+    3300520: Rail_Wooden Staircase_06
+    3300522: Rail_Wooden Staircase_07
+    3300524: Rail_Wooden Staircase_08
+    3300526: Rail_Wooden Staircase_09
+    3300528: Rail_Wooden Staircase_10
+    3300530: Rail_Wooden Staircase_1000
+    3300532: Rail_Wooden Staircase_1001
+    3300534: Rail_Wooden Staircase_11
+    3300536: Rail_Wooden Staircase_12
+    3300538: Rail_Wooden Staircase_13
+    3300540: Raile__A_Big_00
+    3300542: Raile__A_Big_01
+    3300544: Raile__A_Big_02
+    3300546: Raile_Base _A_Small_00
+    3300548: Raile_Base _A_Small_01
+    3300550: Raile_Base _A_Small_02
+    3300552: Raile_Base _A_Small_03
+    3300554: Raile_Base _A_Small_04
+    3300556: Raile_Base _A_Small_05
+    3300558: Raile_Base _A_Small_06
+    3300560: Raile_Base _A_Small_07
+    3300562: Raile_Base _A_Small_08
+    3300564: Raile_Base _A_Small_09
+    3300566: Raile_Base_A_Big_0100
+    3300568: Raile_Base_A_Big_0101
+    3300570: Raile_Base_A_Big_0102
+    3300572: Raile_Wooden _A_Small_00
+    3300574: Raile_Wooden _A_Small_01
+    3300576: Raile_Wooden _A_Small_02
+    3300578: Raile_Wooden _A_Small_03
+    3300580: Raile_Wooden _A_Small_04
+    3300582: Raile_Wooden _A_Small_05
+    3300584: Raile_Wooden _A_Small_06
+    3300586: Raile_Wooden _A_Small_07
+    3300588: Raile_Wooden _A_Small_08
+    3300590: Raile_Wooden _A_Small_09
+    3300592: Rails_Wooden _Base_00
+    3300594: Rails_Wooden _Base_01
+    3300596: Rails_Wooden _Base_03
+    3300598: Rails_Wooden _Base_05
+    3300600: Ramp_Floor_Wood
+    3300602: Simple_columns_barack_00
+    3300604: Stair_Wooden _A_Base
+    3300606: Stair_Wooden _A_stair
+    3300608: Stair_Wooden _A_stair_00
+    3300610: Stair_Wooden _A_stair_01
+    3300612: Stair_Wooden _A_stair_02
+    3300614: Stair_Wooden _A_stair_03
+    3300616: Stair_Wooden _A_stair_04
+    3300618: Stair_Wooden _A_stair_05
+    3300620: Stair_Wooden _A_stair_06
+    3300622: Stair_Wooden _A_stair_07
+    3300624: Stair_Wooden _A_stair_08
+    3300626: Stair_Wooden _A_stair_09
+    3300628: Stair_Wooden _A_stair_10
+    3300630: Stair_Wooden _A_stair_11
+    3300632: Stair_Wooden _A_stair_12
+    3300634: Stair_Wooden _A_stair_13
+    3300636: Stair_Wooden _A_stair_14
+    3300638: Stair_Wooden _A_stair_15
+    3300640: Stair_Wooden _A_stair_16
+    3300642: Stair_Wooden _A_stair_17
+    3300644: Stair_Wooden _A_stair_18
+    3300646: Stair_Wooden _A_stair_19
+    3300648: Stair_Wooden _A_stair_20
+    3300650: Stair_Wooden _A_stair_21
+    3300652: Stair_Wooden _A_stair_22
+    3300654: Stair_Wooden _A_stair_23
+    3300656: Stair_Wooden _A_stair_24
+    3300658: Stair_Wooden _A_stair_25
+    3300660: Stair_Wooden _B_stair_00
+    3300662: Stair_Wooden _B_stair_01
+    3300664: Stair_Wooden _B_stair_02
+    3300666: Stair_Wooden _B_stair_03
+    3300668: Stair_Wooden _B_stair_04
+    3300670: Stair_Wooden _B_stair_05
+    3300672: Stair_Wooden _B_stair_06
+    3300674: Stair_Wooden _B_stair_07
+    3300676: Stair_Wooden _B_stair_08
+    3300678: Stair_Wooden _B_stair_09
+    3300680: Stair_Wooden _B_stair_10
+    3300682: Stair_Wooden _C_stair_00
+    3300684: Stair_Wooden _C_stair_01
+    3300686: Stair_Wooden _C_stair_02
+    3300688: Stair_Wooden _C_stair_03
+    3300690: Stair_Wooden _C_stair_04
+    3300692: Stair_Wooden _C_stair_05
+    3300694: Stair_Wooden _C_stair_06
+    3300696: Stair_Wooden _C_stair_07
+    3300698: Stair_Wooden _C_stair_08
+    3300700: Stair_Wooden _C_stair_09
+    3300702: Stair_Wooden _C_stair_10
+    3300704: Stair_Wooden _C_stair_11
+    3300706: Stair_Wooden _C_stair_12
+    3300708: Stair_Wooden _C_stair_13
+    3300710: Stair_Wooden _C_stair_14
+    3300712: Stair_Wooden _C_stair_15
+    3300714: Stair_Wooden _C_stair_16
+    3300716: Stair_Wooden _C_stair_17
+    3300718: Stair_Wooden _C_stair_18
+    3300720: Stair_Wooden _C_stair_19
+    3300722: Stair_Wooden _C_stair_20
+    3300724: Stair_Wooden _C_stair_21
+    3300726: Stair_Wooden _C_stair_22
+    3300728: Stair_Wooden _C_stair_23
+    3300730: Stairs_Wooden _B_Base
+    3300732: Stairs_Wooden _C_Base
+    3300734: TH_sealing_ornament_00
+    3300736: TH_sealing_ornament_01
+    3300738: Thin_wall_01
+    3300740: Thin_wall_03
+    3300742: Thin_wall_04
+    3300744: Thin_wall_06
+    3300746: Thron__Gallery_Left
+    3300748: Thron_Base_00
+    3300750: Thron_Gallery_Right
+    3300752: Thron_Room_Back_Wall_f1
+    3300754: Thron_Room_Back_Wall_f2
+    3300756: Thron_Room_Base
+    3300758: Thron_Room_Front_Wall_f1
+    3300760: Thron_Room_Front_Wall_f2
+    3300762: Thron_Room_Left_Wall_f1
+    3300764: Thron_Room_Right_Wall_f1
+    3300766: Thron_Room_Selling
+    3300768: Wall_Conterforce_Big_00
+    3300770: Wall_Conterforce_Big_01
+    3300772: Wall_Conterforce_Big_02
+    3300774: Wall_Conterforce_Big_03
+    3300776: Wall_Conterforce_Big_04
+    3300778: Wall_Conterforce_Big_05
+    3300780: Wall_Conterforce_Big_06
+    3300782: Wall_Conterforce_Big_07
+    3300784: Wall_Conterforce_Big_08
+    3300786: Wall_Conterforce_Big_09
+    3300788: Wall_Conterforce_Big_10
+    3300790: Wall_Conterforce_Big_11
+    3300792: Wall_Conterforce_Big_12
+    3300794: Wall_Conterforce_Big_13
+    3300796: Wall_Conterforce_Big_14
+    3300798: Wall_Conterforce_Big_15
+    3300800: Wall_Conterforce_Big_16
+    3300802: Wall_Conterforce_Big_17
+    3300804: Wall_Conterforce_Big_18
+    3300806: Wall_Conterforce_Small_00
+    3300808: Wall_Conterforce_Small_01
+    3300810: Wall_Conterforce_Small_02
+    3300812: Wall_Conterforce_Small_03
+    3300814: Wall_Conterforce_Small_04
+    3300816: Wall_Conterforce_Small_05
+    3300818: Window_A_00
+    3300820: Window_A_08
+    3300822: Window_A_09
+    3300824: Window_D_01
+    3300826: Window_D_03
+    3300828: Window_D_05
+    3300830: Window_D_07
+    3300832: Window_D_09
+    3300834: Window_D_10
+    3300836: Window_D_11
+    3300838: Window_D_12
+    3300840: Window_D_13
+    3300842: Window_D_14
+    3300844: Window_D_15
+    3300846: Window_D_16
+    3300848: Window_Light
+    3300850: Window_Light01
+    3300852: Window_Light02
+    3300854: Window_Light_baraks_00
+    3300856: Window_Light_baraks_01
+    3300858: Window_Light_baraks_02
+    3300860: Window_Light_baraks_03
+    3300862: Window_Light_baraks_04
+    3300864: Window_Light_baraks_05
+    3300866: Window_Light_baraks_06
+    3300868: Window_Light_baraks_07
+    3300870: Window_Light_baraks_08
+    3300872: Window_Light_baraks_09
+    3300874: Window_Light_baraks_10
+    3300876: Window_Light_baraks_11
+    3300878: Wooden _Bordur_barak
+    3300880: Wooden _Plank_B_Small_01
+    3300882: Wooden _Plank_B_Small_02
+    3300884: Wooden _Plank_B_Small_03
+    3300886: Wooden _Plank_B_Small_05
+    3300888: Wooden _Plank_B_Small_06
+    3300890: Wooden _Plank_B_Small_07
+    3300892: Wooden _Plank_B_Small_08
+    3300894: Wooden _Plank_B_Small_09
+    3300896: Wooden _Plank_B_Small_10
+    3300898: Wooden _Plank_B_Small_11
+    3300900: Wooden _Plank_B_Small_12
+    3300902: Wooden _Plank_B_Small_13
+    3300904: Wooden _Plank_B_Small_14
+    3300906: Wooden _Plank_B_Small_16
+    3300908: Wooden _Plank_B_Small_17
+    3300910: Wooden _Plank_B_Small_18
+    3300912: Wooden _Plank_B_Small_19
+    3300914: Wooden _Plank_B_Small_20
+    3300916: Wooden _Plank_B_Small_21
+    3300918: Wooden _Plank_B_Small_22
+    3300920: Wooden _Plank_B_Small_23
+    3300922: Wooden _Plank_B_Small_24
+    3300924: Wooden _Plank_B_Small_26
+    3300926: Wooden _Plank_B_Small_27
+    3300928: Wooden _Plank_B_Small_28
+    3300930: Wooden _Plank_B_Small_29
+    3300932: Wooden _Plank_B_Small_30
+    3300934: Wooden _Plank_B_Small_31
+    3300936: Wooden _Plank_B_Small_32
+    3300938: Wooden _Plank_B_Small_33
+    3300940: Wooden _Plank_B_Small_34
+    3300942: Wooden _Roof_Base_Barack_00
+    3300944: Wooden _Roof_Base_Barack_01
+    3300946: Wooden _Roof_Base_Barack_02
+    3300948: Wooden _Roof_Base_Barack_03
+    3300950: Wooden _Roof_Base_Barack_04
+    3300952: Wooden _Roof_Base_Barack_05
+    3300954: Wooden _Roof_Base_Barack_06
+    3300956: Wooden_simple_column_00
+    3300958: Wooden_simple_column_01
+    3300960: Wooden_simple_column_02
+    3300962: Wooden_simple_column_03
+    3300964: Wooden_simple_column_04
+    4300000: Arc_Long_00
+    4300002: Arc_Long_01
+    4300004: Arc_Long_02
+    4300006: Barracks
+    4300008: Barracks_Pass
+    4300010: Block_D_02
+    4300012: Castle_Ornament_A_00
+    4300014: Castle_Ornament_A_01
+    4300016: Castle_Ornament_A_02
+    4300018: Castle_Ornament_A_03
+    4300020: Castle_Ornament_B_04
+    4300022: Castle_Ornament_B_05
+    4300024: Castle_Ornament_B_06
+    4300026: Castle_Ornament_B_07
+    4300028: Castle_Ornament_B_08
+    4300030: Castle_Ornament_B_09
+    4300032: Castle_Ornament_B_10
+    4300034: Castle_Ornament_B_11
+    4300036: Castle_Ornament_B_12
+    4300038: Castle_Ornament_B_13
+    4300040: Castle_Ornament_B_14
+    4300042: Castle_Ornament_B_15
+    4300044: Castle_Ornament_B_16
+    4300046: Castle_Ornament_B_17
+    4300048: Castle_Ornament_B_18
+    4300050: Castle_Ornament_B_19
+    4300052: Castle_Ornament_B_20
+    4300054: Castle_Ornament_B_21
+    4300056: Castle_Ornament_B_22
+    4300058: Castle_Ornament_B_23
+    4300060: Colomn_Main_00
+    4300062: Colomn_Main_01
+    4300064: Colomn_Main_02
+    4300066: Colomn_Main_03
+    4300068: Colomn_Main_04
+    4300070: Colomn_Main_05
+    4300072: Colomn_Main_06
+    4300074: Colomn_Main_07
+    4300076: Colomn_Main_08
+    4300078: Colomn_Main_09
+    4300080: Colomn_Main_10
+    4300082: Colomn_Main_11
+    4300084: Colomn_Main_12
+    4300086: Colomn_Main_13
+    4300088: Colomn_Main_14
+    4300090: Colomn_Main_15
+    4300092: Colomn_Main_16
+    4300094: Colomn_Main_17
+    4300096: Colomn_Main_18
+    4300098: Colomn_Wooden _A_15
+    4300100: Colomn_Wooden _A_16
+    4300102: Colomn_Wooden _A_17
+    4300104: Column_Wood_Long_20
+    4300106: Wooden _Plank_B_Small_19
+    4300108: Wooden _Plank_B_Small_20
+    4300110: Wooden _Plank_B_Small_18
+    4300112: Wooden _Plank_B_Small_17
+    4300114: Column_Wood_Long_21
+    4300116: Wooden _Plank_B_Small_21
+    4300118: Wooden _Plank_B_Small_22
+    4300120: Wooden _Plank_B_Small_23
+    4300122: Wooden _Plank_B_Small_24
+    4300124: Column_Wood_Long_22
+    4300126: Wooden _Plank_B_Small_14
+    4300128: Wooden _Plank_B_Small_13
+    4300130: Wooden _Plank_B_Small_16
+    4300132: Column_Wood_Long_23
+    4300134: Wooden _Plank_B_Small_09
+    4300136: Wooden _Plank_B_Small_10
+    4300138: Wooden _Plank_B_Small_12
+    4300140: Wooden _Plank_B_Small_11
+    4300142: Column_Wood_Long_24
+    4300144: Wooden _Plank_B_Small_01
+    4300146: Wooden _Plank_B_Small_03
+    4300148: Wooden _Plank_B_Small_02
+    4300150: Column_Wood_Long_25
+    4300152: Wooden _Plank_B_Small_08
+    4300154: Wooden _Plank_B_Small_07
+    4300156: Wooden _Plank_B_Small_06
+    4300158: Wooden _Plank_B_Small_05
+    4300160: Column_Wood_Long_27
+    4300162: Wooden _Plank_B_Small_32
+    4300164: Wooden _Plank_B_Small_34
+    4300166: Wooden _Plank_B_Small_33
+    4300168: Column_Wood_Long_C_00
+    4300170: Wooden _Plank_B_Small_28
+    4300172: Column_Wood_Long_C_01
+    4300174: Wooden _Plank_B_Small_27
+    4300176: Column_Wood_Long_C_02
+    4300178: Wooden _Plank_B_Small_29
+    4300180: Column_Wood_Long_C_03
+    4300182: Wooden _Plank_B_Small_30
+    4300184: Column_Wood_Long_C_04
+    4300186: Wooden _Plank_B_Small_31
+    4300188: Column_Wood_Long_C_05
+    4300190: Wooden _Plank_B_Small_26
+    4300192: Column_Wood_Long_C_06
+    4300194: Column_Wooden_Stair_51
+    4300196: Column_Wooden_Stair_63
+    4300198: Door_Ark_000
+    4300200: Door_Ark_Long_000
+    4300202: Door_Ark_Long_02
+    4300204: Door_Ark_Long_04
+    4300206: Door_Ark_Long_05
+    4300208: Door_Ark_Long_07
+    4300210: Door_Ark_Long_08
+    4300212: Door_Ark_Long_09
+    4300214: Door_Ark_Long_10
+    4300216: Hatch_Wooden_04
+    4300218: Multi_Arc_00
+    4300220: Multi_Arc_01
+    4300222: Rail_Wooden Staircase_07
+    4300224: Raile_Base _A_Small_00
+    4300226: Colomn_Wooden _A_02
+    4300228: Raile_Wooden _A_Small_00
+    4300230: Colomn_Wooden _A_01
+    4300232: Colomn_Wooden _A_00
+    4300234: Raile_Base _A_Small_01
+    4300236: Colomn_Wooden _A_05
+    4300238: Raile_Wooden _A_Small_01
+    4300240: Colomn_Wooden _A_04
+    4300242: Colomn_Wooden _A_03
+    4300244: Raile_Base _A_Small_02
+    4300246: Colomn_Wooden _A_08
+    4300248: Colomn_Wooden _A_07
+    4300250: Colomn_Wooden _A_06
+    4300252: Raile_Wooden _A_Small_02
+    4300254: Raile_Base _A_Small_03
+    4300256: Colomn_Wooden _A_10
+    4300258: Colomn_Wooden _A_09
+    4300260: Colomn_Wooden _A_11
+    4300262: Raile_Wooden _A_Small_03
+    4300264: Raile_Base _A_Small_04
+    4300266: Colomn_Wooden _A_14
+    4300268: Raile_Wooden _A_Small_04
+    4300270: Colomn_Wooden _A_13
+    4300272: Colomn_Wooden _A_12
+    4300274: Raile_Base _A_Small_05
+    4300276: Raile_Base _A_Small_06
+    4300278: Colomn_Wooden _A_19
+    4300280: Colomn_Wooden _A_18
+    4300282: Colomn_Wooden _A_20
+    4300284: Raile_Wooden _A_Small_06
+    4300286: Raile_Base _A_Small_07
+    4300288: Raile_Wooden _A_Small_07
+    4300290: Colomn_Wooden _A_22
+    4300292: Colomn_Wooden _A_21
+    4300294: Colomn_Wooden _A_23
+    4300296: Raile_Base _A_Small_08
+    4300298: Colomn_Wooden _A_24
+    4300300: Colomn_Wooden _A_25
+    4300302: Colomn_Wooden _A_26
+    4300304: Raile_Wooden _A_Small_08
+    4300306: Raile_Base _A_Small_09
+    4300308: Raile_Wooden _A_Small_09
+    4300310: Colomn_Wooden _A_27
+    4300312: Colomn_Wooden _A_28
+    4300314: Colomn_Wooden _A_29
+    4300316: Raile_Wooden _A_Small_05
+    4300318: Rails_Wooden _Base_05
+    4300320: Ramp_Floor_Wood
+    4300322: Column_Wood_Long_12
+    4300324: Column_Wood_Long_02
+    4300326: Column_Wood_Long_00
+    4300328: Arc_Wood_A_17
+    4300330: Arc_Romb_Wood_A_08
+    4300332: Arc_Wood_A_16
+    4300334: Column_Wood_Long_01
+    4300336: Arc_Wood_A_15
+    4300338: Arc_Romb_Wood_A_07
+    4300340: Arc_Wood_A_14
+    4300342: Column_Wood_Long_03
+    4300344: Arc_Wood_A_13
+    4300346: Arc_Romb_Wood_A_06
+    4300348: Arc_Wood_A_12
+    4300350: Column_Wood_Long_04
+    4300352: Arc_Wood_A_07
+    4300354: Arc_Romb_Wood_A_03
+    4300356: Arc_Wood_A_06
+    4300358: Column_Wood_Long_05
+    4300360: Arc_Wood_A_08
+    4300362: Arc_Romb_Wood_A_04
+    4300364: Arc_Wood_A_09
+    4300366: Arc_Wood_A_11
+    4300368: Arc_Romb_Wood_A_05
+    4300370: Column_Wood_Long_06
+    4300372: Column_Wood_Long_07
+    4300374: Arc_Wood_A_10
+    4300376: Raile_Base_A_Big_0100
+    4300378: Colomn_Wooden _A_30
+    4300380: Colomn_Wooden _A_31
+    4300382: Colomn_Wooden _A_32
+    4300384: Colomn_Wooden _A_33
+    4300386: Colomn_Wooden _A_34
+    4300388: Colomn_Wooden _A_35
+    4300390: Colomn_Wooden _A_36
+    4300392: Colomn_Wooden _A_37
+    4300394: Raile__A_Big_02
+    4300396: Raile_Base_A_Big_0101
+    4300398: Colomn_Wooden _A_38
+    4300400: Raile__A_Big_01
+    4300402: Colomn_Wooden _A_39
+    4300404: Colomn_Wooden _A_40
+    4300406: Colomn_Wooden _A_41
+    4300408: Colomn_Wooden _A_42
+    4300410: Colomn_Wooden _A_43
+    4300412: Colomn_Wooden _A_44
+    4300414: Colomn_Wooden _A_45
+    4300416: Raile_Base_A_Big_0102
+    4300418: Colomn_Wooden _A_46
+    4300420: Raile__A_Big_00
+    4300422: Colomn_Wooden _A_47
+    4300424: Colomn_Wooden _A_48
+    4300426: Colomn_Wooden _A_49
+    4300428: Colomn_Wooden _A_50
+    4300430: Colomn_Wooden _A_51
+    4300432: Colomn_Wooden _A_52
+    4300434: Arc_Wood_A_03
+    4300436: Column_Wood_Long_11
+    4300438: Arc_Romb_Wood_A_01
+    4300440: Arc_Wood_A_02
+    4300442: Column_Wood_Long_08
+    4300444: Arc_Wood_A_00
+    4300446: Arc_Romb_Wood_A_00
+    4300448: Arc_Wood_A_01
+    4300450: Column_Wood_Long_09
+    4300452: Arc_Wood_A_04
+    4300454: Arc_Romb_Wood_A_02
+    4300456: Arc_Wood_A_05
+    4300458: Column_Wood_Long_10
+    4300460: Column_Wooden_Stair_27
+    4300462: Rail_Wooden Staircase_01
+    4300464: Column_Wooden_Stair_28
+    4300466: Column_Wooden_Stair_29
+    4300468: Rail_Wooden Staircase_08
+    4300470: Column_Wooden_Stair_30
+    4300472: Column_Wooden_Stair_31
+    4300474: Column_Wooden_Stair_32
+    4300476: Column_Wooden_Stair_33
+    4300478: Column_Wooden_Stair_34
+    4300480: Column_Wooden_Stair_35
+    4300482: Column_Wooden_Stair_36
+    4300484: Column_Wooden_Stair_37
+    4300486: Column_Wooden_Stair_38
+    4300488: Column_Wooden_Stair_39
+    4300490: Column_Wooden_Stair_40
+    4300492: Rails_Wooden _Base_03
+    4300494: Rails_Wooden _Base_01
+    4300496: Column_Wooden_Stair_26
+    4300498: Column_Wooden_Stair_25
+    4300500: Column_Wooden_Stair_24
+    4300502: Column_Wooden_Stair_23
+    4300504: Column_Wooden_Stair_22
+    4300506: Column_Wooden_Stair_21
+    4300508: Column_Wooden_Stair_20
+    4300510: Column_Wooden_Stair_19
+    4300512: Column_Wooden_Stair_18
+    4300514: Column_Wooden_Stair_03
+    4300516: Column_Wooden_Stair_02
+    4300518: Column_Wooden_Stair_01
+    4300520: Column_Wooden_Stair_00
+    4300522: Rail_Wooden Staircase_02
+    4300524: Rails_Wooden _Base_00
+    4300526: Simple_columns_barack_00
+    4300528: Stair_Wooden _A_Base
+    4300530: Stair_Wooden _A_stair_00
+    4300532: Stair_Wooden _A_stair_03
+    4300534: Stair_Wooden _A_stair_06
+    4300536: Stair_Wooden _A_stair_07
+    4300538: Stair_Wooden _A_stair_08
+    4300540: Stair_Wooden _A_stair_10
+    4300542: Stair_Wooden _A_stair_11
+    4300544: Stair_Wooden _A_stair_12
+    4300546: Stair_Wooden _A_stair_13
+    4300548: Stair_Wooden _A_stair_14
+    4300550: Stair_Wooden _A_stair_15
+    4300552: Stair_Wooden _A_stair_16
+    4300554: Stair_Wooden _A_stair_17
+    4300556: Stair_Wooden _A_stair_18
+    4300558: Stair_Wooden _A_stair_19
+    4300560: Stair_Wooden _A_stair_20
+    4300562: Stair_Wooden _A_stair_21
+    4300564: Stair_Wooden _A_stair_22
+    4300566: Stair_Wooden _A_stair_23
+    4300568: Stair_Wooden _A_stair_24
+    4300570: Stair_Wooden _A_stair_25
+    4300572: Column_Wooden_Stair_17
+    4300574: Rail_Wooden Staircase_05
+    4300576: Column_Wooden_Stair_16
+    4300578: Column_Wooden_Stair_15
+    4300580: Rail_Wooden Staircase_06
+    4300582: Stair_Wooden _A_stair_05
+    4300584: Column_Wooden_Stair_14
+    4300586: Stair_Wooden _A_stair_09
+    4300588: Column_Wooden_Stair_13
+    4300590: Column_Wooden_Stair_12
+    4300592: Column_Wooden_Stair_11
+    4300594: Column_Wooden_Stair_10
+    4300596: Column_Wooden_Stair_07
+    4300598: Rail_Wooden Staircase_04
+    4300600: Column_Wooden_Stair_08
+    4300602: Column_Wooden_Stair_09
+    4300604: Column_Wooden_Stair_06
+    4300606: Column_Wooden_Stair_05
+    4300608: Column_Wooden_Stair_04
+    4300610: Stair_Wooden _A_stair
+    4300612: Stair_Wooden _A_stair_02
+    4300614: Column_Wood_Long_14
+    4300616: Column_Wood_Long_13
+    4300618: Stair_Wooden _A_stair_04
+    4300620: Stair_Wooden _A_stair_01
+    4300622: Stairs_Wooden _B_Base
+    4300624: Stair_Wooden _B_stair_00
+    4300626: Stair_Wooden _B_stair_01
+    4300628: Stair_Wooden _B_stair_02
+    4300630: Stair_Wooden _B_stair_03
+    4300632: Stair_Wooden _B_stair_04
+    4300634: Stair_Wooden _B_stair_05
+    4300636: Stair_Wooden _B_stair_06
+    4300638: Stair_Wooden _B_stair_07
+    4300640: Stair_Wooden _B_stair_08
+    4300642: Stair_Wooden _B_stair_09
+    4300644: Stair_Wooden _B_stair_10
+    4300646: Column_Wooden_Stair_46
+    4300648: Rail_Wooden Staircase_09
+    4300650: Column_Wooden_Stair_45
+    4300652: Column_Wooden_Stair_44
+    4300654: Column_Wooden_Stair_43
+    4300656: Column_Wooden_Stair_42
+    4300658: Column_Wooden_Stair_41
+    4300660: Stairs_Wooden _C_Base
+    4300662: Stair_Wooden _C_stair_00
+    4300664: Stair_Wooden _C_stair_01
+    4300666: Stair_Wooden _C_stair_02
+    4300668: Stair_Wooden _C_stair_03
+    4300670: Stair_Wooden _C_stair_04
+    4300672: Stair_Wooden _C_stair_05
+    4300674: Stair_Wooden _C_stair_06
+    4300676: Stair_Wooden _C_stair_07
+    4300678: Stair_Wooden _C_stair_08
+    4300680: Stair_Wooden _C_stair_09
+    4300682: Stair_Wooden _C_stair_10
+    4300684: Stair_Wooden _C_stair_11
+    4300686: Stair_Wooden _C_stair_12
+    4300688: Stair_Wooden _C_stair_13
+    4300690: Stair_Wooden _C_stair_14
+    4300692: Stair_Wooden _C_stair_15
+    4300694: Stair_Wooden _C_stair_16
+    4300696: Stair_Wooden _C_stair_17
+    4300698: Stair_Wooden _C_stair_18
+    4300700: Stair_Wooden _C_stair_19
+    4300702: Stair_Wooden _C_stair_20
+    4300704: Stair_Wooden _C_stair_21
+    4300706: Stair_Wooden _C_stair_22
+    4300708: Stair_Wooden _C_stair_23
+    4300710: Column_Wooden_Stair_47
+    4300712: Column_Wooden_Stair_49
+    4300714: Rail_Wooden Staircase_10
+    4300716: Column_Wooden_Stair_65
+    4300718: Rail_Wooden Staircase_11
+    4300720: Column_Wooden_Stair_64
+    4300722: Column_Wooden_Stair_50
+    4300724: Column_Wooden_Stair_62
+    4300726: Column_Wooden_Stair_52
+    4300728: Column_Wooden_Stair_61
+    4300730: Column_Wooden_Stair_55
+    4300732: Column_Wooden_Stair_60
+    4300734: Column_Wooden_Stair_53
+    4300736: Column_Wooden_Stair_68
+    4300738: Column_Wooden_Stair_75
+    4300740: Rail_Wooden Staircase_12
+    4300742: Column_Wooden_Stair_73
+    4300744: Rail_Wooden Staircase_13
+    4300746: Column_Wooden_Stair_54
+    4300748: Column_Wood_Long_15
+    4300750: Column_Wood_Long_16
+    4300752: Column_Wood_Long_17
+    4300754: Column_Wood_Long_18
+    4300756: Column_Wooden_Stair_56
+    4300758: Column_Wooden_Stair_74
+    4300760: Rail_Wooden Staircase_1001
+    4300762: Column_Wooden_Stair_69
+    4300764: Column_Wooden_Stair_57
+    4300766: Rail_Wooden Staircase_1000
+    4300768: Column_Wooden_Stair_71
+    4300770: Column_Wooden_Stair_58
+    4300772: Column_Wooden_Stair_70
+    4300774: Column_Wooden_Stair_72
+    4300776: Column_Wooden_Stair_59
+    4300778: Column_Wooden_Stair_67
+    4300780: Column_Wooden_Stair_48
+    4300782: Column_Wooden_Stair_66
+    4300784: TH_sealing_ornament_00
+    4300786: TH_sealing_ornament_01
+    4300788: Thin_wall_01
+    4300790: Thin_wall_03
+    4300792: Thin_wall_04
+    4300794: Thin_wall_06
+    4300796: Thron_Base_00
+    4300798: Thron_Room_Base
+    4300800: Thron_Room_Back_Wall_f2
+    4300802: Thron_Room_Front_Wall_f2
+    4300804: Thron_Room_Selling
+    4300806: Thron__Gallery_Left
+    4300808: Thron_Room_Front_Wall_f1
+    4300810: Thron_Room_Right_Wall_f1
+    4300812: Thron_Room_Left_Wall_f1
+    4300814: Thron_Gallery_Right
+    4300816: Thron_Room_Back_Wall_f1
+    4300818: Plinth_A_01
+    4300820: Plinth_A_02
+    4300822: Plinth_A_00
+    4300824: Bordur_B_00
+    4300826: Bordur_B_01
+    4300828: Bordur_B
+    4300830: Wall_Conterforce_Big_00
+    4300832: Wall_Conterforce_Big_01
+    4300834: Wall_Conterforce_Big_02
+    4300836: Wall_Conterforce_Big_03
+    4300838: Wall_Conterforce_Big_04
+    4300840: Wall_Conterforce_Big_05
+    4300842: Wall_Conterforce_Big_06
+    4300844: Wall_Conterforce_Big_07
+    4300846: Wall_Conterforce_Big_08
+    4300848: Wall_Conterforce_Big_09
+    4300850: Wall_Conterforce_Big_10
+    4300852: Wall_Conterforce_Big_11
+    4300854: Wall_Conterforce_Big_12
+    4300856: Wall_Conterforce_Big_13
+    4300858: Wall_Conterforce_Big_14
+    4300860: Wall_Conterforce_Big_15
+    4300862: Wall_Conterforce_Big_16
+    4300864: Wall_Conterforce_Big_17
+    4300866: Wall_Conterforce_Big_18
+    4300868: Wall_Conterforce_Small_00
+    4300870: Wall_Conterforce_Small_01
+    4300872: Wall_Conterforce_Small_02
+    4300874: Wall_Conterforce_Small_03
+    4300876: Wall_Conterforce_Small_04
+    4300878: Wall_Conterforce_Small_05
+    4300880: Window_A_00
+    4300882: Window_A_08
+    4300884: Window_A_09
+    4300886: Window_D_01
+    4300888: Window_D_03
+    4300890: Window_D_05
+    4300892: Window_D_07
+    4300894: Window_D_09
+    4300896: Window_D_10
+    4300898: Window_D_11
+    4300900: Window_D_12
+    4300902: Window_D_13
+    4300904: Window_D_14
+    4300906: Window_D_15
+    4300908: Window_D_16
+    4300910: Window_Light
+    4300912: Window_Light01
+    4300914: Window_Light02
+    4300916: Window_Light_baraks_00
+    4300918: Window_Light_baraks_01
+    4300920: Window_Light_baraks_02
+    4300922: Window_Light_baraks_03
+    4300924: Window_Light_baraks_04
+    4300926: Window_Light_baraks_05
+    4300928: Window_Light_baraks_06
+    4300930: Window_Light_baraks_07
+    4300932: Window_Light_baraks_08
+    4300934: Window_Light_baraks_09
+    4300936: Window_Light_baraks_10
+    4300938: Window_Light_baraks_11
+    4300940: Wooden _Bordur_barak
+    4300942: Wooden _Roof_Base_Barack_00
+    4300944: Wooden _Roof_Base_Barack_01
+    4300946: Wooden _Roof_Base_Barack_02
+    4300948: Wooden _Roof_Base_Barack_03
+    4300950: Wooden _Roof_Base_Barack_04
+    4300952: Wooden _Roof_Base_Barack_05
+    4300954: Wooden _Roof_Base_Barack_06
+    4300956: Wooden_simple_column_00
+    4300958: Wooden_simple_column_01
+    4300960: Wooden_simple_column_02
+    4300962: Wooden_simple_column_03
+    4300964: Wooden_simple_column_04
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

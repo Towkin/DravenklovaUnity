@@ -11,6 +11,14 @@ public class LevelDigger : MonoBehaviour {
     private bool m_DebugLogs = false;
 
     [SerializeField]
+    private bool m_UseRandomSeed = true;
+    private bool UseRandomSeed
+    {
+        get { return m_UseRandomSeed; }
+    }
+
+
+    [SerializeField]
     private int m_Seed;
     private int Seed
     {
@@ -80,13 +88,16 @@ public class LevelDigger : MonoBehaviour {
         get { return m_LevelObjects; }
     }
 
-    int Counter = 0;
+    //int Counter = 0;
     
     void Start () {
         RoomBranch.Push(FirstRoom);
         LevelObjects.Enqueue(FirstRoom);
 
-        Random.seed = Seed;
+        if(!UseRandomSeed)
+        {
+            Random.seed = Seed;
+        }
         BuildLevel(LevelLength);
 
         /*NavMeshBuilder.BuildNavMesh();

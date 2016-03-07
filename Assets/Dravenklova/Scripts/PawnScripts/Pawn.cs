@@ -15,7 +15,6 @@ public abstract class Pawn : MonoBehaviour
     private float SprintSpeedMultiplier
     {
         get { return m_SprintSpeedMultiplier; }
-        //protected set { m_SprintSpeedMultiplier = value; }
     }
 
     private float MaxSpeedMultiplier
