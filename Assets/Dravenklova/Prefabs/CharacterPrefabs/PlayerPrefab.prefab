@@ -18,6 +18,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &163280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 494604}
+  - 108: {fileID: 10858464}
+  m_Layer: 0
+  m_Name: Point light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &169998
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,13 +87,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.37, y: 4.34, z: -10.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 480140}
   - {fileID: 495186}
+  - {fileID: 494604}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &494604
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163280}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 491278}
+  m_RootOrder: 2
 --- !u!4 &495186
 Transform:
   m_ObjectHideFlags: 1
@@ -153,6 +182,39 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153286}
   m_Enabled: 1
+--- !u!108 &10858464
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163280}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_Type: 2
+  m_Color: {r: 0.9338235, g: 0.8396835, b: 0.4463127, a: 1}
+  m_Intensity: 1.09
+  m_Range: 18.41
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_BounceIntensity: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_AreaSize: {x: 1, y: 1}
 --- !u!114 &11479572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,13 +226,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b6f61079aa7c84799a7ffe984ff441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SprintSpeedMultiplier: 2
+  m_SprintSpeedMultiplier: 2.51
   m_MaxSpeed: 3.7
   m_Acceleration: 39
   m_Deacceleration: 50
   m_Decay: 0.791
   m_JumpAcceleration: 33.8
-  m_AirControl: 0.096
+  m_AirControl: 0.339
   m_JumpTimeMax: 0.096
   m_PawnGravity: {x: 0, y: -9.82, z: 0}
   m_WalkThreshold: 2
