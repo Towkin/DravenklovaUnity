@@ -88,7 +88,7 @@ public class LevelDigger : MonoBehaviour {
         get { return m_LevelObjects; }
     }
 
-    int Counter = 0;
+    //int Counter = 0;
     
     void Start () {
         RoomBranch.Push(FirstRoom);
