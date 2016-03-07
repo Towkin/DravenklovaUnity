@@ -38,13 +38,19 @@ public class Player : Pawn {
 
     void Start ()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 	
 	void Update ()
     {
-        //Debug.DrawRay(transform.position, ViewDirection, Color.black, 1f);
         
+        if(Input.GetButtonDown("Menu"))
+        {
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        }
     }
 
     void FixedUpdate ()
@@ -59,7 +65,7 @@ public class Player : Pawn {
 
         if (Physics.Raycast(Searching, out Spotted, SearchDist))
         {
-            UsableProp Prop = Spotted.collider.GetComponent<UsableProp>();
+            Usable Prop = Spotted.collider.GetComponent<Usable>();
             if (Prop != null)
             {
                 // Prop is usable!
@@ -110,7 +116,7 @@ public class Player : Pawn {
         if (VelocityAdd == Vector2.zero || PlanarSpeed > MaxSpeed)
         {
             PlanarSpeed *= Mathf.Pow(1f - Decay, a_DeltaTime);
-            PlanarSpeed -= Mathf.Min(Deacceleration * a_DeltaTime, Speed);
+            PlanarSpeed -= Mathf.Min(Deacceleration * a_DeltaTime, PlanarSpeed);
         }
         else
         {
