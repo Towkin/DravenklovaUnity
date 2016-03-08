@@ -74,7 +74,13 @@ public class LevelDigger : MonoBehaviour {
     {
         get { return m_Shrines; }
     }
-    
+    [SerializeField]
+    private GameObject[] m_ItemPrefabs;
+    public GameObject[] ItemPrefabs
+    {
+        get { return m_ItemPrefabs; }
+    }
+
     private GameObject[] m_Enemies;
     public GameObject[] Enemies
     {

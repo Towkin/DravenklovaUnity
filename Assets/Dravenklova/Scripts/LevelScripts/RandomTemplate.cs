@@ -6,53 +6,138 @@ using System.Collections;
 public class RandomTemplateInspector : Editor
 {
     private RandomTemplate m_Creator;
+    protected RandomTemplate Creator
+    {
+        get { return m_Creator; }
+        private set { m_Creator = value; }
+    }
 
     private void OnEnable()
     {
-        m_Creator = target as RandomTemplate;
+        Creator = target as RandomTemplate;
     }
 
-    private void RefreshCreator()
+    protected virtual void RefreshCreator()
     {
-        m_Creator.CalculateBounds();
+        Creator.CalculateBounds();
     }
 
     public override void OnInspectorGUI()
     {
         EditorGUI.BeginChangeCheck();
-        if(GUILayout.Button("Random Object"))
-        {
-            m_Creator.CreateTestObject();
-        }
-        if(GUILayout.Button("Clear Object"))
-        {
-            m_Creator.ClearTestObject();
-        }
-        DrawDefaultInspector();
+
+        DrawTemplateButtons();
+
+        //DrawDefaultInspector();
         if(EditorGUI.EndChangeCheck())
         {
             RefreshCreator();
         }
     }
-    
-    private void OnSceneGUI()
+
+    protected void DrawSpawnColumn(int a_Length)
     {
+        GUILayout.BeginVertical(new GUILayoutOption[] { GUILayout.MinWidth(200f), GUILayout.MaxWidth(1000f) });
+        if (GUILayout.Button("Random Object"))
+        {
+            Creator.CreateTestObject();
+        }
+        Rect FullWidthRect = GUILayoutUtility.GetLastRect();
+        GUILayout.Space(8);
+
+        for (int i = 0; i < a_Length; i++)
+        {
+            if (Creator.TemplateList != null && i < Creator.TemplateList.Length)
+            {
+                GUILayoutOption[] Options = new GUILayoutOption[] { GUILayout.Width(60f), GUILayout.Height(19f) };
+
+                GUILayout.BeginHorizontal();
+                GameObject Template = Creator.TemplateList[i];
+                if (Template == null)
+                {
+                    GUILayout.Button("Empty", Options);
+                }
+                else if (GUILayout.Button("Spawn", Options))
+                {
+                    Creator.CreateTestObject(Template);
+                }
+                Rect LastRect = GUILayoutUtility.GetLastRect();
+
+                GameObject NewObject = EditorGUI.ObjectField(new Rect(LastRect.xMax + 8, LastRect.yMin + 1f, FullWidthRect.width - LastRect.width - 10f, 16f), Template, typeof(GameObject), false) as GameObject;
+                if (NewObject != Template)
+                {
+                    Creator.TemplateList[i] = NewObject;
+                    GUI.changed = true;
+                }
+
+                GUILayout.EndHorizontal();
+            }
+            else
+            {
+                if (GUILayout.Button("+ Add new template"))
+                {
+                    GameObject[] OldList = Creator.TemplateList;
+                    Creator.TemplateList = new GameObject[a_Length];
+                    OldList.CopyTo(Creator.TemplateList, 0);
+                    GUI.changed = true;
+                }
+            }
+        }
+        GUILayout.EndVertical();
+
+    }
+    protected void DrawDeleteColumn(int a_Length)
+    {
+        GUILayout.BeginVertical(new GUILayoutOption[] { GUILayout.MinWidth(60f), GUILayout.MaxWidth(60f) });
+        if (GUILayout.Button("Clear Objects"))
+        {
+            Creator.ClearTestObject();
+        }
+        GUILayout.Space(8);
+
+        for (int i = 0; i < a_Length; i++)
+        {
+            if (Creator.TemplateList != null && i < Creator.TemplateList.Length)
+            {
+                if (GUILayout.Button("Delete Template"))
+                {
+                    Creator.RemoveIndex(i);
+                    GUI.changed = true;
+                }
+            }
+        }
+        GUILayout.EndVertical();
+    }
+
+    protected virtual void DrawTemplateButtons()
+    {
+        int ListSize = 1;
+        if (Creator.TemplateList != null)
+        {
+            ListSize += Creator.TemplateList.Length;
+        }
         
+        GUILayout.Space(8);
+        GUILayout.BeginHorizontal();
+        DrawSpawnColumn(ListSize);
+        DrawDeleteColumn(ListSize);
+        GUILayout.EndHorizontal();
     }
 }
 
 public class RandomTemplate : MonoBehaviour
 {
-    [SerializeField] [Tooltip("Add elements to the list, and it'll randomly select one to spawn on game start.\nNote: the spawn object will copy the transform of the GameObject this script is attached to.\nNote2: Right-click the field and select 'Test Random Object' to try it out!")]
-    [ContextMenuItem("Test Random Object", "CreateTestObject")]
-    [ContextMenuItem("Clear Random Object", "ClearTestObject")]
+    //[SerializeField] [Tooltip("Add elements to the list, and it'll randomly select one to spawn on game start.\nNote: the spawn object will copy the transform of the GameObject this script is attached to.")]
+    //[ContextMenuItem("Test Random Object", "CreateTestObject")]
+    //[ContextMenuItem("Clear Random Object", "ClearTestObject")]
     protected GameObject[] m_TemplateList;
-    protected GameObject[] TemplateList
+    public GameObject[] TemplateList
     {
         get { return m_TemplateList; }
+        set { m_TemplateList = value; }
     }
     private GameObject m_EditorTestObject;
-    private GameObject EditorTestObject
+    public GameObject EditorTestObject
     {
         get { return m_EditorTestObject; }
         set { m_EditorTestObject = value; }
@@ -69,7 +154,7 @@ public class RandomTemplate : MonoBehaviour
     public Bounds SpawnBounds
     {
         get { return m_SpawnBounds; }
-        private set { m_SpawnBounds = value; }
+        protected set { m_SpawnBounds = value; }
     }
     private Color m_DrawColor = Color.green;
     public Color DrawColor
@@ -78,7 +163,27 @@ public class RandomTemplate : MonoBehaviour
         set { m_DrawColor = value; }
     }
 
-    public void CalculateBounds()
+    public virtual void RemoveIndex(int i)
+    {
+        if(i >= 0 && i < TemplateList.Length)
+        {
+            GameObject[] OldList = TemplateList;
+            TemplateList = new GameObject[TemplateList.Length - 1];
+            for(int j = 0; j < TemplateList.Length; j++)
+            {
+                if(j < i)
+                {
+                    TemplateList[j] = OldList[j];
+                }
+                else
+                {
+                    TemplateList[j] = OldList[j + 1];
+                }
+            }
+        }
+    }
+
+    public virtual void CalculateBounds()
     {
         SpawnBounds = new Bounds();
         //Debug.Log("Calculating Template bounds...");
@@ -104,7 +209,7 @@ public class RandomTemplate : MonoBehaviour
         //Debug.Log("Final bounds: " + SpawnBounds.ToString());
         //Debug.Log("Template bounds calculation complete!");
     }
-    private Bounds CombineBounds(Bounds a, Bounds b)
+    protected Bounds CombineBounds(Bounds a, Bounds b)
     {
         Vector3 Min = new Vector3();
         Vector3 Max = new Vector3();
@@ -120,7 +225,7 @@ public class RandomTemplate : MonoBehaviour
         return ReturnBounds;
     }
 
-    private Bounds GetBounds(GameObject a_Object, Vector3 a_Position, Quaternion a_Rotation)
+    protected Bounds GetBounds(GameObject a_Object, Vector3 a_Position, Quaternion a_Rotation)
     {
         Bounds ObjectBounds = new Bounds();
         
@@ -222,12 +327,29 @@ public class RandomTemplate : MonoBehaviour
         );
     }
 
-    public void CreateTestObject()
+    public virtual void CreateTestObject()
+    {
+        CreateTestObject(null);
+    }
+
+    public virtual void CreateTestObject(GameObject a_Template)
     {
         // Clear the EditorTestObject if it exists.
         ClearTestObject();
         // Create a random Object form the list.
-        EditorTestObject = InstantiateFromList();
+        if(a_Template == null)
+        {
+            EditorTestObject = InstantiateFromList();
+        }
+        else
+        {
+            EditorTestObject = SpawnObject(a_Template);
+        }
+        
+        if(EditorTestObject == null)
+        {
+            return;
+        }
         EditorTestObject.name = EditorTestObject.name + " - Delete me before play!";
         EditorTestObject.transform.parent = this.transform;
     }
@@ -262,13 +384,22 @@ public class RandomTemplate : MonoBehaviour
             return null;
         }
 
+        int RandomIndex = Random.Range(0, TemplateList.Length);
+        if(TemplateList[RandomIndex] == null)
+        {
+            return null;
+        }
 
         // Create an instance of a randomly selected GameObject template in the list.
-        GameObject SpawnedObject = Instantiate(TemplateList[Random.Range(0, TemplateList.Length)]);
+        return SpawnObject(TemplateList[RandomIndex]);
+    }
+    public GameObject SpawnObject(GameObject a_Template)
+    {
+        GameObject SpawnedObject = Instantiate(a_Template);
 
         // Add the transform attributes from this GameObject.
         CopyTransform(SpawnedObject.transform, this.transform);
-        
+
         return SpawnedObject;
     }
 
