@@ -34,10 +34,63 @@ public class Player : Pawn {
         get { return m_Cam; }
         set { m_Cam = value; }
     }
+    [Header("Aim Stats")]
+    [SerializeField]
+    private float m_AimSpeed = 10f;
+    public float AimSpeed
+    {
+        get { return m_AimSpeed; }
+        set { m_AimSpeed = value; }
+    }
+    [SerializeField]
+    private float m_AimMax = 25f;
+    public float AimMax
+    {
+        get { return m_AimMax; }
+        set { m_AimMax = value; }
+    }
+    [SerializeField]
+    private float m_AimOrigin;
+    public float AimOrigin
+    {
+        get { return m_AimOrigin; }
+        set { m_AimOrigin = value; }
+    }
+    [SerializeField]
+    private bool m_IsAiming = false;
+    public bool IsAiming
+    {
+        get { return m_IsAiming; }
+        set { m_IsAiming = value; }
+    }
+    [SerializeField]
+    [Range(1f, 100f)]
+    private float m_AimPrecision = 10f;
+    public float AimPrecision
+    {
+        get { return m_AimPrecision; }
+        set { m_AimPrecision = value; }
+    }
+
+    private float m_InputX;
+    public float InputX
+    {
+        get { return m_InputX; }
+        set { m_InputX = value; }
+    }
+    private float m_InputY;
+    public float InputY
+    {
+        get { return m_InputY; }
+        set { m_InputY = value; }
+    }
+
     #endregion
 
     void Start ()
     {
+        AimOrigin = Cam.fieldOfView;
+        
         Cursor.lockState = CursorLockMode.Locked;
     }
 	
@@ -59,6 +112,7 @@ public class Player : Pawn {
         UpdateRotation();
         UpdatePawnState();
         UpdateMovement(Time.fixedDeltaTime);
+        Aim();
 
         RaycastHit Spotted;
         Ray Searching = new Ray(m_Cam.transform.position, m_Cam.transform.forward);
@@ -75,7 +129,7 @@ public class Player : Pawn {
                 //if(InputUseWorld)
                 //{
                     // Not yet implemented.
-                    //Prop.UseProp();
+                    //Prop.UseProp(this);
                     // TODO: Add Debug message
                 //}
             }
@@ -157,10 +211,20 @@ public class Player : Pawn {
     }
     private void UpdateRotation()
     {
-        Vector2 OldPlanarForwardVelocity = PlanarForwardVelocity;
+        InputX = Input.GetAxis("Mouse X");
+        InputY = Input.GetAxis("Mouse Y");
+        
+        if(IsAiming)
+        {
+            InputX /= AimPrecision;
+            InputY /= AimPrecision;
+        }
+        
 
+        Vector2 OldPlanarForwardVelocity = PlanarForwardVelocity;
+        
         Vector3 OldPhysicsRotation = PhysicsBody.transform.eulerAngles;
-        Vector3 NewPhysicsRotation = new Vector3(OldPhysicsRotation.x, OldPhysicsRotation.y + Input.GetAxis("Mouse X"), OldPhysicsRotation.z);
+        Vector3 NewPhysicsRotation = new Vector3(OldPhysicsRotation.x, OldPhysicsRotation.y + InputX, OldPhysicsRotation.z);
         PhysicsBody.transform.eulerAngles = NewPhysicsRotation;
 
         Vector3 OldCamRotation = Cam.transform.eulerAngles;
@@ -168,7 +232,7 @@ public class Player : Pawn {
         {
             OldCamRotation.x -= 360f;
         }
-        Vector3 NewCamRotation = new Vector3(Mathf.Clamp(OldCamRotation.x - Input.GetAxis("Mouse Y"), -89.9f, 89.9f), OldCamRotation.y, OldCamRotation.z);
+        Vector3 NewCamRotation = new Vector3(Mathf.Clamp(OldCamRotation.x - InputY, -89.9f, 89.9f), OldCamRotation.y, OldCamRotation.z);
         Cam.transform.eulerAngles = NewCamRotation;
 
         float ViewX = NewCamRotation.x;
@@ -179,5 +243,25 @@ public class Player : Pawn {
         ViewDirection = View * Vector3.forward;
 
         PlanarForwardVelocity = OldPlanarForwardVelocity;
+    }
+    private void Aim()
+    {
+        if (Input.GetButton("Aim"))
+        {
+            Cam.fieldOfView -= AimSpeed;
+            IsAiming = true;
+            if (Cam.fieldOfView <= AimMax)
+            {
+                Cam.fieldOfView = AimMax;
+            }
+        }
+        if (!Input.GetButton("Aim"))
+        {
+            IsAiming = false;
+            if (Cam.fieldOfView < AimOrigin)
+            {
+                Cam.fieldOfView += AimSpeed;
+            }
+        }
     }
 }

@@ -1,0 +1,742 @@
+fileFormatVersion: 2
+guid: ef7ba1558e71a7c498b51632f07a5150
+labels:
+- Castle
+- Necturus
+- Medieval
+- Gamelevel
+- Historical
+- Throne
+- Throkitchen
+- Tower
+- Dungeon
+- Crypt
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Arc_CC_00
+    100002: Arc_CC_01
+    100004: Arc_CC_02
+    100006: Arc_CC_03
+    100008: Arc_DD_00
+    100010: Arc_DD_01
+    100012: Arc_DD_02
+    100014: Arc_DD_03
+    100016: Arc_DD_04
+    100018: Arc_DD_05
+    100020: Arc_DD_06
+    100022: Arsenal
+    100024: Arsenal_Back Wall_01
+    100026: //RootNode
+    100028: Arsenal_Ramp
+    100030: Arsenal_Stairs
+    100032: Block_D_00
+    100034: Block_D_01
+    100036: Block_D_03
+    100038: Castle_Ornament_A_04
+    100040: Castle_Ornament_A_05
+    100042: Castle_Ornament_A_06
+    100044: Colomn_Main_20
+    100046: Colomn_Main_21
+    100048: Colomn_Main_22
+    100050: Colomn_Main_23
+    100052: Colomn_Main_24
+    100054: Colomn_Main_28
+    100056: Colomn_Main_29
+    100058: Column_Top_A_00
+    100060: Column_Top_A_01
+    100062: Column_Top_A_02
+    100064: Column_Top_A_03
+    100066: Column_Top_A_04
+    100068: Column_Top_A_08
+    100070: Column_Top_A_09
+    100072: Column_Wood_Long_19
+    100074: Column_Wooden_Stair_76
+    100076: Column_Wooden_Stair_77
+    100078: Column_Wooden_Stair_78
+    100080: Column_Wooden_Stair_79
+    100082: Column_Wooden_Stair_80
+    100084: Dangeron_Pass
+    100086: Door_Ark_Long_06
+    100088: Door_Ark_Long_11
+    100090: Door_Ark_Long_21
+    100092: Door_Ark_Short_01
+    100094: Door_Ark_short_03
+    100096: Entrance_Main
+    100098: Fireplace
+    100100: Firewood_Platform_base
+    100102: Firwoods_Room
+    100104: Hallway_Left
+    100106: Hallway_right
+    100108: Hatch_Wooden_00
+    100110: Hatch_Wooden_01
+    100112: Hatch_Wooden_02
+    100114: Hatch_Wooden_03
+    100116: Hatch_Wooden_Stopper
+    100118: Inner_Door_Base_A15
+    100120: Planck_Big_C_57
+    100122: Planck_Big_C_58
+    100124: Planck_Big_C_59
+    100126: Planck_Big_C_60
+    100128: Planck_Big_C_61
+    100130: Planck_Big_C_62
+    100132: Planck_Big_C_63
+    100134: Planck_Big_C_64
+    100136: Planck_Big_C_65
+    100138: Planck_Big_C_66
+    100140: Planck_Big_C_67
+    100142: Planck_Big_C_68
+    100144: Planck_Big_C_69
+    100146: Planck_Big_C_70
+    100148: Planck_Big_C_71
+    100150: Planck_Big_C_72
+    100152: Planck_Big_C_73
+    100154: Planck_Big_C_74
+    100156: Planck_Big_C_75
+    100158: Planck_Big_C_78
+    100160: Planck_Big_C_79
+    100162: Planck_Small_B_120
+    100164: Planck_Small_B_121
+    100166: Planck_Small_B_122
+    100168: Planck_Small_B_123
+    100170: Planck_Small_B_124
+    100172: Planck_Small_B_125
+    100174: Planck_Small_B_126
+    100176: Planck_Small_B_127
+    100178: Planck_Small_B_128
+    100180: Planck_Small_B_129
+    100182: Planck_Small_B_130
+    100184: Planck_Small_B_131
+    100186: Planck_Small_B_132
+    100188: Planck_Small_B_133
+    100190: Planck_Small_B_134
+    100192: Planck_Small_B_135
+    100194: Planck_Small_B_137
+    100196: Planck_Small_B_138
+    100198: Planck_Small_B_139
+    100200: Planck_Small_B_140
+    100202: Planck_Small_B_141
+    100204: Planck_Small_B_142
+    100206: Planck_Small_B_143
+    100208: Planck_Small_B_144
+    100210: Planck_Small_E_39
+    100212: Planck_Small_E_40
+    100214: Planck_Small_E_41
+    100216: Planck_Small_E_42
+    100218: Rail_Wooden Staircase_14
+    100220: Servants_Dining_Room
+    100222: Stairs_Wooden _E_00
+    100224: Stairs_Wooden _E_01
+    100226: Stairs_Wooden _E_02
+    100228: Stairs_Wooden _E_03
+    100230: Stairs_Wooden _E_04
+    100232: Stairs_Wooden _E_05
+    100234: Stairs_Wooden _E_06
+    100236: Stairs_Wooden _E_07
+    100238: Stairs_Wooden _E_08
+    100240: Stairs_Wooden _E_09
+    100242: Stairs_Wooden _E_10
+    100244: Stairs_Wooden _E_11
+    100246: Stairs_Wooden _E_12
+    100248: Stairs_Wooden _E_Base
+    100250: Thin_wall_05
+    100252: Window_B_08
+    100254: Window_B_16
+    100256: Window_Light_C
+    100258: Window_Light_C01
+    100260: Wood_stairs_tairs_B_01
+    100262: Wood_stairs_tairs_B_02
+    100264: Wood_stairs_tairs_B_03
+    100266: Wood_stairs_tairs_B_04
+    400000: Arc_CC_00
+    400002: Arc_CC_01
+    400004: Arc_CC_02
+    400006: Arc_CC_03
+    400008: Arc_DD_00
+    400010: Arc_DD_01
+    400012: Arc_DD_02
+    400014: Arc_DD_03
+    400016: Arc_DD_04
+    400018: Arc_DD_05
+    400020: Arc_DD_06
+    400022: Arsenal
+    400024: Arsenal_Back Wall_01
+    400026: //RootNode
+    400028: Arsenal_Ramp
+    400030: Arsenal_Stairs
+    400032: Block_D_00
+    400034: Block_D_01
+    400036: Block_D_03
+    400038: Castle_Ornament_A_04
+    400040: Castle_Ornament_A_05
+    400042: Castle_Ornament_A_06
+    400044: Colomn_Main_20
+    400046: Colomn_Main_21
+    400048: Colomn_Main_22
+    400050: Colomn_Main_23
+    400052: Colomn_Main_24
+    400054: Colomn_Main_28
+    400056: Colomn_Main_29
+    400058: Column_Top_A_00
+    400060: Column_Top_A_01
+    400062: Column_Top_A_02
+    400064: Column_Top_A_03
+    400066: Column_Top_A_04
+    400068: Column_Top_A_08
+    400070: Column_Top_A_09
+    400072: Column_Wood_Long_19
+    400074: Column_Wooden_Stair_76
+    400076: Column_Wooden_Stair_77
+    400078: Column_Wooden_Stair_78
+    400080: Column_Wooden_Stair_79
+    400082: Column_Wooden_Stair_80
+    400084: Dangeron_Pass
+    400086: Door_Ark_Long_06
+    400088: Door_Ark_Long_11
+    400090: Door_Ark_Long_21
+    400092: Door_Ark_Short_01
+    400094: Door_Ark_short_03
+    400096: Entrance_Main
+    400098: Fireplace
+    400100: Firewood_Platform_base
+    400102: Firwoods_Room
+    400104: Hallway_Left
+    400106: Hallway_right
+    400108: Hatch_Wooden_00
+    400110: Hatch_Wooden_01
+    400112: Hatch_Wooden_02
+    400114: Hatch_Wooden_03
+    400116: Hatch_Wooden_Stopper
+    400118: Inner_Door_Base_A15
+    400120: Planck_Big_C_57
+    400122: Planck_Big_C_58
+    400124: Planck_Big_C_59
+    400126: Planck_Big_C_60
+    400128: Planck_Big_C_61
+    400130: Planck_Big_C_62
+    400132: Planck_Big_C_63
+    400134: Planck_Big_C_64
+    400136: Planck_Big_C_65
+    400138: Planck_Big_C_66
+    400140: Planck_Big_C_67
+    400142: Planck_Big_C_68
+    400144: Planck_Big_C_69
+    400146: Planck_Big_C_70
+    400148: Planck_Big_C_71
+    400150: Planck_Big_C_72
+    400152: Planck_Big_C_73
+    400154: Planck_Big_C_74
+    400156: Planck_Big_C_75
+    400158: Planck_Big_C_78
+    400160: Planck_Big_C_79
+    400162: Planck_Small_B_120
+    400164: Planck_Small_B_121
+    400166: Planck_Small_B_122
+    400168: Planck_Small_B_123
+    400170: Planck_Small_B_124
+    400172: Planck_Small_B_125
+    400174: Planck_Small_B_126
+    400176: Planck_Small_B_127
+    400178: Planck_Small_B_128
+    400180: Planck_Small_B_129
+    400182: Planck_Small_B_130
+    400184: Planck_Small_B_131
+    400186: Planck_Small_B_132
+    400188: Planck_Small_B_133
+    400190: Planck_Small_B_134
+    400192: Planck_Small_B_135
+    400194: Planck_Small_B_137
+    400196: Planck_Small_B_138
+    400198: Planck_Small_B_139
+    400200: Planck_Small_B_140
+    400202: Planck_Small_B_141
+    400204: Planck_Small_B_142
+    400206: Planck_Small_B_143
+    400208: Planck_Small_B_144
+    400210: Planck_Small_E_39
+    400212: Planck_Small_E_40
+    400214: Planck_Small_E_41
+    400216: Planck_Small_E_42
+    400218: Rail_Wooden Staircase_14
+    400220: Servants_Dining_Room
+    400222: Stairs_Wooden _E_00
+    400224: Stairs_Wooden _E_01
+    400226: Stairs_Wooden _E_02
+    400228: Stairs_Wooden _E_03
+    400230: Stairs_Wooden _E_04
+    400232: Stairs_Wooden _E_05
+    400234: Stairs_Wooden _E_06
+    400236: Stairs_Wooden _E_07
+    400238: Stairs_Wooden _E_08
+    400240: Stairs_Wooden _E_09
+    400242: Stairs_Wooden _E_10
+    400244: Stairs_Wooden _E_11
+    400246: Stairs_Wooden _E_12
+    400248: Stairs_Wooden _E_Base
+    400250: Thin_wall_05
+    400252: Window_B_08
+    400254: Window_B_16
+    400256: Window_Light_C
+    400258: Window_Light_C01
+    400260: Wood_stairs_tairs_B_01
+    400262: Wood_stairs_tairs_B_02
+    400264: Wood_stairs_tairs_B_03
+    400266: Wood_stairs_tairs_B_04
+    2300000: Arc_CC_00
+    2300002: Arc_CC_01
+    2300004: Arc_CC_02
+    2300006: Arc_CC_03
+    2300008: Arc_DD_00
+    2300010: Arc_DD_01
+    2300012: Arc_DD_02
+    2300014: Arc_DD_03
+    2300016: Arc_DD_04
+    2300018: Arc_DD_05
+    2300020: Arc_DD_06
+    2300022: Arsenal
+    2300024: Arsenal_Back Wall_01
+    2300026: Arsenal_Ramp
+    2300028: Arsenal_Stairs
+    2300030: Block_D_00
+    2300032: Block_D_01
+    2300034: Block_D_03
+    2300036: Castle_Ornament_A_04
+    2300038: Castle_Ornament_A_05
+    2300040: Castle_Ornament_A_06
+    2300042: Colomn_Main_20
+    2300044: Colomn_Main_21
+    2300046: Colomn_Main_22
+    2300048: Colomn_Main_23
+    2300050: Colomn_Main_24
+    2300052: Colomn_Main_28
+    2300054: Colomn_Main_29
+    2300056: Column_Top_A_00
+    2300058: Column_Top_A_01
+    2300060: Column_Top_A_02
+    2300062: Column_Top_A_03
+    2300064: Column_Top_A_04
+    2300066: Column_Top_A_08
+    2300068: Column_Top_A_09
+    2300070: Column_Wood_Long_19
+    2300072: Column_Wooden_Stair_76
+    2300074: Column_Wooden_Stair_77
+    2300076: Column_Wooden_Stair_78
+    2300078: Column_Wooden_Stair_79
+    2300080: Column_Wooden_Stair_80
+    2300082: Dangeron_Pass
+    2300084: Door_Ark_Long_06
+    2300086: Door_Ark_Long_11
+    2300088: Door_Ark_Long_21
+    2300090: Door_Ark_Short_01
+    2300092: Door_Ark_short_03
+    2300094: Entrance_Main
+    2300096: Fireplace
+    2300098: Firewood_Platform_base
+    2300100: Firwoods_Room
+    2300102: Hallway_Left
+    2300104: Hallway_right
+    2300106: Hatch_Wooden_00
+    2300108: Hatch_Wooden_01
+    2300110: Hatch_Wooden_02
+    2300112: Hatch_Wooden_03
+    2300114: Hatch_Wooden_Stopper
+    2300116: Inner_Door_Base_A15
+    2300118: Planck_Big_C_57
+    2300120: Planck_Big_C_58
+    2300122: Planck_Big_C_59
+    2300124: Planck_Big_C_60
+    2300126: Planck_Big_C_61
+    2300128: Planck_Big_C_62
+    2300130: Planck_Big_C_63
+    2300132: Planck_Big_C_64
+    2300134: Planck_Big_C_65
+    2300136: Planck_Big_C_66
+    2300138: Planck_Big_C_67
+    2300140: Planck_Big_C_68
+    2300142: Planck_Big_C_69
+    2300144: Planck_Big_C_70
+    2300146: Planck_Big_C_71
+    2300148: Planck_Big_C_72
+    2300150: Planck_Big_C_73
+    2300152: Planck_Big_C_74
+    2300154: Planck_Big_C_75
+    2300156: Planck_Big_C_78
+    2300158: Planck_Big_C_79
+    2300160: Planck_Small_B_120
+    2300162: Planck_Small_B_121
+    2300164: Planck_Small_B_122
+    2300166: Planck_Small_B_123
+    2300168: Planck_Small_B_124
+    2300170: Planck_Small_B_125
+    2300172: Planck_Small_B_126
+    2300174: Planck_Small_B_127
+    2300176: Planck_Small_B_128
+    2300178: Planck_Small_B_129
+    2300180: Planck_Small_B_130
+    2300182: Planck_Small_B_131
+    2300184: Planck_Small_B_132
+    2300186: Planck_Small_B_133
+    2300188: Planck_Small_B_134
+    2300190: Planck_Small_B_135
+    2300192: Planck_Small_B_137
+    2300194: Planck_Small_B_138
+    2300196: Planck_Small_B_139
+    2300198: Planck_Small_B_140
+    2300200: Planck_Small_B_141
+    2300202: Planck_Small_B_142
+    2300204: Planck_Small_B_143
+    2300206: Planck_Small_B_144
+    2300208: Planck_Small_E_39
+    2300210: Planck_Small_E_40
+    2300212: Planck_Small_E_41
+    2300214: Planck_Small_E_42
+    2300216: Rail_Wooden Staircase_14
+    2300218: Servants_Dining_Room
+    2300220: Stairs_Wooden _E_00
+    2300222: Stairs_Wooden _E_01
+    2300224: Stairs_Wooden _E_02
+    2300226: Stairs_Wooden _E_03
+    2300228: Stairs_Wooden _E_04
+    2300230: Stairs_Wooden _E_05
+    2300232: Stairs_Wooden _E_06
+    2300234: Stairs_Wooden _E_07
+    2300236: Stairs_Wooden _E_08
+    2300238: Stairs_Wooden _E_09
+    2300240: Stairs_Wooden _E_10
+    2300242: Stairs_Wooden _E_11
+    2300244: Stairs_Wooden _E_12
+    2300246: Stairs_Wooden _E_Base
+    2300248: Thin_wall_05
+    2300250: Window_B_08
+    2300252: Window_B_16
+    2300254: Window_Light_C
+    2300256: Window_Light_C01
+    2300258: Wood_stairs_tairs_B_01
+    2300260: Wood_stairs_tairs_B_02
+    2300262: Wood_stairs_tairs_B_03
+    2300264: Wood_stairs_tairs_B_04
+    3300000: Arc_CC_00
+    3300002: Arc_CC_01
+    3300004: Arc_CC_02
+    3300006: Arc_CC_03
+    3300008: Arc_DD_00
+    3300010: Arc_DD_01
+    3300012: Arc_DD_02
+    3300014: Arc_DD_03
+    3300016: Arc_DD_04
+    3300018: Arc_DD_05
+    3300020: Arc_DD_06
+    3300022: Arsenal
+    3300024: Arsenal_Back Wall_01
+    3300026: Arsenal_Ramp
+    3300028: Arsenal_Stairs
+    3300030: Block_D_00
+    3300032: Block_D_01
+    3300034: Block_D_03
+    3300036: Castle_Ornament_A_04
+    3300038: Castle_Ornament_A_05
+    3300040: Castle_Ornament_A_06
+    3300042: Colomn_Main_20
+    3300044: Colomn_Main_21
+    3300046: Colomn_Main_22
+    3300048: Colomn_Main_23
+    3300050: Colomn_Main_24
+    3300052: Colomn_Main_28
+    3300054: Colomn_Main_29
+    3300056: Column_Top_A_00
+    3300058: Column_Top_A_01
+    3300060: Column_Top_A_02
+    3300062: Column_Top_A_03
+    3300064: Column_Top_A_04
+    3300066: Column_Top_A_08
+    3300068: Column_Top_A_09
+    3300070: Column_Wood_Long_19
+    3300072: Column_Wooden_Stair_76
+    3300074: Column_Wooden_Stair_77
+    3300076: Column_Wooden_Stair_78
+    3300078: Column_Wooden_Stair_79
+    3300080: Column_Wooden_Stair_80
+    3300082: Dangeron_Pass
+    3300084: Door_Ark_Long_06
+    3300086: Door_Ark_Long_11
+    3300088: Door_Ark_Long_21
+    3300090: Door_Ark_Short_01
+    3300092: Door_Ark_short_03
+    3300094: Entrance_Main
+    3300096: Fireplace
+    3300098: Firewood_Platform_base
+    3300100: Firwoods_Room
+    3300102: Hallway_Left
+    3300104: Hallway_right
+    3300106: Hatch_Wooden_00
+    3300108: Hatch_Wooden_01
+    3300110: Hatch_Wooden_02
+    3300112: Hatch_Wooden_03
+    3300114: Hatch_Wooden_Stopper
+    3300116: Inner_Door_Base_A15
+    3300118: Planck_Big_C_57
+    3300120: Planck_Big_C_58
+    3300122: Planck_Big_C_59
+    3300124: Planck_Big_C_60
+    3300126: Planck_Big_C_61
+    3300128: Planck_Big_C_62
+    3300130: Planck_Big_C_63
+    3300132: Planck_Big_C_64
+    3300134: Planck_Big_C_65
+    3300136: Planck_Big_C_66
+    3300138: Planck_Big_C_67
+    3300140: Planck_Big_C_68
+    3300142: Planck_Big_C_69
+    3300144: Planck_Big_C_70
+    3300146: Planck_Big_C_71
+    3300148: Planck_Big_C_72
+    3300150: Planck_Big_C_73
+    3300152: Planck_Big_C_74
+    3300154: Planck_Big_C_75
+    3300156: Planck_Big_C_78
+    3300158: Planck_Big_C_79
+    3300160: Planck_Small_B_120
+    3300162: Planck_Small_B_121
+    3300164: Planck_Small_B_122
+    3300166: Planck_Small_B_123
+    3300168: Planck_Small_B_124
+    3300170: Planck_Small_B_125
+    3300172: Planck_Small_B_126
+    3300174: Planck_Small_B_127
+    3300176: Planck_Small_B_128
+    3300178: Planck_Small_B_129
+    3300180: Planck_Small_B_130
+    3300182: Planck_Small_B_131
+    3300184: Planck_Small_B_132
+    3300186: Planck_Small_B_133
+    3300188: Planck_Small_B_134
+    3300190: Planck_Small_B_135
+    3300192: Planck_Small_B_137
+    3300194: Planck_Small_B_138
+    3300196: Planck_Small_B_139
+    3300198: Planck_Small_B_140
+    3300200: Planck_Small_B_141
+    3300202: Planck_Small_B_142
+    3300204: Planck_Small_B_143
+    3300206: Planck_Small_B_144
+    3300208: Planck_Small_E_39
+    3300210: Planck_Small_E_40
+    3300212: Planck_Small_E_41
+    3300214: Planck_Small_E_42
+    3300216: Rail_Wooden Staircase_14
+    3300218: Servants_Dining_Room
+    3300220: Stairs_Wooden _E_00
+    3300222: Stairs_Wooden _E_01
+    3300224: Stairs_Wooden _E_02
+    3300226: Stairs_Wooden _E_03
+    3300228: Stairs_Wooden _E_04
+    3300230: Stairs_Wooden _E_05
+    3300232: Stairs_Wooden _E_06
+    3300234: Stairs_Wooden _E_07
+    3300236: Stairs_Wooden _E_08
+    3300238: Stairs_Wooden _E_09
+    3300240: Stairs_Wooden _E_10
+    3300242: Stairs_Wooden _E_11
+    3300244: Stairs_Wooden _E_12
+    3300246: Stairs_Wooden _E_Base
+    3300248: Thin_wall_05
+    3300250: Window_B_08
+    3300252: Window_B_16
+    3300254: Window_Light_C
+    3300256: Window_Light_C01
+    3300258: Wood_stairs_tairs_B_01
+    3300260: Wood_stairs_tairs_B_02
+    3300262: Wood_stairs_tairs_B_03
+    3300264: Wood_stairs_tairs_B_04
+    4300000: Hatch_Wooden_00
+    4300002: Hatch_Wooden_03
+    4300004: Hatch_Wooden_Stopper
+    4300006: Hallway_Left
+    4300008: Hallway_right
+    4300010: Arsenal
+    4300012: Firwoods_Room
+    4300014: Servants_Dining_Room
+    4300016: Entrance_Main
+    4300018: Fireplace
+    4300020: Window_Light_C01
+    4300022: Window_Light_C
+    4300024: Column_Top_A_09
+    4300026: Colomn_Main_29
+    4300028: Column_Top_A_08
+    4300030: Colomn_Main_28
+    4300032: Block_D_03
+    4300034: Arsenal_Ramp
+    4300036: Arc_DD_06
+    4300038: Arc_DD_05
+    4300040: Arc_DD_04
+    4300042: Arc_DD_03
+    4300044: Castle_Ornament_A_06
+    4300046: Column_Top_A_04
+    4300048: Colomn_Main_24
+    4300050: Block_D_01
+    4300052: Colomn_Main_23
+    4300054: Column_Top_A_03
+    4300056: Arc_CC_03
+    4300058: Arc_CC_02
+    4300060: Wood_stairs_tairs_B_04
+    4300062: Wood_stairs_tairs_B_03
+    4300064: Wood_stairs_tairs_B_02
+    4300066: Planck_Small_B_139
+    4300068: Arc_DD_02
+    4300070: Arc_DD_01
+    4300072: Arc_CC_01
+    4300074: Arc_DD_00
+    4300076: Arc_CC_00
+    4300078: Firewood_Platform_base
+    4300080: Planck_Small_E_40
+    4300082: Planck_Small_B_128
+    4300084: Planck_Small_B_129
+    4300086: Planck_Small_B_127
+    4300088: Planck_Small_B_126
+    4300090: Planck_Small_B_130
+    4300092: Planck_Small_B_131
+    4300094: Planck_Small_B_132
+    4300096: Planck_Small_B_133
+    4300098: Planck_Small_B_134
+    4300100: Planck_Small_B_135
+    4300102: Planck_Small_E_41
+    4300104: Planck_Big_C_62
+    4300106: Planck_Big_C_64
+    4300108: Planck_Small_B_137
+    4300110: Planck_Small_B_144
+    4300112: Planck_Small_E_42
+    4300114: Planck_Small_B_143
+    4300116: Planck_Small_B_141
+    4300118: Planck_Small_B_142
+    4300120: Planck_Big_C_63
+    4300122: Planck_Small_B_138
+    4300124: Planck_Big_C_61
+    4300126: Planck_Small_B_140
+    4300128: Wood_stairs_tairs_B_01
+    4300130: Castle_Ornament_A_05
+    4300132: Castle_Ornament_A_04
+    4300134: Arsenal_Stairs
+    4300136: Stairs_Wooden _E_06
+    4300138: Stairs_Wooden _E_00
+    4300140: Stairs_Wooden _E_03
+    4300142: Stairs_Wooden _E_01
+    4300144: Stairs_Wooden _E_02
+    4300146: Stairs_Wooden _E_04
+    4300148: Stairs_Wooden _E_05
+    4300150: Stairs_Wooden _E_10
+    4300152: Stairs_Wooden _E_07
+    4300154: Stairs_Wooden _E_08
+    4300156: Stairs_Wooden _E_09
+    4300158: Stairs_Wooden _E_11
+    4300160: Stairs_Wooden _E_12
+    4300162: Column_Wood_Long_19
+    4300164: Column_Wooden_Stair_79
+    4300166: Rail_Wooden Staircase_14
+    4300168: Column_Wooden_Stair_78
+    4300170: Column_Wooden_Stair_77
+    4300172: Column_Wooden_Stair_76
+    4300174: Column_Wooden_Stair_80
+    4300176: Planck_Small_B_125
+    4300178: Planck_Small_E_39
+    4300180: Planck_Small_B_120
+    4300182: Planck_Small_B_121
+    4300184: Planck_Small_B_122
+    4300186: Planck_Small_B_123
+    4300188: Planck_Small_B_124
+    4300190: Stairs_Wooden _E_Base
+    4300192: Column_Top_A_02
+    4300194: Column_Top_A_01
+    4300196: Column_Top_A_00
+    4300198: Planck_Big_C_60
+    4300200: Planck_Big_C_59
+    4300202: Planck_Big_C_58
+    4300204: Planck_Big_C_57
+    4300206: Colomn_Main_22
+    4300208: Colomn_Main_21
+    4300210: Colomn_Main_20
+    4300212: Block_D_00
+    4300214: Hatch_Wooden_02
+    4300216: Door_Ark_Long_21
+    4300218: Door_Ark_Long_11
+    4300220: Door_Ark_short_03
+    4300222: Door_Ark_Short_01
+    4300224: Inner_Door_Base_A15
+    4300226: Thin_wall_05
+    4300228: Door_Ark_Long_06
+    4300230: Arsenal_Back Wall_01
+    4300232: Window_B_16
+    4300234: Window_B_08
+    4300236: Dangeron_Pass
+    4300238: Planck_Big_C_79
+    4300240: Planck_Big_C_78
+    4300242: Planck_Big_C_75
+    4300244: Planck_Big_C_74
+    4300246: Planck_Big_C_73
+    4300248: Planck_Big_C_72
+    4300250: Planck_Big_C_71
+    4300252: Planck_Big_C_70
+    4300254: Planck_Big_C_68
+    4300256: Planck_Big_C_67
+    4300258: Planck_Big_C_66
+    4300260: Planck_Big_C_65
+    4300262: Planck_Big_C_69
+    4300264: Hatch_Wooden_01
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

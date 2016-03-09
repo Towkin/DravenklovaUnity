@@ -1,0 +1,166 @@
+fileFormatVersion: 2
+guid: f21330da68233e24fbac7316286867ce
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Arc_CC_07
+    100002: Arc_CC_08
+    100004: Arc_CC_09
+    100006: Arc_DD_07
+    100008: Arc_DD_08
+    100010: Arc_DD_09
+    100012: Colomn_Main_30
+    100014: Colomn_Main_31
+    100016: Column_Top_A_10
+    100018: Column_Top_A_11
+    100020: Door_Ark_Long_19
+    100022: Door_Ark_Long_20
+    100024: Door_Ark_Short_03
+    100026: Door_Ark_Short_04
+    100028: Fireplace03
+    100030: Inner_Door_Base_A20
+    100032: Kitchen_pass
+    100034: //RootNode
+    100036: Servants_Bedroom
+    100038: Servants_Fireplace_Room
+    100040: SR_Thin_wall_08
+    400000: Arc_CC_07
+    400002: Arc_CC_08
+    400004: Arc_CC_09
+    400006: Arc_DD_07
+    400008: Arc_DD_08
+    400010: Arc_DD_09
+    400012: Colomn_Main_30
+    400014: Colomn_Main_31
+    400016: Column_Top_A_10
+    400018: Column_Top_A_11
+    400020: Door_Ark_Long_19
+    400022: Door_Ark_Long_20
+    400024: Door_Ark_Short_03
+    400026: Door_Ark_Short_04
+    400028: Fireplace03
+    400030: Inner_Door_Base_A20
+    400032: Kitchen_pass
+    400034: //RootNode
+    400036: Servants_Bedroom
+    400038: Servants_Fireplace_Room
+    400040: SR_Thin_wall_08
+    2300000: Arc_CC_07
+    2300002: Arc_CC_08
+    2300004: Arc_CC_09
+    2300006: Arc_DD_07
+    2300008: Arc_DD_08
+    2300010: Arc_DD_09
+    2300012: Colomn_Main_30
+    2300014: Colomn_Main_31
+    2300016: Column_Top_A_10
+    2300018: Column_Top_A_11
+    2300020: Door_Ark_Long_19
+    2300022: Door_Ark_Long_20
+    2300024: Door_Ark_Short_03
+    2300026: Door_Ark_Short_04
+    2300028: Fireplace03
+    2300030: Inner_Door_Base_A20
+    2300032: Kitchen_pass
+    2300034: Servants_Bedroom
+    2300036: Servants_Fireplace_Room
+    2300038: SR_Thin_wall_08
+    3300000: Arc_CC_07
+    3300002: Arc_CC_08
+    3300004: Arc_CC_09
+    3300006: Arc_DD_07
+    3300008: Arc_DD_08
+    3300010: Arc_DD_09
+    3300012: Colomn_Main_30
+    3300014: Colomn_Main_31
+    3300016: Column_Top_A_10
+    3300018: Column_Top_A_11
+    3300020: Door_Ark_Long_19
+    3300022: Door_Ark_Long_20
+    3300024: Door_Ark_Short_03
+    3300026: Door_Ark_Short_04
+    3300028: Fireplace03
+    3300030: Inner_Door_Base_A20
+    3300032: Kitchen_pass
+    3300034: Servants_Bedroom
+    3300036: Servants_Fireplace_Room
+    3300038: SR_Thin_wall_08
+    4300000: Door_Ark_Long_19
+    4300002: Door_Ark_Long_20
+    4300004: SR_Thin_wall_08
+    4300006: Inner_Door_Base_A20
+    4300008: Door_Ark_Short_03
+    4300010: Door_Ark_Short_04
+    4300012: Fireplace03
+    4300014: Colomn_Main_30
+    4300016: Column_Top_A_10
+    4300018: Arc_CC_07
+    4300020: Arc_CC_08
+    4300022: Arc_CC_09
+    4300024: Arc_DD_07
+    4300026: Arc_DD_08
+    4300028: Arc_DD_09
+    4300030: Column_Top_A_11
+    4300032: Colomn_Main_31
+    4300034: Kitchen_pass
+    4300036: Servants_Fireplace_Room
+    4300038: Servants_Bedroom
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

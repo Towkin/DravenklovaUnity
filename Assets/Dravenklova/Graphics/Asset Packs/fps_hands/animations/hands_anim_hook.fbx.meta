@@ -1,0 +1,416 @@
+fileFormatVersion: 2
+guid: 837ffd552ff22e04b9eae3237238ecbf
+timeCreated: 1446071918
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: anim_chest
+    100002: anim_global
+    100004: anim_l_arm
+    100006: anim_l_clavicle
+    100008: anim_l_elbow
+    100010: anim_l_index
+    100012: anim_l_mid
+    100014: anim_l_pinky
+    100016: anim_l_ring
+    100018: anim_l_thumb
+    100020: anim_l_wrist_IKGoal
+    100022: anim_r_arm
+    100024: anim_r_clavicle
+    100026: anim_r_eldow
+    100028: anim_r_index
+    100030: anim_r_mid
+    100032: anim_r_pinky
+    100034: anim_r_ring
+    100036: anim_r_thumb
+    100038: anim_r_wrist_IKGoal
+    100040: be_l_index_e
+    100042: be_l_mid_e
+    100044: be_l_pinky_e
+    100046: be_l_ring_e
+    100048: be_l_thumb_e
+    100050: be_r_index_e
+    100052: be_r_mid_e
+    100054: be_r_pinky_e
+    100056: be_r_ring_e
+    100058: be_r_thumb_e
+    100060: bind_l_clavicle
+    100062: bind_l_elbow
+    100064: bind_l_index_b
+    100066: bind_l_index_c
+    100068: bind_l_index_d
+    100070: bind_l_mid_b
+    100072: bind_l_mid_c
+    100074: bind_l_mid_d
+    100076: bind_l_pinky_b
+    100078: bind_l_pinky_c
+    100080: bind_l_pinky_d
+    100082: bind_l_ring_b
+    100084: bind_l_ring_c
+    100086: bind_l_ring_d
+    100088: bind_l_shoulder
+    100090: bind_l_shoulder_IKRoot
+    100092: bind_l_thumb_b
+    100094: bind_l_thumb_c
+    100096: bind_l_thumb_d
+    100098: bind_l_wrist
+    100100: bind_r_clavicle
+    100102: bind_r_elbow
+    100104: bind_r_index_b
+    100106: bind_r_index_c
+    100108: bind_r_index_d
+    100110: bind_r_mid_b
+    100112: bind_r_mid_c
+    100114: bind_r_mid_d
+    100116: bind_r_pinky_b
+    100118: bind_r_pinky_c
+    100120: bind_r_pinky_d
+    100122: bind_r_ring_b
+    100124: bind_r_ring_c
+    100126: bind_r_ring_d
+    100128: bind_r_shoulder
+    100130: bind_r_shoulder_IKRoot
+    100132: bind_r_thumb_b
+    100134: bind_r_thumb_c
+    100136: bind_r_thumb_d
+    100138: bind_r_wrist
+    100140: Camera
+    100142: Directional Light
+    100144: //RootNode
+    100146: locDrv_l_clavicle
+    100148: locDrv_r_clavicle
+    100150: low_poly_hand_l
+    100152: low_poly_hand_r
+    100154: spine
+    400000: anim_chest
+    400002: anim_global
+    400004: anim_l_arm
+    400006: anim_l_clavicle
+    400008: anim_l_elbow
+    400010: anim_l_index
+    400012: anim_l_mid
+    400014: anim_l_pinky
+    400016: anim_l_ring
+    400018: anim_l_thumb
+    400020: anim_l_wrist_IKGoal
+    400022: anim_r_arm
+    400024: anim_r_clavicle
+    400026: anim_r_eldow
+    400028: anim_r_index
+    400030: anim_r_mid
+    400032: anim_r_pinky
+    400034: anim_r_ring
+    400036: anim_r_thumb
+    400038: anim_r_wrist_IKGoal
+    400040: be_l_index_e
+    400042: be_l_mid_e
+    400044: be_l_pinky_e
+    400046: be_l_ring_e
+    400048: be_l_thumb_e
+    400050: be_r_index_e
+    400052: be_r_mid_e
+    400054: be_r_pinky_e
+    400056: be_r_ring_e
+    400058: be_r_thumb_e
+    400060: bind_l_clavicle
+    400062: bind_l_elbow
+    400064: bind_l_index_b
+    400066: bind_l_index_c
+    400068: bind_l_index_d
+    400070: bind_l_mid_b
+    400072: bind_l_mid_c
+    400074: bind_l_mid_d
+    400076: bind_l_pinky_b
+    400078: bind_l_pinky_c
+    400080: bind_l_pinky_d
+    400082: bind_l_ring_b
+    400084: bind_l_ring_c
+    400086: bind_l_ring_d
+    400088: bind_l_shoulder
+    400090: bind_l_shoulder_IKRoot
+    400092: bind_l_thumb_b
+    400094: bind_l_thumb_c
+    400096: bind_l_thumb_d
+    400098: bind_l_wrist
+    400100: bind_r_clavicle
+    400102: bind_r_elbow
+    400104: bind_r_index_b
+    400106: bind_r_index_c
+    400108: bind_r_index_d
+    400110: bind_r_mid_b
+    400112: bind_r_mid_c
+    400114: bind_r_mid_d
+    400116: bind_r_pinky_b
+    400118: bind_r_pinky_c
+    400120: bind_r_pinky_d
+    400122: bind_r_ring_b
+    400124: bind_r_ring_c
+    400126: bind_r_ring_d
+    400128: bind_r_shoulder
+    400130: bind_r_shoulder_IKRoot
+    400132: bind_r_thumb_b
+    400134: bind_r_thumb_c
+    400136: bind_r_thumb_d
+    400138: bind_r_wrist
+    400140: Camera
+    400142: Directional Light
+    400144: //RootNode
+    400146: locDrv_l_clavicle
+    400148: locDrv_r_clavicle
+    400150: low_poly_hand_l
+    400152: low_poly_hand_r
+    400154: spine
+    4300000: low_poly_hand_r
+    4300002: low_poly_hand_l
+    7400000: hook
+    9500000: //RootNode
+    13700000: low_poly_hand_l
+    13700002: low_poly_hand_r
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: hook
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: anim_global
+        weight: 1
+      - path: anim_global/anim_chest
+        weight: 1
+      - path: anim_global/anim_chest/spine
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/anim_l_arm
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/anim_l_arm/anim_l_elbow
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/anim_l_arm/anim_l_wrist_IKGoal
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/anim_l_arm/anim_l_wrist_IKGoal/anim_l_index
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/anim_l_arm/anim_l_wrist_IKGoal/anim_l_mid
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/anim_l_arm/anim_l_wrist_IKGoal/anim_l_pinky
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/anim_l_arm/anim_l_wrist_IKGoal/anim_l_ring
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/anim_l_arm/anim_l_wrist_IKGoal/anim_l_thumb
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_l_clavicle/locDrv_l_clavicle
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/anim_r_arm
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/anim_r_arm/anim_r_eldow
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/anim_r_arm/anim_r_wrist_IKGoal
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/anim_r_arm/anim_r_wrist_IKGoal/anim_r_index
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/anim_r_arm/anim_r_wrist_IKGoal/anim_r_mid
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/anim_r_arm/anim_r_wrist_IKGoal/anim_r_pinky
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/anim_r_arm/anim_r_wrist_IKGoal/anim_r_ring
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/anim_r_arm/anim_r_wrist_IKGoal/anim_r_thumb
+        weight: 1
+      - path: anim_global/anim_chest/spine/anim_r_clavicle/locDrv_r_clavicle
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_index_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_index_b/bind_l_index_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_index_b/bind_l_index_c/bind_l_index_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_index_b/bind_l_index_c/bind_l_index_d/be_l_index_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_mid_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_mid_b/bind_l_mid_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_mid_b/bind_l_mid_c/bind_l_mid_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_mid_b/bind_l_mid_c/bind_l_mid_d/be_l_mid_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_pinky_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_pinky_b/bind_l_pinky_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_pinky_b/bind_l_pinky_c/bind_l_pinky_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_pinky_b/bind_l_pinky_c/bind_l_pinky_d/be_l_pinky_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_ring_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_ring_b/bind_l_ring_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_ring_b/bind_l_ring_c/bind_l_ring_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_ring_b/bind_l_ring_c/bind_l_ring_d/be_l_ring_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_thumb_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_thumb_b/bind_l_thumb_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_thumb_b/bind_l_thumb_c/bind_l_thumb_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_l_clavicle/bind_l_shoulder_IKRoot/bind_l_shoulder/bind_l_elbow/bind_l_wrist/bind_l_thumb_b/bind_l_thumb_c/bind_l_thumb_d/be_l_thumb_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_index_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_index_b/bind_r_index_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_index_b/bind_r_index_c/bind_r_index_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_index_b/bind_r_index_c/bind_r_index_d/be_r_index_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_mid_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_mid_b/bind_r_mid_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_mid_b/bind_r_mid_c/bind_r_mid_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_mid_b/bind_r_mid_c/bind_r_mid_d/be_r_mid_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_pinky_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_pinky_b/bind_r_pinky_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_pinky_b/bind_r_pinky_c/bind_r_pinky_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_pinky_b/bind_r_pinky_c/bind_r_pinky_d/be_r_pinky_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_ring_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_ring_b/bind_r_ring_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_ring_b/bind_r_ring_c/bind_r_ring_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_ring_b/bind_r_ring_c/bind_r_ring_d/be_r_ring_e
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_thumb_b
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_thumb_b/bind_r_thumb_c
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_thumb_b/bind_r_thumb_c/bind_r_thumb_d
+        weight: 1
+      - path: anim_global/anim_chest/spine/bind_r_clavicle/bind_r_shoulder_IKRoot/bind_r_shoulder/bind_r_elbow/bind_r_wrist/bind_r_thumb_b/bind_r_thumb_c/bind_r_thumb_d/be_r_thumb_e
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Directional Light
+        weight: 1
+      - path: low_poly_hand_l
+        weight: 1
+      - path: low_poly_hand_r
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 6a0dbfe1bf67e574fbb28fafcdb712e5,
+    type: 3}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

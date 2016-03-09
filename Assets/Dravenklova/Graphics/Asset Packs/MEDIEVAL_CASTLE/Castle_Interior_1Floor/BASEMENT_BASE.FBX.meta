@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 2216964c083790348836642236102cde
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Arc_BB_001
+    100002: Arc_BB_02
+    100004: Arc_BB_03
+    100006: Arc_BB_04
+    100008: Arc_BB_05
+    100010: Arc_BB_09
+    100012: Arc_BB_10
+    100014: Arc_CC_10
+    100016: Arc_CC_11
+    100018: Arc_CC_12
+    100020: //RootNode
+    100022: basement_woden_platform
+    100024: Basment_1Room
+    100026: Basment_2Room
+    100028: Basment_Main_Part
+    100030: Basment_Pass
+    100032: Basment_Stairs_wide
+    100034: Block_A_01
+    100036: Block_B_01
+    100038: Block_B_10
+    100040: Block_B_11
+    100042: Block_C_06
+    100044: Block_D_04
+    100046: CryptPass_stairs_B_00
+    100048: Door_Ark_Long_15
+    100050: Door_Ark_Long_16
+    100052: Door_Ark_Long_17
+    100054: Door_to_Cript
+    100056: Dungeon_Stairs_09
+    100058: Dungeon_Stairs_11
+    100060: Inner_Door_Base_A17
+    100062: Inner_Door_Base_A24
+    100064: Krypt_Pass
+    100066: metall_trash_A_14
+    100068: metall_trash_A_15
+    100070: metall_trash_A_16
+    100072: metall_trash_A_17
+    100074: metall_trash_A_18
+    100076: metall_trash_A_19
+    100078: metall_trash_A_20
+    100080: metall_trash_A_21
+    100082: metall_trash_A_22
+    100084: metall_trash_C_18
+    100086: metall_trash_C_19
+    100088: Planck_Big_C_53
+    100090: Planck_Big_C_54
+    100092: Planck_Big_C_55
+    100094: Planck_Big_C_56
+    100096: Planck_Small_B_100
+    100098: Planck_Small_B_101
+    100100: Planck_Small_B_102
+    100102: Planck_Small_B_103
+    100104: Planck_Small_B_104
+    100106: Planck_Small_B_105
+    100108: Planck_Small_B_106
+    100110: Planck_Small_B_107
+    100112: Planck_Small_B_108
+    100114: Planck_Small_B_109
+    100116: Planck_Small_B_110
+    100118: Planck_Small_B_111
+    100120: Planck_Small_B_112
+    100122: Planck_Small_B_113
+    100124: Planck_Small_B_114
+    100126: Planck_Small_B_115
+    100128: Planck_Small_B_116
+    100130: Planck_Small_B_117
+    100132: Planck_Small_B_118
+    100134: Planck_Small_B_119
+    100136: Planck_Small_B_96
+    100138: Planck_Small_B_98
+    100140: Planck_Small_B_99
+    100142: Planck_Small_E_34
+    100144: Planck_Small_E_37
+    100146: Planck_Small_E_38
+    100148: Stairs_Wooden _D_00
+    100150: Stairs_Wooden _D_01
+    100152: Stairs_Wooden _D_02
+    100154: Stairs_Wooden _D_03
+    100156: Stairs_Wooden _D_04
+    100158: Stairs_Wooden _D_05
+    100160: Stairs_Wooden _D_06
+    100162: Stairs_Wooden _D_07
+    100164: Stairs_Wooden _D_Base
+    100166: Wood_stairs_tairs_B_00
+    400000: Arc_BB_001
+    400002: Arc_BB_02
+    400004: Arc_BB_03
+    400006: Arc_BB_04
+    400008: Arc_BB_05
+    400010: Arc_BB_09
+    400012: Arc_BB_10
+    400014: Arc_CC_10
+    400016: Arc_CC_11
+    400018: Arc_CC_12
+    400020: //RootNode
+    400022: basement_woden_platform
+    400024: Basment_1Room
+    400026: Basment_2Room
+    400028: Basment_Main_Part
+    400030: Basment_Pass
+    400032: Basment_Stairs_wide
+    400034: Block_A_01
+    400036: Block_B_01
+    400038: Block_B_10
+    400040: Block_B_11
+    400042: Block_C_06
+    400044: Block_D_04
+    400046: CryptPass_stairs_B_00
+    400048: Door_Ark_Long_15
+    400050: Door_Ark_Long_16
+    400052: Door_Ark_Long_17
+    400054: Door_to_Cript
+    400056: Dungeon_Stairs_09
+    400058: Dungeon_Stairs_11
+    400060: Inner_Door_Base_A17
+    400062: Inner_Door_Base_A24
+    400064: Krypt_Pass
+    400066: metall_trash_A_14
+    400068: metall_trash_A_15
+    400070: metall_trash_A_16
+    400072: metall_trash_A_17
+    400074: metall_trash_A_18
+    400076: metall_trash_A_19
+    400078: metall_trash_A_20
+    400080: metall_trash_A_21
+    400082: metall_trash_A_22
+    400084: metall_trash_C_18
+    400086: metall_trash_C_19
+    400088: Planck_Big_C_53
+    400090: Planck_Big_C_54
+    400092: Planck_Big_C_55
+    400094: Planck_Big_C_56
+    400096: Planck_Small_B_100
+    400098: Planck_Small_B_101
+    400100: Planck_Small_B_102
+    400102: Planck_Small_B_103
+    400104: Planck_Small_B_104
+    400106: Planck_Small_B_105
+    400108: Planck_Small_B_106
+    400110: Planck_Small_B_107
+    400112: Planck_Small_B_108
+    400114: Planck_Small_B_109
+    400116: Planck_Small_B_110
+    400118: Planck_Small_B_111
+    400120: Planck_Small_B_112
+    400122: Planck_Small_B_113
+    400124: Planck_Small_B_114
+    400126: Planck_Small_B_115
+    400128: Planck_Small_B_116
+    400130: Planck_Small_B_117
+    400132: Planck_Small_B_118
+    400134: Planck_Small_B_119
+    400136: Planck_Small_B_96
+    400138: Planck_Small_B_98
+    400140: Planck_Small_B_99
+    400142: Planck_Small_E_34
+    400144: Planck_Small_E_37
+    400146: Planck_Small_E_38
+    400148: Stairs_Wooden _D_00
+    400150: Stairs_Wooden _D_01
+    400152: Stairs_Wooden _D_02
+    400154: Stairs_Wooden _D_03
+    400156: Stairs_Wooden _D_04
+    400158: Stairs_Wooden _D_05
+    400160: Stairs_Wooden _D_06
+    400162: Stairs_Wooden _D_07
+    400164: Stairs_Wooden _D_Base
+    400166: Wood_stairs_tairs_B_00
+    2300000: Arc_BB_001
+    2300002: Arc_BB_02
+    2300004: Arc_BB_03
+    2300006: Arc_BB_04
+    2300008: Arc_BB_05
+    2300010: Arc_BB_09
+    2300012: Arc_BB_10
+    2300014: Arc_CC_10
+    2300016: Arc_CC_11
+    2300018: Arc_CC_12
+    2300020: basement_woden_platform
+    2300022: Basment_1Room
+    2300024: Basment_2Room
+    2300026: Basment_Main_Part
+    2300028: Basment_Pass
+    2300030: Basment_Stairs_wide
+    2300032: Block_A_01
+    2300034: Block_B_01
+    2300036: Block_B_10
+    2300038: Block_B_11
+    2300040: Block_C_06
+    2300042: Block_D_04
+    2300044: CryptPass_stairs_B_00
+    2300046: Door_Ark_Long_15
+    2300048: Door_Ark_Long_16
+    2300050: Door_Ark_Long_17
+    2300052: Door_to_Cript
+    2300054: Dungeon_Stairs_09
+    2300056: Dungeon_Stairs_11
+    2300058: Inner_Door_Base_A17
+    2300060: Inner_Door_Base_A24
+    2300062: Krypt_Pass
+    2300064: metall_trash_A_14
+    2300066: metall_trash_A_15
+    2300068: metall_trash_A_16
+    2300070: metall_trash_A_17
+    2300072: metall_trash_A_18
+    2300074: metall_trash_A_19
+    2300076: metall_trash_A_20
+    2300078: metall_trash_A_21
+    2300080: metall_trash_A_22
+    2300082: metall_trash_C_18
+    2300084: metall_trash_C_19
+    2300086: Planck_Big_C_53
+    2300088: Planck_Big_C_54
+    2300090: Planck_Big_C_55
+    2300092: Planck_Big_C_56
+    2300094: Planck_Small_B_100
+    2300096: Planck_Small_B_101
+    2300098: Planck_Small_B_102
+    2300100: Planck_Small_B_103
+    2300102: Planck_Small_B_104
+    2300104: Planck_Small_B_105
+    2300106: Planck_Small_B_106
+    2300108: Planck_Small_B_107
+    2300110: Planck_Small_B_108
+    2300112: Planck_Small_B_109
+    2300114: Planck_Small_B_110
+    2300116: Planck_Small_B_111
+    2300118: Planck_Small_B_112
+    2300120: Planck_Small_B_113
+    2300122: Planck_Small_B_114
+    2300124: Planck_Small_B_115
+    2300126: Planck_Small_B_116
+    2300128: Planck_Small_B_117
+    2300130: Planck_Small_B_118
+    2300132: Planck_Small_B_119
+    2300134: Planck_Small_B_96
+    2300136: Planck_Small_B_98
+    2300138: Planck_Small_B_99
+    2300140: Planck_Small_E_34
+    2300142: Planck_Small_E_37
+    2300144: Planck_Small_E_38
+    2300146: Stairs_Wooden _D_00
+    2300148: Stairs_Wooden _D_01
+    2300150: Stairs_Wooden _D_02
+    2300152: Stairs_Wooden _D_03
+    2300154: Stairs_Wooden _D_04
+    2300156: Stairs_Wooden _D_05
+    2300158: Stairs_Wooden _D_06
+    2300160: Stairs_Wooden _D_07
+    2300162: Stairs_Wooden _D_Base
+    2300164: Wood_stairs_tairs_B_00
+    3300000: Arc_BB_001
+    3300002: Arc_BB_02
+    3300004: Arc_BB_03
+    3300006: Arc_BB_04
+    3300008: Arc_BB_05
+    3300010: Arc_BB_09
+    3300012: Arc_BB_10
+    3300014: Arc_CC_10
+    3300016: Arc_CC_11
+    3300018: Arc_CC_12
+    3300020: basement_woden_platform
+    3300022: Basment_1Room
+    3300024: Basment_2Room
+    3300026: Basment_Main_Part
+    3300028: Basment_Pass
+    3300030: Basment_Stairs_wide
+    3300032: Block_A_01
+    3300034: Block_B_01
+    3300036: Block_B_10
+    3300038: Block_B_11
+    3300040: Block_C_06
+    3300042: Block_D_04
+    3300044: CryptPass_stairs_B_00
+    3300046: Door_Ark_Long_15
+    3300048: Door_Ark_Long_16
+    3300050: Door_Ark_Long_17
+    3300052: Door_to_Cript
+    3300054: Dungeon_Stairs_09
+    3300056: Dungeon_Stairs_11
+    3300058: Inner_Door_Base_A17
+    3300060: Inner_Door_Base_A24
+    3300062: Krypt_Pass
+    3300064: metall_trash_A_14
+    3300066: metall_trash_A_15
+    3300068: metall_trash_A_16
+    3300070: metall_trash_A_17
+    3300072: metall_trash_A_18
+    3300074: metall_trash_A_19
+    3300076: metall_trash_A_20
+    3300078: metall_trash_A_21
+    3300080: metall_trash_A_22
+    3300082: metall_trash_C_18
+    3300084: metall_trash_C_19
+    3300086: Planck_Big_C_53
+    3300088: Planck_Big_C_54
+    3300090: Planck_Big_C_55
+    3300092: Planck_Big_C_56
+    3300094: Planck_Small_B_100
+    3300096: Planck_Small_B_101
+    3300098: Planck_Small_B_102
+    3300100: Planck_Small_B_103
+    3300102: Planck_Small_B_104
+    3300104: Planck_Small_B_105
+    3300106: Planck_Small_B_106
+    3300108: Planck_Small_B_107
+    3300110: Planck_Small_B_108
+    3300112: Planck_Small_B_109
+    3300114: Planck_Small_B_110
+    3300116: Planck_Small_B_111
+    3300118: Planck_Small_B_112
+    3300120: Planck_Small_B_113
+    3300122: Planck_Small_B_114
+    3300124: Planck_Small_B_115
+    3300126: Planck_Small_B_116
+    3300128: Planck_Small_B_117
+    3300130: Planck_Small_B_118
+    3300132: Planck_Small_B_119
+    3300134: Planck_Small_B_96
+    3300136: Planck_Small_B_98
+    3300138: Planck_Small_B_99
+    3300140: Planck_Small_E_34
+    3300142: Planck_Small_E_37
+    3300144: Planck_Small_E_38
+    3300146: Stairs_Wooden _D_00
+    3300148: Stairs_Wooden _D_01
+    3300150: Stairs_Wooden _D_02
+    3300152: Stairs_Wooden _D_03
+    3300154: Stairs_Wooden _D_04
+    3300156: Stairs_Wooden _D_05
+    3300158: Stairs_Wooden _D_06
+    3300160: Stairs_Wooden _D_07
+    3300162: Stairs_Wooden _D_Base
+    3300164: Wood_stairs_tairs_B_00
+    4300000: Krypt_Pass
+    4300002: Door_to_Cript
+    4300004: Basment_2Room
+    4300006: Basment_1Room
+    4300008: Basment_Pass
+    4300010: Basment_Main_Part
+    4300012: Basment_Stairs_wide
+    4300014: Dungeon_Stairs_11
+    4300016: Dungeon_Stairs_09
+    4300018: Arc_BB_10
+    4300020: Arc_BB_09
+    4300022: Block_B_11
+    4300024: Block_B_10
+    4300026: Block_A_01
+    4300028: Block_B_01
+    4300030: Block_C_06
+    4300032: Block_D_04
+    4300034: Arc_CC_12
+    4300036: Arc_CC_11
+    4300038: Arc_CC_10
+    4300040: Inner_Door_Base_A24
+    4300042: Arc_BB_05
+    4300044: Arc_BB_04
+    4300046: Arc_BB_03
+    4300048: Arc_BB_02
+    4300050: Arc_BB_001
+    4300052: Stairs_Wooden _D_Base
+    4300054: Stairs_Wooden _D_00
+    4300056: Stairs_Wooden _D_01
+    4300058: Stairs_Wooden _D_02
+    4300060: Stairs_Wooden _D_03
+    4300062: Stairs_Wooden _D_04
+    4300064: Stairs_Wooden _D_05
+    4300066: Stairs_Wooden _D_06
+    4300068: Stairs_Wooden _D_07
+    4300070: Planck_Small_B_96
+    4300072: Wood_stairs_tairs_B_00
+    4300074: basement_woden_platform
+    4300076: Planck_Small_B_111
+    4300078: Planck_Small_B_112
+    4300080: Planck_Small_B_113
+    4300082: Planck_Big_C_56
+    4300084: Planck_Small_E_38
+    4300086: Planck_Small_B_105
+    4300088: Planck_Small_B_106
+    4300090: Planck_Small_B_104
+    4300092: Planck_Big_C_55
+    4300094: Planck_Small_B_110
+    4300096: Planck_Small_B_109
+    4300098: Planck_Small_B_103
+    4300100: Planck_Small_E_37
+    4300102: Planck_Small_B_102
+    4300104: Planck_Small_B_99
+    4300106: Planck_Small_B_101
+    4300108: Planck_Small_B_100
+    4300110: Planck_Small_B_114
+    4300112: Planck_Small_B_115
+    4300114: Planck_Small_B_116
+    4300116: Planck_Small_B_117
+    4300118: Planck_Small_B_98
+    4300120: Planck_Small_E_34
+    4300122: Planck_Small_B_119
+    4300124: Planck_Small_B_108
+    4300126: Planck_Small_B_118
+    4300128: Planck_Big_C_54
+    4300130: Planck_Big_C_53
+    4300132: Planck_Small_B_107
+    4300134: Inner_Door_Base_A17
+    4300136: Door_Ark_Long_17
+    4300138: Door_Ark_Long_16
+    4300140: Door_Ark_Long_15
+    4300142: metall_trash_C_19
+    4300144: metall_trash_A_22
+    4300146: metall_trash_A_21
+    4300148: metall_trash_A_20
+    4300150: metall_trash_A_19
+    4300152: metall_trash_A_18
+    4300154: metall_trash_A_17
+    4300156: metall_trash_A_16
+    4300158: metall_trash_C_18
+    4300160: metall_trash_A_15
+    4300162: metall_trash_A_14
+    4300164: CryptPass_stairs_B_00
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
