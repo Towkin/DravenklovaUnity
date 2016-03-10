@@ -47,6 +47,7 @@ public class Player : Pawn {
         FOVTarget = FOVDefault;
         EquippedWeapon = StartingWeapon;
         Cursor.lockState = CursorLockMode.Locked;
+        AmmoActive = AmmoCrossbow;
     }
 	
 	void Update ()

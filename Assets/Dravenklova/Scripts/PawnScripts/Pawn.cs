@@ -457,11 +457,18 @@ public abstract class Pawn : MonoBehaviour
         set { m_EquippedWeapon = value; }
     }
 
-    private int m_AmmoCrossbow;
+    private int m_AmmoCrossbow = 4;
     public int AmmoCrossbow
     {
         get { return m_AmmoCrossbow; }
         set { m_AmmoCrossbow = value; }
+    }
+
+    private int m_AmmoActive;
+    public int AmmoActive
+    {
+        get { return m_AmmoActive; }
+        set { m_AmmoActive = value; }
     }
 
     #endregion
@@ -472,7 +479,20 @@ public abstract class Pawn : MonoBehaviour
             EquippedWeapon.Attack();
 
         if (a_Action == 1)
-            EquippedWeapon.Reload();   
+        {
+            if (AmmoActive > 0)
+            {
+                EquippedWeapon.Reload();
+                AmmoActive--;
+            }
+            else
+            {
+                // TODO: No-ammo message
+            }
+        }
+            
+       
+            
     }
 
     protected void Aim()
