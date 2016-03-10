@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 451812}
   - 114: {fileID: 11433752}
   m_Layer: 0
-  m_Name: ShelfItemsPrefabs
+  m_Name: TableItemsTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
