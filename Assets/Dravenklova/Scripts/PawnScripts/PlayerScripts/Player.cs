@@ -5,7 +5,7 @@ public class Player : Pawn {
 
     [Header("World interaction")]
     [SerializeField]
-    private float m_SearchDist = 100f;
+    private float m_SearchDist = 9999f;
     public float SearchDist
     {
         get { return m_SearchDist; } 
@@ -27,77 +27,42 @@ public class Player : Pawn {
         get { return m_Collider; }
         set { m_Collider = value; }
     }
-    [SerializeField]
-    private Camera m_Cam;
-    public Camera Cam
-    {
-        get { return m_Cam; }
-        set { m_Cam = value; }
-    }
-    [Header("Aim Stats")]
-    [SerializeField]
-    private float m_AimSpeed = 10f;
-    public float AimSpeed
-    {
-        get { return m_AimSpeed; }
-        set { m_AimSpeed = value; }
-    }
-    [SerializeField]
-    private float m_AimMax = 25f;
-    public float AimMax
-    {
-        get { return m_AimMax; }
-        set { m_AimMax = value; }
-    }
-    [SerializeField]
-    private float m_AimOrigin;
-    public float AimOrigin
-    {
-        get { return m_AimOrigin; }
-        set { m_AimOrigin = value; }
-    }
-    [SerializeField]
-    private bool m_IsAiming = false;
-    public bool IsAiming
-    {
-        get { return m_IsAiming; }
-        set { m_IsAiming = value; }
-    }
-    [SerializeField]
-    [Range(1f, 100f)]
-    private float m_AimPrecision = 10f;
-    public float AimPrecision
-    {
-        get { return m_AimPrecision; }
-        set { m_AimPrecision = value; }
-    }
 
-    private float m_InputX;
-    public float InputX
+    [SerializeField]
+    private Weapon m_StartingWeapon;
+    public Weapon StartingWeapon
     {
-        get { return m_InputX; }
-        set { m_InputX = value; }
+        get { return m_StartingWeapon; }
+        set { m_StartingWeapon = value; }
     }
-    private float m_InputY;
-    public float InputY
-    {
-        get { return m_InputY; }
-        set { m_InputY = value; }
-    }
-
     #endregion
+
+    public enum WeaponAction : int { Attack = 0, Reload = 1 };
+    private int a_WeaponAction;
+
 
     void Start ()
     {
-        AimOrigin = Cam.fieldOfView;
-        
+        FOVDefault = Cam.fieldOfView;
+        FOVTarget = FOVDefault;
+        EquippedWeapon = StartingWeapon;
         Cursor.lockState = CursorLockMode.Locked;
     }
 	
 	void Update ()
     {
-        
-        if(Input.GetButtonDown("Menu"))
+        if (Input.GetButtonDown("Attack"))
+        {
+            a_WeaponAction = (int)WeaponAction.Attack;
+            UseWeapon(a_WeaponAction);
+        }
+        else if (Input.GetButtonDown("Reload"))
+        {
+            a_WeaponAction = (int)WeaponAction.Reload;
+            UseWeapon(a_WeaponAction);
+        }
+
+        if (Input.GetButtonDown("Menu"))
         {
             Application.Quit();
 #if UNITY_EDITOR
@@ -108,6 +73,7 @@ public class Player : Pawn {
 
     void FixedUpdate ()
     {
+        
         UpdateInput();
         UpdateRotation();
         UpdatePawnState();
@@ -115,23 +81,24 @@ public class Player : Pawn {
         Aim();
 
         RaycastHit Spotted;
-        Ray Searching = new Ray(m_Cam.transform.position, m_Cam.transform.forward);
+        Ray Searching = new Ray(Cam.transform.position, Cam.transform.forward);
+        Debug.DrawRay(Cam.transform.position, Cam.transform.forward * SearchDist, Color.red, 2f);
 
         if (Physics.Raycast(Searching, out Spotted, SearchDist))
         {
+            
             Usable Prop = Spotted.collider.GetComponent<Usable>();
             if (Prop != null)
             {
-                // Prop is usable!
+                // TODO: UI message informing that Item is usable
+                Debug.Log(Prop);
 
-
-
-                //if(InputUseWorld)
-                //{
-                    // Not yet implemented.
-                    //Prop.UseProp(this);
+                if (InputUse)
+                {
+                    Debug.Log("Hit!");
+                    Prop.Use(this);
                     // TODO: Add Debug message
-                //}
+                }
             }
         }
 
@@ -208,6 +175,8 @@ public class Player : Pawn {
         InputMoveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         InputJump = Input.GetButton("Jump");
         InputSprint = Input.GetButton("Sprint");
+        InputAim = Input.GetButton("Aim");
+        InputUse = Input.GetButton("Use");
     }
     private void UpdateRotation()
     {
@@ -244,24 +213,5 @@ public class Player : Pawn {
 
         PlanarForwardVelocity = OldPlanarForwardVelocity;
     }
-    private void Aim()
-    {
-        if (Input.GetButton("Aim"))
-        {
-            Cam.fieldOfView -= AimSpeed;
-            IsAiming = true;
-            if (Cam.fieldOfView <= AimMax)
-            {
-                Cam.fieldOfView = AimMax;
-            }
-        }
-        if (!Input.GetButton("Aim"))
-        {
-            IsAiming = false;
-            if (Cam.fieldOfView < AimOrigin)
-            {
-                Cam.fieldOfView += AimSpeed;
-            }
-        }
-    }
+    
 }

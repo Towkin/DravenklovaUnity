@@ -16,6 +16,13 @@ public abstract class Pawn : MonoBehaviour
     {
         get { return m_SprintSpeedMultiplier; }
     }
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float m_AimSpeedMultiplier = 0.5f;
+    private float AimSpeedMultiplier
+    {
+        get { return m_AimSpeedMultiplier; }
+    }
 
     private float MaxSpeedMultiplier
     {
@@ -23,6 +30,7 @@ public abstract class Pawn : MonoBehaviour
         {
             float Mult = 1f;
             Mult *= InputSprint ? m_SprintSpeedMultiplier : 1f;
+            Mult *= InputAim ? m_AimSpeedMultiplier : 1f;
             return Mult;
         }
     }
@@ -358,8 +366,140 @@ public abstract class Pawn : MonoBehaviour
         get { return m_InputSprint; }
         set { m_InputSprint = value; }
     }
+    protected bool m_InputAim = false;
+    public bool InputAim
+    {
+        get { return m_InputAim; }
+        protected set { m_InputAim = value; }
+    }
+    protected bool m_InputUse = false;
+    public bool InputUse
+    {
+        get { return m_InputUse; }
+        protected set { m_InputUse = value; }
+    }
 
 
     #endregion
 
+    #region Aiming Data
+    [SerializeField]
+    private Camera m_Cam;
+    public Camera Cam
+    {
+        get { return m_Cam; }
+        set { m_Cam = value; }
+    }
+    [Header("Aim Stats")]
+    [SerializeField]
+    private float m_AimSpeed = 10f;
+    public float AimSpeed
+    {
+        get { return m_AimSpeed; }
+        set { m_AimSpeed = value; }
+    }
+    [SerializeField]
+    private float m_FOVAimed = 25f;
+    public float FOVAimed
+    {
+        get { return m_FOVAimed; }
+        set { m_FOVAimed = value; }
+    }
+    [SerializeField]
+    private float m_FOVDefault;
+    public float FOVDefault
+    {
+        get { return m_FOVDefault; }
+        set { m_FOVDefault = value; }
+    }
+    private float m_FOVTarget;
+    public float FOVTarget
+    {
+        get { return m_FOVTarget; }
+        protected set { m_FOVTarget = value; }
+    }
+    [SerializeField]
+    private bool m_IsAiming = false;
+    public bool IsAiming
+    {
+        get { return m_IsAiming; }
+        set { m_IsAiming = value; }
+    }
+    [SerializeField]
+    [Range(1f, 100f)]
+    private float m_AimPrecision = 10f;
+    public float AimPrecision
+    {
+        get { return m_AimPrecision; }
+        set { m_AimPrecision = value; }
+    }
+
+    private float m_InputX;
+    public float InputX
+    {
+        get { return m_InputX; }
+        set { m_InputX = value; }
+    }
+    private float m_InputY;
+    public float InputY
+    {
+        get { return m_InputY; }
+        set { m_InputY = value; }
+    }
+    #endregion
+
+    #region Weapon Data
+
+    private Weapon m_EquippedWeapon;
+    public Weapon EquippedWeapon
+    {
+        get { return m_EquippedWeapon; }
+        set { m_EquippedWeapon = value; }
+    }
+
+    private int m_AmmoCrossbow;
+    public int AmmoCrossbow
+    {
+        get { return m_AmmoCrossbow; }
+        set { m_AmmoCrossbow = value; }
+    }
+
+    #endregion
+
+    protected void UseWeapon(int a_Action)
+    {
+        if(a_Action == 0)
+            EquippedWeapon.Attack();
+
+        if (a_Action == 1)
+            EquippedWeapon.Reload();   
+    }
+
+    protected void Aim()
+    {
+
+        FOVTarget = InputAim ? FOVAimed : FOVDefault;
+        Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
+
+        
+
+        /*if (Input.GetButton("Aim"))
+        {
+            Cam.fieldOfView -= AimSpeed;
+            IsAiming = true;
+            if (Cam.fieldOfView <= AimMax)
+            {
+                Cam.fieldOfView = AimMax;
+            }
+        }
+        if (!Input.GetButton("Aim"))
+        {
+            IsAiming = false;
+            if (Cam.fieldOfView < AimOrigin)
+            {
+                Cam.fieldOfView += AimSpeed;
+            }
+        }*/
+    }
 }
+
