@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 457922}
   - 114: {fileID: 11492512}
   m_Layer: 0
-  m_Name: MiscTemplate
+  m_Name: LibraryMiscTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
