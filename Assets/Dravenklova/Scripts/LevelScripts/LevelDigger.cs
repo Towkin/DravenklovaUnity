@@ -80,7 +80,27 @@ public class LevelDigger : MonoBehaviour {
     {
         get { return m_ItemPrefabs; }
     }
+    [SerializeField]
+    private int m_ItemCount = 5;
+    public int ItemCount
+    {
+        get { return m_ItemCount; }
+    }
 
+    [SerializeField]
+    private GameObject[] m_EnemyPrefabs;
+    public GameObject[] EnemyPrefabs
+    {
+        get { return m_EnemyPrefabs; }
+    }
+    [SerializeField]
+    private int m_EnemyCount = 4;
+    public int EnemyCount
+    {
+        get { return m_EnemyCount; }
+    }
+
+    
     private GameObject[] m_Enemies;
     public GameObject[] Enemies
     {
@@ -107,22 +127,6 @@ public class LevelDigger : MonoBehaviour {
             Random.seed = Seed;
         }
         BuildLevel(LevelLength);
-
-        /*NavMeshBuilder.BuildNavMesh();
-
-        ConnectionPoint[] AllConnections = FindObjectsOfType<ConnectionPoint>();
-        Transform[] PatrolPoints = new Transform[AllConnections.Length];
-        for(int i = 0; i < AllConnections.Length; i++)
-        {
-            PatrolPoints[i] = AllConnections[i].transform;
-        }
-
-        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach(GameObject Enemy in Enemies)
-        {
-            Enemy.GetComponent<Patrol>().Points = PatrolPoints;
-        }*/
     }
 	
 	void Update () {
@@ -175,12 +179,34 @@ public class LevelDigger : MonoBehaviour {
         }
 
         List<ItemTemplate> ItemSpawners = new List<ItemTemplate>(FindObjectsOfType<ItemTemplate>());
-            
+        int ItemsSpawned = 0;
+
         while(ItemSpawners.Count > 0)
         {
             int SpawnIndex = Random.Range(0, ItemSpawners.Count);
-            ItemSpawners[SpawnIndex].Spawn();
+            if(ItemsSpawned < ItemCount && ItemPrefabs != null)
+            {
+                ItemSpawners[SpawnIndex].Spawn(ItemPrefabs[Random.Range(0, ItemPrefabs.Length)]);
+            }
+            else
+            {
+                ItemSpawners[SpawnIndex].Spawn();
+            }
             ItemSpawners.RemoveAt(SpawnIndex);
+            ItemsSpawned++;
+        }
+        
+        List<EnemyTemplate> EnemySpawners = new List<EnemyTemplate>(FindObjectsOfType<EnemyTemplate>());
+        int EnemiesSpawned = 0;
+        while(EnemySpawners.Count > 0)
+        {
+            int SpawnIndex = Random.Range(0, EnemySpawners.Count);
+            if(EnemiesSpawned < EnemyCount && EnemyPrefabs != null)
+            {
+
+            }
+
+            EnemySpawners.RemoveAt(SpawnIndex);
         }
 
     }
@@ -343,6 +369,10 @@ public class LevelDigger : MonoBehaviour {
 
             foreach(ConnectionPoint Connection in TestConnections)
             {
+                if (Connection.ExitOnly)
+                {
+                    continue;
+                }
                 bool NoCollisions = true;
                 
                 Quaternion ConnectionRotation = Quaternion.FromToRotation(Connection.transform.forward, -aFromTransform.forward);
