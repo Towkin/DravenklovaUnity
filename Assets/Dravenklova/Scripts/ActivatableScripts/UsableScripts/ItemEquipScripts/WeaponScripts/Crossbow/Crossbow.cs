@@ -64,6 +64,7 @@ public class Crossbow : Weapon
         if(!IsLoaded)
         {
             LoadedBolt = Instantiate<GameObject>(BoltTemplateWood);
+            LoadedBolt.GetComponent<Rigidbody>().isKinematic = true;
             LoadedBolt.transform.position = BoltSpawnLocation.transform.position;
             LoadedBolt.transform.rotation = BoltSpawnLocation.transform.rotation * LoadedBolt.transform.rotation;
             LoadedBolt.transform.parent = transform;
