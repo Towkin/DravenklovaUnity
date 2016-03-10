@@ -97,9 +97,11 @@ public class LevelDigger : MonoBehaviour {
     //int Counter = 0;
     
     void Start () {
-        RoomBranch.Push(FirstRoom);
-        LevelObjects.Enqueue(FirstRoom);
-
+        if (FirstRoom != null)
+        {
+            RoomBranch.Push(FirstRoom);
+            LevelObjects.Enqueue(FirstRoom);
+        }
         if(!UseRandomSeed)
         {
             Random.seed = Seed;
@@ -127,16 +129,16 @@ public class LevelDigger : MonoBehaviour {
 	    
 	}
 
-    private void BuildLevel(int aLevelLength)
+    private void BuildLevel(int a_LevelLength)
     {
-        int AimLength = aLevelLength;
+        int AimLength = a_LevelLength;
         bool LevelEnded = false;
         //bool ConnectionsLeft = true;
 
         while(RoomBranch.Count > 0)
         {
             GameObject NewPrefab;
-            if (RoomBranch.Count >= aLevelLength && !LevelEnded)
+            if (RoomBranch.Count >= a_LevelLength && !LevelEnded)
             {
                 NewPrefab = BuildShrinePiece();
                 if (NewPrefab == null)
@@ -170,6 +172,15 @@ public class LevelDigger : MonoBehaviour {
                 RoomBranch.Push(NewPrefab);
                 LevelObjects.Enqueue(NewPrefab);
             }
+        }
+
+        List<ItemTemplate> ItemSpawners = new List<ItemTemplate>(FindObjectsOfType<ItemTemplate>());
+            
+        while(ItemSpawners.Count > 0)
+        {
+            int SpawnIndex = Random.Range(0, ItemSpawners.Count);
+            ItemSpawners[SpawnIndex].Spawn();
+            ItemSpawners.RemoveAt(SpawnIndex);
         }
 
     }

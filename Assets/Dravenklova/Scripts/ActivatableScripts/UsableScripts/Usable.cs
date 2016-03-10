@@ -2,8 +2,5 @@
 
 public abstract class Usable : Activatable
 {
-    public void Use()
-    {
-        Activate();
-    }
+    public abstract void Use(Pawn User);
 }

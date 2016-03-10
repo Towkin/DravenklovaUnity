@@ -3,6 +3,23 @@ using System.Collections;
 
 public abstract class Pawn : MonoBehaviour
 {
+    #region Pawn components
+    [Header("Pawn Components")]
+    [SerializeField]
+    private Rigidbody m_PhysicsBody;
+    public Rigidbody PhysicsBody
+    {
+        get { return m_PhysicsBody; }
+        set { m_PhysicsBody = value; }
+    }
+    [SerializeField]
+    private CapsuleCollider m_Collider;
+    public CapsuleCollider Capsule
+    {
+        get { return m_Collider; }
+        set { m_Collider = value; }
+    }
+    #endregion
 
     #region All move attributes
     #region Basic move attributes
@@ -16,6 +33,13 @@ public abstract class Pawn : MonoBehaviour
     {
         get { return m_SprintSpeedMultiplier; }
     }
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float m_AimSpeedMultiplier = 0.5f;
+    private float AimSpeedMultiplier
+    {
+        get { return m_AimSpeedMultiplier; }
+    }
 
     private float MaxSpeedMultiplier
     {
@@ -23,6 +47,7 @@ public abstract class Pawn : MonoBehaviour
         {
             float Mult = 1f;
             Mult *= InputSprint ? m_SprintSpeedMultiplier : 1f;
+            Mult *= InputAim ? m_AimSpeedMultiplier : 1f;
             return Mult;
         }
     }
@@ -241,14 +266,11 @@ public abstract class Pawn : MonoBehaviour
     {
         get { return m_TurnRate; }
     }
-    protected Vector3 m_ViewDirection = Vector3.forward;
-    public Vector3 ViewDirection
+    protected Quaternion m_ViewDirection = new Quaternion();
+    public virtual Quaternion ViewDirection
     {
         get { return m_ViewDirection; }
-        set
-        {
-            m_ViewDirection = value.normalized;
-        }
+        protected set { m_ViewDirection = value; }
     }
     #endregion
     #endregion
@@ -324,6 +346,14 @@ public abstract class Pawn : MonoBehaviour
 
     #region Input variables
 
+    protected Vector2 m_InputView = Vector2.zero;
+    // Input rotation in degrees.
+    public Vector2 InputView
+    {
+        get { return m_InputView; }
+        protected set { m_InputView = value; }
+    }
+
     protected Vector2 m_InputMoveDirection = Vector2.zero;
     protected Vector2 InputMoveDirection
     {
@@ -356,10 +386,264 @@ public abstract class Pawn : MonoBehaviour
     public bool InputSprint
     {
         get { return m_InputSprint; }
-        set { m_InputSprint = value; }
+        protected set { m_InputSprint = value; }
     }
-
+    protected bool m_InputAttack = false;
+    public bool InputAttack
+    {
+        get { return m_InputAttack; }
+        protected set { m_InputAttack = value; }
+    }
+    protected bool m_InputReload = false;
+    public bool InputReload
+    {
+        get { return m_InputReload; }
+        protected set { m_InputReload = value; }
+    }
+    protected bool m_InputAim = false;
+    public bool InputAim
+    {
+        get { return m_InputAim; }
+        protected set { m_InputAim = value; }
+    }
+    protected bool m_InputUse = false;
+    public bool InputUse
+    {
+        get { return m_InputUse; }
+        protected set { m_InputUse = value; }
+    }
+    
 
     #endregion
 
+    #region Aiming Data
+    [Header("Aim Stats")]
+    [SerializeField]
+    private bool m_IsAiming = false;
+    public bool IsAiming
+    {
+        get { return m_IsAiming; }
+        set { m_IsAiming = value; }
+    }
+    [SerializeField]
+    [Range(1f, 100f)]
+    private float m_AimPrecision = 10f;
+    public float AimPrecision
+    {
+        get { return m_AimPrecision; }
+        set { m_AimPrecision = value; }
+    }
+
+    
+    #endregion
+
+    #region Weapon Data
+
+    private Weapon m_EquippedWeapon;
+    public Weapon EquippedWeapon
+    {
+        get { return m_EquippedWeapon; }
+        set { m_EquippedWeapon = value; }
+    }
+
+    private enum WeaponType : int { None, Crossbow }
+
+    private WeaponType EquippedType
+    {
+        get
+        {
+            if(EquippedWeapon.GetType() == typeof(Crossbow))
+            {
+                return WeaponType.Crossbow;
+            }
+            return WeaponType.None;
+        }
+    }
+
+    private int[] m_WeaponAmmo;
+    public int[] WeaponAmmo
+    {
+        get { return m_WeaponAmmo; }
+        private set { m_WeaponAmmo = value; }
+    }
+    public int CrossbowAmmo
+    {
+        get { return WeaponAmmo[(int)WeaponType.Crossbow]; }
+        set { WeaponAmmo[(int)WeaponType.Crossbow] = value; }
+    }
+
+    
+    public int EquippedAmmo
+    {
+        get { return WeaponAmmo[(int)EquippedType]; }
+        set { WeaponAmmo[(int)EquippedType] = value; }
+    }
+
+    #endregion
+
+
+    protected virtual void Start()
+    {
+        WeaponAmmo = new int[System.Enum.GetNames(typeof(WeaponType)).Length];
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        UpdateRotation();
+        UpdatePawnState();
+        UpdateMovement(Time.fixedDeltaTime);
+        Aim();
+    }
+
+
+    protected virtual void Update()
+    {
+        UpdateInput();
+        UpdateWeapon();
+    }
+
+
+    public enum WeaponAction : int { Attack, Reload };
+    protected void UseWeapon(WeaponAction a_Action)
+    {
+        switch(a_Action)
+        {
+            case WeaponAction.Attack:
+                {
+                    EquippedWeapon.Attack();
+                    break;
+                }
+            case WeaponAction.Reload:
+                {
+                    // TODO: Refine this.
+                    if (EquippedAmmo > 0)
+                    {
+                        EquippedWeapon.Reload();
+                        EquippedAmmo--;
+                    }
+                    break;
+                }
+            default:
+                {
+                    Debug.Log("You shouldn't be here... How the hell did you input an invalid enum value?");
+                    break;
+                }
+        }
+    }
+
+    protected virtual void Aim()
+    {
+        
+    }
+
+    protected abstract void UpdateInput();
+    
+    protected virtual void UpdateMovement(float a_DeltaTime)
+    {
+        Velocity = PhysicsBody.velocity;
+        
+        Vector2 VelocityAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
+
+        if (VelocityAdd == Vector2.zero || PlanarSpeed > MaxSpeed)
+        {
+            PlanarSpeed *= Mathf.Pow(1f - Decay, a_DeltaTime);
+            PlanarSpeed -= Mathf.Min(Deacceleration * a_DeltaTime, PlanarSpeed);
+        }
+        else
+        {
+            if (VelocityAdd.magnitude > 1f)
+            {
+                VelocityAdd.Normalize();
+            }
+            PlanarForwardVelocity += VelocityAdd;
+            PlanarSpeed = Mathf.Min(MaxSpeed, PlanarSpeed);
+        }
+
+        if (IsGrounded)
+        {
+            IsJumping = InputJump;
+        }
+        else
+        {
+            Velocity += PawnGravity * a_DeltaTime;
+        }
+
+        if (IsJumping)
+        {
+            Velocity += Vector3.up * JumpAcceleration * a_DeltaTime;
+            JumpTime += a_DeltaTime;
+            if (!InputJump || JumpTime >= JumpTimeMax)
+            {
+                IsJumping = false;
+            }
+        }
+
+        PhysicsBody.velocity = Velocity;
+    }
+
+    protected virtual void UpdateRotation()
+    {
+        float InputX = InputView.x;
+        float InputY = InputView.y;
+
+        if (IsAiming)
+        {
+            InputX /= AimPrecision;
+            InputY /= AimPrecision;
+        }
+
+
+        Vector2 OldPlanarForwardVelocity = PlanarForwardVelocity;
+
+        Vector3 OldPhysicsRotation = PhysicsBody.transform.eulerAngles;
+        Vector3 NewPhysicsRotation = new Vector3(OldPhysicsRotation.x, OldPhysicsRotation.y + InputX, OldPhysicsRotation.z);
+        PhysicsBody.transform.eulerAngles = NewPhysicsRotation;
+
+        Vector3 OldViewRotation = ViewDirection.eulerAngles;
+        if (OldViewRotation.x > 90f)
+        {
+            OldViewRotation.x -= 360f;
+        }
+        Vector3 NewViewRotation = new Vector3(Mathf.Clamp(OldViewRotation.x - InputY, -89.9f, 89.9f), OldViewRotation.y, OldViewRotation.z);
+
+        float ViewX = NewViewRotation.x;
+        float ViewY = NewPhysicsRotation.y;
+
+        Quaternion View = new Quaternion();
+        View.eulerAngles = new Vector3(ViewX, ViewY, 0f);
+        ViewDirection = View;
+
+        PlanarForwardVelocity = OldPlanarForwardVelocity;
+    }
+
+    protected virtual void UpdatePawnState()
+    {
+        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.05f, 0f);
+        float TestRadius = Capsule.radius - 0.025f;
+
+        Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
+
+        IsGrounded = false;
+        foreach (Collider Collider in AllColliders)
+        {
+            if (Collider.tag != "Player")
+            {
+                IsGrounded = true;
+                break;
+            }
+        }
+    }
+
+    protected virtual void UpdateWeapon()
+    {
+        if (InputAttack)
+        {
+            UseWeapon(WeaponAction.Attack);
+        }
+        else if (InputReload)
+        {
+            UseWeapon(WeaponAction.Reload);
+        }
+    }
 }
+

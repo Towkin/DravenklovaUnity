@@ -24,32 +24,35 @@ public class RandomTemplateInspector : Editor
 
     public override void OnInspectorGUI()
     {
+        serializedObject.Update();
+
         EditorGUI.BeginChangeCheck();
 
         DrawTemplateButtons();
-
-        //DrawDefaultInspector();
+        
         if(EditorGUI.EndChangeCheck())
         {
             RefreshCreator();
         }
+
+        serializedObject.ApplyModifiedProperties();
     }
 
     protected void DrawSpawnColumn(int a_Length)
     {
-        GUILayout.BeginVertical(new GUILayoutOption[] { GUILayout.MinWidth(200f), GUILayout.MaxWidth(1000f) });
-        if (GUILayout.Button("Random Object"))
+        GUILayout.BeginVertical(new GUILayoutOption[] { GUILayout.MinWidth(100f), GUILayout.MaxWidth(1000f) });
+        if (GUILayout.RepeatButton("Random Object"))
         {
             Creator.CreateTestObject();
         }
-        Rect FullWidthRect = GUILayoutUtility.GetLastRect();
+        
         GUILayout.Space(8);
 
         for (int i = 0; i < a_Length; i++)
         {
             if (Creator.TemplateList != null && i < Creator.TemplateList.Length)
             {
-                GUILayoutOption[] Options = new GUILayoutOption[] { GUILayout.Width(60f), GUILayout.Height(19f) };
+                GUILayoutOption[] Options = new GUILayoutOption[] { GUILayout.Width(50f), GUILayout.Height(19f) };
 
                 GUILayout.BeginHorizontal();
                 GameObject Template = Creator.TemplateList[i];
@@ -61,9 +64,7 @@ public class RandomTemplateInspector : Editor
                 {
                     Creator.CreateTestObject(Template);
                 }
-                Rect LastRect = GUILayoutUtility.GetLastRect();
-
-                GameObject NewObject = EditorGUI.ObjectField(new Rect(LastRect.xMax + 8, LastRect.yMin + 1f, FullWidthRect.width - LastRect.width - 10f, 16f), Template, typeof(GameObject), false) as GameObject;
+                GameObject NewObject = EditorGUILayout.ObjectField(Template, typeof(GameObject), false) as GameObject;
                 if (NewObject != Template)
                 {
                     Creator.TemplateList[i] = NewObject;
@@ -76,15 +77,12 @@ public class RandomTemplateInspector : Editor
             {
                 if (GUILayout.Button("+ Add new template"))
                 {
-                    GameObject[] OldList = Creator.TemplateList;
-                    Creator.TemplateList = new GameObject[a_Length];
-                    OldList.CopyTo(Creator.TemplateList, 0);
+                    Creator.AddLength();
                     GUI.changed = true;
                 }
             }
         }
         GUILayout.EndVertical();
-
     }
     protected void DrawDeleteColumn(int a_Length)
     {
@@ -127,7 +125,8 @@ public class RandomTemplateInspector : Editor
 
 public class RandomTemplate : MonoBehaviour
 {
-    //[SerializeField] [Tooltip("Add elements to the list, and it'll randomly select one to spawn on game start.\nNote: the spawn object will copy the transform of the GameObject this script is attached to.")]
+    [SerializeField]
+    [Tooltip("Add elements to the list, and it'll randomly select one to spawn on game start.\nNote: the spawn object will copy the transform of the GameObject this script is attached to.")]
     //[ContextMenuItem("Test Random Object", "CreateTestObject")]
     //[ContextMenuItem("Clear Random Object", "ClearTestObject")]
     protected GameObject[] m_TemplateList;
@@ -136,6 +135,8 @@ public class RandomTemplate : MonoBehaviour
         get { return m_TemplateList; }
         set { m_TemplateList = value; }
     }
+
+    [SerializeField]
     private GameObject m_EditorTestObject;
     public GameObject EditorTestObject
     {
@@ -143,6 +144,7 @@ public class RandomTemplate : MonoBehaviour
         set { m_EditorTestObject = value; }
     }
 
+    [SerializeField]
     private bool m_IsBoundsCalculated = false;
     public bool IsBoundsCalculated
     {
@@ -150,6 +152,7 @@ public class RandomTemplate : MonoBehaviour
         private set { m_IsBoundsCalculated = value; }
     }
 
+    [SerializeField]
     private Bounds m_SpawnBounds;
     public Bounds SpawnBounds
     {
@@ -182,6 +185,27 @@ public class RandomTemplate : MonoBehaviour
             }
         }
     }
+    public void AddLength()
+    {
+        AddLength(1);
+    }
+    public virtual void AddLength(int a)
+    {
+        if (a <= 0)
+        {
+            return;
+        }
+        GameObject[] OldList = TemplateList;
+        if (OldList != null)
+        {
+            TemplateList = new GameObject[OldList.Length + a];
+            OldList.CopyTo(TemplateList, 0);
+        }
+        else
+        {
+            TemplateList = new GameObject[a];
+        }
+    }
 
     public virtual void CalculateBounds()
     {
@@ -209,6 +233,15 @@ public class RandomTemplate : MonoBehaviour
         //Debug.Log("Final bounds: " + SpawnBounds.ToString());
         //Debug.Log("Template bounds calculation complete!");
     }
+    protected Bounds TransformBounds(Bounds a_Bounds, Vector3 a_Offset, Quaternion a_Rotation)
+    {
+        Bounds ReturnBounds = new Bounds();
+
+        ReturnBounds.min = a_Offset + a_Rotation * a_Bounds.min;
+        ReturnBounds.max = a_Offset + a_Rotation * a_Bounds.max;
+
+        return ReturnBounds;
+    }
     protected Bounds CombineBounds(Bounds a, Bounds b)
     {
         Vector3 Min = new Vector3();
@@ -224,7 +257,6 @@ public class RandomTemplate : MonoBehaviour
 
         return ReturnBounds;
     }
-
     protected Bounds GetBounds(GameObject a_Object, Vector3 a_Position, Quaternion a_Rotation)
     {
         Bounds ObjectBounds = new Bounds();
@@ -232,8 +264,7 @@ public class RandomTemplate : MonoBehaviour
         Renderer ObjectRenderer = a_Object.GetComponent<Renderer>();
         if(ObjectRenderer != null)
         {
-            ObjectBounds.min = ObjectRenderer.bounds.min;
-            ObjectBounds.max = ObjectRenderer.bounds.max;
+            ObjectBounds = TransformBounds(ObjectRenderer.bounds, a_Position - a_Object.transform.localPosition, a_Rotation * Quaternion.Inverse(a_Object.transform.localRotation));
         }
         RandomTemplate TemplateScript = a_Object.GetComponent<RandomTemplate>();
         if(TemplateScript != null)
@@ -245,11 +276,11 @@ public class RandomTemplate : MonoBehaviour
 
             if (ObjectBounds.size == Vector3.zero)
             {
-                ObjectBounds = TemplateScript.SpawnBounds;
+                ObjectBounds = TransformBounds(TemplateScript.SpawnBounds, a_Position, a_Rotation);
             }
             else
             {
-                ObjectBounds = CombineBounds(ObjectBounds, TemplateScript.SpawnBounds);
+                ObjectBounds = CombineBounds(ObjectBounds, TransformBounds(TemplateScript.SpawnBounds, a_Position, a_Rotation));
             }
         }
         for(int i = 0; i < a_Object.transform.childCount; i++)
@@ -287,7 +318,6 @@ public class RandomTemplate : MonoBehaviour
         }
         DrawBounds(DrawColor);
     }
-
     private void DrawBounds(Color a_Color)
     {
         Bounds DrawBounds = SpawnBounds;
@@ -331,7 +361,6 @@ public class RandomTemplate : MonoBehaviour
     {
         CreateTestObject(null);
     }
-
     public virtual void CreateTestObject(GameObject a_Template)
     {
         // Clear the EditorTestObject if it exists.
@@ -352,9 +381,13 @@ public class RandomTemplate : MonoBehaviour
         }
         EditorTestObject.name = EditorTestObject.name + " - Delete me before play!";
         EditorTestObject.transform.parent = this.transform;
+
+        RandomTemplate[] SubTemplates = EditorTestObject.GetComponentsInChildren<RandomTemplate>();
+        foreach(RandomTemplate SubTemplate in SubTemplates)
+        {
+            SubTemplate.CreateTestObject();
+        }
     }
-
-
     public void ClearTestObject()
     {
         // Make sure the object exists at all.
@@ -377,7 +410,7 @@ public class RandomTemplate : MonoBehaviour
     protected virtual GameObject InstantiateFromList()
     {
         // If the user hasn't entered any items into list.
-        if (TemplateList.Length == 0)
+        if (TemplateList == null || TemplateList.Length == 0)
         {
             // Send error message and return null;
             Debug.LogError("No templates available in TemplateList to spawn.");
@@ -402,7 +435,6 @@ public class RandomTemplate : MonoBehaviour
 
         return SpawnedObject;
     }
-
     protected void CopyTransform(Transform a_Target, Transform a_Source)
     {
         NavMeshAgent Agent = a_Target.GetComponent<NavMeshAgent>();
@@ -414,7 +446,7 @@ public class RandomTemplate : MonoBehaviour
         a_Target.parent = a_Source.parent;
         //aTarget.localPosition += aSource.localPosition;
         a_Target.position = a_Source.position;
-        a_Target.localRotation = a_Source.localRotation * a_Target.localRotation;
+        a_Target.localRotation = a_Source.localRotation;
         //a_Target.localScale = Vector3.Scale(a_Target.localScale, a_Source.localScale);
 
         if (Agent != null)
