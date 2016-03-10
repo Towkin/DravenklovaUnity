@@ -3,30 +3,52 @@ using System.Collections;
 
 public class Player : Pawn {
 
+    public override Quaternion ViewDirection
+    {
+        get
+        {
+            return base.ViewDirection;
+        }
+        protected set
+        {
+            base.ViewDirection = value;
+            Cam.transform.rotation = value;
+        }
+    }
+
+    
+
+    #region Player world interaction
     [Header("World interaction")]
     [SerializeField]
-    private float m_SearchDist = 100f;
+    private float m_SearchDist = 9999f;
     public float SearchDist
     {
         get { return m_SearchDist; } 
     }
+    #endregion
 
-    #region Components
-    [Header("Components")]
+    #region Player components
+    [Header("Player Components")]
+    
+
     [SerializeField]
-    private Rigidbody m_PhysicsBody;
-    public Rigidbody PhysicsBody
+    private Weapon m_StartingWeapon;
+    public Weapon StartingWeapon
     {
-        get { return m_PhysicsBody; }
-        set { m_PhysicsBody = value; }
+        get { return m_StartingWeapon; }
+        set { m_StartingWeapon = value; }
     }
     [SerializeField]
-    private CapsuleCollider m_Collider;
-    public CapsuleCollider Capsule
+    private int m_StartingWeaponAmmo = 5;
+    protected int StartingWeaponAmmo
     {
-        get { return m_Collider; }
-        set { m_Collider = value; }
+        get { return m_StartingWeaponAmmo; }
     }
+    #endregion
+
+    #region Player aim attributes
+    [Header("Player Aim Attributes")]
     [SerializeField]
     private Camera m_Cam;
     public Camera Cam
@@ -34,17 +56,42 @@ public class Player : Pawn {
         get { return m_Cam; }
         set { m_Cam = value; }
     }
+    [SerializeField]
+    private float m_FOVAimed = 45f;
+    public float FOVAimed
+    {
+        get { return m_FOVAimed; }
+        set { m_FOVAimed = value; }
+    }
+    [SerializeField]
+    private float m_FOVDefault;
+    public float FOVDefault
+    {
+        get { return m_FOVDefault; }
+        set { m_FOVDefault = value; }
+    }
+    public float FOVTarget
+    {
+        get { return InputAim ? FOVAimed : FOVDefault; }
+    }
     #endregion
 
-    void Start ()
+
+    protected override void Start ()
     {
+        base.Start();
+
+        FOVDefault = Cam.fieldOfView;
+        EquippedWeapon = StartingWeapon;
+        EquippedAmmo = StartingWeaponAmmo;
         Cursor.lockState = CursorLockMode.Locked;
     }
 	
-	void Update ()
+	protected override void Update ()
     {
-        
-        if(Input.GetButtonDown("Menu"))
+        base.Update();
+
+        if (Input.GetButtonDown("Menu"))
         {
             Application.Quit();
 #if UNITY_EDITOR
@@ -53,31 +100,29 @@ public class Player : Pawn {
         }
     }
 
-    void FixedUpdate ()
+    protected override void FixedUpdate ()
     {
-        UpdateInput();
-        UpdateRotation();
-        UpdatePawnState();
-        UpdateMovement(Time.fixedDeltaTime);
+        base.FixedUpdate();
 
         RaycastHit Spotted;
-        Ray Searching = new Ray(m_Cam.transform.position, m_Cam.transform.forward);
+        Ray Searching = new Ray(Cam.transform.position, Cam.transform.forward);
+        Debug.DrawRay(Cam.transform.position, Cam.transform.forward * SearchDist, Color.red, 2f);
 
         if (Physics.Raycast(Searching, out Spotted, SearchDist))
         {
+            
             Usable Prop = Spotted.collider.GetComponent<Usable>();
             if (Prop != null)
             {
-                // Prop is usable!
+                // TODO: UI message informing that Item is usable
+                Debug.Log(Prop);
 
-
-
-                //if(InputUseWorld)
-                //{
-                    // Not yet implemented.
-                    //Prop.UseProp();
+                if (InputUse)
+                {
+                    Debug.Log("Hit!");
+                    Prop.Use(this);
                     // TODO: Add Debug message
-                //}
+                }
             }
         }
 
@@ -89,95 +134,26 @@ public class Player : Pawn {
     //{
     //     TODO: Any and all code for player collision, if we decide to have such
     //}
-    private void UpdatePawnState()
-    {
-        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.05f, 0f);
-        float TestRadius = Capsule.radius - 0.025f;
-
-        Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
-
-        IsGrounded = false;
-        foreach(Collider Collider in AllColliders)
-        {
-            if(Collider.tag != "Player")
-            {
-                IsGrounded = true;
-                break;
-            }
-        }
-    }
-    private void UpdateMovement(float a_DeltaTime)
-    {
-        Velocity = PhysicsBody.velocity;
-        
-        
-        Vector2 VelocityAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
-
-        if (VelocityAdd == Vector2.zero || PlanarSpeed > MaxSpeed)
-        {
-            PlanarSpeed *= Mathf.Pow(1f - Decay, a_DeltaTime);
-            PlanarSpeed -= Mathf.Min(Deacceleration * a_DeltaTime, PlanarSpeed);
-        }
-        else
-        {
-            if(VelocityAdd.magnitude > 1f)
-            {
-                VelocityAdd.Normalize();
-            }
-            PlanarForwardVelocity += VelocityAdd;
-            PlanarSpeed = Mathf.Min(MaxSpeed, PlanarSpeed);
-        }
-        
-        if (IsGrounded)
-        {
-            IsJumping = InputJump;
-        }
-        else 
-        {
-            Velocity += PawnGravity * a_DeltaTime;
-        }
-        
-        if(IsJumping)
-        {
-            Velocity += Vector3.up * JumpAcceleration * a_DeltaTime;
-            JumpTime += a_DeltaTime;
-            if(!InputJump || JumpTime >= JumpTimeMax)
-            {
-                IsJumping = false;
-            }
-        }
-
-        PhysicsBody.velocity = Velocity;
-    }
-    private void UpdateInput()
+    
+    
+    protected override void UpdateInput()
     {
         InputMoveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         InputJump = Input.GetButton("Jump");
         InputSprint = Input.GetButton("Sprint");
+        InputAim = Input.GetButton("Aim");
+        InputUse = Input.GetButtonDown("Use");
+        InputAttack = Input.GetButtonDown("Attack");
+        InputReload = Input.GetButtonDown("Reload");
+
+        InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+
     }
-    private void UpdateRotation()
+
+    protected override void Aim()
     {
-        Vector2 OldPlanarForwardVelocity = PlanarForwardVelocity;
-
-        Vector3 OldPhysicsRotation = PhysicsBody.transform.eulerAngles;
-        Vector3 NewPhysicsRotation = new Vector3(OldPhysicsRotation.x, OldPhysicsRotation.y + Input.GetAxis("Mouse X"), OldPhysicsRotation.z);
-        PhysicsBody.transform.eulerAngles = NewPhysicsRotation;
-
-        Vector3 OldCamRotation = Cam.transform.eulerAngles;
-        if(OldCamRotation.x > 90f)
-        {
-            OldCamRotation.x -= 360f;
-        }
-        Vector3 NewCamRotation = new Vector3(Mathf.Clamp(OldCamRotation.x - Input.GetAxis("Mouse Y"), -89.9f, 89.9f), OldCamRotation.y, OldCamRotation.z);
-        Cam.transform.eulerAngles = NewCamRotation;
-
-        float ViewX = NewCamRotation.x;
-        float ViewY = NewPhysicsRotation.y;
-
-        Quaternion View = new Quaternion();
-        View.eulerAngles = new Vector3(ViewX, ViewY, 0f);
-        ViewDirection = View * Vector3.forward;
-
-        PlanarForwardVelocity = OldPlanarForwardVelocity;
+        base.Aim();
+        Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
     }
+
 }

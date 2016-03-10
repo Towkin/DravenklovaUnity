@@ -9,6 +9,7 @@ TagManager:
   - PrefabBlocker
   - PrefabConnection
   - AINode
+  - Fire
   layers:
   - Default
   - TransparentFX
