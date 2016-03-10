@@ -472,7 +472,6 @@ public abstract class Pawn : MonoBehaviour
         set { WeaponAmmo[(int)WeaponType.Crossbow] = value; }
     }
 
-
     
     public int EquippedAmmo
     {
