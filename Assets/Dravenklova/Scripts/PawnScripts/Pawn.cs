@@ -266,14 +266,11 @@ public abstract class Pawn : MonoBehaviour
     {
         get { return m_TurnRate; }
     }
-    protected Vector3 m_ViewDirection = Vector3.forward;
-    public Vector3 ViewDirection
+    protected Quaternion m_ViewDirection = new Quaternion();
+    public virtual Quaternion ViewDirection
     {
         get { return m_ViewDirection; }
-        set
-        {
-            m_ViewDirection = value.normalized;
-        }
+        protected set { m_ViewDirection = value; }
     }
     #endregion
     #endregion
@@ -350,10 +347,11 @@ public abstract class Pawn : MonoBehaviour
     #region Input variables
 
     protected Vector2 m_InputView = Vector2.zero;
-    protected Vector2 InputView
+    // Input rotation in degrees.
+    public Vector2 InputView
     {
         get { return m_InputView; }
-        set { m_InputView = value; }
+        protected set { m_InputView = value; }
     }
 
     protected Vector2 m_InputMoveDirection = Vector2.zero;
@@ -388,7 +386,7 @@ public abstract class Pawn : MonoBehaviour
     public bool InputSprint
     {
         get { return m_InputSprint; }
-        set { m_InputSprint = value; }
+        protected set { m_InputSprint = value; }
     }
     protected bool m_InputAttack = false;
     public bool InputAttack
@@ -414,55 +412,12 @@ public abstract class Pawn : MonoBehaviour
         get { return m_InputUse; }
         protected set { m_InputUse = value; }
     }
-    private float m_InputX;
-    public float InputX
-    {
-        get { return m_InputX; }
-        protected set { m_InputX = value; }
-    }
-    private float m_InputY;
-    public float InputY
-    {
-        get { return m_InputY; }
-        protected set { m_InputY = value; }
-    }
+    
 
     #endregion
 
     #region Aiming Data
-    [SerializeField]
-    private Camera m_Cam;
-    public Camera Cam
-    {
-        get { return m_Cam; }
-        set { m_Cam = value; }
-    }
     [Header("Aim Stats")]
-    [SerializeField]
-    private float m_AimSpeed = 10f;
-    public float AimSpeed
-    {
-        get { return m_AimSpeed; }
-        set { m_AimSpeed = value; }
-    }
-    [SerializeField]
-    private float m_FOVAimed = 45f;
-    public float FOVAimed
-    {
-        get { return m_FOVAimed; }
-        set { m_FOVAimed = value; }
-    }
-    [SerializeField]
-    private float m_FOVDefault;
-    public float FOVDefault
-    {
-        get { return m_FOVDefault; }
-        set { m_FOVDefault = value; }
-    }
-    public float FOVTarget
-    {
-        get { return InputAim ? FOVAimed : FOVDefault; }
-    }
     [SerializeField]
     private bool m_IsAiming = false;
     public bool IsAiming
@@ -500,6 +455,22 @@ public abstract class Pawn : MonoBehaviour
 
     #endregion
 
+
+    protected virtual void FixedUpdate()
+    {
+        UpdateRotation();
+        UpdatePawnState();
+        UpdateMovement(Time.fixedDeltaTime);
+        Aim();
+    }
+
+    protected virtual void Update()
+    {
+        UpdateInput();
+        UpdateWeapon();
+    }
+
+
     public enum WeaponAction : int { Attack, Reload };
     protected void UseWeapon(WeaponAction a_Action)
     {
@@ -523,9 +494,9 @@ public abstract class Pawn : MonoBehaviour
         }
     }
 
-    protected void Aim()
+    protected virtual void Aim()
     {
-        Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
+        
     }
 
     protected abstract void UpdateInput();
@@ -575,8 +546,8 @@ public abstract class Pawn : MonoBehaviour
 
     protected virtual void UpdateRotation()
     {
-        InputX = InputView.x;
-        InputY = InputView.y;
+        float InputX = InputView.x;
+        float InputY = InputView.y;
 
         if (IsAiming)
         {
@@ -591,20 +562,19 @@ public abstract class Pawn : MonoBehaviour
         Vector3 NewPhysicsRotation = new Vector3(OldPhysicsRotation.x, OldPhysicsRotation.y + InputX, OldPhysicsRotation.z);
         PhysicsBody.transform.eulerAngles = NewPhysicsRotation;
 
-        Vector3 OldCamRotation = Cam.transform.eulerAngles;
-        if (OldCamRotation.x > 90f)
+        Vector3 OldViewRotation = ViewDirection.eulerAngles;
+        if (OldViewRotation.x > 90f)
         {
-            OldCamRotation.x -= 360f;
+            OldViewRotation.x -= 360f;
         }
-        Vector3 NewCamRotation = new Vector3(Mathf.Clamp(OldCamRotation.x - InputY, -89.9f, 89.9f), OldCamRotation.y, OldCamRotation.z);
-        Cam.transform.eulerAngles = NewCamRotation;
+        Vector3 NewViewRotation = new Vector3(Mathf.Clamp(OldViewRotation.x - InputY, -89.9f, 89.9f), OldViewRotation.y, OldViewRotation.z);
 
-        float ViewX = NewCamRotation.x;
+        float ViewX = NewViewRotation.x;
         float ViewY = NewPhysicsRotation.y;
 
         Quaternion View = new Quaternion();
         View.eulerAngles = new Vector3(ViewX, ViewY, 0f);
-        ViewDirection = View * Vector3.forward;
+        ViewDirection = View;
 
         PlanarForwardVelocity = OldPlanarForwardVelocity;
     }

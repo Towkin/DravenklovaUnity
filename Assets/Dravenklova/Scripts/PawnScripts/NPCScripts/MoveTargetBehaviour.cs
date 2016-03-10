@@ -3,6 +3,7 @@ using Pathfinding;
 using System.Collections;
 
 [RequireComponent(typeof(Seeker))]
+[RequireComponent(typeof(NPC))]
 public class MoveTargetBehaviour : MonoBehaviour {
 
     private Vector3 m_TargetLocation = new Vector3(5, 0, 5);
@@ -11,8 +12,21 @@ public class MoveTargetBehaviour : MonoBehaviour {
         get { return m_TargetLocation; }
         set { m_TargetLocation = value; }
     }
+    private NPC m_Controller;
+    private NPC Controller
+    {
+        get { return m_Controller; }
+        set { m_Controller = value; }
+    }
+    
 
     private Seeker m_Pathfinder;
+    private Seeker Pathfinder
+    {
+        get { return m_Pathfinder; }
+        set { m_Pathfinder = value; }
+    }
+
     private Path m_CurrentPath;
     private Path CurrentPath
     {
@@ -43,7 +57,8 @@ public class MoveTargetBehaviour : MonoBehaviour {
 
 
     void Start () {
-        m_Pathfinder = GetComponent<Seeker>();
+        Pathfinder = GetComponent<Seeker>();
+        Controller = GetComponent<NPC>();
 
         StartNewPath(TargetLocation);
 	}
@@ -75,11 +90,12 @@ public class MoveTargetBehaviour : MonoBehaviour {
             return;
         }
 
-        //Vector3 Direction = (CurrentPath.vectorPath[CurrentPathIndex] - transform.position).normalized;
+        Controller.TargetDirection = (CurrentPath.vectorPath[CurrentPathIndex] - transform.position).normalized;
+        Controller.TargetDistance = Vector3.Distance(transform.position, CurrentPath.vectorPath[CurrentPathIndex]);
 
         // Implement pawn move stuff yeah.
 
-        if(Vector3.Distance(transform.position, CurrentPath.vectorPath[CurrentPathIndex]) < PathMaxDistance)
+        if (Controller.TargetDistance < PathMaxDistance)
         {
             CurrentPathIndex++;
         }

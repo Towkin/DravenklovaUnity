@@ -3,6 +3,20 @@ using System.Collections;
 
 public class Player : Pawn {
 
+    public override Quaternion ViewDirection
+    {
+        get
+        {
+            return base.ViewDirection;
+        }
+        protected set
+        {
+            Cam.transform.rotation = value;
+            m_ViewDirection = value;
+        }
+    }
+
+    #region Player world interaction
     [Header("World interaction")]
     [SerializeField]
     private float m_SearchDist = 9999f;
@@ -10,6 +24,7 @@ public class Player : Pawn {
     {
         get { return m_SearchDist; } 
     }
+    #endregion
 
     #region Player components
     [Header("Player Components")]
@@ -24,7 +39,35 @@ public class Player : Pawn {
     }
     #endregion
 
-    
+    #region Player aim attributes
+    [Header("Player Aim Attributes")]
+    [SerializeField]
+    private Camera m_Cam;
+    public Camera Cam
+    {
+        get { return m_Cam; }
+        set { m_Cam = value; }
+    }
+    [SerializeField]
+    private float m_FOVAimed = 45f;
+    public float FOVAimed
+    {
+        get { return m_FOVAimed; }
+        set { m_FOVAimed = value; }
+    }
+    [SerializeField]
+    private float m_FOVDefault;
+    public float FOVDefault
+    {
+        get { return m_FOVDefault; }
+        set { m_FOVDefault = value; }
+    }
+    public float FOVTarget
+    {
+        get { return InputAim ? FOVAimed : FOVDefault; }
+    }
+    #endregion
+
 
     void Start ()
     {
@@ -33,10 +76,9 @@ public class Player : Pawn {
         Cursor.lockState = CursorLockMode.Locked;
     }
 	
-	void Update ()
+	protected override void Update ()
     {
-        UpdateInput();
-        UpdateWeapon();
+        base.Update();
 
         if (Input.GetButtonDown("Menu"))
         {
@@ -47,12 +89,9 @@ public class Player : Pawn {
         }
     }
 
-    void FixedUpdate ()
+    protected override void FixedUpdate ()
     {
-        UpdateRotation();
-        UpdatePawnState();
-        UpdateMovement(Time.fixedDeltaTime);
-        Aim();
+        base.FixedUpdate();
 
         RaycastHit Spotted;
         Ray Searching = new Ray(Cam.transform.position, Cam.transform.forward);
@@ -99,6 +138,11 @@ public class Player : Pawn {
         InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
     }
-    
-    
+
+    protected override void Aim()
+    {
+        base.Aim();
+        Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
+    }
+
 }
