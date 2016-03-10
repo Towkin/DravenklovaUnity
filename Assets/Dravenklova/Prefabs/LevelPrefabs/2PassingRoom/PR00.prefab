@@ -251,6 +251,7 @@ GameObject:
   - 33: {fileID: 3312492}
   - 65: {fileID: 6512050}
   - 23: {fileID: 2338096}
+  - 114: {fileID: 11448074}
   m_Layer: 0
   m_Name: ConnectionPoint1
   m_TagString: PrefabConnection
@@ -676,6 +677,7 @@ GameObject:
   - 33: {fileID: 3393720}
   - 65: {fileID: 6517504}
   - 23: {fileID: 2349882}
+  - 114: {fileID: 11421420}
   m_Layer: 0
   m_Name: ConnectionPoint2
   m_TagString: PrefabConnection
@@ -5415,6 +5417,32 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11421420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86094e523eb8ec6419a66a7bf68c2498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExitOnly: 0
+  m_PreferedPrefabs: []
+--- !u!114 &11448074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86094e523eb8ec6419a66a7bf68c2498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExitOnly: 0
+  m_PreferedPrefabs: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

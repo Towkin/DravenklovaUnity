@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
-using System.Collections;
 
 [CustomEditor(typeof(RandomTemplate))]
 public class RandomTemplateInspector : Editor
@@ -122,6 +123,7 @@ public class RandomTemplateInspector : Editor
         GUILayout.EndHorizontal();
     }
 }
+#endif
 
 public class RandomTemplate : MonoBehaviour
 {
@@ -300,7 +302,7 @@ public class RandomTemplate : MonoBehaviour
         
         return ObjectBounds;
     }
-
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         DrawColor = new Color(0.75f, 0.75f, 0.75f, 0.25f);
@@ -318,6 +320,7 @@ public class RandomTemplate : MonoBehaviour
         }
         DrawBounds(DrawColor);
     }
+
     private void DrawBounds(Color a_Color)
     {
         Bounds DrawBounds = SpawnBounds;
@@ -397,7 +400,7 @@ public class RandomTemplate : MonoBehaviour
             DestroyImmediate(EditorTestObject);
         }
     }
-
+#endif
     private void Start ()
     {
         // Create a random object from the TemplateList;

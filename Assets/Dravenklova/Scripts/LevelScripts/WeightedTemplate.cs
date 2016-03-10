@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
-using System.Collections;
 
 [CustomEditor(typeof(WeightedTemplate))]
 public class WeightedTemplateInspector : RandomTemplateInspector
@@ -52,6 +53,7 @@ public class WeightedTemplateInspector : RandomTemplateInspector
         GUILayout.EndHorizontal();
     }
 }
+#endif
 
 public class WeightedTemplate : RandomTemplate
 {
