@@ -10,9 +10,10 @@ public abstract class Weapon : ItemEquip
 
     public override void Use(Pawn User)
     {
-        // TODO: Weapon beomces the pawn's weapon.
+        // TODO: Weapon becomes the pawn's weapon.
+        //User.EquippedWeapon = this;
 
-        Activate();
+        //Activate();
     }
     public override void Activate()
     {

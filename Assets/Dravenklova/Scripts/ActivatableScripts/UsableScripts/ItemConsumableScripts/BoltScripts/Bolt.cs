@@ -13,7 +13,7 @@ public class Bolt : Consumable
 
     public override void Use(Pawn User)
     {
-        User.AmmoCrossbow += 1;
+        User.CrossbowAmmo += 1;
         Debug.Log("Ammo Pickup");
         Activate();
     }

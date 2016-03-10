@@ -45,6 +45,7 @@ public class Crossbow : Weapon
         if(IsLoaded)
         {
             Rigidbody BoltBody = LoadedBolt.GetComponent<Rigidbody>();
+            LoadedBolt.transform.parent = null;
             BoltBody.isKinematic = false;
             LoadedBolt.GetComponent<CapsuleCollider>().enabled = true;
             BoltBody.AddForce(BoltSpawnLocation.transform.forward * BoltImpulse, ForceMode.Impulse);

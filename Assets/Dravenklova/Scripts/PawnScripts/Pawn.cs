@@ -446,15 +446,47 @@ public abstract class Pawn : MonoBehaviour
         set { m_EquippedWeapon = value; }
     }
 
-    private int m_AmmoCrossbow;
-    public int AmmoCrossbow
+    private enum WeaponType : int { None, Crossbow }
+
+    private WeaponType EquippedType
     {
-        get { return m_AmmoCrossbow; }
-        set { m_AmmoCrossbow = value; }
+        get
+        {
+            if(EquippedWeapon.GetType() == typeof(Crossbow))
+            {
+                return WeaponType.Crossbow;
+            }
+            return WeaponType.None;
+        }
+    }
+
+    private int[] m_WeaponAmmo;
+    public int[] WeaponAmmo
+    {
+        get { return m_WeaponAmmo; }
+        private set { m_WeaponAmmo = value; }
+    }
+    public int CrossbowAmmo
+    {
+        get { return WeaponAmmo[(int)WeaponType.Crossbow]; }
+        set { WeaponAmmo[(int)WeaponType.Crossbow] = value; }
+    }
+
+
+    
+    public int EquippedAmmo
+    {
+        get { return WeaponAmmo[(int)EquippedType]; }
+        set { WeaponAmmo[(int)EquippedType] = value; }
     }
 
     #endregion
 
+
+    protected virtual void Start()
+    {
+        WeaponAmmo = new int[System.Enum.GetNames(typeof(WeaponType)).Length];
+    }
 
     protected virtual void FixedUpdate()
     {
@@ -463,6 +495,7 @@ public abstract class Pawn : MonoBehaviour
         UpdateMovement(Time.fixedDeltaTime);
         Aim();
     }
+
 
     protected virtual void Update()
     {
@@ -483,7 +516,12 @@ public abstract class Pawn : MonoBehaviour
                 }
             case WeaponAction.Reload:
                 {
-                    EquippedWeapon.Reload();
+                    // TODO: Refine this.
+                    if (EquippedAmmo > 0)
+                    {
+                        EquippedWeapon.Reload();
+                        EquippedAmmo--;
+                    }
                     break;
                 }
             default:

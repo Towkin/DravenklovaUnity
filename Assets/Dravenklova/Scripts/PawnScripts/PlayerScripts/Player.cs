@@ -11,10 +11,12 @@ public class Player : Pawn {
         }
         protected set
         {
+            base.ViewDirection = value;
             Cam.transform.rotation = value;
-            m_ViewDirection = value;
         }
     }
+
+    
 
     #region Player world interaction
     [Header("World interaction")]
@@ -36,6 +38,12 @@ public class Player : Pawn {
     {
         get { return m_StartingWeapon; }
         set { m_StartingWeapon = value; }
+    }
+    [SerializeField]
+    private int m_StartingWeaponAmmo = 5;
+    protected int StartingWeaponAmmo
+    {
+        get { return m_StartingWeaponAmmo; }
     }
     #endregion
 
@@ -69,10 +77,13 @@ public class Player : Pawn {
     #endregion
 
 
-    void Start ()
+    protected override void Start ()
     {
+        base.Start();
+
         FOVDefault = Cam.fieldOfView;
         EquippedWeapon = StartingWeapon;
+        EquippedAmmo = StartingWeaponAmmo;
         Cursor.lockState = CursorLockMode.Locked;
     }
 	
