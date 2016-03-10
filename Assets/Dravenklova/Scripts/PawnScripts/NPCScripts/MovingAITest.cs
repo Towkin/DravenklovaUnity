@@ -70,12 +70,12 @@ public class MovingAITest : MonoBehaviour
         }
     }
 
-     public void Update()
+    public void Update()
     {
      
         if (m_Path == null)
         {
-            Debug.Log("hello");
+            //Debug.Log("hello");
             // We have no path to move after yet
             return;
         }

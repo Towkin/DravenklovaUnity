@@ -3,6 +3,23 @@ using System.Collections;
 
 public abstract class Pawn : MonoBehaviour
 {
+    #region Pawn components
+    [Header("Pawn Components")]
+    [SerializeField]
+    private Rigidbody m_PhysicsBody;
+    public Rigidbody PhysicsBody
+    {
+        get { return m_PhysicsBody; }
+        set { m_PhysicsBody = value; }
+    }
+    [SerializeField]
+    private CapsuleCollider m_Collider;
+    public CapsuleCollider Capsule
+    {
+        get { return m_Collider; }
+        set { m_Collider = value; }
+    }
+    #endregion
 
     #region All move attributes
     #region Basic move attributes
@@ -332,6 +349,13 @@ public abstract class Pawn : MonoBehaviour
 
     #region Input variables
 
+    protected Vector2 m_InputView = Vector2.zero;
+    protected Vector2 InputView
+    {
+        get { return m_InputView; }
+        set { m_InputView = value; }
+    }
+
     protected Vector2 m_InputMoveDirection = Vector2.zero;
     protected Vector2 InputMoveDirection
     {
@@ -366,6 +390,18 @@ public abstract class Pawn : MonoBehaviour
         get { return m_InputSprint; }
         set { m_InputSprint = value; }
     }
+    protected bool m_InputAttack = false;
+    public bool InputAttack
+    {
+        get { return m_InputAttack; }
+        protected set { m_InputAttack = value; }
+    }
+    protected bool m_InputReload = false;
+    public bool InputReload
+    {
+        get { return m_InputReload; }
+        protected set { m_InputReload = value; }
+    }
     protected bool m_InputAim = false;
     public bool InputAim
     {
@@ -378,7 +414,18 @@ public abstract class Pawn : MonoBehaviour
         get { return m_InputUse; }
         protected set { m_InputUse = value; }
     }
-
+    private float m_InputX;
+    public float InputX
+    {
+        get { return m_InputX; }
+        protected set { m_InputX = value; }
+    }
+    private float m_InputY;
+    public float InputY
+    {
+        get { return m_InputY; }
+        protected set { m_InputY = value; }
+    }
 
     #endregion
 
@@ -399,7 +446,7 @@ public abstract class Pawn : MonoBehaviour
         set { m_AimSpeed = value; }
     }
     [SerializeField]
-    private float m_FOVAimed = 25f;
+    private float m_FOVAimed = 45f;
     public float FOVAimed
     {
         get { return m_FOVAimed; }
@@ -412,11 +459,9 @@ public abstract class Pawn : MonoBehaviour
         get { return m_FOVDefault; }
         set { m_FOVDefault = value; }
     }
-    private float m_FOVTarget;
     public float FOVTarget
     {
-        get { return m_FOVTarget; }
-        protected set { m_FOVTarget = value; }
+        get { return InputAim ? FOVAimed : FOVDefault; }
     }
     [SerializeField]
     private bool m_IsAiming = false;
@@ -434,18 +479,7 @@ public abstract class Pawn : MonoBehaviour
         set { m_AimPrecision = value; }
     }
 
-    private float m_InputX;
-    public float InputX
-    {
-        get { return m_InputX; }
-        set { m_InputX = value; }
-    }
-    private float m_InputY;
-    public float InputY
-    {
-        get { return m_InputY; }
-        set { m_InputY = value; }
-    }
+    
     #endregion
 
     #region Weapon Data
@@ -466,40 +500,143 @@ public abstract class Pawn : MonoBehaviour
 
     #endregion
 
-    protected void UseWeapon(int a_Action)
+    public enum WeaponAction : int { Attack, Reload };
+    protected void UseWeapon(WeaponAction a_Action)
     {
-        if(a_Action == 0)
-            EquippedWeapon.Attack();
-
-        if (a_Action == 1)
-            EquippedWeapon.Reload();   
+        switch(a_Action)
+        {
+            case WeaponAction.Attack:
+                {
+                    EquippedWeapon.Attack();
+                    break;
+                }
+            case WeaponAction.Reload:
+                {
+                    EquippedWeapon.Reload();
+                    break;
+                }
+            default:
+                {
+                    Debug.Log("You shouldn't be here... How the hell did you input an invalid enum value?");
+                    break;
+                }
+        }
     }
 
     protected void Aim()
     {
-
-        FOVTarget = InputAim ? FOVAimed : FOVDefault;
         Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
+    }
 
+    protected abstract void UpdateInput();
+    
+    protected virtual void UpdateMovement(float a_DeltaTime)
+    {
+        Velocity = PhysicsBody.velocity;
         
+        Vector2 VelocityAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
 
-        /*if (Input.GetButton("Aim"))
+        if (VelocityAdd == Vector2.zero || PlanarSpeed > MaxSpeed)
         {
-            Cam.fieldOfView -= AimSpeed;
-            IsAiming = true;
-            if (Cam.fieldOfView <= AimMax)
+            PlanarSpeed *= Mathf.Pow(1f - Decay, a_DeltaTime);
+            PlanarSpeed -= Mathf.Min(Deacceleration * a_DeltaTime, PlanarSpeed);
+        }
+        else
+        {
+            if (VelocityAdd.magnitude > 1f)
             {
-                Cam.fieldOfView = AimMax;
+                VelocityAdd.Normalize();
+            }
+            PlanarForwardVelocity += VelocityAdd;
+            PlanarSpeed = Mathf.Min(MaxSpeed, PlanarSpeed);
+        }
+
+        if (IsGrounded)
+        {
+            IsJumping = InputJump;
+        }
+        else
+        {
+            Velocity += PawnGravity * a_DeltaTime;
+        }
+
+        if (IsJumping)
+        {
+            Velocity += Vector3.up * JumpAcceleration * a_DeltaTime;
+            JumpTime += a_DeltaTime;
+            if (!InputJump || JumpTime >= JumpTimeMax)
+            {
+                IsJumping = false;
             }
         }
-        if (!Input.GetButton("Aim"))
+
+        PhysicsBody.velocity = Velocity;
+    }
+
+    protected virtual void UpdateRotation()
+    {
+        InputX = InputView.x;
+        InputY = InputView.y;
+
+        if (IsAiming)
         {
-            IsAiming = false;
-            if (Cam.fieldOfView < AimOrigin)
+            InputX /= AimPrecision;
+            InputY /= AimPrecision;
+        }
+
+
+        Vector2 OldPlanarForwardVelocity = PlanarForwardVelocity;
+
+        Vector3 OldPhysicsRotation = PhysicsBody.transform.eulerAngles;
+        Vector3 NewPhysicsRotation = new Vector3(OldPhysicsRotation.x, OldPhysicsRotation.y + InputX, OldPhysicsRotation.z);
+        PhysicsBody.transform.eulerAngles = NewPhysicsRotation;
+
+        Vector3 OldCamRotation = Cam.transform.eulerAngles;
+        if (OldCamRotation.x > 90f)
+        {
+            OldCamRotation.x -= 360f;
+        }
+        Vector3 NewCamRotation = new Vector3(Mathf.Clamp(OldCamRotation.x - InputY, -89.9f, 89.9f), OldCamRotation.y, OldCamRotation.z);
+        Cam.transform.eulerAngles = NewCamRotation;
+
+        float ViewX = NewCamRotation.x;
+        float ViewY = NewPhysicsRotation.y;
+
+        Quaternion View = new Quaternion();
+        View.eulerAngles = new Vector3(ViewX, ViewY, 0f);
+        ViewDirection = View * Vector3.forward;
+
+        PlanarForwardVelocity = OldPlanarForwardVelocity;
+    }
+
+    protected virtual void UpdatePawnState()
+    {
+        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.05f, 0f);
+        float TestRadius = Capsule.radius - 0.025f;
+
+        Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
+
+        IsGrounded = false;
+        foreach (Collider Collider in AllColliders)
+        {
+            if (Collider.tag != "Player")
             {
-                Cam.fieldOfView += AimSpeed;
+                IsGrounded = true;
+                break;
             }
-        }*/
+        }
+    }
+
+    protected virtual void UpdateWeapon()
+    {
+        if (InputAttack)
+        {
+            UseWeapon(WeaponAction.Attack);
+        }
+        else if (InputReload)
+        {
+            UseWeapon(WeaponAction.Reload);
+        }
     }
 }
 

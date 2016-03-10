@@ -75,7 +75,7 @@ public class MoveTargetBehaviour : MonoBehaviour {
             return;
         }
 
-        Vector3 Direction = (CurrentPath.vectorPath[CurrentPathIndex] - transform.position).normalized;
+        //Vector3 Direction = (CurrentPath.vectorPath[CurrentPathIndex] - transform.position).normalized;
 
         // Implement pawn move stuff yeah.
 
