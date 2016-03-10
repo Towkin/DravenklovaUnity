@@ -5,32 +5,11 @@ using System.Collections;
 [CustomEditor(typeof(WeightedTemplate))]
 public class WeightedTemplateInspector : RandomTemplateInspector
 {
-    protected override void RefreshCreator()
-    {
-        WeightedTemplate WeightedCreator = Creator as WeightedTemplate;
-        WeightedCreator.CalculateBounds();
-
-        float[] OldList = WeightedCreator.WeightList;
-        WeightedCreator.WeightList = new float[WeightedCreator.TemplateList.Length];
-        for(int i = 0; i < WeightedCreator.WeightList.Length; i++)
-        {
-            if (i < OldList.Length)
-            {
-                WeightedCreator.WeightList[i] = OldList[i];
-            }
-        }
-        if(OldList.Length < WeightedCreator.WeightList.Length)
-        {
-            for(int i = OldList.Length; i < WeightedCreator.WeightList.Length; i++)
-            {
-                WeightedCreator.WeightList[i] = 1f;
-            }
-        }
-    }
+    
 
     protected void DrawWeightColumn(int a_Length)
     {
-        GUILayout.BeginVertical(new GUILayoutOption[] { GUILayout.MinWidth(120f), GUILayout.MaxWidth(500f) });
+        GUILayout.BeginVertical(new GUILayoutOption[] { GUILayout.MinWidth(30f), GUILayout.MaxWidth(1000f) });
         if (GUILayout.Button(""))
         {
             
@@ -39,16 +18,18 @@ public class WeightedTemplateInspector : RandomTemplateInspector
 
         WeightedTemplate WeightedCreator = Creator as WeightedTemplate;
 
-        for (int i = 0; i < a_Length; i++)
+        if (WeightedCreator.WeightList != null)
         {
-            if (i < WeightedCreator.WeightList.Length)
+            for (int i = 0; i < a_Length; i++)
             {
-                GUILayout.BeginHorizontal();
-                float NewWeight = EditorGUILayout.Slider(WeightedCreator.WeightList[i], 0f, 100f, new GUILayoutOption[] { GUILayout.Height(19f) });
-                GUILayout.EndHorizontal();
-                if (NewWeight != WeightedCreator.WeightList[i])
+                if (i < WeightedCreator.WeightList.Length)
                 {
-                    WeightedCreator.WeightList[i] = NewWeight;
+                    float NewWeight = EditorGUILayout.Slider(WeightedCreator.WeightList[i], 0f, 100f, new GUILayoutOption[] { GUILayout.Height(19f) });
+
+                    if (NewWeight != WeightedCreator.WeightList[i])
+                    {
+                        WeightedCreator.WeightList[i] = NewWeight;
+                    }
                 }
             }
         }
@@ -82,17 +63,68 @@ public class WeightedTemplate : RandomTemplate
         set { m_WeightList = value; }
     }
 
+    public override void RemoveIndex(int i)
+    {
+        base.RemoveIndex(i);
+
+        if (WeightList != null && i >= 0 && i < WeightList.Length)
+        {
+            float[] OldWeights = WeightList;
+            WeightList = new float[WeightList.Length - 1];
+
+            for (int j = 0; j < WeightList.Length; j++)
+            {
+                if (j < i)
+                {
+                    WeightList[j] = OldWeights[j];
+                }
+                else
+                {
+                    WeightList[j] = OldWeights[j + 1];
+                }
+            }
+        }
+    }
+    public override void AddLength(int a)
+    {
+        if(a <= 0)
+        {
+            return;
+        }
+        base.AddLength(a);
+
+        float[] OldList = WeightList;
+        if (OldList != null)
+        {
+            WeightList = new float[OldList.Length + a];
+            OldList.CopyTo(WeightList, 0);
+            
+            for (int i = Mathf.Max(OldList.Length - 1, 0); i < WeightList.Length; i++)
+            {
+                WeightList[i] = 1f;
+            }
+        }
+        else
+        {
+            WeightList = new float[a];
+            for(int i = 0; i < WeightList.Length; i++)
+            {
+                WeightList[i] = 1f;
+            }
+        }
+    }
+
     protected override GameObject InstantiateFromList()
     {
         // If the user hasn't entered any items into list.
-        if (TemplateList.Length == 0)
+        if (TemplateList == null || TemplateList.Length == 0)
         {
             // Send error message and return null;
             Debug.LogError("No templates available in TemplateList to spawn.");
             return null;
         }
         // If the user has set the length of the two lists differently.
-        if (WeightList.Length != TemplateList.Length)
+        if (WeightList == null || WeightList.Length != TemplateList.Length)
         {
             Debug.LogError("The number of input weights are not equal to the number of templates.");
             return null;
