@@ -21,11 +21,18 @@ public class Player : Pawn {
     #region Player world interaction
     [Header("World interaction")]
     [SerializeField]
-    private float m_SearchDist = 9999f;
+    private float m_SearchDist = 500f;
     public float SearchDist
     {
         get { return m_SearchDist; } 
     }
+    [SerializeField]
+    private float m_SearchWidth = 100f;
+    public float SearchWidth
+    {
+        get { return m_SearchWidth; }
+    }
+
     #endregion
 
     #region Player components
@@ -99,6 +106,7 @@ public class Player : Pawn {
 #endif
         }
     }
+    
 
     protected override void FixedUpdate ()
     {
@@ -107,10 +115,13 @@ public class Player : Pawn {
         RaycastHit Spotted;
         Ray Searching = new Ray(Cam.transform.position, Cam.transform.forward);
         Debug.DrawRay(Cam.transform.position, Cam.transform.forward * SearchDist, Color.red, 2f);
+        
+
+        //Physics.CapsuleCast(Cam.transform.position, Cam.transform.forward.normalized * SearchDist, SearchWidth, Cam.transform.forward, out Spotted, SearchDist);
 
         if (Physics.Raycast(Searching, out Spotted, SearchDist))
         {
-            
+            Debug.Log("Hit!");
             Usable Prop = Spotted.collider.GetComponent<Usable>();
             if (Prop != null)
             {
