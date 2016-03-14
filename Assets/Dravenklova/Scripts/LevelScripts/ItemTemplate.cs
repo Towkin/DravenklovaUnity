@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
-using System.Collections;
 
 [CustomEditor(typeof(ItemTemplate))]
 public class ItemTemplateInspector : WeightedTemplateInspector
@@ -26,6 +27,7 @@ public class ItemTemplateInspector : WeightedTemplateInspector
         }
     }
 }
+#endif
 
 public class ItemTemplate : WeightedTemplate {
     [SerializeField]

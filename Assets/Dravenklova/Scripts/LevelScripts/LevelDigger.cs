@@ -17,12 +17,24 @@ public class LevelDigger : MonoBehaviour {
         get { return m_UseRandomSeed; }
     }
 
-
     [SerializeField]
+    [ContextMenuItem("Remove debug map", "ClearDebugLevel")]
+    [ContextMenuItem("Generate debug map by TrackingData", "DebugLevelTrackingData")]
+    private DebugTrackerVisualizer m_TrackingData;
+    public DebugTrackerVisualizer TrackingData
+    {
+        get { return m_TrackingData; }
+    }
+
+    
+    [SerializeField]
+    [ContextMenuItem("Remove debug map", "ClearDebugLevel")]
+    [ContextMenuItem("Generate debug map by settings", "DebugLevelSettings")]
     private int m_Seed;
-    private int Seed
+    public int Seed
     {
         get { return m_Seed; }
+        private set { m_Seed = value; }
     }
 
     [SerializeField]
@@ -80,7 +92,27 @@ public class LevelDigger : MonoBehaviour {
     {
         get { return m_ItemPrefabs; }
     }
+    [SerializeField]
+    private int m_ItemCount = 5;
+    public int ItemCount
+    {
+        get { return m_ItemCount; }
+    }
 
+    [SerializeField]
+    private GameObject[] m_EnemyPrefabs;
+    public GameObject[] EnemyPrefabs
+    {
+        get { return m_EnemyPrefabs; }
+    }
+    [SerializeField]
+    private int m_EnemyCount = 4;
+    public int EnemyCount
+    {
+        get { return m_EnemyCount; }
+    }
+
+    
     private GameObject[] m_Enemies;
     public GameObject[] Enemies
     {
@@ -94,104 +126,192 @@ public class LevelDigger : MonoBehaviour {
         get { return m_LevelObjects; }
     }
 
+    private GameObject m_LevelParent;
+    public GameObject LevelParent
+    {
+        get { return m_LevelParent; }
+        private set { m_LevelParent = value; }
+    }
+
+    private Stack<GameObject> m_DebugBranch = new Stack<GameObject>();
+    public Stack<GameObject> DebugBranch
+    {
+        get { return m_DebugBranch; }
+        private set { m_DebugBranch = value; }
+    }
+
+    private Queue<GameObject> m_DebugObjects = new Queue<GameObject>();
+    public Queue<GameObject> DebugObjects
+    {
+        get { return m_DebugObjects; }
+        private set { m_DebugObjects = value; }
+    }
+
     //int Counter = 0;
     
-    void Start () {
-        if (FirstRoom != null)
+    void Awake ()
+    {
+        if (UseRandomSeed)
         {
-            RoomBranch.Push(FirstRoom);
-            LevelObjects.Enqueue(FirstRoom);
+            Seed = Random.Range(int.MinValue, int.MaxValue);
         }
-        if(!UseRandomSeed)
+        else
         {
             Random.seed = Seed;
         }
-        BuildLevel(LevelLength);
+    }
+    void Start ()
+    {
+        GameObject LevelObject = new GameObject("Level Objects");
+        Random.seed = Seed;
+        BuildLevel(RoomBranch, LevelObjects, LevelLength, LevelObject);
+    }
 
-        /*NavMeshBuilder.BuildNavMesh();
+    public void DebugLevelTrackingData()
+    {
+        ClearDebugLevel();
 
-        ConnectionPoint[] AllConnections = FindObjectsOfType<ConnectionPoint>();
-        Transform[] PatrolPoints = new Transform[AllConnections.Length];
-        for(int i = 0; i < AllConnections.Length; i++)
+        if (TrackingData != null)
         {
-            PatrolPoints[i] = AllConnections[i].transform;
+            Debug.Log("Building level with seed " + TrackingData.Data.MapSeed.ToString());
+            SpawnDebugLevel(LevelLength, TrackingData.Data.MapSeed);
+        }
+        else
+        {
+            Debug.Log("Tracking data unreadable.");
+        }
+    }
+    public void DebugLevelSettings()
+    {
+        ClearDebugLevel();
+
+        if (UseRandomSeed)
+        {
+            Seed = Random.Range(int.MinValue, int.MaxValue);
+        }
+        Debug.Log("Building level with seed " + Seed);
+        SpawnDebugLevel(LevelLength, Seed);
+        
+    }
+
+    private void SpawnDebugLevel(int a_LevelLength, int a_Seed)
+    {
+        int OldSeed = Random.seed;
+        Random.seed = a_Seed;
+
+        GameObject DebugLevel = new GameObject("Debug Level - Delete me before play!");
+        BuildLevel(DebugBranch, DebugObjects, a_LevelLength, DebugLevel);
+        LevelParent = DebugLevel;
+
+        Random.seed = OldSeed;
+    }
+
+    private void ClearDebugLevel()
+    {
+        Debug.Log("Clearing level of " + DebugObjects.Count.ToString() + " objects.");
+
+        while(DebugObjects.Count > 0)
+        {
+            DestroyImmediate(DebugObjects.Dequeue());
         }
 
-        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach(GameObject Enemy in Enemies)
-        {
-            Enemy.GetComponent<Patrol>().Points = PatrolPoints;
-        }*/
+        DebugObjects = new Queue<GameObject>();
+        DebugBranch = new Stack<GameObject>();
+        DestroyImmediate(LevelParent);
     }
-	
-	void Update () {
-	    
-	}
 
-    private void BuildLevel(int a_LevelLength)
+    private void BuildLevel(Stack<GameObject> a_Branch, Queue<GameObject> a_Level, int a_LevelLength, GameObject a_Parent)
     {
         int AimLength = a_LevelLength;
         bool LevelEnded = false;
         //bool ConnectionsLeft = true;
 
-        while(RoomBranch.Count > 0)
+        GameObject InstantiatedFirstRoom = Instantiate(FirstRoom);
+        InstantiatedFirstRoom.transform.parent = a_Parent.transform;
+        a_Branch.Push(InstantiatedFirstRoom);
+        a_Level.Enqueue(InstantiatedFirstRoom);
+        
+
+        while(a_Branch.Count > 0)
         {
             GameObject NewPrefab;
-            if (RoomBranch.Count >= a_LevelLength && !LevelEnded)
+            if (a_Branch.Count >= a_LevelLength && !LevelEnded)
             {
-                NewPrefab = BuildShrinePiece();
+                NewPrefab = BuildShrinePiece(a_Branch);
                 if (NewPrefab == null)
                 {
-                    NewPrefab = BuildEndPiece();
+                    NewPrefab = BuildEndPiece(a_Branch);
                 }
                 else
                 {
                     LevelEnded = true;
                 }
             }
-            else if(RoomBranch.Count >= AimLength)
+            else if(a_Branch.Count >= AimLength)
             {
-                NewPrefab = BuildEndPiece();
+                NewPrefab = BuildEndPiece(a_Branch);
             }
             else
             {
-                NewPrefab = BuildNextPiece();
+                NewPrefab = BuildNextPiece(a_Branch);
                 if(NewPrefab == null)
                 {
-                    NewPrefab = BuildEndPiece();
+                    NewPrefab = BuildEndPiece(a_Branch);
                 }
             }
 
             if(NewPrefab == null)
             {
-                RoomBranch.Pop();
+                a_Branch.Pop();
             }
             else
             {
-                RoomBranch.Push(NewPrefab);
-                LevelObjects.Enqueue(NewPrefab);
+                a_Branch.Push(NewPrefab);
+                a_Level.Enqueue(NewPrefab);
+                NewPrefab.transform.parent = a_Parent.transform;
             }
         }
 
         List<ItemTemplate> ItemSpawners = new List<ItemTemplate>(FindObjectsOfType<ItemTemplate>());
-            
+        int ItemsSpawned = 0;
+
         while(ItemSpawners.Count > 0)
         {
             int SpawnIndex = Random.Range(0, ItemSpawners.Count);
-            ItemSpawners[SpawnIndex].Spawn();
+            if(ItemsSpawned < ItemCount && ItemPrefabs != null)
+            {
+                ItemSpawners[SpawnIndex].Spawn(ItemPrefabs[Random.Range(0, ItemPrefabs.Length)]);
+            }
+            else
+            {
+                ItemSpawners[SpawnIndex].Spawn();
+            }
             ItemSpawners.RemoveAt(SpawnIndex);
+            ItemsSpawned++;
+        }
+        
+        List<EnemyTemplate> EnemySpawners = new List<EnemyTemplate>(FindObjectsOfType<EnemyTemplate>());
+        int EnemiesSpawned = 0;
+        while(EnemySpawners.Count > 0)
+        {
+            int SpawnIndex = Random.Range(0, EnemySpawners.Count);
+            if(EnemiesSpawned < EnemyCount && EnemyPrefabs != null)
+            {
+
+            }
+
+            EnemySpawners.RemoveAt(SpawnIndex);
         }
 
     }
 
     // Builds the next piece on the current branch, and returns the GameObject. If unsuccessful, returns null.
-    private GameObject BuildNextPiece()
+    private GameObject BuildNextPiece(Stack<GameObject> a_Branch)
     {
         //Debug.Log("BuildNextPiece");
         GameObject NextPiece = null;
 
-        ConnectionPoint[] NextConnections = GetConnections(RoomBranch.Peek());
+        ConnectionPoint[] NextConnections = GetConnections(a_Branch.Peek());
         if (NextConnections != null)
         {
 
@@ -227,11 +347,11 @@ public class LevelDigger : MonoBehaviour {
     }
 
     // Builds the last piece on this branch, and returns the GameObject. If there are no Connections left unlinked, returns null.
-    private GameObject BuildEndPiece()
+    private GameObject BuildEndPiece(Stack<GameObject> a_Branch)
     {
         GameObject EndPiece = null;
 
-        ConnectionPoint[] NextConnections = GetConnections(RoomBranch.Peek());
+        ConnectionPoint[] NextConnections = GetConnections(a_Branch.Peek());
         if (NextConnections != null)
         {
             foreach (ConnectionPoint Connection in NextConnections)
@@ -265,11 +385,11 @@ public class LevelDigger : MonoBehaviour {
     }
 
     // Builds a shrine on this branch, and returns the GameObject. If there are no Connections left unlinked, returns null.
-    private GameObject BuildShrinePiece()
+    private GameObject BuildShrinePiece(Stack<GameObject> a_Branch)
     {
         GameObject ShrinePiece = null;
 
-        ConnectionPoint[] NextConnections = GetConnections(RoomBranch.Peek());
+        ConnectionPoint[] NextConnections = GetConnections(a_Branch.Peek());
         if (NextConnections != null)
         {
             foreach (ConnectionPoint Connection in NextConnections)
@@ -343,6 +463,10 @@ public class LevelDigger : MonoBehaviour {
 
             foreach(ConnectionPoint Connection in TestConnections)
             {
+                if (Connection.ExitOnly)
+                {
+                    continue;
+                }
                 bool NoCollisions = true;
                 
                 Quaternion ConnectionRotation = Quaternion.FromToRotation(Connection.transform.forward, -aFromTransform.forward);
@@ -434,7 +558,7 @@ public class LevelDigger : MonoBehaviour {
             }
         }
 
-        Destroy(TransformMarker);
+        DestroyImmediate(TransformMarker);
 
         return ReturnPrefab;
     }
