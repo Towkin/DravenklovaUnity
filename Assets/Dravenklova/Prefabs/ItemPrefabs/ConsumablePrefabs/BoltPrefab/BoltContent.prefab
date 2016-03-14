@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 480004}
   - 95: {fileID: 9523854}
   m_Layer: 0
-  m_Name: bolt
+  m_Name: BoltContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

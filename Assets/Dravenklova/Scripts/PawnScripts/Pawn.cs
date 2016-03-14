@@ -613,7 +613,7 @@ public abstract class Pawn : MonoBehaviour
         View.eulerAngles = new Vector3(ViewX, ViewY, 0f);
         ViewDirection = View;
 
-        PlanarForwardVelocity = OldPlanarForwardVelocity;
+        //PlanarForwardVelocity = OldPlanarForwardVelocity;
     }
 
     protected virtual void UpdatePawnState()

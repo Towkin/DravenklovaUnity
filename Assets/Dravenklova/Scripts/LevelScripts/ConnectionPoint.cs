@@ -9,7 +9,13 @@ public class ConnectionPoint : MonoBehaviour {
         get { return m_Linked; }
         set { m_Linked = true; }
     }
-
+    [SerializeField]
+    private bool m_ExitOnly = false;
+    public bool ExitOnly
+    {
+        get { return m_ExitOnly; }
+    }
+    
     [SerializeField]
     private GameObject[] m_PreferedPrefabs;
     public GameObject[] PreferedPrefabs
