@@ -12,10 +12,10 @@ public class TriggerActivatable : MonoBehaviour
     }
 
     [SerializeField]
-    protected string m_CompareTag = "Player";
-    public string CompareTag
+    protected string m_TriggerTag = "Player";
+    public string TriggerTag
     {
-        get { return m_CompareTag; }
+        get { return m_TriggerTag; }
     }
 
     [SerializeField]
@@ -27,7 +27,7 @@ public class TriggerActivatable : MonoBehaviour
 
     void OnTriggerEnter (Collider other)
     {
-        if (other.tag == CompareTag)
+        if (other.tag == TriggerTag)
         {
             foreach(Activatable Object in ActivatedObjects)
             {

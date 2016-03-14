@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 573df9cc1dac0da488aeed0e911d90ea
+timeCreated: 1457525106
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - m_BoltWood: {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

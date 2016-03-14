@@ -1,12 +1,33 @@
 ﻿using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
-using System.Collections;
 
 [CustomEditor(typeof(ItemTemplate))]
 public class ItemTemplateInspector : WeightedTemplateInspector
 {
 
+    protected override void RefreshCreator()
+    {
+        if ((Creator as ItemTemplate).LevelGenerator == null)
+        {
+            (Creator as ItemTemplate).LevelGenerator = FindObjectOfType<LevelDigger>();
+        }
+        base.RefreshCreator();
+    }
+
+    protected override void DrawTemplateButtons()
+    {
+        base.DrawTemplateButtons();
+        ItemTemplate ItemCreator = (Creator as ItemTemplate);
+        LevelDigger NewDigger = EditorGUILayout.ObjectField("Level Generator", ItemCreator.LevelGenerator, typeof(LevelDigger), true) as LevelDigger;
+        if(NewDigger != ItemCreator.LevelGenerator)
+        {
+            ItemCreator.LevelGenerator = NewDigger;
+        }
+    }
 }
+#endif
 
 public class ItemTemplate : WeightedTemplate {
     [SerializeField]
@@ -14,6 +35,7 @@ public class ItemTemplate : WeightedTemplate {
     public LevelDigger LevelGenerator
     {
         get { return m_LevelGenerator; }
+        set { m_LevelGenerator = value; }
     }
 	
     public override void CalculateBounds()
@@ -41,19 +63,6 @@ public class ItemTemplate : WeightedTemplate {
             }
         }
     }
-    /*public override void CreateTestObject()
-    {
-        // Clear the EditorTestObject if it exists.
-        ClearTestObject();
-        // Create a random Object form the list.
-        EditorTestObject = Spawn();
-        if (EditorTestObject == null)
-        {
-            return;
-        }
-        EditorTestObject.name = EditorTestObject.name + " - Delete me before play!";
-        EditorTestObject.transform.parent = this.transform;
-    }*/
 
     public GameObject Spawn()
     {
@@ -69,5 +78,10 @@ public class ItemTemplate : WeightedTemplate {
         {
             return SpawnObject(a_Item);
         }
+    }
+    
+    void Start()
+    {
+        // Override the Start() function to not automatically spawn and destroy on game start.
     }
 }

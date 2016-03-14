@@ -30,8 +30,12 @@ sysinfo.txt
 /Assets/FMODAssets/*
 /Assets/Resources/*
 /Assets/StreamingAssets/*
+/Assets/StreamingAssets.meta
 /Assets/FMODStudioCache.asset
+/Assets/FMODStudioCache.meta
 fmod_editor.log
 fmod.log
-Assets/Temporary_character/
+
+# Temporary stuff
+Assets/Temporary_character/*
 Assets/Temporary_character.meta
