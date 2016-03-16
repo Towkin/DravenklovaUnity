@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class LevelDigger : MonoBehaviour {
@@ -9,6 +8,8 @@ public class LevelDigger : MonoBehaviour {
     private bool m_SpawnBlockerTests = false;
     [SerializeField]
     private bool m_DebugLogs = false;
+    [SerializeField]
+    private bool m_TestConnectionScale = false;
 
     [SerializeField]
     private bool m_UseRandomSeed = true;
@@ -17,12 +18,24 @@ public class LevelDigger : MonoBehaviour {
         get { return m_UseRandomSeed; }
     }
 
-
     [SerializeField]
+    [ContextMenuItem("Remove debug map", "ClearDebugLevel")]
+    [ContextMenuItem("Generate debug map by TrackingData", "DebugLevelTrackingData")]
+    private DebugTrackerVisualizer m_TrackingData;
+    public DebugTrackerVisualizer TrackingData
+    {
+        get { return m_TrackingData; }
+    }
+
+    
+    [SerializeField]
+    [ContextMenuItem("Remove debug map", "ClearDebugLevel")]
+    [ContextMenuItem("Generate debug map by settings", "DebugLevelSettings")]
     private int m_Seed;
-    private int Seed
+    public int Seed
     {
         get { return m_Seed; }
+        private set { m_Seed = value; }
     }
 
     [SerializeField]
@@ -34,12 +47,15 @@ public class LevelDigger : MonoBehaviour {
         get { return m_RoomBranch; }
     }
     [SerializeField]
-    [Range(1, 10)]
+    [Range(1, 30)]
     private int m_LevelLength = 5;
     public int LevelLength
     {
         get { return m_LevelLength; }
     }
+
+    private enum RoomTypes { Spawn, Branch, End, Shrine };
+    private enum SortTypes { Random, Ascending, Descending };
 
     [SerializeField]
     private GameObject m_FirstRoom;
@@ -61,6 +77,7 @@ public class LevelDigger : MonoBehaviour {
     {
         get { return m_EndRooms; }
     }
+    
 
     [SerializeField]
     private GameObject[] m_EndWalls;
@@ -114,67 +131,155 @@ public class LevelDigger : MonoBehaviour {
         get { return m_LevelObjects; }
     }
 
-    //int Counter = 0;
+    private GameObject m_LevelParent;
+    public GameObject LevelParent
+    {
+        get { return m_LevelParent; }
+        private set { m_LevelParent = value; }
+    }
     
-    void Start () {
-        if (FirstRoom != null)
+    private Stack<GameObject> m_DebugBranch = new Stack<GameObject>();
+    public Stack<GameObject> DebugBranch
+    {
+        get { return m_DebugBranch; }
+        private set { m_DebugBranch = value; }
+    }
+
+    private Queue<GameObject> m_DebugObjects = new Queue<GameObject>();
+    public Queue<GameObject> DebugObjects
+    {
+        get { return m_DebugObjects; }
+        private set { m_DebugObjects = value; }
+    }
+
+    //int Counter = 0;
+
+
+    private bool m_LevelEnded = false;
+
+    void Awake ()
+    {
+        if (UseRandomSeed)
         {
-            RoomBranch.Push(FirstRoom);
-            LevelObjects.Enqueue(FirstRoom);
+            Seed = Random.Range(int.MinValue, int.MaxValue);
         }
-        if(!UseRandomSeed)
+        else
         {
             Random.seed = Seed;
         }
-        BuildLevel(LevelLength);
     }
-	
-	void Update () {
-	    
-	}
-
-    private void BuildLevel(int a_LevelLength)
+    void Start ()
     {
+        GameObject LevelObject = new GameObject("Level Objects");
+        Random.seed = Seed;
+        BuildLevel(RoomBranch, LevelObjects, LevelLength, LevelObject);
+    }
+
+    public void DebugLevelTrackingData()
+    {
+        ClearDebugLevel();
+
+        if (TrackingData != null)
+        {
+            SpawnDebugLevel(TrackingData.Data.MapLength, TrackingData.Data.MapSeed);
+        }
+        else
+        {
+            Debug.Log("Tracking data unreadable.");
+        }
+    }
+    public void DebugLevelSettings()
+    {
+        ClearDebugLevel();
+
+        if (UseRandomSeed)
+        {
+            Seed = Random.Range(int.MinValue, int.MaxValue);
+        }
+        SpawnDebugLevel(LevelLength, Seed);
+        
+    }
+
+    private void SpawnDebugLevel(int a_LevelLength, int a_Seed)
+    {
+        int OldSeed = Random.seed;
+        Random.seed = a_Seed;
+
+        GameObject DebugLevel = new GameObject("Debug Level - Delete me before play!");
+        BuildLevel(DebugBranch, DebugObjects, a_LevelLength, DebugLevel);
+        LevelParent = DebugLevel;
+
+        Random.seed = OldSeed;
+    }
+
+    private void ClearDebugLevel()
+    {
+        Debug.Log("Clearing level of " + DebugObjects.Count.ToString() + " objects.");
+
+        while(DebugObjects.Count > 0)
+        {
+            DestroyImmediate(DebugObjects.Dequeue());
+        }
+
+        DebugObjects = new Queue<GameObject>();
+        DebugBranch = new Stack<GameObject>();
+        DestroyImmediate(LevelParent);
+    }
+
+    private void BuildLevel(Stack<GameObject> a_Branch, Queue<GameObject> a_Level, int a_LevelLength, GameObject a_Parent)
+    {
+        Debug.Log("Building level with length " + a_LevelLength.ToString() + " and seed " + Random.seed.ToString());
+
+
         int AimLength = a_LevelLength;
         bool LevelEnded = false;
+        m_LevelEnded = false;
         //bool ConnectionsLeft = true;
 
-        while(RoomBranch.Count > 0)
+        GameObject InstantiatedFirstRoom = Instantiate(FirstRoom);
+        InstantiatedFirstRoom.transform.parent = a_Parent.transform;
+        a_Branch.Push(InstantiatedFirstRoom);
+        a_Level.Enqueue(InstantiatedFirstRoom);
+        
+
+        while(a_Branch.Count > 0)
         {
             GameObject NewPrefab;
-            if (RoomBranch.Count >= a_LevelLength && !LevelEnded)
+            if (a_Branch.Count >= a_LevelLength && !LevelEnded)
             {
-                NewPrefab = BuildShrinePiece();
+                NewPrefab = BuildLevelPiece(a_Branch, RoomTypes.Shrine);
                 if (NewPrefab == null)
                 {
-                    NewPrefab = BuildEndPiece();
+                    NewPrefab = BuildLevelPiece(a_Branch, RoomTypes.End);
                 }
                 else
                 {
                     LevelEnded = true;
+                    m_LevelEnded = true;
                 }
             }
-            else if(RoomBranch.Count >= AimLength)
+            else if(a_Branch.Count >= AimLength)
             {
-                NewPrefab = BuildEndPiece();
+                NewPrefab = BuildLevelPiece(a_Branch, RoomTypes.End);
             }
             else
             {
-                NewPrefab = BuildNextPiece();
+                NewPrefab = BuildLevelPiece(a_Branch, RoomTypes.Branch);
                 if(NewPrefab == null)
                 {
-                    NewPrefab = BuildEndPiece();
+                    NewPrefab = BuildLevelPiece(a_Branch, RoomTypes.End);
                 }
             }
 
             if(NewPrefab == null)
             {
-                RoomBranch.Pop();
+                a_Branch.Pop();
             }
             else
             {
-                RoomBranch.Push(NewPrefab);
-                LevelObjects.Enqueue(NewPrefab);
+                a_Branch.Push(NewPrefab);
+                a_Level.Enqueue(NewPrefab);
+                NewPrefab.transform.parent = a_Parent.transform;
             }
         }
 
@@ -211,16 +316,15 @@ public class LevelDigger : MonoBehaviour {
 
     }
 
-    // Builds the next piece on the current branch, and returns the GameObject. If unsuccessful, returns null.
-    private GameObject BuildNextPiece()
+    // Tries to build a level piece of the a_Type type. If succesful it returns the room prefab, else returns null.
+    private GameObject BuildLevelPiece(Stack<GameObject> a_Branch, RoomTypes a_Type)
     {
-        //Debug.Log("BuildNextPiece");
-        GameObject NextPiece = null;
+        GameObject LevelPiece = null;
 
-        ConnectionPoint[] NextConnections = GetConnections(RoomBranch.Peek());
+        
+        ConnectionPoint[] NextConnections = m_LevelEnded ? GetConnections(a_Branch.Peek(), SortTypes.Random) : GetConnections(a_Branch.Peek(), SortTypes.Descending);
         if (NextConnections != null)
         {
-
             foreach (ConnectionPoint Connection in NextConnections)
             {
                 if (Connection.Linked)
@@ -231,116 +335,109 @@ public class LevelDigger : MonoBehaviour {
 
                 Transform BuildFromTransform = Connection.transform;
 
-                NextPiece = TestAndBuildPrefabs(BuildFromTransform, Connection.PreferedPrefabs);
-                if (NextPiece == null)
+                switch (a_Type)
                 {
-                    NextPiece = TestAndBuildPrefabs(BuildFromTransform, BranchingRooms);
+                    case RoomTypes.Spawn:
+                        Debug.LogError("Can't build a spawn room after first one!");
+                        break;
+
+                    case RoomTypes.Branch:
+                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, Connection.PreferedPrefabs);
+                        if (LevelPiece == null)
+                        {
+                            LevelPiece = TestAndBuildPrefabs(BuildFromTransform, BranchingRooms);
+                        }
+                        break;
+
+                    case RoomTypes.End:
+                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, EndRooms);
+                        if (LevelPiece == null)
+                        {
+                            LevelPiece = TestAndBuildPrefabs(BuildFromTransform, EndWalls);
+                        }
+                        break;
+
+                    case RoomTypes.Shrine:
+                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, Shrines);
+                        break;
+
+                    default:
+                        Debug.LogError("Unkown room type.");
+                        break;
                 }
-                if (NextPiece != null)
+
+                if (LevelPiece != null)
                 {
                     Connection.Linked = true;
 
                     if (m_DebugLogs)
                     {
-                        Debug.Log("Found a piece that worked, built a " + NextPiece.name);
+                        Debug.Log("Found a piece that worked, built a " + LevelPiece.name);
                     }
 
                     break;
                 }
             }
         }
-        return NextPiece;
+        return LevelPiece;
     }
-
-    // Builds the last piece on this branch, and returns the GameObject. If there are no Connections left unlinked, returns null.
-    private GameObject BuildEndPiece()
+    private ConnectionPoint Heighest(ConnectionPoint a, ConnectionPoint b)
     {
-        GameObject EndPiece = null;
-
-        ConnectionPoint[] NextConnections = GetConnections(RoomBranch.Peek());
-        if (NextConnections != null)
-        {
-            foreach (ConnectionPoint Connection in NextConnections)
-            {
-                if (Connection.Linked)
-                {
-                    continue;
-                }
-
-                Transform BuildFromTransform = Connection.transform;
-
-                EndPiece = TestAndBuildPrefabs(BuildFromTransform, EndRooms);
-                if (EndPiece == null)
-                {
-                    EndPiece = TestAndBuildPrefabs(BuildFromTransform, EndWalls);
-                }
-                if (EndPiece != null)
-                {
-                    Connection.Linked = true;
-
-                    if (m_DebugLogs)
-                    {
-                        Debug.Log("Found a piece that worked, built a " + EndPiece.name);
-                    }
-
-                    break;
-                }
-            }
-        }
-        return EndPiece;
+        return a.transform.position.y > b.transform.position.y ? a : b;
     }
 
-    // Builds a shrine on this branch, and returns the GameObject. If there are no Connections left unlinked, returns null.
-    private GameObject BuildShrinePiece()
-    {
-        GameObject ShrinePiece = null;
-
-        ConnectionPoint[] NextConnections = GetConnections(RoomBranch.Peek());
-        if (NextConnections != null)
-        {
-            foreach (ConnectionPoint Connection in NextConnections)
-            {
-                if (Connection.Linked)
-                {
-                    continue;
-                }
-
-                Transform BuildFromTransform = Connection.transform;
-
-                ShrinePiece = TestAndBuildPrefabs(BuildFromTransform, Shrines);
-                if (ShrinePiece != null)
-                {
-                    Connection.Linked = true;
-
-                    if (m_DebugLogs)
-                    {
-                        Debug.Log("Found a piece that worked, built a " + ShrinePiece.name);
-                    }
-
-                    break;
-                }
-            }
-        }
-        return ShrinePiece;
-    }
-
-    // Returns the ConnectionPoints of a prefab in random order. If no ConnectionPoints exist, returns null.
-    private ConnectionPoint[] GetConnections(GameObject aPrefab)
+    // Returns the ConnectionPoints of a prefab in either sorted by height or random order. If no ConnectionPoints exist, returns null.
+    private ConnectionPoint[] GetConnections(GameObject a_Prefab, SortTypes a_Sorted)
     {
         //Debug.Log("Connection");
         ConnectionPoint[] ReturnArray = null;
 
-        ConnectionPoint[] Connections = aPrefab.GetComponentsInChildren<ConnectionPoint>();
+        ConnectionPoint[] Connections = a_Prefab.GetComponentsInChildren<ConnectionPoint>();
 
         if(Connections.Length > 0)
         {
             ReturnArray = new ConnectionPoint[Connections.Length];
-            int RandomAdd = Random.Range(0, Connections.Length);
-
-            for(int i = 0; i < ReturnArray.Length; i++)
+            if (a_Sorted != SortTypes.Random)
             {
-                ReturnArray[i] = Connections[(i + RandomAdd) % Connections.Length];
+                if (a_Sorted == SortTypes.Ascending)
+                {
+                    System.Array.Sort(Connections);
+                    for (int i = 0; i < Connections.Length; i++)
+                    {
+                        ReturnArray[Connections.Length - 1 - i] = Connections[i];
+                    }
+                }
+                else if (a_Sorted == SortTypes.Descending)
+                {
+                    System.Array.Sort(Connections);
+                    ReturnArray = Connections;
+                }
+
+                for(int i = 1; i < ReturnArray.Length; i++)
+                {
+                    // If two array indicies are within a meter height of each other.
+                    if(Mathf.Abs(ReturnArray[i].transform.position.y - ReturnArray[i - 1].transform.position.y) < 1f)
+                    {
+                        if(Random.value > 0.5f)
+                        {
+                            ConnectionPoint Holder = ReturnArray[i];
+                            ReturnArray[i] = ReturnArray[i - 1];
+                            ReturnArray[i - 1] = Holder;
+                        }
+                    }
+                }
+
             }
+            else
+            {
+                int RandomAdd = Random.Range(0, Connections.Length);
+
+                for (int i = 0; i < ReturnArray.Length; i++)
+                {
+                    ReturnArray[i] = Connections[(i + RandomAdd) % Connections.Length];
+                }
+            }
+            
         }
 
 
@@ -348,34 +445,38 @@ public class LevelDigger : MonoBehaviour {
     }
 
     // Tests an array of prefabs from a ConnectionPoint's transform, and returns the instantiated GameObject if successful, else null.
-    private GameObject TestAndBuildPrefabs(Transform aFromTransform, GameObject[] aPrefabs)
+    private GameObject TestAndBuildPrefabs(Transform a_FromTransform, GameObject[] a_Prefabs)
     {
         GameObject TransformMarker = new GameObject();
         GameObject ReturnPrefab = null;
 
         // To "scramble" the list, we add a random integer to the index (andmod it by length).
-        int IndexAdd = Random.Range(0, aPrefabs.Length);
+        int IndexAdd = Random.Range(0, a_Prefabs.Length);
         // Find all GameObjects who'll potentially block our new prefab.
         GameObject[] ExistingPrefabBlockers = GameObject.FindGameObjectsWithTag("PrefabBlocker");
 
         // Go through all prefabs until we find one who fit. 
         // Resource-intense, it's O(n^2 * ni^2) I think... - TODO: performance check?
-        for (int i = 0; i < aPrefabs.Length; i++)
+        for (int i = 0; i < a_Prefabs.Length; i++)
         {
-            GameObject TestObject = aPrefabs[(i + IndexAdd) % aPrefabs.Length];
+            GameObject TestObject = a_Prefabs[(i + IndexAdd) % a_Prefabs.Length];
             BoxCollider[] TestBlockers = TestObject.GetComponentsInChildren<BoxCollider>();
-            
-            ConnectionPoint[] TestConnections = GetConnections(TestObject);
 
+            ConnectionPoint[] TestConnections = m_LevelEnded ? GetConnections(TestObject, SortTypes.Ascending) : GetConnections(TestObject, SortTypes.Descending);
+            
             foreach(ConnectionPoint Connection in TestConnections)
             {
                 if (Connection.ExitOnly)
                 {
                     continue;
                 }
+                if(m_TestConnectionScale && Connection.transform.lossyScale != a_FromTransform.lossyScale)
+                {
+                    continue;
+                }
                 bool NoCollisions = true;
                 
-                Quaternion ConnectionRotation = Quaternion.FromToRotation(Connection.transform.forward, -aFromTransform.forward);
+                Quaternion ConnectionRotation = Quaternion.FromToRotation(Connection.transform.forward, -a_FromTransform.forward);
                 ConnectionRotation.eulerAngles = new Vector3(0, ConnectionRotation.eulerAngles.y, 0);
 
                 Vector3 ConnectionOffset = ConnectionRotation * Connection.transform.localPosition;
@@ -398,7 +499,7 @@ public class LevelDigger : MonoBehaviour {
                     Transform TestTransform = TransformMarker.transform;
 
                     // Move the blueprint transform through the other ConnectionPoint's transform, and then offset with our prefab's transform.
-                    TestTransform.position = ConnectionRotation * TestBlocker.transform.localPosition + aFromTransform.position - ConnectionOffset;
+                    TestTransform.position = ConnectionRotation * TestBlocker.transform.localPosition + a_FromTransform.position - ConnectionOffset;
                     TestTransform.rotation = TestBlocker.transform.rotation * ConnectionRotation;
                     TestTransform.localScale = TestBlocker.transform.localScale;
 
@@ -437,17 +538,23 @@ public class LevelDigger : MonoBehaviour {
                     // Build the thing from this place, then break.
                     ReturnPrefab = Instantiate(TestObject);
 
-                    ReturnPrefab.transform.position = aFromTransform.position - ConnectionOffset;
+                    ReturnPrefab.transform.position = a_FromTransform.position - ConnectionOffset;
                     ReturnPrefab.transform.rotation = ConnectionRotation;
 
-                    Debug.Log(TestObject.name + "->" + Connection.name + ".rotation: " + ConnectionRotation.ToString());
+                    if (m_DebugLogs)
+                    {
+                        Debug.Log(TestObject.name + "->" + Connection.name + ".rotation: " + ConnectionRotation.ToString());
+                    }
 
                     ConnectionPoint[] PrefabConnections = ReturnPrefab.GetComponentsInChildren<ConnectionPoint>();
                     foreach (ConnectionPoint PrefabConnection in PrefabConnections)
                     {
                         if(PrefabConnection.name == Connection.name)
                         {
-                            Debug.Log("Found the connection!");
+                            if (m_DebugLogs)
+                            {
+                                Debug.Log("Found the connection!");
+                            }
                             PrefabConnection.Linked = true;
                             break;
                         }
@@ -464,7 +571,7 @@ public class LevelDigger : MonoBehaviour {
             }
         }
 
-        Destroy(TransformMarker);
+        DestroyImmediate(TransformMarker);
 
         return ReturnPrefab;
     }

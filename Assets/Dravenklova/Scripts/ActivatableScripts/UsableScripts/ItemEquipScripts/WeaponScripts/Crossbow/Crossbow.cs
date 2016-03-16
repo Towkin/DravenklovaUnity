@@ -47,9 +47,9 @@ public class Crossbow : Weapon
             Rigidbody BoltBody = LoadedBolt.GetComponent<Rigidbody>();
             LoadedBolt.transform.parent = null;
             BoltBody.isKinematic = false;
-            LoadedBolt.GetComponent<CapsuleCollider>().enabled = true;
             // Default the bolt's layer.
             SetPrefabRenderLayer(LoadedBolt.transform, 0);
+            LoadedBolt.GetComponent<Collider>().enabled = true;
             BoltBody.AddForce(BoltSpawnLocation.transform.forward * BoltImpulse, ForceMode.Impulse);
             
             IsLoaded = false;
@@ -67,6 +67,7 @@ public class Crossbow : Weapon
         {
             LoadedBolt = Instantiate<GameObject>(BoltTemplateWood);
             LoadedBolt.GetComponent<Rigidbody>().isKinematic = true;
+            LoadedBolt.GetComponent<Collider>().enabled = false;
             LoadedBolt.transform.position = BoltSpawnLocation.transform.position;
             LoadedBolt.transform.rotation = BoltSpawnLocation.transform.rotation * LoadedBolt.transform.rotation;
             LoadedBolt.transform.parent = transform;
