@@ -3122,7 +3122,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -3137,7 +3137,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -3167,7 +3167,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -3181,7 +3181,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.2588, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000003211319, y: 0.27032462, z: -0.00000039522794}
+  m_ConnectedAnchor: {x: 0.000000043686523, y: 0.27032462, z: -0.00000011982588}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -3213,7 +3213,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5137363, z: 0}
   m_Axis: {x: 1, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.12799966, y: -0.083274305, z: 0.6041808}
+  m_ConnectedAnchor: {x: 0.12799966, y: -0.083274424, z: 0.60418075}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -3437,7 +3437,8 @@ MonoBehaviour:
   m_Oil: 0
   m_IsAiming: 0
   m_AimPrecision: 10
-  m_SearchDist: 100
+  m_SearchDistance: 5
+  m_SearchRadius: 0.4
   m_StartingWeapon: {fileID: 11403098}
   m_StartingWeaponAmmo: 5
   m_Cam: {fileID: 2025472}

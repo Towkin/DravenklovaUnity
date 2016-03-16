@@ -4792,6 +4792,18 @@ Prefab:
       propertyPath: m_ConnectedAnchor.z
       value: -0.00000011982588
       objectReference: {fileID: 0}
+    - target: {fileID: 5499618, guid: b02af3c5c08e29040af27c33d87d3bcc, type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435654, guid: b02af3c5c08e29040af27c33d87d3bcc, type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477648, guid: b02af3c5c08e29040af27c33d87d3bcc, type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b02af3c5c08e29040af27c33d87d3bcc, type: 2}
   m_IsPrefabParent: 0
