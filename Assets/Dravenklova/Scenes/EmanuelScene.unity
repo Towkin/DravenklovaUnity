@@ -430,7 +430,7 @@ MonoBehaviour:
   m_TestConnectionScale: 0
   m_UseRandomSeed: 1
   m_TrackingData: {fileID: 1547386816}
-  m_Seed: -518179729
+  m_Seed: 1251581689
   m_Cube: {fileID: 391297310}
   m_LevelLength: 6
   m_FirstRoom: {fileID: 390734889}
@@ -441,6 +441,7 @@ MonoBehaviour:
   - {fileID: 118030, guid: 3193aea0cc2a19f4a95d580f08605e0d, type: 2}
   - {fileID: 156996, guid: 8f587a906371c0e4db9b1a8ff9f6573a, type: 2}
   - {fileID: 196928, guid: a5492722171f52d408816b3635975ac9, type: 2}
+  - {fileID: 196070, guid: 555ee10c7de3e274483a5dad2351d2e7, type: 2}
   m_EndRooms:
   - {fileID: 193092, guid: ef3cdb51db8e39e48bab9774d408c4da, type: 2}
   - {fileID: 117482, guid: 738107428ae2dfb49abde5da9ca6420c, type: 2}

@@ -130,6 +130,12 @@ public class LevelDigger : MonoBehaviour {
     {
         get { return m_LevelObjects; }
     }
+    private GameObject m_LastBuiltPrefab = null;
+    public GameObject LastBuiltPrefab
+    {
+        get { return m_LastBuiltPrefab; }
+        set { m_LastBuiltPrefab = value; }
+    }
 
     private GameObject m_LevelParent;
     public GameObject LevelParent
@@ -342,23 +348,23 @@ public class LevelDigger : MonoBehaviour {
                         break;
 
                     case RoomTypes.Branch:
-                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, Connection.PreferedPrefabs);
+                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, Connection.PreferedPrefabs, LastBuiltPrefab);
                         if (LevelPiece == null)
                         {
-                            LevelPiece = TestAndBuildPrefabs(BuildFromTransform, BranchingRooms);
+                            LevelPiece = TestAndBuildPrefabs(BuildFromTransform, BranchingRooms, LastBuiltPrefab);
                         }
                         break;
 
                     case RoomTypes.End:
-                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, EndRooms);
+                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, EndRooms, LastBuiltPrefab);
                         if (LevelPiece == null)
                         {
-                            LevelPiece = TestAndBuildPrefabs(BuildFromTransform, EndWalls);
+                            LevelPiece = TestAndBuildPrefabs(BuildFromTransform, EndWalls, null);
                         }
                         break;
 
                     case RoomTypes.Shrine:
-                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, Shrines);
+                        LevelPiece = TestAndBuildPrefabs(BuildFromTransform, Shrines, null);
                         break;
 
                     default:
@@ -445,7 +451,7 @@ public class LevelDigger : MonoBehaviour {
     }
 
     // Tests an array of prefabs from a ConnectionPoint's transform, and returns the instantiated GameObject if successful, else null.
-    private GameObject TestAndBuildPrefabs(Transform a_FromTransform, GameObject[] a_Prefabs)
+    private GameObject TestAndBuildPrefabs(Transform a_FromTransform, GameObject[] a_Prefabs, GameObject a_AvoidPrefab)
     {
         GameObject TransformMarker = new GameObject();
         GameObject ReturnPrefab = null;
@@ -460,6 +466,11 @@ public class LevelDigger : MonoBehaviour {
         for (int i = 0; i < a_Prefabs.Length; i++)
         {
             GameObject TestObject = a_Prefabs[(i + IndexAdd) % a_Prefabs.Length];
+            if(TestObject == a_AvoidPrefab)
+            {
+                continue;
+            }
+
             BoxCollider[] TestBlockers = TestObject.GetComponentsInChildren<BoxCollider>();
 
             ConnectionPoint[] TestConnections = m_LevelEnded ? GetConnections(TestObject, SortTypes.Ascending) : GetConnections(TestObject, SortTypes.Descending);
@@ -537,6 +548,7 @@ public class LevelDigger : MonoBehaviour {
                 {
                     // Build the thing from this place, then break.
                     ReturnPrefab = Instantiate(TestObject);
+                    LastBuiltPrefab = TestObject;
 
                     ReturnPrefab.transform.position = a_FromTransform.position - ConnectionOffset;
                     ReturnPrefab.transform.rotation = ConnectionRotation;
