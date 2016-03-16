@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: c738c1d8d2a0dc14ca60f0f673bc57eb
-timeCreated: 1450457566
-licenseType: Store
+timeCreated: 1458037813
+licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
   materialInstances:
@@ -22,7 +22,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: $randomseed
       value:
-        scalar[0]: 0
+        scalar[0]: 4643
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -43,9 +43,9 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: skin_tone
       value:
-        scalar[0]: .941176474
-        scalar[1]: .871972322
-        scalar[2]: .871972322
+        scalar[0]: 0.9411765
+        scalar[1]: 0.8719723
+        scalar[2]: 0.8719723
         scalar[3]: 1
         texture: {instanceID: 0}
     - name: Tattoo_image_l
@@ -54,7 +54,7 @@ SubstanceImporter:
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
-        texture: {fileID: 2800000, guid: d6a3cd50ed9bf7a49a0ae5b9dca366cb, type: 3}
+        texture: {instanceID: 0}
     - name: wet_level
       value:
         scalar[0]: 0
@@ -78,7 +78,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: cuts_variation
       value:
-        scalar[0]: .182999998
+        scalar[0]: 0.183
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -92,30 +92,30 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: plaster_l_on_off
       value:
-        scalar[0]: 1
+        scalar[0]: 0
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: plaster_r_on_off
       value:
-        scalar[0]: 1
+        scalar[0]: 0
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: blood_color
       value:
-        scalar[0]: .713235259
-        scalar[1]: .057688158
-        scalar[2]: .057688158
+        scalar[0]: 0.71323526
+        scalar[1]: 0.057688158
+        scalar[2]: 0.057688158
         scalar[3]: 1
         texture: {instanceID: 0}
     - name: dirt_color
       value:
-        scalar[0]: .713725507
-        scalar[1]: .0588235334
-        scalar[2]: .0588235334
+        scalar[0]: 0.7137255
+        scalar[1]: 0.058823533
+        scalar[2]: 0.058823533
         scalar[3]: 1
         texture: {instanceID: 0}
     - name: dirt_level
@@ -138,7 +138,7 @@ SubstanceImporter:
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
-        texture: {fileID: 2800000, guid: 66dd747b9434f9c45aa5ded5ea135931, type: 3}
+        texture: {instanceID: 0}
     materialInformation:
       serializedVersion: 5
       offset: {x: 0, y: 0}
@@ -224,11 +224,11 @@ SubstanceImporter:
         data:
           first:
             name: _Cutoff
-          second: .5
+          second: 0.5
         data:
           first:
             name: _Parallax
-          second: .0199999996
+          second: 0.02
         data:
           first:
             name: _ZWrite
@@ -236,7 +236,7 @@ SubstanceImporter:
         data:
           first:
             name: _Glossiness
-          second: .5
+          second: 0.5
         data:
           first:
             name: _BumpScale
