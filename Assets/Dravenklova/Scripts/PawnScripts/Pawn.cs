@@ -53,8 +53,8 @@ public abstract class Pawn : MonoBehaviour
     }
 
     [SerializeField]
-    [Range(0f, 20f)]
-    protected float m_MaxSpeed = 5f;
+    [Range(0f, 50f)]
+    private float m_MaxSpeed = 5f;
     public float MaxSpeed
     {
         get { return m_MaxSpeed * MaxSpeedMultiplier; }
@@ -62,7 +62,7 @@ public abstract class Pawn : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 100f)]
-    protected float m_Acceleration = 1f;
+    private float m_Acceleration = 1f;
     public float Acceleration
     {
         get { return m_Acceleration; }
@@ -70,7 +70,7 @@ public abstract class Pawn : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 100f)]
-    protected float m_Deacceleration = 1f;
+    private float m_Deacceleration = 1f;
     public float Deacceleration
     {
         get { return m_Deacceleration; }
@@ -78,15 +78,15 @@ public abstract class Pawn : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 1f)]
-    protected float m_Decay = 0.05f;
+    private float m_Decay = 0.05f;
     public float Decay
     {
         get { return m_Decay; }
     }
 
-    protected Vector3 m_Velocity = Vector3.zero;
-    protected Vector3 m_LastDirection = Vector3.forward;
-    protected Vector2 m_LastPlanarDirection = Vector2.up;
+    private Vector3 m_Velocity = Vector3.zero;
+    private Vector3 m_LastDirection = Vector3.forward;
+    private Vector2 m_LastPlanarDirection = Vector2.up;
     public Vector3 Velocity
     {
         get { return m_Velocity; }
@@ -540,22 +540,21 @@ public abstract class Pawn : MonoBehaviour
     
     protected virtual void UpdateMovement(float a_DeltaTime)
     {
-        Velocity = PhysicsBody.velocity;
-        
-        Vector2 VelocityAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
-
-        if (VelocityAdd == Vector2.zero || PlanarSpeed > MaxSpeed)
+        if (!PhysicsBody.isKinematic)
         {
-            PlanarSpeed *= Mathf.Pow(1f - Decay, a_DeltaTime);
+            Velocity = PhysicsBody.velocity;
+        }
+
+        PlanarSpeed *= Mathf.Pow(1f - Decay, a_DeltaTime);
+        Vector2 MoveAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
+        
+        if (MoveAdd == Vector2.zero || PlanarSpeed > MaxSpeed)
+        {
             PlanarSpeed -= Mathf.Min(Deacceleration * a_DeltaTime, PlanarSpeed);
         }
         else
         {
-            if (VelocityAdd.magnitude > 1f)
-            {
-                VelocityAdd.Normalize();
-            }
-            PlanarForwardVelocity += VelocityAdd;
+            PlanarForwardVelocity += MoveAdd;
             PlanarSpeed = Mathf.Min(MaxSpeed, PlanarSpeed);
         }
 
@@ -578,7 +577,57 @@ public abstract class Pawn : MonoBehaviour
             }
         }
 
-        PhysicsBody.velocity = Velocity;
+
+        if (!PhysicsBody.isKinematic)
+        {
+            PhysicsBody.velocity = Velocity;
+        }
+        else
+        {
+            int Counter = 0;
+            bool FoundHits = true;
+
+            // Bugged, TODO: It probably finds the item(s) it collides with over and over: find out why.
+            while (FoundHits && Counter < 10)
+            {
+                Counter++;
+
+                Vector3 CapsulePositionTop = Capsule.transform.position + new Vector3(0f, (Capsule.height / 2) - Capsule.radius, 0f);
+                Vector3 CapsulePositionBottom = Capsule.transform.position + new Vector3(0f, -(Capsule.height / 2) + Capsule.radius, 0f);
+
+                RaycastHit[] MoveHits;
+                MoveHits = Physics.CapsuleCastAll(CapsulePositionBottom, CapsulePositionTop, Capsule.radius, VelocityDirection, Speed * a_DeltaTime);
+
+                FoundHits = false;
+                foreach(RaycastHit Hit in MoveHits)
+                {
+                    // Skip potential triggers and the Player
+                    if(Hit.transform.tag == "Player" || Hit.collider.isTrigger)
+                    {
+                        continue;
+                    }
+
+                    FoundHits = true;
+
+                    float NormalMove = 0.001f;
+
+                    //if(Hit.distance <= 0.0f)
+                    //{
+                    //    NormalMove = 10f;
+                    //}
+
+                    
+
+                    Vector3 BeforeHitMove = VelocityDirection * Hit.distance + Hit.normal * NormalMove;
+                    Velocity = Vector3.ProjectOnPlane(Velocity, Hit.normal) - Vector3.ProjectOnPlane(BeforeHitMove, Hit.normal) + BeforeHitMove;
+                }
+                
+            }
+
+            //Debug.Log(Counter.ToString());
+
+            PhysicsBody.transform.position += Velocity * a_DeltaTime;
+        }
     }
 
     protected virtual void UpdateRotation()
@@ -586,7 +635,7 @@ public abstract class Pawn : MonoBehaviour
         float InputX = InputView.x;
         float InputY = InputView.y;
 
-        if (IsAiming)
+        if (InputAim)
         {
             InputX /= AimPrecision;
             InputY /= AimPrecision;
@@ -626,7 +675,7 @@ public abstract class Pawn : MonoBehaviour
         IsGrounded = false;
         foreach (Collider Collider in AllColliders)
         {
-            if (Collider.tag != "Player")
+            if (!Collider.isTrigger && Collider.tag != "Player")
             {
                 IsGrounded = true;
                 break;

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+//using System.Collections.Generic;
+using System;
 
-public class ConnectionPoint : MonoBehaviour {
+public class ConnectionPoint : MonoBehaviour, IComparable<ConnectionPoint> {
 
     private bool m_Linked = false;
     public bool Linked
@@ -31,4 +32,13 @@ public class ConnectionPoint : MonoBehaviour {
 	void Update () {
 	
 	}
+    
+    public int CompareTo(ConnectionPoint other)
+    {
+        return transform.position.y.CompareTo(other.transform.position.y);
+    }
+    public override string ToString()
+    {
+        return transform.name + " connection point; Linked " + Linked.ToString() + "; Exit only " + ExitOnly.ToString();
+    }
 }
