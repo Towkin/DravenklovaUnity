@@ -62,7 +62,7 @@ public class DebugTracker : MonoBehaviour {
     {
         FileName = DirectoryName + "\\TrackerFile_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".dat";
         Debug.Log(FileName);
-        Data = new TrackerData(LevelGenerator.Seed); 
+        Data = new TrackerData(LevelGenerator.Seed, LevelGenerator.LevelLength); 
         
     }
 	
@@ -110,6 +110,12 @@ public struct TrackerData
         get { return m_MapSeed; }
         set { m_MapSeed = value; }
     }
+    private int m_MapLength;
+    public int MapLength
+    {
+        get { return m_MapLength; }
+        set { m_MapLength = value; }
+    }
     private List<Vector3> m_PlayerPosition;
     public List<Vector3> PlayerPosition
     {
@@ -126,9 +132,10 @@ public struct TrackerData
         get { return m_TrackerTime; }
     }
 
-    public TrackerData(int a_Seed)
+    public TrackerData(int a_Seed, int a_Length)
     {
         m_MapSeed = a_Seed;
+        m_MapLength = a_Length;
         m_PlayerPosition = new List<Vector3>();
         m_PlayerDirection = new List<Vector3>();
         m_TrackerTime = new List<float>();
@@ -142,13 +149,14 @@ public struct TrackerData
     }
     public SerializableTrackerData MakeSerializable()
     {
-        return new SerializableTrackerData(MapSeed, PlayerPosition.ToArray(), PlayerDirection.ToArray(), TrackerTime.ToArray());
+        return new SerializableTrackerData(MapSeed, MapLength, PlayerPosition.ToArray(), PlayerDirection.ToArray(), TrackerTime.ToArray());
     }
 }
 [Serializable]
 public struct SerializableTrackerData
 {
     private int m_Seed;
+    private int m_Length;
     private float[] m_PlayerX;
     private float[] m_PlayerY;
     private float[] m_PlayerZ;
@@ -157,9 +165,10 @@ public struct SerializableTrackerData
     private float[] m_PlayerDirectionZ;
     private float[] m_Time;
 
-    public SerializableTrackerData(int a_Seed, Vector3[] a_PlayerPosition, Vector3[] a_PlayerDirection, float[] a_Time)
+    public SerializableTrackerData(int a_Seed, int a_Length, Vector3[] a_PlayerPosition, Vector3[] a_PlayerDirection, float[] a_Time)
     {
         m_Seed = a_Seed;
+        m_Length = a_Length;
 
         m_PlayerX = new float[a_PlayerPosition.Length];
         m_PlayerY = new float[a_PlayerPosition.Length];
@@ -186,7 +195,7 @@ public struct SerializableTrackerData
     }
     public TrackerData Deserialize()
     {
-        TrackerData ReturnData = new TrackerData(m_Seed);
+        TrackerData ReturnData = new TrackerData(m_Seed, m_Length);
 
         for(int i = 0; i < m_Time.Length; i++)
         {

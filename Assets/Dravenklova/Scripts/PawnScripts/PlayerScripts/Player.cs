@@ -21,16 +21,16 @@ public class Player : Pawn {
     #region Player world interaction
     [Header("World interaction")]
     [SerializeField]
-    private float m_SearchDist = 500f;
-    public float SearchDist
+    private float m_SearchDistance = 5f;
+    public float SearchDistance
     {
-        get { return m_SearchDist; } 
+        get { return m_SearchDistance; } 
     }
     [SerializeField]
-    private float m_SearchWidth = 100f;
-    public float SearchWidth
+    private float m_SearchRadius = 0.4f;
+    public float SearchRadius
     {
-        get { return m_SearchWidth; }
+        get { return m_SearchRadius; }
     }
 
     #endregion
@@ -112,27 +112,44 @@ public class Player : Pawn {
     {
         base.FixedUpdate();
 
-        RaycastHit Spotted;
-        Ray Searching = new Ray(Cam.transform.position, Cam.transform.forward);
-        Debug.DrawRay(Cam.transform.position, Cam.transform.forward * SearchDist, Color.red, 2f);
-        
+        RaycastHit[] ViewHits;
+        //Ray Searching = new Ray(Cam.transform.position, Cam.transform.forward);
+        //Debug.DrawRay(Cam.transform.position, Cam.transform.forward * SearchDist, Color.red, 2f);
+
 
         //Physics.CapsuleCast(Cam.transform.position, Cam.transform.forward.normalized * SearchDist, SearchWidth, Cam.transform.forward, out Spotted, SearchDist);
 
-        if (Physics.Raycast(Searching, out Spotted, SearchDist))
-        {
-            Debug.Log("Hit!");
-            Usable Prop = Spotted.collider.GetComponent<Usable>();
-            if (Prop != null)
-            {
-                // TODO: UI message informing that Item is usable
-                Debug.Log(Prop);
+        //float SearchRadius = 0.4f;
 
-                if (InputUse)
+        ViewHits = Physics.SphereCastAll(Cam.transform.position, SearchRadius, Cam.transform.forward, SearchDistance);
+
+        if (ViewHits.Length > 0)
+        {
+            bool HasUsed = false;
+            foreach(RaycastHit Hit in ViewHits)
+            {
+
+                RaycastHit PropHit;
+                if (Physics.Raycast(Cam.transform.position, (Hit.point - Cam.transform.position).normalized, out PropHit, SearchDistance)
+                && PropHit.transform != Hit.transform)
                 {
-                    Debug.Log("Hit!");
-                    Prop.Use(this);
-                    // TODO: Add Debug message
+                    // Ignore if something is in the way.
+                    continue;
+                }
+
+                Usable Prop = Hit.collider.GetComponent<Usable>();
+                if (Prop != null)
+                {
+                    // TODO: UI message informing that Item is usable
+                    //Debug.Log(Prop);
+
+                    Debug.DrawLine(Cam.transform.position, Prop.transform.position, Color.blue);
+
+                    if (InputUse && !HasUsed)
+                    {
+                        Prop.Use(this);
+                        HasUsed = true;
+                    }
                 }
             }
         }
