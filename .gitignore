@@ -39,3 +39,6 @@ fmod.log
 # Temporary stuff
 Assets/Temporary_character/*
 Assets/Temporary_character.meta
+
+# Tracking data
+TrackingData/*

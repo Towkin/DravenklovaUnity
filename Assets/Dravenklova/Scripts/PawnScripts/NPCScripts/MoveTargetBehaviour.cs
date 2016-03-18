@@ -4,9 +4,11 @@ using System.Collections;
 
 [RequireComponent(typeof(Seeker))]
 [RequireComponent(typeof(NPC))]
-public class MoveTargetBehaviour : MonoBehaviour {
+public class MoveTargetBehaviour : MonoBehaviour
+{
+    
 
-    private Vector3 m_TargetLocation = new Vector3(5, 0, 5);
+    private Vector3 m_TargetLocation;
     private Vector3 TargetLocation
     {
         get { return m_TargetLocation; }
@@ -39,11 +41,24 @@ public class MoveTargetBehaviour : MonoBehaviour {
         get { return m_CurrentPathIndex; }
         set { m_CurrentPathIndex = value; }
     }
-    
-    private float m_PathMaxDistance = 2f;
+
+    private float m_PathMaxDistance = 10f;
     private float PathMaxDistance
     {
         get { return m_PathMaxDistance; }
+    }
+
+    private float m_PathMinDistance = 0.25f;
+    private float PathMinDistance
+    {
+        get { return m_PathMinDistance; }
+    }
+
+    private int m_DetectionMask;
+    private int DetectionMask
+    {
+        get { return m_DetectionMask; }
+        set { m_DetectionMask = value; }
     }
 
     private bool m_EndOfPath = false;
@@ -54,19 +69,26 @@ public class MoveTargetBehaviour : MonoBehaviour {
     }
 
 
+    private GameObject GetRandomPointOfInterest()
+    {
+        GameObject[] Points = GameObject.FindGameObjectsWithTag("PointOfInterest");
 
+        return Points[Random.Range(0, Points.Length)];
+    }
 
     void Start () {
         Pathfinder = GetComponent<Seeker>();
         Controller = GetComponent<NPC>();
+        DetectionMask = LayerMask.GetMask("Interior/Wall", "Interior / Ceiling", "Interior/Obstacle");
+        Debug.Log("DetectionaMask: " + DetectionMask.ToString());
 
-        StartNewPath(TargetLocation);
+        StartNewPath(GetRandomPointOfInterest().transform.position);
 	}
 
     public void StartNewPath(Vector3 a_Target)
     {
         TargetLocation = a_Target;
-        m_Pathfinder.StartPath(transform.position, TargetLocation, OnPathComplete);
+        Pathfinder.StartPath(transform.position, TargetLocation, OnPathComplete);
     }
 	
     public void OnPathComplete(Path a_Path)
@@ -87,6 +109,11 @@ public class MoveTargetBehaviour : MonoBehaviour {
         EndOfPath = CurrentPathIndex >= CurrentPath.vectorPath.Count;
         if (EndOfPath)
         {
+            if (Pathfinder.IsDone())
+            {
+                StartNewPath(GetRandomPointOfInterest().transform.position);
+            }
+            Controller.TargetDirection = Vector3.zero;
             return;
         }
 
@@ -95,9 +122,33 @@ public class MoveTargetBehaviour : MonoBehaviour {
 
         // Implement pawn move stuff yeah.
 
-        if (Controller.TargetDistance < PathMaxDistance)
+        bool Hit = true;
+
+        if ((CurrentPathIndex + 1) < CurrentPath.vectorPath.Count)
+        {
+            Ray CastRay = new Ray(transform.position, (CurrentPath.vectorPath[CurrentPathIndex + 1] - transform.position).normalized);
+            float Distance = Vector3.Distance(CurrentPath.vectorPath[CurrentPathIndex + 1], transform.position);
+            float Radius = Controller.Capsule.radius + 0.05f;
+            Hit = Physics.SphereCast(CastRay, Radius, Distance, DetectionMask);
+            Color RayColor = Hit ? Color.red : Color.green;
+            
+            Debug.DrawRay(CastRay.origin + new Vector3(Radius, 0f, 0f), CastRay.direction * Distance, RayColor);
+            Debug.DrawRay(CastRay.origin + new Vector3(-Radius, 0f, 0f), CastRay.direction * Distance, RayColor);
+            Debug.DrawRay(CastRay.origin + new Vector3(0f, Radius, 0f), CastRay.direction * Distance, RayColor);
+            Debug.DrawRay(CastRay.origin + new Vector3(0f, -Radius, 0f), CastRay.direction * Distance, RayColor);
+            Debug.DrawRay(CastRay.origin + new Vector3(0f, 0f, Radius), CastRay.direction * Distance, RayColor);
+            Debug.DrawRay(CastRay.origin + new Vector3(0f, 0f, -Radius), CastRay.direction * Distance, RayColor);
+        }
+
+        if ((Controller.TargetDistance < PathMaxDistance && !Hit) || Controller.TargetDistance < PathMinDistance)
         {
             CurrentPathIndex++;
         }
-	}
+
+    }
+
+    void OnDisabled()
+    {
+        Pathfinder.pathCallback -= OnPathComplete;
+    }
 }
