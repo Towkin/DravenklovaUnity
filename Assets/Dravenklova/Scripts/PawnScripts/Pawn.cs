@@ -219,10 +219,10 @@ public abstract class Pawn : MonoBehaviour
         get { return m_IsJumping; }
         set
         {
-            if(IsGrounded && value)
-            {
-                JumpTime = 0f;
-            }
+            //if(IsGrounded && value)
+            //{
+            //    JumpTime = 0f;
+            //}
             m_IsJumping = value;
         }
     }
@@ -560,7 +560,14 @@ public abstract class Pawn : MonoBehaviour
 
         if (IsGrounded)
         {
-            IsJumping = InputJump;
+            if(!InputJump)
+            {
+                JumpTime = 0f;
+            }
+            if (JumpTime < JumpTimeMax)
+            {
+                IsJumping = InputJump;
+            }
         }
         else
         {
@@ -667,8 +674,8 @@ public abstract class Pawn : MonoBehaviour
 
     protected virtual void UpdatePawnState()
     {
-        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.05f, 0f);
-        float TestRadius = Capsule.radius - 0.025f;
+        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.01f, 0f);
+        float TestRadius = Capsule.radius - 0.005f;
 
         Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
 

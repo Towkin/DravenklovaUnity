@@ -430,7 +430,7 @@ MonoBehaviour:
   m_TestConnectionScale: 0
   m_UseRandomSeed: 1
   m_TrackingData: {fileID: 1547386816}
-  m_Seed: -1886918748
+  m_Seed: 1360502460
   m_Cube: {fileID: 391297310}
   m_LevelLength: 10
   m_FirstRoom: {fileID: 390734889}
