@@ -100,6 +100,7 @@ GameObject:
   - 4: {fileID: 475778}
   - 108: {fileID: 10850842}
   - 114: {fileID: 11463020}
+  - 114: {fileID: 11422634}
   m_Layer: 8
   m_Name: Light
   m_TagString: Untagged
@@ -2186,7 +2187,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.178, y: 0.439, z: 0.337}
+  m_LocalPosition: {x: -0.082, y: 0.608, z: 0.215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 463962}
@@ -2538,7 +2539,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 163574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.04, y: -0.54, z: -53.23}
+  m_LocalPosition: {x: 40.3, y: -0.54, z: -63.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 416858}
@@ -2700,7 +2701,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.005, z: 0}
+  m_LocalPosition: {x: 0, y: 0.158, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 406330}
@@ -2921,7 +2922,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 85
+  far clip plane: 1
   field of view: 75
   orthographic: 0
   orthographic size: 5
@@ -2978,7 +2979,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161636}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -3211,13 +3212,13 @@ HingeJoint:
   m_GameObject: {fileID: 182338}
   m_ConnectedBody: {fileID: 5482020}
   m_Anchor: {x: 0, y: 0.5137363, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0.12799966, y: -0.083274424, z: 0.60418075}
   m_UseSpring: 1
   m_Spring:
-    spring: 0
-    damper: 1
+    spring: 350
+    damper: 100
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -3311,7 +3312,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.5992406, b: 0.27405927, a: 1}
   m_Intensity: 2
-  m_Range: 7.4
+  m_Range: 13.25
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -3342,9 +3343,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 2
-  m_Color: {r: 0.9338235, g: 0.8396835, b: 0.4463127, a: 1}
+  m_Color: {r: 0.9338235, g: 0.7589921, b: 0.4463127, a: 1}
   m_Intensity: 1
-  m_Range: 10.17
+  m_Range: 9.6
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -3381,13 +3382,24 @@ MonoBehaviour:
   m_BoltSpawnLocation: {fileID: 163724}
   m_BoltImpulse: 50
   m_IsLoaded: 0
---- !u!114 &11463020
+--- !u!114 &11422634
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106656}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e2d65984c31434f84159ff1363dd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11463020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106656}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 723274b822865ed4d9ed2a504c0ca79d, type: 3}
   m_Name: 
@@ -9546,7 +9558,7 @@ ParticleSystem:
         m_RotationOrder: 0
       minMaxState: 3
     startSpeed:
-      scalar: 0.18518588
+      scalar: 0.14
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9562,7 +9574,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0.3333333
+          value: 0.28571427
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -9665,7 +9677,7 @@ ParticleSystem:
         rgba: 2365587455
       minMaxState: 0
     startSize:
-      scalar: 0.4
+      scalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:

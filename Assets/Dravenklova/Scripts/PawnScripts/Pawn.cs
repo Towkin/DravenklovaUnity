@@ -140,10 +140,10 @@ public abstract class Pawn : MonoBehaviour
 
     public Vector3 ForwardVelocity
     {
-        get { return transform.rotation * Velocity; }
+        get { return Quaternion.Inverse(transform.rotation) * Velocity; }
         set
         {
-            Velocity = transform.rotation * value;
+            Velocity = Quaternion.Inverse(transform.rotation) * value;
         }
     }
     public Vector2 PlanarForwardVelocity
@@ -219,10 +219,10 @@ public abstract class Pawn : MonoBehaviour
         get { return m_IsJumping; }
         set
         {
-            if(IsGrounded && value)
-            {
-                JumpTime = 0f;
-            }
+            //if(IsGrounded && value)
+            //{
+            //    JumpTime = 0f;
+            //}
             m_IsJumping = value;
         }
     }
@@ -266,11 +266,18 @@ public abstract class Pawn : MonoBehaviour
     {
         get { return m_TurnRate; }
     }
-    protected Quaternion m_ViewDirection = new Quaternion();
-    public virtual Quaternion ViewDirection
+    protected Quaternion m_ViewRotation = new Quaternion();
+    public virtual Quaternion ViewRotation
     {
-        get { return m_ViewDirection; }
-        protected set { m_ViewDirection = value; }
+        get { return m_ViewRotation; }
+        protected set
+        {
+            m_ViewRotation = value;
+            Quaternion NewPhysicsRotation = PhysicsBody.transform.rotation;
+            NewPhysicsRotation.eulerAngles = new Vector3(NewPhysicsRotation.eulerAngles.x, ViewRotation.eulerAngles.y, NewPhysicsRotation.eulerAngles.z);
+            
+            PhysicsBody.transform.rotation = NewPhysicsRotation;
+        }
     }
     #endregion
     #endregion
@@ -294,6 +301,11 @@ public abstract class Pawn : MonoBehaviour
 			}
 		}
 	}
+    public bool IsAlive
+    {
+        get { return Health > 0f; }
+        set { Health = 0f; }
+    }
     [SerializeField]
     [Range(0f, 1f)]
     protected float m_Sanity;
@@ -560,7 +572,14 @@ public abstract class Pawn : MonoBehaviour
 
         if (IsGrounded)
         {
-            IsJumping = InputJump;
+            if(!InputJump)
+            {
+                JumpTime = 0f;
+            }
+            if (JumpTime < JumpTimeMax)
+            {
+                IsJumping = InputJump;
+            }
         }
         else
         {
@@ -592,8 +611,11 @@ public abstract class Pawn : MonoBehaviour
             {
                 Counter++;
 
-                Vector3 CapsulePositionTop = Capsule.transform.position + new Vector3(0f, (Capsule.height / 2) - Capsule.radius, 0f);
-                Vector3 CapsulePositionBottom = Capsule.transform.position + new Vector3(0f, -(Capsule.height / 2) + Capsule.radius, 0f);
+                Vector3 HalfCenterOriginDistance = new Vector3();
+                HalfCenterOriginDistance[Capsule.direction] = ((Capsule.height / 2) - Capsule.radius);
+
+                Vector3 CapsulePositionTop = Capsule.transform.position + Capsule.center + HalfCenterOriginDistance;
+                Vector3 CapsulePositionBottom = Capsule.transform.position + Capsule.center - HalfCenterOriginDistance;
 
                 RaycastHit[] MoveHits;
                 MoveHits = Physics.CapsuleCastAll(CapsulePositionBottom, CapsulePositionTop, Capsule.radius, VelocityDirection, Speed * a_DeltaTime);
@@ -601,13 +623,17 @@ public abstract class Pawn : MonoBehaviour
                 FoundHits = false;
                 foreach(RaycastHit Hit in MoveHits)
                 {
-                    // Skip potential triggers and the Player
-                    if(Hit.transform.tag == "Player" || Hit.collider.isTrigger)
+                    // Skip potential triggers and the Pawn's collider
+                    if(Hit.collider == Capsule || Hit.collider.isTrigger)
                     {
                         continue;
                     }
 
                     FoundHits = true;
+                    if(this.GetType() == typeof(NPC))
+                    {
+                        //Debug.Log("I collide with " + Hit.transform.name + " at " + Hit.point.ToString());
+                    }
 
                     float NormalMove = 0.001f;
 
@@ -642,33 +668,34 @@ public abstract class Pawn : MonoBehaviour
         }
 
 
-        Vector2 OldPlanarForwardVelocity = PlanarForwardVelocity;
+        //Vector2 OldPlanarForwardVelocity = PlanarForwardVelocity;
 
-        Vector3 OldPhysicsRotation = PhysicsBody.transform.eulerAngles;
-        Vector3 NewPhysicsRotation = new Vector3(OldPhysicsRotation.x, OldPhysicsRotation.y + InputX, OldPhysicsRotation.z);
-        PhysicsBody.transform.eulerAngles = NewPhysicsRotation;
+        //Vector3 OldPhysicsRotation = PhysicsBody.transform.eulerAngles;
+        //Vector3 NewPhysicsRotation = new Vector3(OldPhysicsRotation.x, OldPhysicsRotation.y + InputX, OldPhysicsRotation.z);
+        //PhysicsBody.transform.eulerAngles = NewPhysicsRotation;
 
-        Vector3 OldViewRotation = ViewDirection.eulerAngles;
+        Vector3 OldViewRotation = ViewRotation.eulerAngles;
         if (OldViewRotation.x > 90f)
         {
             OldViewRotation.x -= 360f;
         }
         Vector3 NewViewRotation = new Vector3(Mathf.Clamp(OldViewRotation.x - InputY, -89.9f, 89.9f), OldViewRotation.y, OldViewRotation.z);
 
+
         float ViewX = NewViewRotation.x;
-        float ViewY = NewPhysicsRotation.y;
+        float ViewY = PhysicsBody.transform.rotation.eulerAngles.y + InputX;
 
         Quaternion View = new Quaternion();
         View.eulerAngles = new Vector3(ViewX, ViewY, 0f);
-        ViewDirection = View;
+        ViewRotation = View;
 
         //PlanarForwardVelocity = OldPlanarForwardVelocity;
     }
 
     protected virtual void UpdatePawnState()
     {
-        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.05f, 0f);
-        float TestRadius = Capsule.radius - 0.025f;
+        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.01f, 0f);
+        float TestRadius = Capsule.radius - 0.005f;
 
         Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
 

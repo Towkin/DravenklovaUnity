@@ -10,6 +10,7 @@ TagManager:
   - PrefabConnection
   - AINode
   - Fire
+  - PointOfInterest
   layers:
   - Default
   - TransparentFX
@@ -20,10 +21,10 @@ TagManager:
   - 
   - 
   - FPS_Hands
-  - 
-  - 
-  - 
-  - 
+  - Interior/Ground
+  - Interior/Wall
+  - Interior/Ceiling
+  - Interior/Obstacle
   - 
   - 
   - 

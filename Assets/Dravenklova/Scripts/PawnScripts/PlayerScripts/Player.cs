@@ -3,15 +3,15 @@ using System.Collections;
 
 public class Player : Pawn {
 
-    public override Quaternion ViewDirection
+    public override Quaternion ViewRotation
     {
         get
         {
-            return base.ViewDirection;
+            return base.ViewRotation;
         }
         protected set
         {
-            base.ViewDirection = value;
+            base.ViewRotation = value;
             Cam.transform.rotation = value;
         }
     }
