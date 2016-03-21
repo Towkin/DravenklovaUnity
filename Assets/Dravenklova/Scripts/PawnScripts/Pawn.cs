@@ -289,7 +289,7 @@ public abstract class Pawn : MonoBehaviour
     protected float m_Health = 1f;
     [SerializeField]
     protected float m_HealthMax = 1f;
-    public float Health
+    public virtual float Health
     {
         get { return m_Health; }
         set
@@ -301,6 +301,11 @@ public abstract class Pawn : MonoBehaviour
 			}
 		}
 	}
+    public float HealthPercentage
+    {
+        get { return Health / m_HealthMax; }
+    }
+
     public bool IsAlive
     {
         get { return Health > 0f; }
