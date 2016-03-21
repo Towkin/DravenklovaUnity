@@ -79,7 +79,8 @@ public class MoveTargetBehaviour : MonoBehaviour
     void Start () {
         Pathfinder = GetComponent<Seeker>();
         Controller = GetComponent<NPC>();
-        DetectionMask = LayerMask.GetMask("Interior/Wall", "Interior / Ceiling", "Interior/Obstacle");
+        //DetectionMask = LayerMask.GetMask("Interior/Wall", "Interior / Ceiling", "Interior/Obstacle");
+        DetectionMask = LayerMask.GetMask("Default");
         Debug.Log("DetectionaMask: " + DetectionMask.ToString());
 
         StartNewPath(GetRandomPointOfInterest().transform.position);

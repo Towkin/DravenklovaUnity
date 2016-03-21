@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Pathfinding;
 
 public class LevelDigger : MonoBehaviour {
     [SerializeField]
@@ -104,6 +105,14 @@ public class LevelDigger : MonoBehaviour {
         get { return m_ItemCount; }
     }
 
+    //[SerializeField]
+    //private RecastGraph m_PathfindingGraph;
+    //public RecastGraph PathfindingGraph
+    //{
+    //    get { return m_PathfindingGraph; }
+    //    private set { m_PathfindingGraph = value; }
+    //}
+
     [SerializeField]
     private GameObject[] m_EnemyPrefabs;
     public GameObject[] EnemyPrefabs
@@ -143,7 +152,13 @@ public class LevelDigger : MonoBehaviour {
         get { return m_LevelParent; }
         private set { m_LevelParent = value; }
     }
-    
+    private GameObject m_LevelGraph;
+    public GameObject LevelGraph
+    {
+        get { return m_LevelGraph; }
+        private set { m_LevelGraph = value; }
+    }
+
     private Stack<GameObject> m_DebugBranch = new Stack<GameObject>();
     public Stack<GameObject> DebugBranch
     {
@@ -229,6 +244,7 @@ public class LevelDigger : MonoBehaviour {
 
         DebugObjects = new Queue<GameObject>();
         DebugBranch = new Stack<GameObject>();
+        DestroyImmediate(LevelGraph);
         DestroyImmediate(LevelParent);
     }
 
@@ -288,6 +304,10 @@ public class LevelDigger : MonoBehaviour {
                 NewPrefab.transform.parent = a_Parent.transform;
             }
         }
+        LevelGraph = new GameObject("A* Graph Object");
+        LevelGraph.transform.parent = a_Parent.transform;
+
+        BuildPathfinding(LevelGraph);
 
         List<ItemTemplate> ItemSpawners = new List<ItemTemplate>(FindObjectsOfType<ItemTemplate>());
         int ItemsSpawned = 0;
@@ -314,12 +334,62 @@ public class LevelDigger : MonoBehaviour {
             int SpawnIndex = Random.Range(0, EnemySpawners.Count);
             if(EnemiesSpawned < EnemyCount && EnemyPrefabs != null)
             {
-
+                if(EnemyPrefabs.Length > 0)
+                {
+                    Instantiate(EnemyPrefabs[0], EnemySpawners[SpawnIndex].transform.position, EnemySpawners[SpawnIndex].transform.rotation);
+                    EnemiesSpawned++;
+                }
             }
 
             EnemySpawners.RemoveAt(SpawnIndex);
         }
+        Debug.Log("Enemies spawned: " + EnemiesSpawned.ToString());
 
+    }
+
+    private void BuildPathfinding(GameObject a_GraphObject)
+    {
+        // Dis ting be broek
+        AstarPath GraphScript = a_GraphObject.AddComponent<AstarPath>();
+        if(GraphScript == null)
+        {
+            Debug.LogError("Couldn't build AstarPath - does the scene already contain any?");
+        }
+        
+        
+        RecastGraph Graph = GraphScript.astarData.AddGraph(typeof(RecastGraph)) as RecastGraph;
+        //a_GraphObject.GetComponent<AstarPath>().astarData.recastGraph;
+        //RecastGraph Graph = new RecastGraph();
+        //Graph.active = GraphScript;
+
+        if(Graph == null)
+        {
+            Debug.LogError("No RecastGraph available!");
+            return;
+        }
+
+        Graph.cellSize = 0.25f;
+        Graph.cellHeight = 0.01f;
+
+        Graph.useTiles = true;
+
+        Graph.minRegionSize = 3f;
+
+        Graph.walkableHeight = 2f;
+        Graph.walkableClimb = 0.5f;
+
+        Graph.characterRadius = 0.25f;
+
+        Graph.maxSlope = 50f;
+        Graph.maxEdgeLength = 5f;
+
+        Graph.showMeshOutline = true;
+        Graph.showMeshSurface = true;
+
+        Graph.SnapForceBoundsToScene();
+        //Graph.ScanGraph();
+
+        GraphScript.Scan();
     }
 
     // Tries to build a level piece of the a_Type type. If succesful it returns the room prefab, else returns null.
@@ -386,10 +456,6 @@ public class LevelDigger : MonoBehaviour {
             }
         }
         return LevelPiece;
-    }
-    private ConnectionPoint Heighest(ConnectionPoint a, ConnectionPoint b)
-    {
-        return a.transform.position.y > b.transform.position.y ? a : b;
     }
 
     // Returns the ConnectionPoints of a prefab in either sorted by height or random order. If no ConnectionPoints exist, returns null.
