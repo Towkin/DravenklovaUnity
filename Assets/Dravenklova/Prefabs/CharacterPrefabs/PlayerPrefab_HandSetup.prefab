@@ -2963,7 +2963,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294958847
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3182,7 +3182,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.2588, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000001098404, y: 0.27032462, z: -0.000000039941963}
+  m_ConnectedAnchor: {x: 0.00000018847614, y: 0.27032462, z: 0.00000038943415}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -3214,7 +3214,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5137363, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.12799963, y: -0.083274424, z: 0.60418075}
+  m_ConnectedAnchor: {x: 0.12799957, y: -0.08327435, z: 0.6041805}
   m_UseSpring: 1
   m_Spring:
     spring: 350
@@ -3378,6 +3378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573df9cc1dac0da488aeed0e911d90ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GlowRenderers: []
+  m_HighLightTimerMax: 0.1
+  m_GlowShader: {fileID: 0}
   m_BoltTemplateWood: {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
   m_BoltSpawnLocation: {fileID: 163724}
   m_BoltImpulse: 50

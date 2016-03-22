@@ -11,8 +11,11 @@ public class Player : Pawn {
         }
         protected set
         {
-            base.ViewRotation = value;
-            Cam.transform.rotation = value;
+            if (IsAlive)
+            {
+                base.ViewRotation = value;
+                Cam.transform.rotation = value;
+            }
         }
     }
     
@@ -51,9 +54,16 @@ public class Player : Pawn {
             base.Health = value;
 
             HealthBar.CurrentVal = HealthPercentage;
+
+            if(!m_GameOver && !IsAlive)
+            {
+                StartPlayerDeath();
+            }
         }
     }
 
+    protected bool m_GameOver = false;
+    
 
     [SerializeField]
     private Weapon m_StartingWeapon;
@@ -129,7 +139,8 @@ public class Player : Pawn {
 
         if(Input.GetKeyDown(KeyCode.B))
         {
-            Health -= 0.1f;
+            Health -= 0.5f;
+            Debug.Log(Health.ToString());
         }
     }
     
@@ -183,24 +194,36 @@ public class Player : Pawn {
 
         //TODO: Functionality for taking sanity damage
     }
-
-    //void OnTriggerEnter(Collider Coll)
-    //{
-    //     TODO: Any and all code for player collision, if we decide to have such
-    //}
     
     
     protected override void UpdateInput()
     {
-        InputMoveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        InputJump = Input.GetButton("Jump");
-        InputSprint = Input.GetButton("Sprint");
-        InputAim = Input.GetButton("Aim");
-        InputUse = Input.GetButtonDown("Use");
-        InputAttack = Input.GetButtonDown("Attack");
-        InputReload = Input.GetButtonDown("Reload");
+        if(IsAlive)
+        {
+            InputMoveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            InputJump = Input.GetButton("Jump");
+            InputSprint = Input.GetButton("Sprint");
+            InputAim = Input.GetButton("Aim");
+            InputUse = Input.GetButtonDown("Use");
+            InputAttack = Input.GetButtonDown("Attack");
+            InputReload = Input.GetButtonDown("Reload");
 
-        InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+
+        }
+        else
+        {
+            InputMoveDirection = Vector2.zero;
+            InputJump = false;
+            InputSprint = false;
+            InputAim = false;
+            InputUse = false;
+            InputAttack = false;
+            InputReload = false;
+
+            InputView = Vector2.zero;
+
+        }
 
     }
 
@@ -210,4 +233,32 @@ public class Player : Pawn {
         Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
     }
 
+    protected override void UpdateMovement(float a_DeltaTime)
+    {
+        if (IsAlive)
+        {
+            base.UpdateMovement(a_DeltaTime);
+        }
+    }
+    protected override void UpdateRotation()
+    {
+        if (IsAlive)
+        {
+            base.UpdateRotation();
+        }
+    }
+
+
+    protected void StartPlayerDeath()
+    {
+        Debug.Log("Player died!");
+
+        m_GameOver = true;
+
+        PhysicsBody.isKinematic = false;
+        PhysicsBody.useGravity = true;
+        PhysicsBody.angularDrag = 0.5f;
+        PhysicsBody.drag = 0.5f;
+        PhysicsBody.AddForce(PhysicsBody.transform.forward * -5000f);
+    }
 }

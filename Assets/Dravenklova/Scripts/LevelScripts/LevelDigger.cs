@@ -159,6 +159,13 @@ public class LevelDigger : MonoBehaviour {
         private set { m_LevelGraph = value; }
     }
 
+    [SerializeField]
+    private LayerMask m_PathfinderMask;
+    public LayerMask PathfinderMask
+    {
+        get { return m_PathfinderMask; }
+    }
+
     private Stack<GameObject> m_DebugBranch = new Stack<GameObject>();
     public Stack<GameObject> DebugBranch
     {
@@ -355,9 +362,26 @@ public class LevelDigger : MonoBehaviour {
         {
             Debug.LogError("Couldn't build AstarPath - does the scene already contain any?");
         }
-        
-        
-        RecastGraph Graph = GraphScript.astarData.AddGraph(typeof(RecastGraph)) as RecastGraph;
+
+
+        PointGraph Graph = GraphScript.astarData.AddGraph(typeof(PointGraph)) as PointGraph;
+        if(Graph == null)
+        {
+            Debug.LogError("PointGraph creation failed!");
+            return;
+        }
+
+        Graph.searchTag = "AINode";
+        Graph.maxDistance = 25f;
+        Graph.limits = new Vector3(0.0f, 1.0f, 0.0f);
+        Graph.raycast = true;
+        Graph.thickRaycast = true;
+        Graph.thickRaycastRadius = 0.25f;
+        Graph.mask = PathfinderMask;
+
+        GraphScript.Scan();
+
+        /*RecastGraph Graph = GraphScript.astarData.AddGraph(typeof(RecastGraph)) as RecastGraph;
         //a_GraphObject.GetComponent<AstarPath>().astarData.recastGraph;
         //RecastGraph Graph = new RecastGraph();
         //Graph.active = GraphScript;
@@ -389,7 +413,7 @@ public class LevelDigger : MonoBehaviour {
         Graph.SnapForceBoundsToScene();
         //Graph.ScanGraph();
 
-        GraphScript.Scan();
+        GraphScript.Scan();*/
     }
 
     // Tries to build a level piece of the a_Type type. If succesful it returns the room prefab, else returns null.
@@ -438,7 +462,7 @@ public class LevelDigger : MonoBehaviour {
                         break;
 
                     default:
-                        Debug.LogError("Unkown room type.");
+                        Debug.LogError("Unknown room type.");
                         break;
                 }
 
@@ -522,7 +546,7 @@ public class LevelDigger : MonoBehaviour {
         GameObject TransformMarker = new GameObject();
         GameObject ReturnPrefab = null;
 
-        // To "scramble" the list, we add a random integer to the index (andmod it by length).
+        // To "scramble" the list, we add a random integer to the index (and later we mod the iterator by length).
         int IndexAdd = Random.Range(0, a_Prefabs.Length);
         // Find all GameObjects who'll potentially block our new prefab.
         GameObject[] ExistingPrefabBlockers = GameObject.FindGameObjectsWithTag("PrefabBlocker");

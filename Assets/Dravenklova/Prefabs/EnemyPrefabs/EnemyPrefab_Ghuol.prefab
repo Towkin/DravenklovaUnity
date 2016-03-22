@@ -2039,12 +2039,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PhysicsBody: {fileID: 5492510}
   m_Collider: {fileID: 13644704}
-  m_SprintSpeedMultiplier: 2.5
+  m_SprintSpeedMultiplier: 2
   m_AimSpeedMultiplier: 0.5
-  m_MaxSpeed: 3
+  m_MaxSpeed: 1.1
   m_Acceleration: 25
-  m_Deacceleration: 80
-  m_Decay: 0.801
+  m_Deacceleration: 60
+  m_Decay: 0.8
   m_JumpAcceleration: 45
   m_AirControl: 0.35
   m_JumpTimeMax: 0.1
@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_AttackRange: 2
   m_Prey: {fileID: 0}
   m_FindAndSetPlayerAsPrey: 1
-  m_IdleTimeMax: 2
+  m_IdleTimeMax: 3
   m_IdleTimeVariance: 1
   m_ViewConeAngle: 80
   m_ViewDistance: 40
@@ -2103,6 +2103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4600874a2c63e3645b9a971ff25bfb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PathMaxDistance: 1
+  m_PathMinDistance: 0.25
 --- !u!136 &13644704
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2112,7 +2114,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.25
+  m_Radius: 0.35
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -2126,7 +2128,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4b1f127c18d296e4e8f5c5b29cc826b6, type: 2}
+  - {fileID: 2100000, guid: 574a79c547e66914381469a39049a9dc, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

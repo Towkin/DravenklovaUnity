@@ -645,7 +645,7 @@ public abstract class Pawn : MonoBehaviour
                     // TODO: Look for better solution: as of now, the pawn is literally an unstoppable force in the physics-world.
                     if(Hit.rigidbody != null)
                     {
-                        continue;
+                        
                     }
 
                     FoundHits = true;

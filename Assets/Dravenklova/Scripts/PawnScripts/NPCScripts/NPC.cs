@@ -119,7 +119,7 @@ public class NPC : Pawn
     #region IdleTimer
     [Header("Idle attributes")]
     [SerializeField]
-    private float m_IdleTimeMax = 2f;
+    private float m_IdleTimeMax = 3f;
     [SerializeField]
     private float m_IdleTimeVariance = 1f;
     public float NewIdleTime
@@ -149,7 +149,7 @@ public class NPC : Pawn
     #endregion
 
     #region StuckTimer
-    private float m_StuckTimeMax = 3f;
+    private float m_StuckTimeMax = 10f;
     public float StuckTimerMax
     {
         get { return m_StuckTimeMax; }
@@ -261,10 +261,12 @@ public class NPC : Pawn
                 if(IdleTimerActive)
                 {
                     IdleTimer -= Time.deltaTime;
+                    //Debug.Log("Idle Time left: " + IdleTimer.ToString());
                     if(IdleTimer <= 0f)
                     {
                         IdleTimerActive = false;
-                        if(IsHunting)
+                        //Debug.Log("Deactivated idle");
+                        if (IsHunting)
                         {
                             StopHunting();
                         }
@@ -276,11 +278,12 @@ public class NPC : Pawn
                 {
                     IdleTimerActive = true;
                     IdleTimer = NewIdleTime;
+                    //Debug.Log("Activated idle for " + IdleTimer.ToString() + " seconds");
                 }
             }
             else
             {
-                Stuck = Speed < 0.25f;
+                Stuck = Speed < 0.5f;
                 if (Stuck)
                 {
                     StuckTimer -= Time.deltaTime;
@@ -302,14 +305,21 @@ public class NPC : Pawn
         Vector3 RotatedDirection = Quaternion.Inverse(transform.rotation) * MoveDirection;
 
         
-        InputMoveDirection = new Vector2(RotatedDirection.x, RotatedDirection.z).normalized;
+        InputMoveDirection = new Vector2(RotatedDirection.x, RotatedDirection.z).normalized * Mathf.Min(1f, TargetDistance);
 
         
-        ViewRotation = Quaternion.RotateTowards(ViewRotation, ViewRotation * Quaternion.FromToRotation(transform.forward, VelocityDirection), Time.deltaTime * TurnRate);
+
+        Vector3 ViewDirection = VelocityDirection;
+        if(IsHunting)
+        {
+            ViewDirection = TargetDirection;
+        }
+        
+        ViewRotation = Quaternion.RotateTowards(ViewRotation, ViewRotation * Quaternion.FromToRotation(transform.forward, ViewDirection), Time.deltaTime * TurnRate);
 
         InputSprint = IsHunting;
 
-
+        Debug.DrawRay(transform.position, TargetDirection * TargetDistance, Color.blue, 0.2f);
 
         PawnAnaimator.SetFloat("SpeedX", ForwardVelocity.x);
         PawnAnaimator.SetFloat("SpeedZ", ForwardVelocity.z);

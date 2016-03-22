@@ -25,12 +25,13 @@ public class PathMoveBehaviour : MonoBehaviour
         set { m_CurrentPathIndex = value; }
     }
 
+    [SerializeField]
     private float m_PathMaxDistance = 10f;
     private float PathMaxDistance
     {
         get { return m_PathMaxDistance; }
     }
-
+    [SerializeField]
     private float m_PathMinDistance = 0.25f;
     private float PathMinDistance
     {
@@ -65,7 +66,7 @@ public class PathMoveBehaviour : MonoBehaviour
 
     public void StartNewPath(Vector3 a_Target)
     {
-        Debug.Log("New path requested to " + a_Target.ToString());
+        //Debug.Log("New path requested to " + a_Target.ToString());
         if (!IsBusy)
         {
             IsBusy = true;
