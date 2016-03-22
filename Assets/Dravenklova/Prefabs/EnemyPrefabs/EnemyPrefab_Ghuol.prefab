@@ -662,7 +662,7 @@ GameObject:
   - 54: {fileID: 5492510}
   - 114: {fileID: 11495630}
   m_Layer: 0
-  m_Name: ghoulprefab
+  m_Name: EnemyPrefab_Ghuol
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1763,7 +1763,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.03, y: 1.45, z: 5.08}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 418706}
@@ -1974,10 +1974,10 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160680}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
@@ -2039,30 +2039,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PhysicsBody: {fileID: 5492510}
   m_Collider: {fileID: 13644704}
-  m_SprintSpeedMultiplier: 5
+  m_SprintSpeedMultiplier: 2.5
   m_AimSpeedMultiplier: 0.5
-  m_MaxSpeed: 5
-  m_Acceleration: 100
-  m_Deacceleration: 46.4
+  m_MaxSpeed: 3
+  m_Acceleration: 25
+  m_Deacceleration: 80
   m_Decay: 0.801
-  m_JumpAcceleration: 10
-  m_AirControl: 0.05
-  m_JumpTimeMax: 0.2
+  m_JumpAcceleration: 45
+  m_AirControl: 0.35
+  m_JumpTimeMax: 0.1
   m_PawnGravity: {x: 0, y: -9.82, z: 0}
   m_WalkThreshold: 2
   m_RunThreshold: 4
-  m_TurnRate: 360
+  m_TurnRate: 250
   m_Health: 1
   m_HealthMax: 1
   m_Sanity: 0
   m_Holy: 0
   m_Oil: 0
   m_IsAiming: 0
-  m_AimPrecision: 10
+  m_AimPrecision: 5
   m_PawnAnimatior: {fileID: 9582006}
   m_MovePath: {fileID: 11495630}
-  m_AttackRange: 1
+  m_AttackRange: 2
   m_Prey: {fileID: 0}
+  m_FindAndSetPlayerAsPrey: 1
   m_IdleTimeMax: 2
   m_IdleTimeVariance: 1
   m_ViewConeAngle: 80
@@ -2238,6 +2239,50 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SprintSpeedMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Acceleration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_MaxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Deacceleration
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_JumpAcceleration
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AirControl
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_JumpTimeMax
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TurnRate
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AimPrecision
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

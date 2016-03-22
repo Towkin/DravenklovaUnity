@@ -93,6 +93,24 @@ public class NPC : Pawn
     {
         get { return TargetDistance < m_TargetRadius; }
     }
+    private float m_StraightLineRadiusEntry = 3f;
+    private float m_StraightLineRadiusExit = 10f;
+    private bool m_StraightLineCurrently = false;
+    public bool UseStraightLine
+    {
+        get
+        {
+            float TestDistance = m_StraightLineRadiusEntry;
+            if (m_StraightLineCurrently)
+            {
+                TestDistance = m_StraightLineRadiusExit;
+            }
+            m_StraightLineCurrently = TargetDistance < TestDistance;
+
+            return m_StraightLineCurrently;
+        }
+    }
+
     public bool InAttackRange
     {
         get { return TargetDistance < AttackRange; }
@@ -130,6 +148,34 @@ public class NPC : Pawn
     }
     #endregion
 
+    #region StuckTimer
+    private float m_StuckTimeMax = 3f;
+    public float StuckTimerMax
+    {
+        get { return m_StuckTimeMax; }
+    }
+    private bool m_Stuck = false;
+    public bool Stuck
+    {
+        get { return m_Stuck; }
+        protected set
+        {
+            if (!m_Stuck && value)
+            {
+                StuckTimer = StuckTimerMax;
+            }
+            m_Stuck = value;
+        }
+    }
+    private float m_StuckTimer = 0f;
+    public float StuckTimer
+    {
+        get { return m_StuckTimer; }
+        protected set { m_StuckTimer = value; }
+    }
+
+    #endregion
+    
     #region Detection attributes
     [Header("Detection Attributes")]
     [SerializeField]
@@ -232,25 +278,34 @@ public class NPC : Pawn
                     IdleTimer = NewIdleTime;
                 }
             }
+            else
+            {
+                Stuck = Speed < 0.25f;
+                if (Stuck)
+                {
+                    StuckTimer -= Time.deltaTime;
+                    if(StuckTimer <= 0f)
+                    {
+                        TargetLocation = GetRandomPointOfInterest();
+                    }
+                }
+            }
         }
 
-        Vector3 MoveDirection; ;
-        if (TargetDistance > 2.5f)
-        {
-            MoveDirection = MovePath.UpdatePathDirection(transform.position, Capsule);
-        }
-        else
+        // Note: In the UpdatePathDirection-function must be run at least once per frame.
+        Vector3 MoveDirection = MovePath.UpdatePathDirection(transform.position, Capsule);
+        if (UseStraightLine)
         {
             MoveDirection = TargetDirection;
-            MovePath.UpdatePathDirection(transform.position, Capsule);
         }
+
         Vector3 RotatedDirection = Quaternion.Inverse(transform.rotation) * MoveDirection;
 
         
         InputMoveDirection = new Vector2(RotatedDirection.x, RotatedDirection.z).normalized;
 
         
-        ViewRotation = Quaternion.RotateTowards(ViewRotation, ViewRotation * Quaternion.FromToRotation(transform.forward, MoveDirection), Time.deltaTime * 250f);
+        ViewRotation = Quaternion.RotateTowards(ViewRotation, ViewRotation * Quaternion.FromToRotation(transform.forward, VelocityDirection), Time.deltaTime * TurnRate);
 
         InputSprint = IsHunting;
 

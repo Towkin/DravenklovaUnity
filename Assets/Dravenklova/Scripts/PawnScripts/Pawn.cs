@@ -566,13 +566,16 @@ public abstract class Pawn : MonoBehaviour
         {
             Velocity = PhysicsBody.velocity;
         }
-
-        PlanarSpeed *= Mathf.Pow(1f - Decay, a_DeltaTime);
-        Vector2 MoveAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
         
+        Vector2 MoveAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
+        PlanarSpeed *= Mathf.Pow(1f - Decay * (IsGrounded ? 1.00f : AirControl), a_DeltaTime);
+
         if (MoveAdd == Vector2.zero || PlanarSpeed > MaxSpeed)
         {
-            PlanarSpeed -= Mathf.Min(Deacceleration * a_DeltaTime, PlanarSpeed);
+            if (IsGrounded)
+            {
+                PlanarSpeed -= Mathf.Min(Deacceleration * a_DeltaTime, PlanarSpeed);
+            }
         }
         else
         {
@@ -582,7 +585,8 @@ public abstract class Pawn : MonoBehaviour
 
         if (IsGrounded)
         {
-            if(!InputJump)
+            
+            if (!InputJump)
             {
                 JumpTime = 0f;
             }
@@ -591,11 +595,9 @@ public abstract class Pawn : MonoBehaviour
                 IsJumping = InputJump;
             }
         }
-        //else
-        {
-            Velocity += PawnGravity * a_DeltaTime;
-        }
-
+        
+        Velocity += PawnGravity * a_DeltaTime;
+        
         if (IsJumping)
         {
             Velocity += Vector3.up * JumpAcceleration * a_DeltaTime;
@@ -647,28 +649,14 @@ public abstract class Pawn : MonoBehaviour
                     }
 
                     FoundHits = true;
-
-                    if(this.GetType() == typeof(NPC))
-                    {
-                        //Debug.Log("I collide with " + Hit.transform.name + " at " + Hit.point.ToString());
-                    }
-
+                    
                     float NormalMove = 0.001f;
 
                     Debug.DrawRay(Hit.point, Hit.normal, Color.red, 2f, false);
-
-                    /*
-                    if (Hit.normal.magnitude != 1f)
-                    {
-                        Debug.Log(Hit.normal.ToString());
-                    }
-                    */
+                    
 
                     if (Hit.distance <= 0.0f)
                     {
-                        //NormalMove = 1f;
-                        
-                        
                         Debug.DrawRay(PhysicsBody.transform.position, Hit.normal, Color.red, 5f, false);
 
                         PhysicsBody.transform.position += Hit.normal * 0.05f;
@@ -683,8 +671,9 @@ public abstract class Pawn : MonoBehaviour
                 }
                 
             }
-            
-            //Debug.Log(Speed.ToString());
+
+
+
             PhysicsBody.transform.position += Velocity * a_DeltaTime;
         }
     }

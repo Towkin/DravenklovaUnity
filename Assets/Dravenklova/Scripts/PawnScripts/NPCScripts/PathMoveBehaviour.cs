@@ -57,7 +57,7 @@ public class PathMoveBehaviour : MonoBehaviour
         protected set { m_IsBusy = value; }
     }
 
-    void Start () {
+    void Awake () {
         Pathfinder = GetComponent<Seeker>();
         DetectionMask = LayerMask.GetMask("Interior/Wall", "Interior / Ceiling", "Interior/Obstacle");
         Debug.Log("DetectionaMask: " + DetectionMask.ToString());
@@ -65,6 +65,7 @@ public class PathMoveBehaviour : MonoBehaviour
 
     public void StartNewPath(Vector3 a_Target)
     {
+        Debug.Log("New path requested to " + a_Target.ToString());
         if (!IsBusy)
         {
             IsBusy = true;
