@@ -289,7 +289,7 @@ public abstract class Pawn : MonoBehaviour
     protected float m_Health = 1f;
     [SerializeField]
     protected float m_HealthMax = 1f;
-    public float Health
+    public virtual float Health
     {
         get { return m_Health; }
         set
@@ -301,6 +301,11 @@ public abstract class Pawn : MonoBehaviour
 			}
 		}
 	}
+    public float HealthPercentage
+    {
+        get { return Health / m_HealthMax; }
+    }
+
     public bool IsAlive
     {
         get { return Health > 0f; }
@@ -581,7 +586,7 @@ public abstract class Pawn : MonoBehaviour
                 IsJumping = InputJump;
             }
         }
-        else
+        //else
         {
             Velocity += PawnGravity * a_DeltaTime;
         }
@@ -607,7 +612,7 @@ public abstract class Pawn : MonoBehaviour
             bool FoundHits = true;
 
             // Bugged, TODO: It probably finds the item(s) it collides with over and over: find out why.
-            while (FoundHits && Counter < 10)
+            while (FoundHits && Counter < 100)
             {
                 Counter++;
 
@@ -624,12 +629,20 @@ public abstract class Pawn : MonoBehaviour
                 foreach(RaycastHit Hit in MoveHits)
                 {
                     // Skip potential triggers and the Pawn's collider
-                    if(Hit.collider == Capsule || Hit.collider.isTrigger)
+                    if(Hit.collider == this.Capsule || Hit.collider.isTrigger)
+                    {
+                        continue;
+                    }
+
+                    // If the hit has a rigidbody, skip it.
+                    // TODO: Look for better solution: as of now, the pawn is literally an unstoppable force in the physics-world.
+                    if(Hit.rigidbody != null)
                     {
                         continue;
                     }
 
                     FoundHits = true;
+
                     if(this.GetType() == typeof(NPC))
                     {
                         //Debug.Log("I collide with " + Hit.transform.name + " at " + Hit.point.ToString());
@@ -637,21 +650,40 @@ public abstract class Pawn : MonoBehaviour
 
                     float NormalMove = 0.001f;
 
-                    //if(Hit.distance <= 0.0f)
-                    //{
-                    //    NormalMove = 10f;
-                    //}
+                    Debug.DrawRay(Hit.point, Hit.normal, Color.red, 2f, false);
 
-                    
+                    /*
+                    if (Hit.normal.magnitude != 1f)
+                    {
+                        Debug.Log(Hit.normal.ToString());
+                    }
+                    */
 
-                    Vector3 BeforeHitMove = VelocityDirection * Hit.distance + Hit.normal * NormalMove;
-                    Velocity = Vector3.ProjectOnPlane(Velocity, Hit.normal) - Vector3.ProjectOnPlane(BeforeHitMove, Hit.normal) + BeforeHitMove;
+                    if (Hit.distance <= 0.0f)
+                    {
+                        //NormalMove = 1f;
+                        
+                        
+                        Debug.DrawRay(PhysicsBody.transform.position, Hit.normal, Color.red, 5f, false);
+
+                        PhysicsBody.transform.position += Hit.normal * 0.05f;
+                        //PhysicsBody.transform.position += -PawnGravity * 0.01f;
+                        break;
+                    }
+
+                    Vector3 BeforeHitMove = VelocityDirection * Hit.distance;
+                    Velocity = Vector3.ProjectOnPlane(Velocity, Hit.normal) - Vector3.ProjectOnPlane(BeforeHitMove, Hit.normal) + BeforeHitMove + Hit.normal * NormalMove;
+
+                    break;
                 }
                 
             }
 
-            //Debug.Log(Counter.ToString());
-
+            if (Counter > 1)
+            {
+                Debug.Log(Counter.ToString());
+            }
+            //Debug.Log(Speed.ToString());
             PhysicsBody.transform.position += Velocity * a_DeltaTime;
         }
     }

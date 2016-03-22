@@ -1,42 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 // Doesn't need to be in MonoBehavior, else it won't work the way we want it to do.
+[Serializable]
 public class StatScript 
 {
+    [SerializeField]
+    private BarScript m_Bar;
 
-    private BarScript bar;
+    [SerializeField]
+    private float m_MaxVal;
 
-    private float MaxVal;
+    [SerializeField]
+    private float m_CurrentVal;
 
-    private float CurrentVal;
-
-    public float CurrentVal1
+    public float CurrentVal
     {
         get
         {
-            return CurrentVal;
+            return m_CurrentVal;
         }
 
         set
         {
-            this.CurrentVal = value;
-            bar.SetBarValue = CurrentVal;
+            this.m_CurrentVal = value;
+            m_Bar.BarValue = m_CurrentVal;
         }
     }
 
-    public float MaxVal1
+    public float MaxVal
     {
         get
         {
-            return MaxVal;
+            return m_MaxVal;
         }
 
         set
         {
-            this.MaxVal = value;
-            bar.MaxValue = MaxVal;
+            this.m_MaxVal = value;
+            m_Bar.MaxValue = m_MaxVal;
         }
+    }
+
+    public void Initialize()
+    {
+        this.MaxVal = m_MaxVal;
+        this.CurrentVal = m_CurrentVal;
     }
 }
 
