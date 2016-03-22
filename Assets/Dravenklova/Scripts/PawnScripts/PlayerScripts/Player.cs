@@ -142,7 +142,7 @@ public class Player : Pawn {
                 {
                     // TODO: UI message informing that Item is usable
                     //Debug.Log(Prop);
-
+                    Prop.StartGlow();
                     Debug.DrawLine(Cam.transform.position, Prop.transform.position, Color.blue);
 
                     if (InputUse && !HasUsed)

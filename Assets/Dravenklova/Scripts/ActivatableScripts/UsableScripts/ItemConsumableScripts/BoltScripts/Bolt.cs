@@ -6,8 +6,9 @@ public class Bolt : Consumable
 {
     Rigidbody BoltBody;
 
-    void Start ()
+    protected override void Start ()
     {
+        base.Start();
         BoltBody = GetComponent<Rigidbody>();
 	}
 
@@ -23,9 +24,9 @@ public class Bolt : Consumable
         Destroy(gameObject);
     }
 
-    void FixedUpdate ()
+    /*void FixedUpdate ()
     {
-	    /*if(!BoltBody.isKinematic)
+	    if(!BoltBody.isKinematic)
         {
             RaycastHit m_Hit;
             Ray m_RayPath = new Ray(transform.position, BoltBody.velocity.normalized);
@@ -52,6 +53,6 @@ public class Bolt : Consumable
                 }
 
             }
-        }*/
-	}
+        }
+	}*/
 }
