@@ -35,7 +35,7 @@ public abstract class Usable : Activatable
     }
 
     [SerializeField]
-    private Shader m_GlowShader = Shader.Find("Self-Illumin/Outlined Diffuse");
+    private Shader m_GlowShader;// = Shader.Find("Self-Illumin/Outlined Diffuse");
     protected Shader GlowShader
     {
         get { return m_GlowShader; }

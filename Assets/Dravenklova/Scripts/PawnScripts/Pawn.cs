@@ -678,11 +678,7 @@ public abstract class Pawn : MonoBehaviour
                 }
                 
             }
-
-            if (Counter > 1)
-            {
-                Debug.Log(Counter.ToString());
-            }
+            
             //Debug.Log(Speed.ToString());
             PhysicsBody.transform.position += Velocity * a_DeltaTime;
         }
