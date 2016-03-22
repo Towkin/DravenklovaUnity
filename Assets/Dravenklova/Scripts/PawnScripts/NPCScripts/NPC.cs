@@ -5,31 +5,180 @@ public class NPC : Pawn
 {
     [Header("NPC Components")]
     [SerializeField]
-    protected Animator m_PawnAnimatior;
+    private Animator m_PawnAnimatior;
     public Animator PawnAnaimator
     {
         get { return m_PawnAnimatior; }
         protected set { m_PawnAnimatior = value; }
     }
 
-    protected Vector3 m_TargetDirection = Vector3.zero;
+    [SerializeField]
+    private PathMoveBehaviour m_MovePath;
+    public PathMoveBehaviour MovePath
+    {
+        get { return m_MovePath; }
+    }
+
+    private GameObject m_TargetObject;
+    public GameObject TargetObject
+    {
+        get { return m_TargetObject; }
+        set { m_TargetObject = value; }
+    }
+
+    private Vector3 m_TargetLocation = Vector3.zero;
+    public Vector3 TargetLocation
+    {
+        get
+        {
+            if(TargetObject != null)
+            {
+                TargetLocation = TargetObject.transform.position;
+            }
+            return m_TargetLocation;
+        }
+        set
+        {
+            m_TargetLocation = value;
+            // Note: Pathing is slightly delayed, and ignore requests if busy.
+            MovePath.StartNewPath(value);
+        }
+    }
     public Vector3 TargetDirection
     {
-        get { return m_TargetDirection; }
-        set { m_TargetDirection = value; }
+        get { return (TargetLocation - transform.position).normalized; }
     }
-    protected float m_TargetDistance = 0f;
     public float TargetDistance
     {
-        get { return m_TargetDistance; }
-        set { m_TargetDistance = value; }
+        get { return (TargetLocation - transform.position).magnitude; }
     }
-    
 
+
+    // Daniel Fucking around with variables
+
+    [Header("Hunt Attributes")]
+    [SerializeField]
+    private float m_AttackRange = 1f;
+    public float AttackRange
+    {
+        get { return m_AttackRange; }
+    }
+
+    [SerializeField]
+    private GameObject m_Prey;
+    public GameObject Prey
+    {
+        get { return m_Prey; }
+        set { m_Prey = value; }
+    }
+    [SerializeField]
+    private bool m_FindAndSetPlayerAsPrey = true;
+
+    private bool m_PreyDetected;
+    public bool PreyDetected
+    {
+        get { return m_PreyDetected; }
+        protected set { m_PreyDetected = value; }
+    }
+
+    private bool m_IsHunting;
+    public bool IsHunting
+    {
+        get { return m_IsHunting; }
+        protected set { m_IsHunting = value; }
+    }
+
+    private float m_TargetRadius = 2.5f;
+    public bool OnMoveTarget
+    {
+        get { return TargetDistance < m_TargetRadius; }
+    }
+    public bool InAttackRange
+    {
+        get { return TargetDistance < AttackRange; }
+    }
+
+    #region IdleTimer
+    [Header("Idle attributes")]
+    [SerializeField]
+    private float m_IdleTimeMax = 2f;
+    [SerializeField]
+    private float m_IdleTimeVariance = 1f;
+    public float NewIdleTime
+    {
+        get { return Random.Range(m_IdleTimeMax - m_IdleTimeVariance, m_IdleTimeMax + m_IdleTimeVariance); }
+    }
+
+    private float m_IdleTimer = 0f;
+    public float IdleTimer
+    {
+        get { return m_IdleTimer; }
+        protected set { m_IdleTimer = value; }
+    }
+    private bool m_IdleTimerActive = false;
+    public bool IdleTimerActive
+    {
+        get { return m_IdleTimerActive; }
+        protected set { m_IdleTimerActive = value; }
+    }
+
+    private float m_OnTimer;
+    public float OnTimer
+    {
+        get { return m_OnTimer; }
+        // set?
+    }
+    #endregion
+
+    #region Detection attributes
+    [Header("Detection Attributes")]
+    [SerializeField]
+    private float m_ViewConeAngle = 80f;
+    public float ViewConeAngle
+    {
+        get { return m_ViewConeAngle; }
+        protected set { m_ViewConeAngle = value; }
+    }
+
+    [SerializeField]
+    private float m_ViewDistance = 40f;
+    public float ViewDistance
+    {
+        get { return m_ViewDistance; }
+        protected set { m_ViewDistance = value; }
+    }
+
+    [SerializeField]
+    private LayerMask m_ViewBlockers;
+    public LayerMask ViewBlockers
+    {
+        get { return m_ViewBlockers; }
+    }
+    [SerializeField]
+    [Tooltip("Make sure the transform's forward (blue arrow) is pointing in the creatue's forward direction.")]
+    private Transform m_HeadTransform;
+    public Transform HeadTransform
+    {
+        get { return m_HeadTransform; }
+    }
+
+
+    #endregion
+
+    protected override void Start()
+    {
+        base.Start();
+
+        TargetLocation = GetRandomPointOfInterest();
+
+        if(m_FindAndSetPlayerAsPrey)
+        {
+            Prey = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
 
     protected override void UpdateInput()
     {
-        
         PawnAnaimator.SetBool("IsDead", !IsAlive);
         if (!IsAlive)
         {
@@ -38,29 +187,132 @@ public class NPC : Pawn
             
             return;
         }
-        Vector3 RotatedDirection = Quaternion.Inverse(transform.rotation) * TargetDirection;
 
-        InputMoveDirection = new Vector2(RotatedDirection.x, RotatedDirection.z);
-        // * TargetDistance * 0.25f;
+        UpdateDetection();
+
+        InputAttack = false;
+
+        if(PreyDetected)
+        {
+            if(IsHunting)
+            {
+                TargetObject = Prey;
+                if (TargetDistance < AttackRange)
+                {
+                    InputAttack = true;
+                }
+            }
+            else
+            {
+                StartHunting();
+            }
+        }
+        else
+        {
+            TargetObject = null;
+            if(OnMoveTarget)
+            {
+                if(IdleTimerActive)
+                {
+                    IdleTimer -= Time.deltaTime;
+                    if(IdleTimer <= 0f)
+                    {
+                        IdleTimerActive = false;
+                        if(IsHunting)
+                        {
+                            StopHunting();
+                        }
+
+                        TargetLocation = GetRandomPointOfInterest();
+                    }
+                }
+                else
+                {
+                    IdleTimerActive = true;
+                    IdleTimer = NewIdleTime;
+                }
+            }
+        }
+
+        Vector3 MoveDirection; ;
+        if (TargetDistance > 2.5f)
+        {
+            MoveDirection = MovePath.UpdatePathDirection(transform.position, Capsule);
+        }
+        else
+        {
+            MoveDirection = TargetDirection;
+            MovePath.UpdatePathDirection(transform.position, Capsule);
+        }
+        Vector3 RotatedDirection = Quaternion.Inverse(transform.rotation) * MoveDirection;
+
+        
+        InputMoveDirection = new Vector2(RotatedDirection.x, RotatedDirection.z).normalized;
+
+        
+        ViewRotation = Quaternion.RotateTowards(ViewRotation, ViewRotation * Quaternion.FromToRotation(transform.forward, MoveDirection), Time.deltaTime * 250f);
+
+        InputSprint = IsHunting;
+
+
 
         PawnAnaimator.SetFloat("SpeedX", ForwardVelocity.x);
         PawnAnaimator.SetFloat("SpeedZ", ForwardVelocity.z);
-
-        ViewRotation = Quaternion.RotateTowards(ViewRotation, ViewRotation * Quaternion.FromToRotation(transform.forward, TargetDirection), Time.deltaTime * 250f);
-
-        InputSprint = true;
-        //float Tau = Mathf.PI * 2f;
-
-        //InputView = new Vector2((((Mathf.Atan2(TargetDirection.y, TargetDirection.x) + Tau) % Tau) - ((Mathf.Atan2(transform.forward.y, transform.forward.x) + Tau) % Tau)) / (Mathf.PI * 2) * 360f, 0f);
-            
-            
-            //new Vector2(Quaternion.FromToRotation(Vector3.zero, TargetDirection).eulerAngles.y - transform.rotation.eulerAngles.y, 0f);
+        PawnAnaimator.SetBool("Attack", InputAttack);
+    }
 
 
-        //Debug.Log(InputView.ToString());
-        Debug.DrawRay(transform.position, transform.rotation * new Vector3(InputMoveDirection.x, 0.0f, InputMoveDirection.y), Color.blue);
-        Debug.DrawRay(transform.position, VelocityDirection, Color.cyan);
-        //InputMoveDirection = new Vector2(1, 0);
-        //ViewDirection = Quaternion.FromToRotation(Vector3.zero, TargetDirection);
+
+
+    protected void UpdateDetection()
+    {
+        PreyDetected = false;
+
+        // If there is no prey.
+        if(Prey == null)
+        {
+            return;
+        }
+
+
+        // If the prey is too far away.
+        float PreyDistance = (Prey.transform.position - HeadTransform.position).magnitude;
+        if (PreyDistance > ViewDistance)
+        {
+            return;
+        }
+
+        // If the prey is outside of the view angle.
+        Vector3 PreyDirection = (Prey.transform.position - HeadTransform.position).normalized;
+        float PreyAngle = Vector3.Angle(HeadTransform.forward, PreyDirection);
+        if (PreyAngle > ViewConeAngle)
+        {
+            return;
+        }
+
+        // If there is anything blocking the NPC's line of sight.
+        Ray ViewRay = new Ray(HeadTransform.position, PreyDirection);
+        if(Physics.Raycast(ViewRay, PreyDistance, ViewBlockers))
+        {
+            return;
+        }
+        
+        PreyDetected = true;
+    }
+
+    protected void StartHunting()
+    {
+        IsHunting = true;
+    }
+    protected void StopHunting()
+    {
+        IsHunting = false;
+    }
+
+    protected Vector3 GetRandomPointOfInterest()
+    {
+        GameObject[] Points = GameObject.FindGameObjectsWithTag("PointOfInterest");
+
+        return Points[Random.Range(0, Points.Length)].transform.position;
     }
 }

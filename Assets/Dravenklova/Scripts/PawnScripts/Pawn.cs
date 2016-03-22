@@ -458,7 +458,7 @@ public abstract class Pawn : MonoBehaviour
         set { m_EquippedWeapon = value; }
     }
 
-    private enum WeaponType : int { None, Crossbow }
+    private enum WeaponType : int { None, Crossbow, Claws }
 
     private WeaponType EquippedType
     {
@@ -518,6 +518,11 @@ public abstract class Pawn : MonoBehaviour
     public enum WeaponAction : int { Attack, Reload };
     protected void UseWeapon(WeaponAction a_Action)
     {
+        if(EquippedWeapon == null)
+        {
+            return;
+        }
+
         switch(a_Action)
         {
             case WeaponAction.Attack:

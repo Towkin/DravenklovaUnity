@@ -658,9 +658,9 @@ GameObject:
   - 95: {fileID: 9582006}
   - 114: {fileID: 11400764}
   - 114: {fileID: 11445870}
-  - 114: {fileID: 11477088}
   - 136: {fileID: 13644704}
   - 54: {fileID: 5492510}
+  - 114: {fileID: 11495630}
   m_Layer: 0
   m_Name: ghoulprefab
   m_TagString: Enemy
@@ -1763,7 +1763,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 14.03, y: 1.45, z: 5.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 418706}
@@ -2060,6 +2060,17 @@ MonoBehaviour:
   m_IsAiming: 0
   m_AimPrecision: 10
   m_PawnAnimatior: {fileID: 9582006}
+  m_MovePath: {fileID: 11495630}
+  m_AttackRange: 1
+  m_Prey: {fileID: 0}
+  m_IdleTimeMax: 2
+  m_IdleTimeVariance: 1
+  m_ViewConeAngle: 80
+  m_ViewDistance: 40
+  m_ViewBlockers:
+    serializedVersion: 2
+    m_Bits: 3584
+  m_HeadTransform: {fileID: 470206}
 --- !u!114 &11445870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2080,7 +2091,7 @@ MonoBehaviour:
   bezierTangentLength: 0.4
   offset: 0.2
   factor: 0.1
---- !u!114 &11477088
+--- !u!114 &11495630
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2088,7 +2099,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 160680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d3b9bee24fabcd4b95d8450849600fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 4600874a2c63e3645b9a971ff25bfb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &13644704
