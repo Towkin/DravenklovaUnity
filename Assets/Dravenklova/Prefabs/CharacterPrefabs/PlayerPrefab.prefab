@@ -409,6 +409,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 480140}
   - 114: {fileID: 11479572}
+  - 114: {fileID: 11414792}
   m_Layer: 0
   m_Name: PlayerScript
   m_TagString: Untagged
@@ -969,7 +970,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -983,7 +984,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.2588, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000023751231, y: 0.2703247, z: -0.0000001210049}
+  m_ConnectedAnchor: {x: 0.000000059602954, y: 0.2703244, z: -4.49749e-10}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -1015,7 +1016,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5137363, z: 0}
   m_Axis: {x: 1, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0020000935, y: 0.015728194, z: 0.1363977}
+  m_ConnectedAnchor: {x: 0.0020002723, y: 0.015728392, z: 0.13639767}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -1121,8 +1122,8 @@ Light:
   serializedVersion: 6
   m_Type: 2
   m_Color: {r: 0.9338235, g: 0.8396835, b: 0.4463127, a: 1}
-  m_Intensity: 1
-  m_Range: 10.17
+  m_Intensity: 2.35
+  m_Range: 20.32
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1144,6 +1145,20 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11414792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c677ffe798ac8694096ef01528961d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackerDeltaTime: 0.25
+  m_PlayerCameraObject: {fileID: 153286}
+  m_LevelGenerator: {fileID: 0}
 --- !u!114 &11417916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1157,7 +1172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BoltTemplateWood: {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
   m_BoltSpawnLocation: {fileID: 160910}
-  m_BoltImpulse: 50
+  m_BoltImpulse: 30
   m_IsLoaded: 0
 --- !u!114 &11478660
 MonoBehaviour:
@@ -1185,11 +1200,11 @@ MonoBehaviour:
   m_Collider: {fileID: 13689928}
   m_SprintSpeedMultiplier: 2.51
   m_AimSpeedMultiplier: 0.164
-  m_MaxSpeed: 3.7
-  m_Acceleration: 39
-  m_Deacceleration: 50
-  m_Decay: 0.791
-  m_JumpAcceleration: 33.8
+  m_MaxSpeed: 3
+  m_Acceleration: 25.8
+  m_Deacceleration: 79.9
+  m_Decay: 0.822
+  m_JumpAcceleration: 45.3
   m_AirControl: 0.339
   m_JumpTimeMax: 0.096
   m_PawnGravity: {x: 0, y: -9.82, z: 0}
@@ -1202,12 +1217,17 @@ MonoBehaviour:
   m_Holy: 0
   m_Oil: 0
   m_IsAiming: 0
-  m_AimPrecision: 10
-  m_SearchDist: 100
+  m_AimPrecision: 5
+  m_SearchDistance: 2
+  m_SearchRadius: 0.6
+  m_HealthBar:
+    m_Bar: {fileID: 0}
+    m_MaxVal: 0
+    m_CurrentVal: 0
   m_StartingWeapon: {fileID: 11417916}
   m_StartingWeaponAmmo: 5
   m_Cam: {fileID: 2056092}
-  m_FOVAimed: 25
+  m_FOVAimed: 45
   m_FOVDefault: 0
 --- !u!124 &12451630
 Behaviour:
@@ -1225,7 +1245,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 0.3
   m_Height: 1.75
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

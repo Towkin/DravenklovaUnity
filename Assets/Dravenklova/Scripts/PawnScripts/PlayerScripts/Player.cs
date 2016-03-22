@@ -15,9 +15,7 @@ public class Player : Pawn {
             Cam.transform.rotation = value;
         }
     }
-
     
-
     #region Player world interaction
     [Header("World interaction")]
     [SerializeField]
@@ -37,7 +35,25 @@ public class Player : Pawn {
 
     #region Player components
     [Header("Player Components")]
-    
+
+    [SerializeField]
+    private StatScript m_HealthBar;
+    private StatScript HealthBar
+    {
+        get { return m_HealthBar; }
+    }
+
+    public override float Health
+    {
+        get { return base.Health; }
+        set
+        {
+            base.Health = value;
+
+            HealthBar.CurrentVal = HealthPercentage;
+        }
+    }
+
 
     [SerializeField]
     private Weapon m_StartingWeapon;
@@ -81,6 +97,9 @@ public class Player : Pawn {
     {
         get { return InputAim ? FOVAimed : FOVDefault; }
     }
+
+    
+
     #endregion
 
 
@@ -92,6 +111,8 @@ public class Player : Pawn {
         EquippedWeapon = StartingWeapon;
         EquippedAmmo = StartingWeaponAmmo;
         Cursor.lockState = CursorLockMode.Locked;
+
+        HealthBar.Initialize();
     }
 	
 	protected override void Update ()
@@ -104,6 +125,11 @@ public class Player : Pawn {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
+        }
+
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            Health -= 0.1f;
         }
     }
     
@@ -142,7 +168,7 @@ public class Player : Pawn {
                 {
                     // TODO: UI message informing that Item is usable
                     //Debug.Log(Prop);
-
+                    Prop.StartGlow();
                     Debug.DrawLine(Cam.transform.position, Prop.transform.position, Color.blue);
 
                     if (InputUse && !HasUsed)
