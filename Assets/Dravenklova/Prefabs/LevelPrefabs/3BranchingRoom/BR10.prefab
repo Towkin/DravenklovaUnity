@@ -348,7 +348,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 470798}
   m_Layer: 0
-  m_Name: Room21
+  m_Name: BR10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

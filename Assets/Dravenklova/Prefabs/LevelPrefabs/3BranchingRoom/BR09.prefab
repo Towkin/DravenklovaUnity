@@ -627,7 +627,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 457078}
   m_Layer: 0
-  m_Name: Cathedral
+  m_Name: BR09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
