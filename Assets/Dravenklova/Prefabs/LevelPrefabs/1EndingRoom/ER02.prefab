@@ -461,6 +461,7 @@ GameObject:
   - 33: {fileID: 3324770}
   - 23: {fileID: 2356176}
   - 95: {fileID: 9519658}
+  - 64: {fileID: 6436714}
   m_Layer: 0
   m_Name: Door_Ark_Long (2)
   m_TagString: Untagged
@@ -1865,6 +1866,7 @@ GameObject:
   - 33: {fileID: 3320488}
   - 23: {fileID: 2317592}
   - 95: {fileID: 9551636}
+  - 64: {fileID: 6477926}
   m_Layer: 0
   m_Name: Door_Ark_Long
   m_TagString: Untagged
@@ -2537,6 +2539,7 @@ GameObject:
   - 33: {fileID: 3364912}
   - 23: {fileID: 2312716}
   - 95: {fileID: 9573026}
+  - 64: {fileID: 6409516}
   m_Layer: 0
   m_Name: Door_Ark_Long (3)
   m_TagString: Untagged
@@ -15619,6 +15622,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 69abb77f0f1677b43a15ca66e1025bc3, type: 3}
+--- !u!64 &6409516
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154900}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 6d30a95666819cc40b0121f7613eac6d, type: 3}
 --- !u!64 &6414688
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -15703,6 +15718,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 69abb77f0f1677b43a15ca66e1025bc3, type: 3}
+--- !u!64 &6436714
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110740}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 6d30a95666819cc40b0121f7613eac6d, type: 3}
 --- !u!64 &6441204
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -15883,6 +15910,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 9c2b959b7e8abcb40b7b5c9af4b41e40, type: 3}
+--- !u!64 &6477926
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 6d30a95666819cc40b0121f7613eac6d, type: 3}
 --- !u!64 &6479868
 MeshCollider:
   m_ObjectHideFlags: 1

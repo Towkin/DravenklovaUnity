@@ -60,7 +60,7 @@ public class PathMoveBehaviour : MonoBehaviour
 
     void Awake () {
         Pathfinder = GetComponent<Seeker>();
-        DetectionMask = LayerMask.GetMask("Interior/Wall", "Interior / Ceiling", "Interior/Obstacle");
+        DetectionMask = LayerMask.GetMask("Default", "Interior/Wall", "Interior / Ceiling", "Interior/Obstacle");
         Debug.Log("DetectionaMask: " + DetectionMask.ToString());
 	}
 
@@ -102,9 +102,9 @@ public class PathMoveBehaviour : MonoBehaviour
 
         if ((CurrentPathIndex + 1) < CurrentPath.vectorPath.Count)
         {
-            Ray CastRay = new Ray(a_CurrentLocation, (CurrentPath.vectorPath[CurrentPathIndex + 1] - a_CurrentLocation).normalized);
+            Ray CastRay = new Ray(a_CurrentLocation + Vector3.up * 0.5f, (CurrentPath.vectorPath[CurrentPathIndex + 1] - a_CurrentLocation).normalized);
             float TestDistance = Vector3.Distance(CurrentPath.vectorPath[CurrentPathIndex + 1], a_CurrentLocation);
-            float TestRadius = a_Capsule.radius + 0.05f;
+            float TestRadius = a_Capsule.radius - 0.10f;
             Hit = Physics.SphereCast(CastRay, TestRadius, TestDistance, DetectionMask);
             Color RayColor = Hit ? Color.red : Color.green;
 

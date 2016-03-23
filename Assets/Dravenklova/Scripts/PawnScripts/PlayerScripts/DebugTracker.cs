@@ -7,6 +7,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class DebugTracker : MonoBehaviour {
 
+    [SerializeField]
+    private bool m_IsTrackingData = true;
+    public bool IsTrackingData
+    {
+        get { return m_IsTrackingData; }
+    }
+
     private BinaryFormatter m_Formatter = new BinaryFormatter();
     private BinaryFormatter Formatter
     {
@@ -49,6 +56,7 @@ public class DebugTracker : MonoBehaviour {
     private LevelDigger LevelGenerator
     {
         get { return m_LevelGenerator; }
+        set { m_LevelGenerator = value; }
     }
     #endregion
     private float m_TrackerTime = 0f;
@@ -60,6 +68,15 @@ public class DebugTracker : MonoBehaviour {
 
     void Start ()
     {
+        if (!IsTrackingData)
+        {
+            return;
+        }
+        if(LevelGenerator == null)
+        {
+            LevelGenerator = FindObjectOfType<LevelDigger>();
+        }
+
         FileName = DirectoryName + "\\TrackerFile_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".dat";
         Debug.Log(FileName);
         Data = new TrackerData(LevelGenerator.Seed, LevelGenerator.LevelLength); 
@@ -68,6 +85,11 @@ public class DebugTracker : MonoBehaviour {
 	
     void FixedUpdate ()
     {
+        if (!IsTrackingData)
+        {
+            return;
+        }
+
         TrackerTime += Time.fixedDeltaTime;
         if (TrackerDeltaTime <= 0f)
         {
@@ -82,6 +104,11 @@ public class DebugTracker : MonoBehaviour {
     }
     void OnDestroy ()
     {
+        if (!IsTrackingData)
+        {
+            return;
+        }
+
         SaveData();
     }
 

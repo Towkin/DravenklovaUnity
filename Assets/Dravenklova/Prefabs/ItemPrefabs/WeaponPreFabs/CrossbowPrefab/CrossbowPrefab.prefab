@@ -129,8 +129,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185562}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0.418, y: -0.367, z: 0.7088362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 422242}
@@ -185,7 +185,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156844}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0, y: 0.0427, z: -0.0771}
+  m_LocalPosition: {x: 0, y: 0.0427, z: -0.0628}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 407840}
@@ -254,6 +254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573df9cc1dac0da488aeed0e911d90ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GlowRenderers: []
+  m_HighLightTimerMax: 0.1
+  m_GlowShader: {fileID: 0}
   m_BoltTemplateWood: {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
   m_BoltSpawnLocation: {fileID: 156844}
   m_BoltImpulse: 50

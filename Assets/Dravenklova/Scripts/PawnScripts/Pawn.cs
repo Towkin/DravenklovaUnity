@@ -594,9 +594,16 @@ public abstract class Pawn : MonoBehaviour
             {
                 IsJumping = InputJump;
             }
+
+
+            Velocity += (PawnGravity / 10f) * a_DeltaTime;
+        }
+        else
+        {
+            Velocity += PawnGravity * a_DeltaTime;
         }
         
-        Velocity += PawnGravity * a_DeltaTime;
+        
         
         if (IsJumping)
         {
@@ -716,6 +723,11 @@ public abstract class Pawn : MonoBehaviour
 
     protected virtual void UpdatePawnState()
     {
+        if (transform.position.y < -100f)
+        {
+            Destroy(Capsule.gameObject);
+        }
+
         Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.01f, 0f);
         float TestRadius = Capsule.radius - 0.005f;
 

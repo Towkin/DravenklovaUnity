@@ -26,6 +26,7 @@ public class NPC : Pawn
         set { m_TargetObject = value; }
     }
 
+    private Vector3 m_LastTargetLocation = Vector3.zero;
     private Vector3 m_TargetLocation = Vector3.zero;
     public Vector3 TargetLocation
     {
@@ -40,6 +41,13 @@ public class NPC : Pawn
         set
         {
             m_TargetLocation = value;
+            if(m_LastTargetLocation != value && (Time.realtimeSinceStartup - LastPathUpdateTime) > PathUpdateTimeMin)
+            {
+                // Note: Pathing is slightly delayed, and ignore requests if busy.
+                MovePath.StartNewPath(value);
+                LastPathUpdateTime = Time.realtimeSinceStartup;
+
+            }
         }
     }
     public Vector3 TargetDirection
@@ -91,8 +99,8 @@ public class NPC : Pawn
     {
         get { return TargetDistance < m_TargetRadius; }
     }
-    private float m_StraightLineRadiusEntry = 3f;
-    private float m_StraightLineRadiusExit = 10f;
+    private float m_StraightLineRadiusEntry = 10f;
+    private float m_StraightLineRadiusExit = 20f;
     private bool m_StraightLineCurrently = false;
     public bool UseStraightLine
     {
@@ -175,18 +183,25 @@ public class NPC : Pawn
     #endregion
 
     #region PathUpdate attributes
-    private float m_PathTimer = 0f;
-    public float PathTimer
+    private float m_LastPathUpdateTime = 0f;
+    public float LastPathUpdateTime
     {
-        get { return m_PathTimer; }
-        protected set { m_PathTimer = value; }
+        get { return m_LastPathUpdateTime; }
+        protected set { m_LastPathUpdateTime = value; }
     }
-    private float m_PathTimerMax = 0.5f;
-    public float PathTimerMax
+    private float m_PathUpdateTimeMin = 0.5f;
+    public float PathUpdateTimeMin
     {
-        get { return m_PathTimerMax; }
-        protected set { m_PathTimerMax = value; }
+        get { return m_PathUpdateTimeMin; }
+        protected set { m_PathUpdateTimeMin = value; }
     }
+    [SerializeField]
+    private float m_POIMaxDistance = 125f;
+    public float POIMaxDistance
+    {
+        get { return m_POIMaxDistance; }
+    }
+
 
     #endregion
     
@@ -248,9 +263,7 @@ public class NPC : Pawn
             return;
         }
 
-        // Note: Pathing is slightly delayed, and ignore requests if busy.
-        MovePath.StartNewPath(TargetLocation);
-
+        
         UpdateDetection();
 
         InputAttack = false;
@@ -314,7 +327,7 @@ public class NPC : Pawn
 
         // Note: In the UpdatePathDirection-function must be run at least once per frame.
         Vector3 MoveDirection = MovePath.UpdatePathDirection(transform.position, Capsule);
-        if (UseStraightLine)
+        if (UseStraightLine && !Physics.Raycast(HeadTransform.position, (TargetLocation - HeadTransform.position).normalized, (TargetLocation - HeadTransform.position).magnitude, ViewBlockers))
         {
             MoveDirection = TargetDirection;
         }
@@ -322,7 +335,7 @@ public class NPC : Pawn
         Vector3 RotatedDirection = Quaternion.Inverse(transform.rotation) * MoveDirection;
 
         
-        InputMoveDirection = new Vector2(RotatedDirection.x, RotatedDirection.z).normalized * Mathf.Min(1f, TargetDistance);
+        InputMoveDirection = new Vector2(RotatedDirection.x, RotatedDirection.z).normalized * Mathf.Clamp01(TargetDistance - 1.5f);
 
         
 
@@ -331,8 +344,20 @@ public class NPC : Pawn
         {
             ViewDirection = TargetDirection;
         }
+
+
+        //ViewRotation = Quaternion.Euler(0f, ViewRotation.eulerAngles.y + Quaternion.FromToRotation(transform.forward, ViewDirection).eulerAngles.y, 0f);
         
-        ViewRotation = Quaternion.RotateTowards(ViewRotation, ViewRotation * Quaternion.FromToRotation(transform.forward, ViewDirection), Time.deltaTime * TurnRate);
+        
+        
+        ViewRotation = Quaternion.RotateTowards(
+            ViewRotation, 
+            ViewRotation * Quaternion.FromToRotation(
+                transform.forward,
+                ViewDirection
+            ), 
+            Time.deltaTime * TurnRate
+        );
 
         InputSprint = IsHunting;
 
@@ -344,7 +369,10 @@ public class NPC : Pawn
     }
 
 
+    protected void UpdateTarget()
+    {
 
+    }
 
     protected void UpdateDetection()
     {
@@ -373,7 +401,7 @@ public class NPC : Pawn
         }
 
         // If there is anything blocking the NPC's line of sight.
-        Ray ViewRay = new Ray(HeadTransform.position, PreyDirection);
+        Ray ViewRay = new Ray(HeadTransform.position + HeadTransform.forward * 0.5f, PreyDirection);
         if(Physics.Raycast(ViewRay, PreyDistance, ViewBlockers))
         {
             return;
@@ -395,6 +423,22 @@ public class NPC : Pawn
     {
         GameObject[] Points = GameObject.FindGameObjectsWithTag("PointOfInterest");
 
-        return Points[Random.Range(0, Points.Length)].transform.position;
+        System.Collections.Generic.List<GameObject> PointsInRange = new System.Collections.Generic.List<GameObject>();
+
+        foreach(GameObject Point in Points)
+        {
+            if((Point.transform.position - transform.position).magnitude < POIMaxDistance)
+            {
+                PointsInRange.Add(Point);
+            }
+        }
+
+        if (PointsInRange.Count <= 1)
+        {
+            return Points[Random.Range(0, Points.Length)].transform.position;
+        }
+        
+        return PointsInRange[Random.Range(0, PointsInRange.Count)].transform.position;
+
     }
 }

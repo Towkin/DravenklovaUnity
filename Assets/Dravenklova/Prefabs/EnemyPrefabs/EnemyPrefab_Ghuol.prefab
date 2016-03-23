@@ -1980,7 +1980,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!95 &9582006
 Animator:
@@ -2051,7 +2051,7 @@ MonoBehaviour:
   m_PawnGravity: {x: 0, y: -9.82, z: 0}
   m_WalkThreshold: 2
   m_RunThreshold: 4
-  m_TurnRate: 250
+  m_TurnRate: 100
   m_Health: 1
   m_HealthMax: 1
   m_Sanity: 0
@@ -2066,11 +2066,12 @@ MonoBehaviour:
   m_FindAndSetPlayerAsPrey: 1
   m_IdleTimeMax: 10
   m_IdleTimeVariance: 5
+  m_POIMaxDistance: 125
   m_ViewConeAngle: 80
   m_ViewDistance: 40
   m_ViewBlockers:
     serializedVersion: 2
-    m_Bits: 3584
+    m_Bits: 3585
   m_HeadTransform: {fileID: 470206}
 --- !u!114 &11445870
 MonoBehaviour:
@@ -2078,7 +2079,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
   m_Name: 
@@ -2103,7 +2104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4600874a2c63e3645b9a971ff25bfb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PathMaxDistance: 1
+  m_PathMaxDistance: 10
   m_PathMinDistance: 0.25
 --- !u!136 &13644704
 CapsuleCollider:
