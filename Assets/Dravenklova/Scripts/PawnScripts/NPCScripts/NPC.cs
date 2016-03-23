@@ -40,8 +40,6 @@ public class NPC : Pawn
         set
         {
             m_TargetLocation = value;
-            // Note: Pathing is slightly delayed, and ignore requests if busy.
-            MovePath.StartNewPath(value);
         }
     }
     public Vector3 TargetDirection
@@ -175,6 +173,22 @@ public class NPC : Pawn
     }
 
     #endregion
+
+    #region PathUpdate attributes
+    private float m_PathTimer = 0f;
+    public float PathTimer
+    {
+        get { return m_PathTimer; }
+        protected set { m_PathTimer = value; }
+    }
+    private float m_PathTimerMax = 0.5f;
+    public float PathTimerMax
+    {
+        get { return m_PathTimerMax; }
+        protected set { m_PathTimerMax = value; }
+    }
+
+    #endregion
     
     #region Detection attributes
     [Header("Detection Attributes")]
@@ -233,6 +247,9 @@ public class NPC : Pawn
             
             return;
         }
+
+        // Note: Pathing is slightly delayed, and ignore requests if busy.
+        MovePath.StartNewPath(TargetLocation);
 
         UpdateDetection();
 
