@@ -123,6 +123,8 @@ public class Player : Pawn {
         Cursor.lockState = CursorLockMode.Locked;
 
         HealthBar.Initialize();
+
+        Capsule.transform.parent = null;
     }
 	
 	protected override void Update ()
