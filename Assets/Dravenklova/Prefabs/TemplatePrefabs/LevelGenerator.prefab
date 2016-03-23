@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Seed: 665341182
   m_Cube: {fileID: 0}
   m_LevelLength: 7
-  m_FirstRoom: {fileID: 189438, guid: d0dda9b3aa73f6f42ae75d425c15de4c, type: 2}
+  m_FirstRoom: {fileID: 158396, guid: 57c227fc1177c034499841a6b1ca43a3, type: 2}
   m_BranchingRooms:
   - {fileID: 105892, guid: 8693fbdc613a7fd49bf72a1f664650b0, type: 2}
   - {fileID: 118030, guid: 3193aea0cc2a19f4a95d580f08605e0d, type: 2}
@@ -57,7 +57,7 @@ MonoBehaviour:
   - {fileID: 194164, guid: dfba7e4bfef8ddf478a4c71a6aff5bc5, type: 2}
   - {fileID: 130354, guid: f5134d121f5e7df4abe09a40bc57ccca, type: 2}
   - {fileID: 122820, guid: 187becab1626ef74cbd155825f6303f8, type: 2}
-  - {fileID: 148464, guid: f49b55adb3936904eae19b054a30ac20, type: 2}
+  - {fileID: 148464, guid: 18fecd6eab50cd94dab0058012e171ed, type: 2}
   - {fileID: 147656, guid: f4780a6e4d619354399f250c3599a407, type: 2}
   - {fileID: 129560, guid: b874e2654dd802e488fbfde8af42542f, type: 2}
   - {fileID: 101382, guid: e5e7b9493c7ac8d4aa17cb714ca990b8, type: 2}
