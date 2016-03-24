@@ -24,6 +24,8 @@ public class Bolt : Consumable
         Destroy(gameObject);
     }
 
+    
+
     /*void FixedUpdate ()
     {
 	    if(!BoltBody.isKinematic)

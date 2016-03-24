@@ -9394,6 +9394,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11481042, guid: 65e97d538164b6c45bb60f9dae3de0d2, type: 2}
+      propertyPath: m_TrackingData
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 65e97d538164b6c45bb60f9dae3de0d2, type: 2}
   m_IsPrefabParent: 0
@@ -10018,7 +10022,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &1294185855
 GameObject:
   m_ObjectHideFlags: 0
@@ -10350,49 +10354,6 @@ Transform:
   - {fileID: 1650482824}
   m_Father: {fileID: 1518029734}
   m_RootOrder: 0
---- !u!1 &1547386814
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1547386815}
-  - 114: {fileID: 1547386816}
-  m_Layer: 0
-  m_Name: DebugTrackerVisualizer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1547386815
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1547386814}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3701835, y: 0.29122162, z: -7.09735}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
---- !u!114 &1547386816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1547386814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed94677f983e7dc499e1fa49e513a6af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FileName: TrackingData/TrackerFile_2016-03-16_15-19-12.dat
-  m_ColorRate: 2.52
-  m_DirectionLength: 1
-  m_TimeStampStep: 100
 --- !u!1 &1586983745
 GameObject:
   m_ObjectHideFlags: 0

@@ -441,4 +441,13 @@ public class NPC : Pawn
         return PointsInRange[Random.Range(0, PointsInRange.Count)].transform.position;
 
     }
+
+    void OnCollisionEnter(Collision Coll)
+    {
+        Debug.Log("You're not an idiot!");
+        if (Coll.gameObject.GetComponent<Bolt>())
+        {
+            IsAlive = false;
+        }
+    }
 }

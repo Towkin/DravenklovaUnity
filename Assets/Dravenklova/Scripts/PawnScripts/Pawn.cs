@@ -640,20 +640,32 @@ public abstract class Pawn : MonoBehaviour
                 MoveHits = Physics.CapsuleCastAll(CapsulePositionBottom, CapsulePositionTop, Capsule.radius, VelocityDirection, Speed * a_DeltaTime);
 
                 FoundHits = false;
+                //for(int i = 0; i < MoveHits.Length; i++)
+                //{
+                    //RaycastHit Hit = MoveHits[i];
                 foreach(RaycastHit Hit in MoveHits)
-                {
+                { 
+
                     // Skip potential triggers and the Pawn's collider
-                    if(Hit.collider == this.Capsule || Hit.collider.isTrigger)
+                    if (Hit.collider == this.Capsule || Hit.collider.isTrigger)
                     {
                         continue;
                     }
 
+                    // Bug in Unity Physics, somewhat error-prone solution should be below:
+                    if (Hit.point == Vector3.zero)
+                    {
+                        //Hit.normal = Hit.normal.normalized;
+                    }
+
                     // If the hit has a rigidbody, skip it.
                     // TODO: Look for better solution: as of now, the pawn is literally an unstoppable force in the physics-world.
-                    if(Hit.rigidbody != null)
+                        if (Hit.rigidbody != null)
                     {
                         
                     }
+
+                    
 
                     FoundHits = true;
                     
