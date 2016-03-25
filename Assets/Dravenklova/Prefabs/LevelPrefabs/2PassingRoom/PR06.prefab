@@ -12742,7 +12742,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130118}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -19292,8 +19292,8 @@ Light:
   serializedVersion: 6
   m_Type: 2
   m_Color: {r: 0.9411765, g: 0.80563176, b: 0.449827, a: 1}
-  m_Intensity: 2
-  m_Range: 20
+  m_Intensity: 1
+  m_Range: 18.7
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -19311,7 +19311,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 4
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
@@ -19325,8 +19325,8 @@ Light:
   serializedVersion: 6
   m_Type: 2
   m_Color: {r: 0.9411765, g: 0.80563176, b: 0.449827, a: 1}
-  m_Intensity: 2
-  m_Range: 20
+  m_Intensity: 1
+  m_Range: 18.7
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -19344,7 +19344,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 4
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}

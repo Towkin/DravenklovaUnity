@@ -12,12 +12,18 @@ public abstract class Pawn : MonoBehaviour
         get { return m_PhysicsBody; }
         set { m_PhysicsBody = value; }
     }
-    [SerializeField]
+    /*[SerializeField]
     private CapsuleCollider m_Collider;
     public CapsuleCollider Capsule
     {
         get { return m_Collider; }
         set { m_Collider = value; }
+    }*/
+    [SerializeField]
+    private CharacterController m_Controller;
+    public CharacterController Controller
+    {
+        get { return m_Controller; }
     }
     #endregion
 
@@ -87,6 +93,8 @@ public abstract class Pawn : MonoBehaviour
     private Vector3 m_Velocity = Vector3.zero;
     private Vector3 m_LastDirection = Vector3.forward;
     private Vector2 m_LastPlanarDirection = Vector2.up;
+    private Vector3 m_PlanarNormal = Vector3.up;
+    
     public Vector3 Velocity
     {
         get { return m_Velocity; }
@@ -104,9 +112,21 @@ public abstract class Pawn : MonoBehaviour
             }
         }
     }
+    public Vector3 PlanarNormal
+    {
+        get { return m_PlanarNormal; }
+        protected set { m_PlanarNormal = value; }
+    }
+
     public Vector2 PlanarVelocity
     {
-        get { return new Vector2(Velocity.x, Velocity.z); }
+        get
+        {
+            // TODO: Make sure the PlanarVelocity is a vector along the PlanarNormal axis, and not just {x, z}.
+            //Vector3 ProjectedVelocity = Vector3.ProjectOnPlane(Velocity, PlanarNormal);
+
+            return new Vector2(Velocity.x, Velocity.z);
+        }
         set { Velocity = new Vector3(value.x, Velocity.y, value.y); }
     }
     public float Speed
@@ -506,17 +526,23 @@ public abstract class Pawn : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        UpdateRotation();
-        UpdatePawnState();
-        UpdateMovement(Time.fixedDeltaTime);
-        Aim();
+        if (IsAlive)
+        {
+            UpdateRotation();
+            UpdatePawnState();
+            UpdateMovement(Time.fixedDeltaTime);
+            Aim();
+        }
     }
 
 
     protected virtual void Update()
     {
-        UpdateInput();
-        UpdateWeapon();
+        if (IsAlive)
+        {
+            UpdateInput();
+            UpdateWeapon();
+        }
     }
 
 
@@ -562,10 +588,7 @@ public abstract class Pawn : MonoBehaviour
     
     protected virtual void UpdateMovement(float a_DeltaTime)
     {
-        if (!PhysicsBody.isKinematic)
-        {
-            Velocity = PhysicsBody.velocity;
-        }
+        Velocity = Controller.velocity;
         
         Vector2 MoveAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
         PlanarSpeed *= Mathf.Pow(1f - Decay * (IsGrounded ? 1.00f : AirControl), a_DeltaTime);
@@ -596,7 +619,7 @@ public abstract class Pawn : MonoBehaviour
             }
 
 
-            Velocity += (PawnGravity / 10f) * a_DeltaTime;
+            //Velocity += (PawnGravity / 10f) * a_DeltaTime;
         }
         else
         {
@@ -614,87 +637,8 @@ public abstract class Pawn : MonoBehaviour
                 IsJumping = false;
             }
         }
-
-
-        if (!PhysicsBody.isKinematic)
-        {
-            PhysicsBody.velocity = Velocity;
-        }
-        else
-        {
-            int Counter = 0;
-            bool FoundHits = true;
-
-            // Bugged, TODO: It probably finds the item(s) it collides with over and over: find out why.
-            while (FoundHits && Counter < 100)
-            {
-                Counter++;
-
-                Vector3 HalfCenterOriginDistance = new Vector3();
-                HalfCenterOriginDistance[Capsule.direction] = ((Capsule.height / 2) - Capsule.radius);
-
-                Vector3 CapsulePositionTop = Capsule.transform.position + Capsule.center + HalfCenterOriginDistance;
-                Vector3 CapsulePositionBottom = Capsule.transform.position + Capsule.center - HalfCenterOriginDistance;
-
-                RaycastHit[] MoveHits;
-                MoveHits = Physics.CapsuleCastAll(CapsulePositionBottom, CapsulePositionTop, Capsule.radius, VelocityDirection, Speed * a_DeltaTime);
-
-                FoundHits = false;
-                //for(int i = 0; i < MoveHits.Length; i++)
-                //{
-                    //RaycastHit Hit = MoveHits[i];
-                foreach(RaycastHit Hit in MoveHits)
-                { 
-
-                    // Skip potential triggers and the Pawn's collider
-                    if (Hit.collider == this.Capsule || Hit.collider.isTrigger)
-                    {
-                        continue;
-                    }
-
-                    // Bug in Unity Physics, somewhat error-prone solution should be below:
-                    if (Hit.point == Vector3.zero)
-                    {
-                        //Hit.normal = Hit.normal.normalized;
-                    }
-
-                    // If the hit has a rigidbody, skip it.
-                    // TODO: Look for better solution: as of now, the pawn is literally an unstoppable force in the physics-world.
-                        if (Hit.rigidbody != null)
-                    {
-                        
-                    }
-
-                    
-
-                    FoundHits = true;
-                    
-                    float NormalMove = 0.001f;
-
-                    Debug.DrawRay(Hit.point, Hit.normal, Color.red, 2f, false);
-                    
-
-                    if (Hit.distance <= 0.0f)
-                    {
-                        Debug.DrawRay(PhysicsBody.transform.position, Hit.normal, Color.red, 5f, false);
-
-                        PhysicsBody.transform.position += Hit.normal * 0.05f;
-                        //PhysicsBody.transform.position += -PawnGravity * 0.01f;
-                        break;
-                    }
-
-                    Vector3 BeforeHitMove = VelocityDirection * Hit.distance;
-                    Velocity = Vector3.ProjectOnPlane(Velocity, Hit.normal) - Vector3.ProjectOnPlane(BeforeHitMove, Hit.normal) + BeforeHitMove + Hit.normal * NormalMove;
-
-                    break;
-                }
-                
-            }
-
-
-
-            PhysicsBody.transform.position += Velocity * a_DeltaTime;
-        }
+        
+        Controller.Move(Velocity * a_DeltaTime);
     }
 
     protected virtual void UpdateRotation()
@@ -737,11 +681,18 @@ public abstract class Pawn : MonoBehaviour
     {
         if (transform.position.y < -100f)
         {
-            Destroy(Capsule.gameObject);
+            if (Controller.tag == "Player")
+            {
+                IsAlive = false;
+            }
+            else
+            {
+                Destroy(Controller.gameObject);
+            }
         }
 
-        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Capsule.height / 2 + Capsule.radius - 0.01f, 0f);
-        float TestRadius = Capsule.radius - 0.005f;
+        /*Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Controller.height / 2 + Controller.radius - 0.01f, 0f);
+        float TestRadius = Controller.radius - 0.005f;
 
         Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
 
@@ -753,7 +704,9 @@ public abstract class Pawn : MonoBehaviour
                 IsGrounded = true;
                 break;
             }
-        }
+        }*/
+
+        IsGrounded = Controller.isGrounded;
     }
 
     protected virtual void UpdateWeapon()

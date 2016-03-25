@@ -189,7 +189,7 @@ public class NPC : Pawn
         get { return m_LastPathUpdateTime; }
         protected set { m_LastPathUpdateTime = value; }
     }
-    private float m_PathUpdateTimeMin = 0.5f;
+    private float m_PathUpdateTimeMin = 0.1f;
     public float PathUpdateTimeMin
     {
         get { return m_PathUpdateTimeMin; }
@@ -245,21 +245,27 @@ public class NPC : Pawn
         base.Start();
 
         TargetLocation = GetRandomPointOfInterest();
+    }
 
-        if(m_FindAndSetPlayerAsPrey)
-        {
-            Prey = GameObject.FindGameObjectWithTag("Player");
-        }
+    protected override void Update()
+    {
+        base.Update();
+        UpdateAnimator();
+    }
+
+    protected virtual void UpdateAnimator()
+    {
+        PawnAnaimator.SetBool("IsDead", !IsAlive);
+        PawnAnaimator.SetFloat("SpeedX", ForwardVelocity.x);
+        PawnAnaimator.SetFloat("SpeedZ", ForwardVelocity.z);
+        PawnAnaimator.SetBool("Attack", InputAttack);
+        //PawnAnaimator.SetBool("WasHit", )
     }
 
     protected override void UpdateInput()
     {
-        PawnAnaimator.SetBool("IsDead", !IsAlive);
         if (!IsAlive)
         {
-            InputMoveDirection = Vector2.zero;
-            InputSprint = false;
-            
             return;
         }
 
@@ -326,7 +332,7 @@ public class NPC : Pawn
         }
 
         // Note: In the UpdatePathDirection-function must be run at least once per frame.
-        Vector3 MoveDirection = MovePath.UpdatePathDirection(transform.position, Capsule);
+        Vector3 MoveDirection = MovePath.UpdatePathDirection(transform.position, Controller.radius);
         if (UseStraightLine && !Physics.Raycast(HeadTransform.position, (TargetLocation - HeadTransform.position).normalized, (TargetLocation - HeadTransform.position).magnitude, ViewBlockers))
         {
             MoveDirection = TargetDirection;
@@ -337,35 +343,25 @@ public class NPC : Pawn
         
         InputMoveDirection = new Vector2(RotatedDirection.x, RotatedDirection.z).normalized * Mathf.Clamp01(TargetDistance - 1.5f);
 
-        
+        //new Vector2(Vector2.Angle(new Vector2(1f, 0f), InputMoveDirection), 0f);
 
-        Vector3 ViewDirection = VelocityDirection;
-        if(IsHunting)
-        {
-            ViewDirection = TargetDirection;
-        }
-
-
-        //ViewRotation = Quaternion.Euler(0f, ViewRotation.eulerAngles.y + Quaternion.FromToRotation(transform.forward, ViewDirection).eulerAngles.y, 0f);
+        Vector2 Forward2D = new Vector2(transform.forward.x, transform.forward.z);
+        Vector2 Move2D = new Vector2(RotatedDirection.x, RotatedDirection.z);
         
-        
-        
-        ViewRotation = Quaternion.RotateTowards(
-            ViewRotation, 
-            ViewRotation * Quaternion.FromToRotation(
-                transform.forward,
-                ViewDirection
+        InputView = new Vector2(
+            Mathf.Clamp(
+                (360f * Mathf.Atan2(Move2D.x, Move2D.y) / (Mathf.PI * 2f)),
+                -Time.deltaTime * TurnRate,
+                Time.deltaTime * TurnRate
             ), 
-            Time.deltaTime * TurnRate
+            0f
         );
 
         InputSprint = IsHunting;
 
         Debug.DrawRay(transform.position, TargetDirection * TargetDistance, Color.blue, 0.2f);
 
-        PawnAnaimator.SetFloat("SpeedX", ForwardVelocity.x);
-        PawnAnaimator.SetFloat("SpeedZ", ForwardVelocity.z);
-        PawnAnaimator.SetBool("Attack", InputAttack);
+        
     }
 
 
@@ -381,6 +377,10 @@ public class NPC : Pawn
         // If there is no prey.
         if(Prey == null)
         {
+            if (m_FindAndSetPlayerAsPrey)
+            {
+                Prey = GameObject.FindGameObjectWithTag("Player");
+            }
             return;
         }
 
@@ -389,6 +389,7 @@ public class NPC : Pawn
         float PreyDistance = (Prey.transform.position - HeadTransform.position).magnitude;
         if (PreyDistance > ViewDistance)
         {
+            Debug.DrawLine(HeadTransform.position, Prey.transform.position, Color.white);
             return;
         }
 
@@ -397,6 +398,7 @@ public class NPC : Pawn
         float PreyAngle = Vector3.Angle(HeadTransform.forward, PreyDirection);
         if (PreyAngle > ViewConeAngle)
         {
+            Debug.DrawLine(HeadTransform.position, Prey.transform.position, Color.yellow);
             return;
         }
 
@@ -404,9 +406,12 @@ public class NPC : Pawn
         Ray ViewRay = new Ray(HeadTransform.position + HeadTransform.forward * 0.5f, PreyDirection);
         if(Physics.Raycast(ViewRay, PreyDistance, ViewBlockers))
         {
+            Debug.DrawLine(HeadTransform.position, Prey.transform.position, Color.red);
             return;
         }
-        
+
+        Debug.DrawLine(HeadTransform.position, Prey.transform.position, Color.green);
+
         PreyDetected = true;
     }
 
@@ -444,10 +449,16 @@ public class NPC : Pawn
 
     void OnCollisionEnter(Collision Coll)
     {
-        Debug.Log("You're not an idiot!");
         if (Coll.gameObject.GetComponent<Bolt>())
         {
             IsAlive = false;
+
+            InputAttack = false;
+            InputSprint = false;
+            InputView = Vector2.zero;
+            InputMoveDirection = Vector2.zero;
+
+            Controller.enabled = false;
         }
     }
 }

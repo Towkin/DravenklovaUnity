@@ -661,8 +661,9 @@ GameObject:
   - 136: {fileID: 13644704}
   - 54: {fileID: 5492510}
   - 114: {fileID: 11495630}
-  m_Layer: 0
-  m_Name: EnemyPrefab_Ghuol
+  - 143: {fileID: 14325378}
+  m_Layer: 14
+  m_Name: EnemyPrefab_Ghoul
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2038,11 +2039,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PhysicsBody: {fileID: 5492510}
-  m_Collider: {fileID: 13644704}
+  m_Controller: {fileID: 14325378}
   m_SprintSpeedMultiplier: 2
   m_AimSpeedMultiplier: 0.5
   m_MaxSpeed: 1.1
-  m_Acceleration: 25
+  m_Acceleration: 70
   m_Deacceleration: 60
   m_Decay: 0.8
   m_JumpAcceleration: 45
@@ -2114,7 +2115,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 160680}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.35
   m_Height: 1.8
   m_Direction: 1
@@ -2224,6 +2225,23 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0077166706, y: 0.04778582, z: 0.07444167}
     m_Extent: {x: 0.33468938, y: 0.3066314, z: 0.90508515}
   m_DirtyAABB: 0
+--- !u!143 &14325378
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160680}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.8
+  m_Radius: 0.35
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.05
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

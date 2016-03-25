@@ -280,7 +280,7 @@ GameObject:
   - 33: {fileID: 3348322}
   - 136: {fileID: 13689928}
   - 54: {fileID: 5493084}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1156,6 +1156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c677ffe798ac8694096ef01528961d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IsTrackingData: 1
   m_TrackerDeltaTime: 0.25
   m_PlayerCameraObject: {fileID: 153286}
   m_LevelGenerator: {fileID: 0}
@@ -1170,6 +1171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573df9cc1dac0da488aeed0e911d90ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GlowRenderers: []
+  m_HighLightTimerMax: 0.1
+  m_GlowShader: {fileID: 0}
   m_BoltTemplateWood: {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
   m_BoltSpawnLocation: {fileID: 160910}
   m_BoltImpulse: 30
@@ -1197,7 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PhysicsBody: {fileID: 5493084}
-  m_Collider: {fileID: 13689928}
+  m_Controller: {fileID: 0}
   m_SprintSpeedMultiplier: 2.51
   m_AimSpeedMultiplier: 0.164
   m_MaxSpeed: 3

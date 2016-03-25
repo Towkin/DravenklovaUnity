@@ -82,7 +82,7 @@ public class PathMoveBehaviour : MonoBehaviour
             CurrentPathIndex = 0;
         }
     }
-    public Vector3 UpdatePathDirection(Vector3 a_CurrentLocation, CapsuleCollider a_Capsule)
+    public Vector3 UpdatePathDirection(Vector3 a_CurrentLocation, float a_PathRadius)
     {
         Vector3 Direction = Vector3.zero;
 
@@ -102,9 +102,9 @@ public class PathMoveBehaviour : MonoBehaviour
 
         if ((CurrentPathIndex + 1) < CurrentPath.vectorPath.Count)
         {
-            Ray CastRay = new Ray(a_CurrentLocation + Vector3.up * 0.5f, (CurrentPath.vectorPath[CurrentPathIndex + 1] - a_CurrentLocation).normalized);
+            Ray CastRay = new Ray(a_CurrentLocation + Vector3.up * a_PathRadius * 2, (CurrentPath.vectorPath[CurrentPathIndex + 1] + Vector3.up * a_PathRadius - a_CurrentLocation).normalized);
             float TestDistance = Vector3.Distance(CurrentPath.vectorPath[CurrentPathIndex + 1], a_CurrentLocation);
-            float TestRadius = a_Capsule.radius - 0.10f;
+            float TestRadius = a_PathRadius;
             Hit = Physics.SphereCast(CastRay, TestRadius, TestDistance, DetectionMask);
             Color RayColor = Hit ? Color.red : Color.green;
 

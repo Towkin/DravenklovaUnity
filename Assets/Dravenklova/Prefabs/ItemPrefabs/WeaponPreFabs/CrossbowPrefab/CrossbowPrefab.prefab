@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 419550}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: String
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,7 +23,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 430676}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BowRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 422242}
   - 95: {fileID: 9504158}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: crossbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 426366}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BoltSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 476834}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BowLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 443058}
   - 137: {fileID: 13726108}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: pCube13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 407840}
   - 114: {fileID: 11421370}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrossbowPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 420216}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BowBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
