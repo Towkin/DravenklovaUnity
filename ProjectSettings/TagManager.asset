@@ -11,6 +11,7 @@ TagManager:
   - AINode
   - Fire
   - PointOfInterest
+  - ShrineEntrance
   layers:
   - Default
   - TransparentFX

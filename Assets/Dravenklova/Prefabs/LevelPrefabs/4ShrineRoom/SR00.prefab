@@ -4814,6 +4814,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &173440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 496016}
+  m_Layer: 0
+  m_Name: EntrancePoint
+  m_TagString: ShrineEntrance
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &173650
 GameObject:
   m_ObjectHideFlags: 1
@@ -9859,7 +9874,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157292}
-  m_LocalRotation: {x: 0.0064362474, y: -0.73122996, z: 0.6818691, w: 0.017772786}
+  m_LocalRotation: {x: 0.0064362464, y: -0.73122996, z: 0.6818691, w: 0.017772786}
   m_LocalPosition: {x: 3.3406343, y: -1.420248, z: 17.394783}
   m_LocalScale: {x: 0.21264817, y: 0.21264805, z: 0.21264811}
   m_Children: []
@@ -10032,6 +10047,7 @@ Transform:
   - {fileID: 406302}
   - {fileID: 435192}
   - {fileID: 435272}
+  - {fileID: 496016}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &483872
@@ -10589,6 +10605,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 483648}
   m_RootOrder: 2
+--- !u!4 &496016
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.523, y: -1.395, z: 25.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 483648}
+  m_RootOrder: 13
 --- !u!4 &496420
 Transform:
   m_ObjectHideFlags: 1
