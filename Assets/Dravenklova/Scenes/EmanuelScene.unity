@@ -269,6 +269,7 @@ MonoBehaviour:
     m_Bar: {fileID: 0}
     m_MaxVal: 0
     m_CurrentVal: 0
+  m_Fader: {fileID: 0}
   m_StartingWeapon: {fileID: 515142132}
   m_StartingWeaponAmmo: 5
   m_Cam: {fileID: 956566009}

@@ -51,7 +51,12 @@ public class Player : Pawn {
     {
         get { return m_HealthBar; }
     }
-
+    [SerializeField]
+    private FaderScript m_Fader;
+    private FaderScript Fader
+    {
+        get { return m_Fader; }
+    }
     public override float Health
     {
         get { return base.Health; }
@@ -131,6 +136,8 @@ public class Player : Pawn {
         HealthBar.Initialize();
 
         Controller.transform.parent = null;
+        if (Fader)
+            Fader.FadeIn();
     }
 	
 	protected override void Update ()
@@ -235,7 +242,8 @@ public class Player : Pawn {
         Debug.Log("Player died!");
 
         m_GameOver = true;
-
+        if(Fader)
+            Fader.FadeOut();
 
         Controller.enabled = false;
         Controller.gameObject.GetComponent<CapsuleCollider>().enabled = true;
