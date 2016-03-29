@@ -9,15 +9,11 @@ public class FaderScript : MonoBehaviour
     {
         get { return m_FadeMesh; }
     }
-    private float m_FadeMax = 1f;
-    public float FadeMax
+    private float m_Target = 0f;
+    public float Target
     {
-        get { return m_FadeMax; }
-    }
-    private float m_FadeMin = 0f;
-    public float FadeMin
-    {
-       get { return m_FadeMin; }
+        get { return m_Target; }
+        set { m_Target = Mathf.Clamp01(value); }
     }
 
     [SerializeField]
@@ -26,26 +22,21 @@ public class FaderScript : MonoBehaviour
     {
         get { return m_FadeTime; }
     }
-
-    private int m_Direction = 0;
-    public int Direction
-    {
-        get { return m_Direction; }
-        private set { m_Direction = value; }
-    }
-
+    
     public void FadeIn()
     {
-        Direction = -1;
+        Target = 0;
     }
     public void FadeOut()
     {
-        Direction = 1;
+        Target = 1;
     }
     void Update()
     {
         Color FadeColor = FadeMesh.material.color;
-        FadeColor.a = Mathf.Clamp(FadeColor.a + Direction * Time.deltaTime / FadeTime, FadeMin, FadeMax);
+        float Difference = Target - FadeColor.a;
+        float Direction = Mathf.Sign(Difference);
+        FadeColor.a = Mathf.Clamp01(FadeColor.a + Direction * Time.deltaTime / FadeTime);
         FadeMesh.material.color = FadeColor;
     }
 }
