@@ -25745,7 +25745,7 @@ MeshCollider:
   m_GameObject: {fileID: 142108}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: edae84422d8520f4f8d1b677aaab6837, type: 3}
@@ -25901,7 +25901,7 @@ MeshCollider:
   m_GameObject: {fileID: 168910}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: edae84422d8520f4f8d1b677aaab6837, type: 3}
@@ -25949,7 +25949,7 @@ MeshCollider:
   m_GameObject: {fileID: 108680}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: edae84422d8520f4f8d1b677aaab6837, type: 3}
@@ -25961,7 +25961,7 @@ MeshCollider:
   m_GameObject: {fileID: 116810}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: edae84422d8520f4f8d1b677aaab6837, type: 3}
@@ -26081,7 +26081,7 @@ MeshCollider:
   m_GameObject: {fileID: 121266}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: edae84422d8520f4f8d1b677aaab6837, type: 3}
@@ -26201,7 +26201,7 @@ MeshCollider:
   m_GameObject: {fileID: 190168}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: edae84422d8520f4f8d1b677aaab6837, type: 3}
@@ -26273,7 +26273,7 @@ MeshCollider:
   m_GameObject: {fileID: 148954}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: edae84422d8520f4f8d1b677aaab6837, type: 3}
@@ -26357,7 +26357,7 @@ MeshCollider:
   m_GameObject: {fileID: 150022}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: edae84422d8520f4f8d1b677aaab6837, type: 3}

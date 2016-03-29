@@ -33,6 +33,12 @@ public class Player : Pawn {
     {
         get { return m_SearchRadius; }
     }
+    [SerializeField]
+    private LayerMask m_ItemLayerMask;
+    public LayerMask ItemLayerMask
+    {
+        get { return m_ItemLayerMask; }
+    }
 
     #endregion
 
@@ -124,12 +130,14 @@ public class Player : Pawn {
 
         HealthBar.Initialize();
 
-        Capsule.transform.parent = null;
+        Controller.transform.parent = null;
     }
 	
 	protected override void Update ()
     {
         base.Update();
+
+        UseItems();
 
         if (Input.GetButtonDown("Menu"))
         {
@@ -144,57 +152,6 @@ public class Player : Pawn {
             Health -= 0.5f;
             Debug.Log(Health.ToString());
         }
-    }
-    
-
-    protected override void FixedUpdate ()
-    {
-        base.FixedUpdate();
-
-        RaycastHit[] ViewHits;
-        //Ray Searching = new Ray(Cam.transform.position, Cam.transform.forward);
-        //Debug.DrawRay(Cam.transform.position, Cam.transform.forward * SearchDist, Color.red, 2f);
-
-
-        //Physics.CapsuleCast(Cam.transform.position, Cam.transform.forward.normalized * SearchDist, SearchWidth, Cam.transform.forward, out Spotted, SearchDist);
-
-        //float SearchRadius = 0.4f;
-
-        ViewHits = Physics.SphereCastAll(Cam.transform.position, SearchRadius, Cam.transform.forward, SearchDistance);
-
-        if (ViewHits.Length > 0)
-        {
-            bool HasUsed = false;
-            foreach(RaycastHit Hit in ViewHits)
-            {
-
-                RaycastHit PropHit;
-                if (Physics.Raycast(Cam.transform.position, (Hit.point - Cam.transform.position).normalized, out PropHit, SearchDistance)
-                && PropHit.transform != Hit.transform)
-                {
-                    // Ignore if something is in the way.
-                    continue;
-                }
-
-                Usable Prop = Hit.collider.GetComponent<Usable>();
-                if (Prop != null)
-                {
-                    // TODO: UI message informing that Item is usable
-                    //Debug.Log(Prop);
-                    Prop.StartGlow();
-                    Debug.DrawLine(Cam.transform.position, Prop.transform.position, Color.blue);
-
-                    if (InputUse && !HasUsed)
-                    {
-                        Prop.Use(this);
-                        HasUsed = true;
-                    }
-                }
-            }
-        }
-
-
-        //TODO: Functionality for taking sanity damage
     }
     
     
@@ -229,33 +186,60 @@ public class Player : Pawn {
 
     }
 
+    protected virtual void UseItems()
+    {
+        RaycastHit[] ViewHits;
+        ViewHits = Physics.SphereCastAll(Cam.transform.position, SearchRadius, Cam.transform.forward, SearchDistance, ItemLayerMask);
+
+        Debug.DrawRay(Cam.transform.position, Cam.transform.forward * SearchDistance, Color.green);
+
+        bool HasUsed = false;
+        foreach (RaycastHit Hit in ViewHits)
+        {
+
+            Usable Prop = Hit.collider.GetComponent<Usable>();
+            if (Prop != null)
+            {
+                RaycastHit PropHit;
+                if (Physics.Raycast(Cam.transform.position, (Hit.point - Cam.transform.position).normalized, out PropHit, SearchDistance, ItemLayerMask)
+                && PropHit.transform != Hit.transform)
+                {
+                    // Ignore if something is in the way.
+                    Debug.Log(PropHit.transform.gameObject.ToString() + " is in the way of " + Prop.gameObject.ToString());
+
+                    continue;
+                }
+                
+                // TODO: UI message informing that Item is usable
+                Debug.Log(Prop);
+                Prop.StartGlow();
+                Debug.DrawLine(Cam.transform.position, Prop.transform.position, Color.blue);
+
+                if (InputUse && !HasUsed)
+                {
+                    Prop.Use(this);
+                    HasUsed = true;
+                }
+            }
+        }
+    }
+
     protected override void Aim()
     {
         base.Aim();
         Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
     }
-
-    protected override void UpdateMovement(float a_DeltaTime)
-    {
-        if (IsAlive)
-        {
-            base.UpdateMovement(a_DeltaTime);
-        }
-    }
-    protected override void UpdateRotation()
-    {
-        if (IsAlive)
-        {
-            base.UpdateRotation();
-        }
-    }
-
-
+    
     protected void StartPlayerDeath()
     {
         Debug.Log("Player died!");
 
         m_GameOver = true;
+
+
+        Controller.enabled = false;
+        Controller.gameObject.GetComponent<CapsuleCollider>().enabled = true;
+
 
         PhysicsBody.isKinematic = false;
         PhysicsBody.velocity = Velocity;
