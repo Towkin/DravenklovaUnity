@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class HealthBarScript : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     private Player m_Player;
 
