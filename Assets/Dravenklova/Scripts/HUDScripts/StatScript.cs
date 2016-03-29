@@ -25,7 +25,10 @@ public class StatScript
         set
         {
             this.m_CurrentVal = value;
-            m_Bar.BarValue = m_CurrentVal;
+            if (m_Bar != null)
+            {
+                m_Bar.BarValue = m_CurrentVal;
+            }
         }
     }
 
@@ -39,7 +42,10 @@ public class StatScript
         set
         {
             this.m_MaxVal = value;
-            m_Bar.MaxValue = m_MaxVal;
+            if (m_Bar != null)
+            {
+                m_Bar.MaxValue = m_MaxVal;
+            }
         }
     }
 

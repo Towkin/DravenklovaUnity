@@ -123,6 +123,8 @@ public class Player : Pawn {
         Cursor.lockState = CursorLockMode.Locked;
 
         HealthBar.Initialize();
+
+        Capsule.transform.parent = null;
     }
 	
 	protected override void Update ()
@@ -256,6 +258,7 @@ public class Player : Pawn {
         m_GameOver = true;
 
         PhysicsBody.isKinematic = false;
+        PhysicsBody.velocity = Velocity;
         PhysicsBody.useGravity = true;
         PhysicsBody.angularDrag = 0.5f;
         PhysicsBody.drag = 0.5f;
