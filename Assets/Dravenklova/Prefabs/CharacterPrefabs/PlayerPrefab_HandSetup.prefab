@@ -30,6 +30,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &103294
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 492648}
+  - 114: {fileID: 11407216}
+  - 114: {fileID: 11450052}
+  m_Layer: 0
+  m_Name: DirectionalWind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &104620
 GameObject:
   m_ObjectHideFlags: 1
@@ -1472,12 +1489,12 @@ GameObject:
   - 4: {fileID: 445310}
   - 114: {fileID: 11465400}
   m_Layer: 0
-  m_Name: windLoop Emitter
+  m_Name: AmbianceAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &191302
 GameObject:
   m_ObjectHideFlags: 1
@@ -1878,6 +1895,7 @@ Transform:
   m_Children:
   - {fileID: 423874}
   - {fileID: 445310}
+  - {fileID: 492648}
   m_Father: {fileID: 463962}
   m_RootOrder: 0
 --- !u!4 &417148
@@ -2943,6 +2961,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 426552}
   m_RootOrder: 0
+--- !u!4 &492648
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 416858}
+  m_RootOrder: 2
 --- !u!4 &493184
 Transform:
   m_ObjectHideFlags: 1
@@ -3464,6 +3494,33 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11407216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  traversableTagsCompatibility:
+    tagsChange: -1
+    tagsSet: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &11412740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3514,6 +3571,19 @@ MonoBehaviour:
   m_TrackerDeltaTime: 0.5
   m_PlayerCameraObject: {fileID: 147966}
   m_LevelGenerator: {fileID: 0}
+--- !u!114 &11450052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d331c14f1a7f64849bebcdff118ca30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WindEvent: event:/Ambience/windDirectional
+  m_PathUpdateDistance: 2.5
 --- !u!114 &11459074
 MonoBehaviour:
   m_ObjectHideFlags: 1
