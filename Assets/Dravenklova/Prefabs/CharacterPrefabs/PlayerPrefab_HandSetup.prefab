@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &104620
 GameObject:
   m_ObjectHideFlags: 1
@@ -992,6 +992,7 @@ GameObject:
   - 114: {fileID: 11490976}
   - 114: {fileID: 11426384}
   - 114: {fileID: 11459074}
+  - 114: {fileID: 11495068}
   m_Layer: 0
   m_Name: PlayerScript
   m_TagString: Untagged
@@ -1494,7 +1495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &191302
 GameObject:
   m_ObjectHideFlags: 1
@@ -3521,6 +3522,17 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &11409898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3e6b3869696f64ebe340127ff739e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11412740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3717,6 +3729,32 @@ MonoBehaviour:
   m_Cam: {fileID: 2025472}
   m_FOVAimed: 45
   m_FOVDefault: 0
+  m_HeadBobAngleMin: 0.25
+  m_HeadBobAngleMax: 5
+  m_HeadBobFrequencyMin: 0.25
+  m_HeadBobFrequencyMax: 0.85
+  m_HeadBobIdle: 0
+  m_HeadBobWalk: 0.25
+  m_HeadBobRun: 1
+--- !u!114 &11495068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0234afce452a154cb4486f292aa9fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FootstepEvent: {fileID: 195900, guid: 19208377c286999498a3caf38f054009, type: 2}
+  m_FootstepDeltaMin: 0.6
+  m_FootstepDeltaMax: 0.4
+  m_FootstepSpeedThreshold: 0.05
+  m_FootstepSpeedMin: 2.5
+  m_FootstepSpeedMax: 4
+  m_PawnScript: {fileID: 11490976}
+  m_PlayerCamera: {fileID: 0}
 --- !u!124 &12430972
 Behaviour:
   m_ObjectHideFlags: 1

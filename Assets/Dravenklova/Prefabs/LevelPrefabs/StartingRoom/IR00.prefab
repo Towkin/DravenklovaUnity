@@ -17508,12 +17508,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TemplateList:
-  - {fileID: 163574, guid: b02af3c5c08e29040af27c33d87d3bcc, type: 2}
+  - {fileID: 173304, guid: dea39f668493cd841acc07565b293eb4, type: 2}
   m_EditorTestObject: {fileID: 0}
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
-    m_Center: {x: -0.42410326, y: 0.10577619, z: -0.26789594}
-    m_Extent: {x: 0.9158411, y: 1.1597506, z: 1.2635747}
+    m_Center: {x: -0.41997218, y: 0.43501282, z: -0.26789594}
+    m_Extent: {x: 0.9199722, y: 1.4889872, z: 1.2635747}
 --- !u!114 &11490112
 MonoBehaviour:
   m_ObjectHideFlags: 1

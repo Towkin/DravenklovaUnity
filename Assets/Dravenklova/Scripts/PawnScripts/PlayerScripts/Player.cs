@@ -14,7 +14,8 @@ public class Player : Pawn {
             if (IsAlive)
             {
                 base.ViewRotation = value;
-                Cam.transform.rotation = value;
+                //Cam.transform.rotation = value;
+                HeadBobAnchor = value;
             }
         }
     }
@@ -118,11 +119,77 @@ public class Player : Pawn {
     {
         get { return InputAim ? FOVAimed : FOVDefault; }
     }
-
-    
-
     #endregion
 
+    #region Player headbob
+    [Header("Headbobbing effects")]
+    [SerializeField]
+    private float m_HeadBobAngleMin = 0.25f;
+    [SerializeField]
+    private float m_HeadBobAngleMax = 5f;
+
+    public float HeadBobAngle
+    {
+        get
+        {
+            return Mathf.Lerp(
+                m_HeadBobAngleMin,
+                m_HeadBobAngleMax,
+                HeadBobAmount
+            );
+        }
+    }
+
+    [SerializeField]
+    private float m_HeadBobFrequencyMin = 0.25f;
+    [SerializeField]
+    private float m_HeadBobFrequencyMax = 0.85f;
+
+    public float HeadBobFrequency
+    {
+        get
+        {
+            return Mathf.Lerp(
+                m_HeadBobFrequencyMin,
+                m_HeadBobFrequencyMax, 
+                HeadBobAmount
+            );
+        }
+    }
+
+    public float HeadBobAmount
+    {
+        get {
+            return IsRunning ?
+                m_HeadBobRun : Mathf.Lerp(
+                    m_HeadBobIdle,
+                    m_HeadBobWalk,
+                    Mathf.Clamp01(PlanarSpeed / 0.15f)
+            );
+        }
+    }
+
+    [SerializeField]
+    private float m_HeadBobIdle = 0.0f;
+    [SerializeField]
+    private float m_HeadBobWalk = 0.25f;
+    [SerializeField]
+    private float m_HeadBobRun = 1f;
+
+    private Quaternion m_HeadBobAnchor;
+    public Quaternion HeadBobAnchor
+    {
+        get { return m_HeadBobAnchor; }
+        protected set { m_HeadBobAnchor = value; }
+    }
+
+    /*private Quaternion m_HeadBobTarget;
+    public Quaternion HeadBobTarget
+    {
+        get { return m_HeadBobTarget; }
+        protected set { m_HeadBobTarget = value; }
+    }*/
+    #endregion
 
     protected override void Start ()
     {
@@ -145,13 +212,16 @@ public class Player : Pawn {
         base.Update();
 
         UseItems();
+        UpdateHeadBob();
 
-        if (Input.GetButtonDown("Menu"))
+        if (InputPause)
         {
-            Application.Quit();
+            GetComponent<PauseMenu>().Pause();
+            /*
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
+            */
         }
 
         if(Input.GetKeyDown(KeyCode.B))
@@ -173,6 +243,7 @@ public class Player : Pawn {
             InputUse = Input.GetButtonDown("Use");
             InputAttack = Input.GetButtonDown("Attack");
             InputReload = Input.GetButtonDown("Reload");
+            InputPause = Input.GetButtonDown("Menu");
 
             InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
@@ -186,6 +257,7 @@ public class Player : Pawn {
             InputUse = false;
             InputAttack = false;
             InputReload = false;
+            InputPause = false;
 
             InputView = Vector2.zero;
 
@@ -237,6 +309,18 @@ public class Player : Pawn {
         Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
     }
     
+    protected void UpdateHeadBob()
+    {
+        Quaternion HeadBob = HeadBobAnchor;
+
+        Vector3 EulerBob = HeadBob.eulerAngles;
+        EulerBob.x += Mathf.Sin(Time.realtimeSinceStartup * HeadBobFrequency) * HeadBobAngle;
+
+        HeadBob.eulerAngles = EulerBob;
+
+        Cam.transform.rotation = HeadBob;
+    }
+
     protected void StartPlayerDeath()
     {
         Debug.Log("Player died!");
@@ -256,4 +340,6 @@ public class Player : Pawn {
         PhysicsBody.drag = 0.5f;
         PhysicsBody.AddForce(PhysicsBody.transform.forward * -5000f);
     }
+
+    
 }
