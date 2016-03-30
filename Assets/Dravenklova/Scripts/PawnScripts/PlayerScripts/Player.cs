@@ -122,7 +122,6 @@ public class Player : Pawn {
     #endregion
 
     #region Player headbob
-
     [Header("Headbobbing effects")]
     [SerializeField]
     private float m_HeadBobAngleMin = 0.25f;
@@ -215,12 +214,14 @@ public class Player : Pawn {
         UseItems();
         UpdateHeadBob();
 
-        if (Input.GetButtonDown("Menu"))
+        if (InputPause)
         {
-            Application.Quit();
+            GetComponent<PauseMenu>().Pause();
+            /*
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
+            */
         }
 
         if(Input.GetKeyDown(KeyCode.B))
@@ -242,6 +243,7 @@ public class Player : Pawn {
             InputUse = Input.GetButtonDown("Use");
             InputAttack = Input.GetButtonDown("Attack");
             InputReload = Input.GetButtonDown("Reload");
+            InputPause = Input.GetButtonDown("Menu");
 
             InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
@@ -255,6 +257,7 @@ public class Player : Pawn {
             InputUse = false;
             InputAttack = false;
             InputReload = false;
+            InputPause = false;
 
             InputView = Vector2.zero;
 
@@ -337,4 +340,6 @@ public class Player : Pawn {
         PhysicsBody.drag = 0.5f;
         PhysicsBody.AddForce(PhysicsBody.transform.forward * -5000f);
     }
+
+    
 }

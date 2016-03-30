@@ -449,7 +449,12 @@ public abstract class Pawn : MonoBehaviour
         get { return m_InputUse; }
         protected set { m_InputUse = value; }
     }
-    
+    protected bool m_InputPause = false;
+    public bool InputPause
+    {
+        get { return m_InputPause; }
+        protected set { m_InputPause = value; }
+    }
 
     #endregion
 
