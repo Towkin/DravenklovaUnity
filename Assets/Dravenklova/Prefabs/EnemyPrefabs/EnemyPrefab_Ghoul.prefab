@@ -662,6 +662,7 @@ GameObject:
   - 54: {fileID: 5492510}
   - 114: {fileID: 11495630}
   - 143: {fileID: 14325378}
+  - 114: {fileID: 11462402}
   m_Layer: 14
   m_Name: EnemyPrefab_Ghoul
   m_TagString: Enemy
@@ -2094,6 +2095,19 @@ MonoBehaviour:
   bezierTangentLength: 0.4
   offset: 0.2
   factor: 0.1
+--- !u!114 &11462402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6418b2626e4dc814faedce8e30c4bc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FootstepEvent: {fileID: 120750, guid: 0ae1be66bd5053c4da257563509da820, type: 2}
+  m_AttackEvent: {fileID: 187848, guid: 8eab788fd5af0534894331eb57556e21, type: 2}
 --- !u!114 &11495630
 MonoBehaviour:
   m_ObjectHideFlags: 1

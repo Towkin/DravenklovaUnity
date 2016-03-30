@@ -122,12 +122,19 @@ public abstract class Pawn : MonoBehaviour
     {
         get
         {
-            // TODO: Make sure the PlanarVelocity is a vector along the PlanarNormal axis, and not just {x, z}.
-            //Vector3 ProjectedVelocity = Vector3.ProjectOnPlane(Velocity, PlanarNormal);
+            // Maybe fixed? TODO: Make sure the PlanarVelocity is a vector along the PlanarNormal axis, and not just {x, z}.
+            Vector3 ProjectedVelocity = Vector3.ProjectOnPlane(Velocity, PlanarNormal);
+            ProjectedVelocity = ProjectedVelocity.normalized * Velocity.magnitude;
 
-            return new Vector2(Velocity.x, Velocity.z);
+            return new Vector2(ProjectedVelocity.x, ProjectedVelocity.z);
         }
-        set { Velocity = new Vector3(value.x, Velocity.y, value.y); }
+        set
+        {
+            Vector3 ProjectedVelocity = Vector3.ProjectOnPlane(Velocity, PlanarNormal);
+            Vector3 FallVector = Velocity - ProjectedVelocity;
+            
+            Velocity = FallVector + new Vector3(value.x, 0, value.y);
+        }
     }
     public float Speed
     {
@@ -593,7 +600,7 @@ public abstract class Pawn : MonoBehaviour
     
     protected virtual void UpdateMovement(float a_DeltaTime)
     {
-        Velocity = Controller.velocity;
+        
         
         Vector2 MoveAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
         PlanarSpeed *= Mathf.Pow(1f - Decay * (IsGrounded ? 1.00f : AirControl), a_DeltaTime);
@@ -624,7 +631,7 @@ public abstract class Pawn : MonoBehaviour
             }
 
 
-            //Velocity += (PawnGravity / 10f) * a_DeltaTime;
+            Velocity += (PawnGravity / 10f) * a_DeltaTime;
         }
         else
         {
@@ -644,6 +651,7 @@ public abstract class Pawn : MonoBehaviour
         }
         
         Controller.Move(Velocity * a_DeltaTime);
+        Velocity = Controller.velocity;
     }
 
     protected virtual void UpdateRotation()
@@ -696,22 +704,27 @@ public abstract class Pawn : MonoBehaviour
             }
         }
 
-        /*Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Controller.height / 2 + Controller.radius - 0.01f, 0f);
-        float TestRadius = Controller.radius - 0.005f;
+        Vector3 TestPos = PhysicsBody.transform.position + new Vector3(0f, -Controller.height / 2 + Controller.radius - 0.05f, 0f);
+        float TestRadius = Controller.radius;
 
-        Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
+        //Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
+        RaycastHit[] GroundHits = Physics.SphereCastAll(TestPos, TestRadius, Vector3.down, 0.05f, LayerMask.GetMask("Default"));
+
+        PlanarNormal = Vector3.up;
 
         IsGrounded = false;
-        foreach (Collider Collider in AllColliders)
+        foreach (RaycastHit GroundHit in GroundHits)
         {
-            if (!Collider.isTrigger && Collider.tag != "Player")
+            if (!GroundHit.collider.isTrigger)
             {
                 IsGrounded = true;
+                PlanarNormal = GroundHit.normal;
+                
                 break;
             }
-        }*/
-
-        IsGrounded = Controller.isGrounded;
+        }
+        
+        //IsGrounded = Controller.isGrounded;
     }
 
     protected virtual void UpdateWeapon()

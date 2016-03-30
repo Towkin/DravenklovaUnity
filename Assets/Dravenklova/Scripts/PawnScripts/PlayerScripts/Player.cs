@@ -263,7 +263,6 @@ public class Player : Pawn {
             InputAttack = false;
             InputReload = false;
             InputView = Vector2.zero;
-            Debug.Log("No input!");
         }
         else
         {
@@ -335,6 +334,14 @@ public class Player : Pawn {
         HeadBob.eulerAngles = EulerBob;
 
         Cam.transform.rotation = HeadBob;
+    }
+
+    public void DamagePlayer(float a_RawDamage, Vector3 a_FromPosition)
+    {
+        Health -= a_RawDamage;
+        Vector3 Direction = (transform.position - a_FromPosition).normalized;
+
+        Velocity += Direction * 4.5f;
     }
 
     protected void StartPlayerDeath()

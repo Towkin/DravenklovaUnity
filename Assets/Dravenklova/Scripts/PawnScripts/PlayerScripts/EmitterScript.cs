@@ -17,6 +17,8 @@ public class EmitterScript : MonoBehaviour {
     }
 	void Update()
     {
+        m_EmitterInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+
         PLAYBACK_STATE EmitterState;
         m_EmitterInstance.getPlaybackState(out EmitterState);
         if (EmitterState == PLAYBACK_STATE.STOPPED)
