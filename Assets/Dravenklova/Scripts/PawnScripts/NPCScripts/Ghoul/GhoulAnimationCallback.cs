@@ -18,7 +18,7 @@ public class GhoulAnimationCallback : MonoBehaviour {
         //Voice.transform.position = transform.position;
         //Voice.transform.rotation = transform.rotation;
 
-        Collider[] PawnHits = Physics.OverlapSphere(transform.position + transform.forward * 0.5f, 0.5f, LayerMask.GetMask("Pawns"));
+        Collider[] PawnHits = Physics.OverlapSphere(transform.position + transform.forward * 0.8f, 0.8f, LayerMask.GetMask("Pawns"));
 
         foreach(Collider PawnHit in PawnHits)
         {

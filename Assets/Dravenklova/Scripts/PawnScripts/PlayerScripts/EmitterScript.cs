@@ -8,6 +8,10 @@ public class EmitterScript : MonoBehaviour {
     [SerializeField]
     private string m_EmitterEvent;
     private EventInstance m_EmitterInstance;
+    public EventInstance EmitterInstance
+    {
+        get { return m_EmitterInstance; }
+    }
     
     void Start ()
     {

@@ -51,6 +51,13 @@ public class Player : Pawn {
     {
         get { return m_PauseScript; }
     }
+    [SerializeField]
+    private GameOverMenu m_GameOverScript;
+    private GameOverMenu GameOverScript
+    {
+        get { return m_GameOverScript; }
+    }
+
 
     [SerializeField]
     private StatScript m_HealthBar;
@@ -362,6 +369,8 @@ public class Player : Pawn {
         PhysicsBody.angularDrag = 0.5f;
         PhysicsBody.drag = 0.5f;
         PhysicsBody.AddForce(PhysicsBody.transform.forward * -5000f);
+
+        GameOverScript.Visible = true;
     }
 
     
