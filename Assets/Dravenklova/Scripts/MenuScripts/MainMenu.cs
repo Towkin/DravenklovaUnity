@@ -11,7 +11,8 @@ public class MainMenu : MonoBehaviour
     {
         if (GUI.Button(new Rect(Screen.width / 2 - m_ButtonWidth / 2, Screen.height / 2 - m_ButtonHeight / 2 - m_ButtonSpacing, m_ButtonWidth, m_ButtonHeight), "Click Bait"))
         {
-            Application.LoadLevel("MainScene");
+            //Application.LoadLevel("MainScene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
         }
 
         if (GUI.Button(new Rect(Screen.width / 2 - m_ButtonWidth / 2, Screen.height / 2 + m_ButtonHeight / 2 + m_ButtonSpacing, m_ButtonWidth, m_ButtonHeight), "Quit Bait"))
