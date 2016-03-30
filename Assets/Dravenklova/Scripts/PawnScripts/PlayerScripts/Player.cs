@@ -45,6 +45,12 @@ public class Player : Pawn {
 
     #region Player components
     [Header("Player Components")]
+    [SerializeField]
+    private PauseMenu m_PauseScript;
+    private PauseMenu PauseScript
+    {
+        get { return m_PauseScript; }
+    }
 
     [SerializeField]
     private StatScript m_HealthBar;
@@ -58,6 +64,14 @@ public class Player : Pawn {
     {
         get { return m_Fader; }
     }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_HeartBeat;
+    private FMODUnity.StudioEventEmitter HeartBeat
+    {
+        get { return m_HeartBeat; }
+    }
+
+
     public override float Health
     {
         get { return base.Health; }
@@ -66,6 +80,7 @@ public class Player : Pawn {
             base.Health = value;
 
             HealthBar.CurrentVal = HealthPercentage;
+            HeartBeat.SetParameter("health", HealthPercentage);
 
             if(!m_GameOver && !IsAlive)
             {
@@ -132,11 +147,12 @@ public class Player : Pawn {
     {
         get
         {
-            return Mathf.Lerp(
+            return 0f;
+            /*Mathf.Lerp(
                 m_HeadBobAngleMin,
                 m_HeadBobAngleMax,
                 HeadBobAmount
-            );
+            );*/
         }
     }
 
@@ -201,6 +217,7 @@ public class Player : Pawn {
         Cursor.lockState = CursorLockMode.Locked;
 
         HealthBar.Initialize();
+        
 
         Controller.transform.parent = null;
         if (Fader)
@@ -216,12 +233,14 @@ public class Player : Pawn {
 
         if (InputPause)
         {
-            GetComponent<PauseMenu>().Pause();
-            /*
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-            */
+            if(PauseScript)
+                PauseScript.Pause();
+            //GetComponent<PauseMenu>().Pause();
+//            
+//#if UNITY_EDITOR
+//            UnityEditor.EditorApplication.isPlaying = false;
+//#endif
+//            
         }
 
         if(Input.GetKeyDown(KeyCode.B))
@@ -234,21 +253,7 @@ public class Player : Pawn {
     
     protected override void UpdateInput()
     {
-        if(IsAlive)
-        {
-            InputMoveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            InputJump = Input.GetButton("Jump");
-            InputSprint = Input.GetButton("Sprint");
-            InputAim = Input.GetButton("Aim");
-            InputUse = Input.GetButtonDown("Use");
-            InputAttack = Input.GetButtonDown("Attack");
-            InputReload = Input.GetButtonDown("Reload");
-            InputPause = Input.GetButtonDown("Menu");
-
-            InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
-        }
-        else
+        if (!IsAlive || (PauseScript != null && PauseScript.IsPaused))
         {
             InputMoveDirection = Vector2.zero;
             InputJump = false;
@@ -257,11 +262,22 @@ public class Player : Pawn {
             InputUse = false;
             InputAttack = false;
             InputReload = false;
-            InputPause = false;
-
             InputView = Vector2.zero;
-
+            Debug.Log("No input!");
         }
+        else
+        {
+            InputMoveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            InputJump = Input.GetButton("Jump");
+            InputSprint = Input.GetButton("Sprint");
+            InputAim = Input.GetButton("Aim");
+            InputUse = Input.GetButtonDown("Use");
+            InputAttack = Input.GetButtonDown("Attack");
+            InputReload = Input.GetButtonDown("Reload");
+            InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        }
+
+        InputPause = Input.GetButtonDown("Menu");
 
     }
 

@@ -41,10 +41,16 @@ public class WindDirection : MonoBehaviour {
         protected set { m_PathIndex = value; }
     }
     [SerializeField]
-    private float m_PathUpdateDistance = 2.5f;
+    private float m_PathUpdateDistance = 5.0f;
     public float PathUpdateDistance
     {
         get { return m_PathUpdateDistance; }
+    }
+    [SerializeField]
+    private float m_PathClimbDistance = 2.5f;
+    public float PathClimbDistance
+    {
+        get { return m_PathClimbDistance; }
     }
 
     private float m_LastPathUpdateTime = 0f;
@@ -78,12 +84,19 @@ public class WindDirection : MonoBehaviour {
 	
 	
 	void Update () {
-        if((Time.realtimeSinceStartup - LastPathUpdateTime) > PathUpdateTimeMin)
+        if(ShrinePath == null || (Vector3.Distance(transform.position, ShrinePath.vectorPath[PathIndex]) < PathUpdateDistance && (Time.realtimeSinceStartup - LastPathUpdateTime) > PathUpdateTimeMin))
         {
             FindPathToShrine();
         }
-	    
-        while(ShrinePath.vectorPath.Count < PathIndex + 1 && Vector3.Distance(transform.position, ShrinePath.vectorPath[PathIndex+1]) < PathUpdateDistance)
+
+
+        if (ShrinePath == null)
+        {
+            return;
+        }
+
+
+        while(ShrinePath.vectorPath.Count > (PathIndex + 1) && Vector3.Distance(transform.position, ShrinePath.vectorPath[PathIndex+1]) < PathClimbDistance)
         {
             PathIndex++;
         }
@@ -122,7 +135,9 @@ public class WindDirection : MonoBehaviour {
 
         Vector3 ShrineEntrancePosition = ShrineEntrance.transform.position;
 
-        StartNewPath(ShrineEntrancePosition);
+        // It ain't working yet, so ignore atm.
+        // TODO: Fix stuff
+        //StartNewPath(ShrineEntrancePosition);
     }
 
     void OnDestroy()
