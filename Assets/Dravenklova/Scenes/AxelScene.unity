@@ -1148,7 +1148,7 @@ MonoBehaviour:
     pivotPointRoot: {fileID: 0}
     spreadOutCount: 1
   showGraphs: 1
-  lastUniqueAreaIndex: 9
+  lastUniqueAreaIndex: 7
 --- !u!4 &1029279060
 Transform:
   m_ObjectHideFlags: 0
