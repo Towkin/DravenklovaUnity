@@ -17,6 +17,7 @@ public class PauseMenu : MenuParent {
         set
         {
             m_IsPaused = value;
+            Cursor.lockState = value ? CursorLockMode.Confined : CursorLockMode.Locked;
             Cursor.visible = value;
             Time.timeScale = value? 0f : 1f;
             PauseMenuObject.SetActive(value);

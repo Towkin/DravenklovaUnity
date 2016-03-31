@@ -48,8 +48,10 @@ public class Bolt : Consumable
         Destroy(gameObject);
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if(BoltBody != null && BoltBody.velocity.magnitude > DamageSpeedThreshold)
         {
             RaycastHit BoltHit;

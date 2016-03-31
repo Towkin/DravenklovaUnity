@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_PawnGravity: {x: 0, y: -9.82, z: 0}
   m_WalkThreshold: 2
   m_RunThreshold: 4
-  m_TurnRate: 100
+  m_TurnRate: 200
   m_Health: 1
   m_HealthMax: 1
   m_Sanity: 0
@@ -2104,6 +2104,9 @@ MonoBehaviour:
     m_Bits: 3585
   m_HeadTransform: {fileID: 470206}
   m_BaseTransform: {fileID: 408962}
+  m_IdleVoiceEvent: {fileID: 152690, guid: f86f2f612181e0a4b949158ef25bbba6, type: 2}
+  m_HitVoiceEvent: {fileID: 103016, guid: 203d57323c1b6224a9e43765c74384fd, type: 2}
+  m_DeathVoiceEvent: {fileID: 118052, guid: f1dd7e73637653842ab77684bc1ab776, type: 2}
 --- !u!114 &11445870
 MonoBehaviour:
   m_ObjectHideFlags: 1
