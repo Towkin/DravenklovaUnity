@@ -28,10 +28,10 @@ sysinfo.txt
 
 # FMOD Generated Files
 /Assets/FMODAssets/*
-/Assets/Resources/*
 /Assets/StreamingAssets/*
 /Assets/StreamingAssets.meta
 /Assets/FMODStudioCache.asset
+/Assets/FMODStudioCache.asset.meta
 /Assets/FMODStudioCache.meta
 fmod_editor.log
 fmod.log

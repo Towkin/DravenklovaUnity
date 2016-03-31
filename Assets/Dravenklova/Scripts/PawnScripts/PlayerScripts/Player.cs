@@ -14,7 +14,8 @@ public class Player : Pawn {
             if (IsAlive)
             {
                 base.ViewRotation = value;
-                Cam.transform.rotation = value;
+                //Cam.transform.rotation = value;
+                HeadBobAnchor = value;
             }
         }
     }
@@ -44,6 +45,19 @@ public class Player : Pawn {
 
     #region Player components
     [Header("Player Components")]
+    [SerializeField]
+    private PauseMenu m_PauseScript;
+    private PauseMenu PauseScript
+    {
+        get { return m_PauseScript; }
+    }
+    [SerializeField]
+    private GameOverMenu m_GameOverScript;
+    private GameOverMenu GameOverScript
+    {
+        get { return m_GameOverScript; }
+    }
+
 
     [SerializeField]
     private StatScript m_HealthBar;
@@ -57,6 +71,14 @@ public class Player : Pawn {
     {
         get { return m_Fader; }
     }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_HeartBeat;
+    private FMODUnity.StudioEventEmitter HeartBeat
+    {
+        get { return m_HeartBeat; }
+    }
+
+
     public override float Health
     {
         get { return base.Health; }
@@ -65,6 +87,7 @@ public class Player : Pawn {
             base.Health = value;
 
             HealthBar.CurrentVal = HealthPercentage;
+            HeartBeat.SetParameter("health", HealthPercentage);
 
             if(!m_GameOver && !IsAlive)
             {
@@ -118,11 +141,78 @@ public class Player : Pawn {
     {
         get { return InputAim ? FOVAimed : FOVDefault; }
     }
-
-    
-
     #endregion
 
+    #region Player headbob
+    [Header("Headbobbing effects")]
+    [SerializeField]
+    private float m_HeadBobAngleMin = 0.25f;
+    [SerializeField]
+    private float m_HeadBobAngleMax = 5f;
+
+    public float HeadBobAngle
+    {
+        get
+        {
+            return 0f;
+            /*Mathf.Lerp(
+                m_HeadBobAngleMin,
+                m_HeadBobAngleMax,
+                HeadBobAmount
+            );*/
+        }
+    }
+
+    [SerializeField]
+    private float m_HeadBobFrequencyMin = 0.25f;
+    [SerializeField]
+    private float m_HeadBobFrequencyMax = 0.85f;
+
+    public float HeadBobFrequency
+    {
+        get
+        {
+            return Mathf.Lerp(
+                m_HeadBobFrequencyMin,
+                m_HeadBobFrequencyMax, 
+                HeadBobAmount
+            );
+        }
+    }
+
+    public float HeadBobAmount
+    {
+        get {
+            return IsRunning ?
+                m_HeadBobRun : Mathf.Lerp(
+                    m_HeadBobIdle,
+                    m_HeadBobWalk,
+                    Mathf.Clamp01(PlanarSpeed / 0.15f)
+            );
+        }
+    }
+
+    [SerializeField]
+    private float m_HeadBobIdle = 0.0f;
+    [SerializeField]
+    private float m_HeadBobWalk = 0.25f;
+    [SerializeField]
+    private float m_HeadBobRun = 1f;
+
+    private Quaternion m_HeadBobAnchor;
+    public Quaternion HeadBobAnchor
+    {
+        get { return m_HeadBobAnchor; }
+        protected set { m_HeadBobAnchor = value; }
+    }
+
+    /*private Quaternion m_HeadBobTarget;
+    public Quaternion HeadBobTarget
+    {
+        get { return m_HeadBobTarget; }
+        protected set { m_HeadBobTarget = value; }
+    }*/
+    #endregion
 
     protected override void Start ()
     {
@@ -134,6 +224,7 @@ public class Player : Pawn {
         Cursor.lockState = CursorLockMode.Locked;
 
         HealthBar.Initialize();
+        
 
         Controller.transform.parent = null;
         if (Fader)
@@ -145,13 +236,18 @@ public class Player : Pawn {
         base.Update();
 
         UseItems();
+        UpdateHeadBob();
 
-        if (Input.GetButtonDown("Menu"))
+        if (InputPause)
         {
-            Application.Quit();
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
+            if(PauseScript)
+                PauseScript.Pause();
+            //GetComponent<PauseMenu>().Pause();
+//            
+//#if UNITY_EDITOR
+//            UnityEditor.EditorApplication.isPlaying = false;
+//#endif
+//            
         }
 
         if(Input.GetKeyDown(KeyCode.B))
@@ -164,20 +260,7 @@ public class Player : Pawn {
     
     protected override void UpdateInput()
     {
-        if(IsAlive)
-        {
-            InputMoveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            InputJump = Input.GetButton("Jump");
-            InputSprint = Input.GetButton("Sprint");
-            InputAim = Input.GetButton("Aim");
-            InputUse = Input.GetButtonDown("Use");
-            InputAttack = Input.GetButtonDown("Attack");
-            InputReload = Input.GetButtonDown("Reload");
-
-            InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
-        }
-        else
+        if (!IsAlive || (PauseScript != null && PauseScript.IsPaused))
         {
             InputMoveDirection = Vector2.zero;
             InputJump = false;
@@ -186,10 +269,21 @@ public class Player : Pawn {
             InputUse = false;
             InputAttack = false;
             InputReload = false;
-
             InputView = Vector2.zero;
-
         }
+        else
+        {
+            InputMoveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            InputJump = Input.GetButton("Jump");
+            InputSprint = Input.GetButton("Sprint");
+            InputAim = Input.GetButton("Aim");
+            InputUse = Input.GetButtonDown("Use");
+            InputAttack = Input.GetButtonDown("Attack");
+            InputReload = Input.GetButtonDown("Reload");
+            InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        }
+
+        InputPause = Input.GetButtonDown("Menu");
 
     }
 
@@ -237,6 +331,26 @@ public class Player : Pawn {
         Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
     }
     
+    protected void UpdateHeadBob()
+    {
+        Quaternion HeadBob = HeadBobAnchor;
+
+        Vector3 EulerBob = HeadBob.eulerAngles;
+        EulerBob.x += Mathf.Sin(Time.realtimeSinceStartup * HeadBobFrequency) * HeadBobAngle;
+
+        HeadBob.eulerAngles = EulerBob;
+
+        Cam.transform.rotation = HeadBob;
+    }
+
+    public void DamagePlayer(float a_RawDamage, Vector3 a_FromPosition)
+    {
+        Health -= a_RawDamage;
+        Vector3 Direction = (transform.position - a_FromPosition).normalized;
+
+        Velocity += Direction * 4.5f;
+    }
+
     protected void StartPlayerDeath()
     {
         Debug.Log("Player died!");
@@ -255,5 +369,9 @@ public class Player : Pawn {
         PhysicsBody.angularDrag = 0.5f;
         PhysicsBody.drag = 0.5f;
         PhysicsBody.AddForce(PhysicsBody.transform.forward * -5000f);
+
+        GameOverScript.Visible = true;
     }
+
+    
 }

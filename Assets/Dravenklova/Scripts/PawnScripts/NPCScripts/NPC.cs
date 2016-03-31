@@ -3,6 +3,23 @@
 [RequireComponent(typeof(Animator))]
 public class NPC : Pawn
 {
+    public override float Health
+    {
+        get
+        {
+            return base.Health;
+        }
+
+        set
+        {
+            base.Health = value;
+            if(!IsAlive)
+            {
+                StartNPCDeath();
+            }
+        }
+    }
+
     [Header("NPC Components")]
     [SerializeField]
     private Animator m_PawnAnimatior;
@@ -463,19 +480,9 @@ public class NPC : Pawn
 
     }
 
-   
-    
-    void OnCollisionEnter(Collision Coll)
-    {
-        if (Coll.gameObject.GetComponent<Bolt>())
-        {
-            IsAlive = false;
-            InputAttack = false;
-            InputSprint = false;
-            InputView = Vector2.zero;
-            InputMoveDirection = Vector2.zero;
 
-            Controller.enabled = false;
-        }
+    protected void StartNPCDeath()
+    {
+        Controller.enabled = false;
     }
 }

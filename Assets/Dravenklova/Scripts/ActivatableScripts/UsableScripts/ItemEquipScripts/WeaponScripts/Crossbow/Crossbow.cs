@@ -23,6 +23,19 @@ public class Crossbow : Weapon
         get { return m_LoadedBolt; }
         set { m_LoadedBolt = value; }
     }
+    [SerializeField]
+    private GameObject m_BoltFireAudioEvent;
+    public GameObject BoltFireAudioEvent
+    {
+        get { return m_BoltFireAudioEvent; }
+    }
+    [SerializeField]
+    private GameObject m_ReloadAudioEvent;
+    public GameObject ReloadAudioEvent
+    {
+        get { return m_ReloadAudioEvent; }
+    }
+
 
     [SerializeField]
     private float m_BoltImpulse = 50f;
@@ -44,6 +57,7 @@ public class Crossbow : Weapon
     {
         if(IsLoaded)
         {
+            
             Rigidbody BoltBody = LoadedBolt.GetComponent<Rigidbody>();
             LoadedBolt.transform.parent = null;
             BoltBody.isKinematic = false;
@@ -51,7 +65,9 @@ public class Crossbow : Weapon
             SetPrefabRenderLayer(LoadedBolt.transform, 0);
             LoadedBolt.GetComponent<Collider>().enabled = true;
             BoltBody.AddForce(BoltSpawnLocation.transform.forward * BoltImpulse, ForceMode.Impulse);
-            
+
+            Instantiate(BoltFireAudioEvent, transform.position, transform.rotation);
+
             IsLoaded = false;
         }
         else
