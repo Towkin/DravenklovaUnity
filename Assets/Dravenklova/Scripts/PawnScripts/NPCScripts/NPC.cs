@@ -76,8 +76,7 @@ public class NPC : Pawn
         get { return (TargetLocation - transform.position).magnitude; }
     }
 
-
-    // Daniel Fucking around with variables
+    
 
     [Header("Hunt Attributes")]
     [SerializeField]
@@ -86,7 +85,11 @@ public class NPC : Pawn
     {
         get { return m_AttackRange; }
     }
-
+    private float m_AggroRange = 3f;
+    public float AggroRange
+    {
+        get { return m_AggroRange; }
+    }
     [SerializeField]
     private GameObject m_Prey;
     public GameObject Prey
@@ -137,6 +140,10 @@ public class NPC : Pawn
     public bool InAttackRange
     {
         get { return TargetDistance < AttackRange; }
+    }
+    public bool InAggroRange
+    {
+        get { return TargetDistance < AggroRange; }
     }
 
     #region IdleTimer
@@ -253,6 +260,12 @@ public class NPC : Pawn
     {
         get { return m_HeadTransform; }
     }
+    [SerializeField]
+    private Transform m_BaseTransform;
+    public Transform BaseTransform
+    {
+        get { return m_BaseTransform; }
+    }
 
 
     #endregion
@@ -273,9 +286,11 @@ public class NPC : Pawn
     protected virtual void UpdateAnimator()
     {
         PawnAnaimator.SetBool("IsDead", !IsAlive);
-        PawnAnaimator.SetFloat("SpeedX", ForwardVelocity.x);
-        PawnAnaimator.SetFloat("SpeedZ", ForwardVelocity.z);
+        PawnAnaimator.SetFloat("SpeedX", Mathf.Lerp(PawnAnaimator.GetFloat("SpeedX"), ForwardVelocity.x, 0.5f));
+        PawnAnaimator.SetFloat("SpeedZ", Mathf.Lerp(PawnAnaimator.GetFloat("SpeedZ"), ForwardVelocity.z, 0.5f));
         PawnAnaimator.SetBool("Attack", InputAttack);
+        
+        
         //PawnAnaimator.SetBool("WasHit", )
     }
 
@@ -291,7 +306,7 @@ public class NPC : Pawn
 
         InputAttack = false;
 
-        if(PreyDetected)
+        if (PreyDetected)
         {
             if(IsHunting)
             {
@@ -350,8 +365,10 @@ public class NPC : Pawn
 
         // Note: In the UpdatePathDirection-function must be run at least once per frame.
         Vector3 MoveDirection = MovePath.UpdatePathDirection(transform.position, Controller.radius);
-        if (UseStraightLine && !Physics.Raycast(HeadTransform.position, (TargetLocation - HeadTransform.position).normalized, (TargetLocation - HeadTransform.position).magnitude, ViewBlockers))
+        if (UseStraightLine && !Physics.Raycast(HeadTransform.position, (TargetLocation - HeadTransform.position).normalized, (TargetLocation - HeadTransform.position).magnitude, ViewBlockers)
+            && !Physics.Raycast(BaseTransform.position, (TargetLocation - BaseTransform.position).normalized, (TargetLocation - BaseTransform.position).magnitude, ViewBlockers))
         {
+            
             MoveDirection = TargetDirection;
         }
 
@@ -400,7 +417,6 @@ public class NPC : Pawn
             }
             return;
         }
-
 
         // If the prey is too far away.
         float PreyDistance = (Prey.transform.position - HeadTransform.position).magnitude;
@@ -463,6 +479,7 @@ public class NPC : Pawn
         return PointsInRange[Random.Range(0, PointsInRange.Count)].transform.position;
 
     }
+
 
     protected void StartNPCDeath()
     {
