@@ -208,20 +208,20 @@ public abstract class Pawn : MonoBehaviour
     [Header("Jump and gravity attributes")]
     [SerializeField]
     [Range(0f, 100f)]
-    protected float m_JumpAcceleration = 10f;
+    private float m_JumpAcceleration = 10f;
     public float JumpAcceleration
     {
         get { return m_JumpAcceleration; }
     }
     [SerializeField]
     [Range(0f, 1f)]
-    protected float m_AirControl = 0.05f;
+    private float m_AirControl = 0.05f;
     public float AirControl
     {
         get { return m_AirControl; }
         protected set { m_AirControl = value; }
     }
-    protected float m_JumpTime = 0f;
+    private float m_JumpTime = 0f;
     public float JumpTime
     {
         get { return m_JumpTime; }
@@ -229,19 +229,19 @@ public abstract class Pawn : MonoBehaviour
     }
     [SerializeField]
     [Range(0f, 1f)]
-    protected float m_JumpTimeMax = 0.2f;
+    private float m_JumpTimeMax = 0.2f;
     public float JumpTimeMax
     {
         get { return m_JumpTimeMax; }
     }
-    protected bool m_IsGrounded = true;
+    private bool m_IsGrounded = true;
     public bool IsGrounded
     {
         get { return m_IsGrounded; }
         protected set { m_IsGrounded = value; }
     }
-    protected bool m_IsJumping = false;
-    public bool IsJumping
+    private bool m_IsJumping = false;
+    virtual public bool IsJumping
     {
         get { return m_IsJumping; }
         set
@@ -254,7 +254,7 @@ public abstract class Pawn : MonoBehaviour
         }
     }
     [SerializeField]
-    protected Vector3 m_PawnGravity = new Vector3(0f, -9.82f, 0f);
+    private Vector3 m_PawnGravity = new Vector3(0f, -9.82f, 0f);
     public Vector3 PawnGravity
     {
         get { return m_PawnGravity; }
@@ -264,7 +264,7 @@ public abstract class Pawn : MonoBehaviour
     #region Move behaviour attributes
     [Header("Move behaviour attributes")]
     [SerializeField]
-    protected float m_WalkThreshold = 2f;
+    private float m_WalkThreshold = 2f;
     public float WalkThreshold
     {
         get { return m_WalkThreshold; }
@@ -276,7 +276,7 @@ public abstract class Pawn : MonoBehaviour
     }
 
     [SerializeField]
-    protected float m_RunThreshold = 4f;
+    private float m_RunThreshold = 4f;
     public float RunThreshold
     {
         get { return m_RunThreshold; }
@@ -288,12 +288,12 @@ public abstract class Pawn : MonoBehaviour
     }
 
     [SerializeField]
-    protected float m_TurnRate = 360f;
+    private float m_TurnRate = 360f;
     public float TurnRate
     {
         get { return m_TurnRate; }
     }
-    protected Quaternion m_ViewRotation = new Quaternion();
+    private Quaternion m_ViewRotation = new Quaternion();
     public virtual Quaternion ViewRotation
     {
         get { return m_ViewRotation; }
@@ -313,9 +313,9 @@ public abstract class Pawn : MonoBehaviour
     [Header ("Character Attributes")]
 
     [SerializeField]
-    protected float m_Health = 1f;
+    private float m_Health = 1f;
     [SerializeField]
-    protected float m_HealthMax = 1f;
+    private float m_HealthMax = 1f;
     public virtual float Health
     {
         get { return m_Health; }
@@ -340,9 +340,7 @@ public abstract class Pawn : MonoBehaviour
     }
     [SerializeField]
     [Range(0f, 1f)]
-    protected float m_Sanity;
-    //[SerializeField]
-    //protected float m_SanityMax = 1;
+    private float m_Sanity;
     public float Sanity
     {
         get { return m_Sanity; }
@@ -351,9 +349,7 @@ public abstract class Pawn : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 1f)]
-    protected float m_Holy;
-    //[SerializeField]
-    protected float m_HolyMax = 1;
+    private float m_Holy;
     public float Holy
     {
         get { return m_Holy; }
@@ -362,8 +358,7 @@ public abstract class Pawn : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 1f)]
-    protected float m_Oil;
-
+    private float m_Oil;
     public float Oil
     {
         get { return m_Oil; }
@@ -390,7 +385,7 @@ public abstract class Pawn : MonoBehaviour
 
     #region Input variables
 
-    protected Vector2 m_InputView = Vector2.zero;
+    private Vector2 m_InputView = Vector2.zero;
     // Input rotation in degrees.
     public Vector2 InputView
     {
@@ -398,7 +393,7 @@ public abstract class Pawn : MonoBehaviour
         protected set { m_InputView = value; }
     }
 
-    protected Vector2 m_InputMoveDirection = Vector2.zero;
+    private Vector2 m_InputMoveDirection = Vector2.zero;
     protected Vector2 InputMoveDirection
     {
         get { return m_InputMoveDirection; }
@@ -420,43 +415,43 @@ public abstract class Pawn : MonoBehaviour
             InputMoveDirection = InputMoveDirection.normalized * Mathf.Clamp01(value);
         }
     }
-    protected bool m_InputJump = false;
+    private bool m_InputJump = false;
     public bool InputJump
     {
         get { return m_InputJump; }
         protected set { m_InputJump = value; }
     }
-    protected bool m_InputSprint = false;
+    private bool m_InputSprint = false;
     public bool InputSprint
     {
         get { return m_InputSprint; }
         protected set { m_InputSprint = value; }
     }
-    protected bool m_InputAttack = false;
+    private bool m_InputAttack = false;
     public bool InputAttack
     {
         get { return m_InputAttack; }
         protected set { m_InputAttack = value; }
     }
-    protected bool m_InputReload = false;
+    private bool m_InputReload = false;
     public bool InputReload
     {
         get { return m_InputReload; }
         protected set { m_InputReload = value; }
     }
-    protected bool m_InputAim = false;
+    private bool m_InputAim = false;
     public bool InputAim
     {
         get { return m_InputAim; }
         protected set { m_InputAim = value; }
     }
-    protected bool m_InputUse = false;
+    private bool m_InputUse = false;
     public bool InputUse
     {
         get { return m_InputUse; }
         protected set { m_InputUse = value; }
     }
-    protected bool m_InputPause = false;
+    private bool m_InputPause = false;
     public bool InputPause
     {
         get { return m_InputPause; }

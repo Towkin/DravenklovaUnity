@@ -19,7 +19,20 @@ public class Player : Pawn {
             }
         }
     }
-    
+    public override bool IsJumping
+    {
+        get { return base.IsJumping; }
+        set
+        {
+            if(!IsJumping && value)
+            {
+                PlayerJumpAudio.Play();
+            }
+            base.IsJumping = value;
+            
+        }
+    }
+
     #region Player world interaction
     [Header("World interaction")]
     [SerializeField]
@@ -71,13 +84,49 @@ public class Player : Pawn {
     {
         get { return m_Fader; }
     }
-    [SerializeField]
-    private FMODUnity.StudioEventEmitter m_HeartBeat;
-    private FMODUnity.StudioEventEmitter HeartBeat
-    {
-        get { return m_HeartBeat; }
-    }
 
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_PickupAudio;
+    private FMODUnity.StudioEventEmitter PickupAudio
+    {
+        get { return m_PickupAudio; }
+    }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_HeartBeatAudio;
+    private FMODUnity.StudioEventEmitter HeartBeatAudio
+    {
+        get { return m_HeartBeatAudio; }
+    }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_BreathingAudio;
+    private FMODUnity.StudioEventEmitter BreathingAudio
+    {
+        get { return m_BreathingAudio; }
+    }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_PlayerJumpAudio;
+    private FMODUnity.StudioEventEmitter PlayerJumpAudio
+    {
+        get { return m_PlayerJumpAudio; }
+    }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_PlayerHurtAudio;
+    private FMODUnity.StudioEventEmitter PlayerHurtAudio
+    {
+        get { return m_PlayerHurtAudio; }
+    }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_PlayerDeathAudio;
+    private FMODUnity.StudioEventEmitter PlayerDeathAudio
+    {
+        get { return m_PlayerDeathAudio; }
+    }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_PlayerZoomAudio;
+    private FMODUnity.StudioEventEmitter PlayerZoomAudio
+    {
+        get { return m_PlayerZoomAudio; }
+    }
 
     public override float Health
     {
@@ -87,12 +136,23 @@ public class Player : Pawn {
             base.Health = value;
 
             HealthBar.CurrentVal = HealthPercentage;
-            HeartBeat.SetParameter("health", HealthPercentage);
+            HeartBeatAudio.SetParameter("health", HealthPercentage);
 
             if(!m_GameOver && !IsAlive)
             {
                 StartPlayerDeath();
             }
+        }
+    }
+
+    private float m_Fatigue = 0f;
+    public float Fatigue
+    {
+        get { return m_Fatigue; }
+        set
+        {
+            m_Fatigue = Mathf.Clamp01(value);
+            BreathingAudio.SetParameter("speed", m_Fatigue);
         }
     }
 
@@ -286,6 +346,12 @@ public class Player : Pawn {
         InputPause = Input.GetButtonDown("Menu");
 
     }
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        Fatigue += (IsRunning ? 0.25f : -0.15f) * Time.fixedDeltaTime;
+    }
 
     protected virtual void UseItems()
     {
@@ -306,20 +372,23 @@ public class Player : Pawn {
                 && PropHit.transform != Hit.transform)
                 {
                     // Ignore if something is in the way.
-                    Debug.Log(PropHit.transform.gameObject.ToString() + " is in the way of " + Prop.gameObject.ToString());
+                    //Debug.Log(PropHit.transform.gameObject.ToString() + " is in the way of " + Prop.gameObject.ToString());
 
                     continue;
                 }
                 
                 // TODO: UI message informing that Item is usable
-                Debug.Log(Prop);
+                //Debug.Log(Prop);
                 Prop.StartGlow();
-                Debug.DrawLine(Cam.transform.position, Prop.transform.position, Color.blue);
+                //Debug.DrawLine(Cam.transform.position, Prop.transform.position, Color.blue);
 
                 if (InputUse && !HasUsed)
                 {
                     Prop.Use(this);
                     HasUsed = true;
+
+                    if (PickupAudio)
+                        PickupAudio.Play();
                 }
             }
         }
@@ -329,6 +398,10 @@ public class Player : Pawn {
     {
         base.Aim();
         Cam.fieldOfView = Mathf.Lerp(Cam.fieldOfView, FOVTarget, 0.25f);
+        if(PlayerZoomAudio)
+        {
+            PlayerZoomAudio.SetParameter("zoomOnOff", IsAiming ? 0f : 1f);
+        }
     }
     
     protected void UpdateHeadBob()
@@ -346,14 +419,26 @@ public class Player : Pawn {
     public void DamagePlayer(float a_RawDamage, Vector3 a_FromPosition)
     {
         Health -= a_RawDamage;
+
+        if (PlayerHurtAudio)
+        {
+            PlayerHurtAudio.Play();
+        }
+
         Vector3 Direction = (transform.position - a_FromPosition).normalized;
 
         Velocity += Direction * 4.5f;
+
+        
     }
 
     protected void StartPlayerDeath()
     {
-        Debug.Log("Player died!");
+        
+        if (PlayerDeathAudio)
+        {
+            PlayerDeathAudio.Play();
+        }
 
         m_GameOver = true;
         if(Fader)

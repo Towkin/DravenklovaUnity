@@ -49,6 +49,8 @@ public abstract class Usable : Activatable
     
     public void StartGlow()
     {
+        Debug.Log(gameObject.ToString() + " started glowing.");
+
         for(int i = 0; i < GlowRenderers.Length; i++)
         {
             MeshRenderer GlowRenderer = GlowRenderers[i];
@@ -62,6 +64,8 @@ public abstract class Usable : Activatable
 
     public void StopGlow()
     {
+        Debug.Log(gameObject.ToString() + " stopped glowing.");
+
         for (int i = 0; i < GlowRenderers.Length; i++)
         {
             if (i >= DefaultShader.Length || DefaultShader[i] == null)
@@ -89,7 +93,7 @@ public abstract class Usable : Activatable
         }
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (Glowing)
         {
