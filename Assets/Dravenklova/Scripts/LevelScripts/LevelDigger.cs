@@ -9,6 +9,12 @@ public class LevelDigger : MonoBehaviour {
     private bool m_SpawnBlockerTests = false;
     [SerializeField]
     private bool m_DebugLogs = false;
+    private bool m_IsDebugLevel = false;
+    private bool IsDebugLevel
+    {
+        get { return m_IsDebugLevel; }
+        set { m_IsDebugLevel = value; }
+    }
     [SerializeField]
     private bool m_TestConnectionScale = false;
 
@@ -46,6 +52,7 @@ public class LevelDigger : MonoBehaviour {
     public Stack<GameObject> RoomBranch
     {
         get { return m_RoomBranch; }
+        set { m_RoomBranch = value; }
     }
     [SerializeField]
     [Range(1, 30)]
@@ -53,6 +60,7 @@ public class LevelDigger : MonoBehaviour {
     public int LevelLength
     {
         get { return m_LevelLength; }
+        set { m_LevelLength = value; }
     }
 
     private enum RoomTypes { Spawn, Branch, End, Shrine };
@@ -63,6 +71,12 @@ public class LevelDigger : MonoBehaviour {
     public GameObject FirstRoom
     {
         get { return m_FirstRoom; }
+    }
+    private GameObject m_LastShrine;
+    public GameObject LastShrine
+    {
+        get { return m_LastShrine; }
+        set { m_LastShrine = value; }
     }
 
     [SerializeField]
@@ -99,10 +113,10 @@ public class LevelDigger : MonoBehaviour {
         get { return m_ItemPrefabs; }
     }
     [SerializeField]
-    private int m_ItemCount = 5;
+    private float m_ItemMultiplier = 2.0f;
     public int ItemCount
     {
-        get { return m_ItemCount; }
+        get { return Mathf.RoundToInt(LevelLength * m_ItemMultiplier); }
     }
 
     //[SerializeField]
@@ -120,15 +134,15 @@ public class LevelDigger : MonoBehaviour {
         get { return m_EnemyPrefabs; }
     }
     [SerializeField]
-    private int m_EnemyCount = 4;
+    private float m_EnemyMultiplier = 0.75f;
     public int EnemyCount
     {
-        get { return m_EnemyCount; }
+        get { return Mathf.RoundToInt(LevelLength * m_EnemyMultiplier); }
     }
 
     
-    private GameObject[] m_Enemies;
-    public GameObject[] Enemies
+    private List<GameObject> m_Enemies;
+    public List<GameObject> Enemies
     {
         get { return m_Enemies; }
         private set { m_Enemies = value; }
@@ -138,6 +152,7 @@ public class LevelDigger : MonoBehaviour {
     public Queue<GameObject> LevelObjects
     {
         get { return m_LevelObjects; }
+        set { m_LevelObjects = value; }
     }
     private GameObject m_LastBuiltPrefab = null;
     public GameObject LastBuiltPrefab
@@ -198,9 +213,9 @@ public class LevelDigger : MonoBehaviour {
     }
     void Start ()
     {
-        GameObject LevelObject = new GameObject("Level Objects");
+        IsDebugLevel = false;
         Random.seed = Seed;
-        BuildLevel(RoomBranch, LevelObjects, LevelLength, LevelObject);
+        BuildLevel(RoomBranch, LevelObjects, LevelLength, Instantiate(FirstRoom), new GameObject("Level Objects"));
     }
 
     public void DebugLevelTrackingData()
@@ -233,8 +248,9 @@ public class LevelDigger : MonoBehaviour {
         int OldSeed = Random.seed;
         Random.seed = a_Seed;
 
+        IsDebugLevel = true;
         GameObject DebugLevel = new GameObject("Debug Level - Delete me before play!");
-        BuildLevel(DebugBranch, DebugObjects, a_LevelLength, DebugLevel);
+        BuildLevel(DebugBranch, DebugObjects, a_LevelLength, Instantiate(FirstRoom), DebugLevel);
         LevelParent = DebugLevel;
 
         Random.seed = OldSeed;
@@ -255,7 +271,28 @@ public class LevelDigger : MonoBehaviour {
         DestroyImmediate(LevelParent);
     }
 
-    private void BuildLevel(Stack<GameObject> a_Branch, Queue<GameObject> a_Level, int a_LevelLength, GameObject a_Parent)
+    public void LoadNextLevel()
+    {
+        ClearLastLevel();
+        BuildLevel(RoomBranch, LevelObjects, ++LevelLength, LastShrine, new GameObject("Level Objects"));
+    }
+
+    private void ClearLastLevel()
+    {
+        while(LevelObjects.Count > 0)
+        {
+            Destroy(LevelObjects.Dequeue());
+        }
+        foreach(GameObject Enemy in Enemies)
+        {
+            Destroy(Enemy);
+        }
+        Enemies = null;
+        LevelObjects = new Queue<GameObject>();
+        RoomBranch = new Stack<GameObject>();
+    }
+
+    private void BuildLevel(Stack<GameObject> a_Branch, Queue<GameObject> a_Level, int a_LevelLength, GameObject a_FirstRoom, GameObject a_Parent)
     {
         Debug.Log("Building level with length " + a_LevelLength.ToString() + " and seed " + Random.seed.ToString());
 
@@ -265,10 +302,9 @@ public class LevelDigger : MonoBehaviour {
         m_LevelEnded = false;
         //bool ConnectionsLeft = true;
 
-        GameObject InstantiatedFirstRoom = Instantiate(FirstRoom);
-        InstantiatedFirstRoom.transform.parent = a_Parent.transform;
-        a_Branch.Push(InstantiatedFirstRoom);
-        a_Level.Enqueue(InstantiatedFirstRoom);
+        a_FirstRoom.transform.parent = a_Parent.transform;
+        a_Branch.Push(a_FirstRoom);
+        a_Level.Enqueue(a_FirstRoom);
         
 
         while(a_Branch.Count > 0)
@@ -285,6 +321,10 @@ public class LevelDigger : MonoBehaviour {
                 {
                     LevelEnded = true;
                     m_LevelEnded = true;
+                    
+                    LastShrine = NewPrefab;
+                    // Make the leveldigger back up again.
+                    continue;
                 }
             }
             else if(a_Branch.Count >= AimLength)
@@ -311,7 +351,10 @@ public class LevelDigger : MonoBehaviour {
                 NewPrefab.transform.parent = a_Parent.transform;
             }
         }
-        LevelGraph = new GameObject("A* Graph Object");
+        if (LevelGraph == null)
+        {
+            LevelGraph = new GameObject("A* Graph Object");
+        }
         LevelGraph.transform.parent = a_Parent.transform;
 
         BuildPathfinding(LevelGraph);
@@ -335,36 +378,44 @@ public class LevelDigger : MonoBehaviour {
         }
         
         List<EnemyTemplate> EnemySpawners = new List<EnemyTemplate>(FindObjectsOfType<EnemyTemplate>());
-        int EnemiesSpawned = 0;
+        //int EnemiesSpawned = 0;
+        Enemies = new List<GameObject>();
         while(EnemySpawners.Count > 0)
         {
             int SpawnIndex = Random.Range(0, EnemySpawners.Count);
-            if(EnemiesSpawned < EnemyCount && EnemyPrefabs != null)
+            if(Enemies.Count < EnemyCount && EnemyPrefabs != null)
             {
                 if(EnemyPrefabs.Length > 0)
                 {
-                    Instantiate(EnemyPrefabs[0], EnemySpawners[SpawnIndex].transform.position, EnemySpawners[SpawnIndex].transform.rotation);
-                    EnemiesSpawned++;
+                    Enemies.Add(Instantiate(EnemyPrefabs[0], EnemySpawners[SpawnIndex].transform.position, EnemySpawners[SpawnIndex].transform.rotation) as GameObject);
                 }
             }
 
             EnemySpawners.RemoveAt(SpawnIndex);
         }
-        Debug.Log("Enemies spawned: " + EnemiesSpawned.ToString());
+        Debug.Log("Enemies spawned: " + Enemies.Count.ToString());
 
     }
 
     private void BuildPathfinding(GameObject a_GraphObject)
     {
-        // Dis ting be broek
-        AstarPath GraphScript = a_GraphObject.AddComponent<AstarPath>();
+
+        AstarPath GraphScript = a_GraphObject.GetComponent<AstarPath>();
+        if (GraphScript == null)
+        {
+            GraphScript = a_GraphObject.AddComponent<AstarPath>();
+        }
         if(GraphScript == null)
         {
             Debug.LogError("Couldn't build AstarPath - does the scene already contain any?");
         }
 
 
-        PointGraph Graph = GraphScript.astarData.AddGraph(typeof(PointGraph)) as PointGraph;
+        PointGraph Graph = GraphScript.astarData.pointGraph;
+        if (Graph == null)
+        {
+            Graph = GraphScript.astarData.AddGraph(typeof(PointGraph)) as PointGraph;
+        }
         if(Graph == null)
         {
             Debug.LogError("PointGraph creation failed!");
@@ -380,40 +431,6 @@ public class LevelDigger : MonoBehaviour {
         Graph.mask = PathfinderMask;
 
         GraphScript.Scan();
-
-        /*RecastGraph Graph = GraphScript.astarData.AddGraph(typeof(RecastGraph)) as RecastGraph;
-        //a_GraphObject.GetComponent<AstarPath>().astarData.recastGraph;
-        //RecastGraph Graph = new RecastGraph();
-        //Graph.active = GraphScript;
-
-        if(Graph == null)
-        {
-            Debug.LogError("No RecastGraph available!");
-            return;
-        }
-
-        Graph.cellSize = 0.25f;
-        Graph.cellHeight = 0.01f;
-
-        Graph.useTiles = true;
-
-        Graph.minRegionSize = 3f;
-
-        Graph.walkableHeight = 2f;
-        Graph.walkableClimb = 0.5f;
-
-        Graph.characterRadius = 0.25f;
-
-        Graph.maxSlope = 50f;
-        Graph.maxEdgeLength = 5f;
-
-        Graph.showMeshOutline = true;
-        Graph.showMeshSurface = true;
-
-        Graph.SnapForceBoundsToScene();
-        //Graph.ScanGraph();
-
-        GraphScript.Scan();*/
     }
 
     // Tries to build a level piece of the a_Type type. If succesful it returns the room prefab, else returns null.
@@ -673,7 +690,16 @@ public class LevelDigger : MonoBehaviour {
             }
         }
 
-        DestroyImmediate(TransformMarker);
+#if UNITY_EDITOR
+        if (IsDebugLevel)
+        {
+            DestroyImmediate(TransformMarker);
+        }
+#endif
+        if(TransformMarker)
+        {
+            Destroy(TransformMarker);
+        }
 
         return ReturnPrefab;
     }

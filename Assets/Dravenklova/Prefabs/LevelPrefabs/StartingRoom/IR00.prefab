@@ -17325,6 +17325,7 @@ MonoBehaviour:
   - {fileID: 121408, guid: 7efec862d2373044fae79aeeb9a1272c, type: 2}
   - {fileID: 103392, guid: e8d87292e486a0540afd8303a63e0c44, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 1
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
     m_Center: {x: 0.020632863, y: 0.16551417, z: 0.05853024}
@@ -17390,6 +17391,7 @@ MonoBehaviour:
   - {fileID: 107068, guid: b5ca45cd59d578e4e8ececc45879db71, type: 2}
   - {fileID: 194048, guid: 073a3a3161b2ed04a9bbe9d3a85ec3cd, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 1
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
     m_Center: {x: 0.000000014901161, y: 0.087000005, z: 0}
@@ -17409,6 +17411,7 @@ MonoBehaviour:
   - {fileID: 121408, guid: 7efec862d2373044fae79aeeb9a1272c, type: 2}
   - {fileID: 103392, guid: e8d87292e486a0540afd8303a63e0c44, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 1
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
     m_Center: {x: 0.020632863, y: 0.16551417, z: 0.05853024}
@@ -17433,6 +17436,7 @@ MonoBehaviour:
   - {fileID: 195414, guid: 5f7daeb63c4613a4b800bab6faaa9bf7, type: 2}
   - {fileID: 117712, guid: 0395086f9bd409a4ab1f7a8bfdbdd5f1, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 1
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
     m_Center: {x: 0, y: 0.16551417, z: 0}
@@ -17453,6 +17457,7 @@ MonoBehaviour:
   - {fileID: 107068, guid: b5ca45cd59d578e4e8ececc45879db71, type: 2}
   - {fileID: 194048, guid: 073a3a3161b2ed04a9bbe9d3a85ec3cd, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 1
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
     m_Center: {x: 0.000000014901161, y: 0.087000005, z: 0}
@@ -17473,6 +17478,7 @@ MonoBehaviour:
   - {fileID: 107068, guid: b5ca45cd59d578e4e8ececc45879db71, type: 2}
   - {fileID: 194048, guid: 073a3a3161b2ed04a9bbe9d3a85ec3cd, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 1
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
     m_Center: {x: 0.000000014901161, y: 0.087000005, z: 0}
@@ -17493,6 +17499,7 @@ MonoBehaviour:
   m_GlowShader: {fileID: 0}
   m_BoltTemplateWood: {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
   m_BoltSpawnLocation: {fileID: 195570}
+  m_StringTransform: {fileID: 465950}
   m_BoltFireAudioEvent: {fileID: 0}
   m_ReloadAudioEvent: {fileID: 0}
   m_BoltImpulse: 50
@@ -17524,6 +17531,7 @@ MonoBehaviour:
   - {fileID: 107068, guid: b5ca45cd59d578e4e8ececc45879db71, type: 2}
   - {fileID: 194048, guid: 073a3a3161b2ed04a9bbe9d3a85ec3cd, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 1
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
     m_Center: {x: 0.000000014901161, y: 0.087000005, z: 0}
@@ -17560,6 +17568,7 @@ MonoBehaviour:
   - {fileID: 121408, guid: 7efec862d2373044fae79aeeb9a1272c, type: 2}
   - {fileID: 103392, guid: e8d87292e486a0540afd8303a63e0c44, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 1
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
     m_Center: {x: 0.020632863, y: 0.16551417, z: 0.05853024}
@@ -17599,10 +17608,11 @@ MonoBehaviour:
   m_TemplateList:
   - {fileID: 173304, guid: dea39f668493cd841acc07565b293eb4, type: 2}
   m_EditorTestObject: {fileID: 0}
+  m_CopyParent: 0
   m_IsBoundsCalculated: 1
   m_SpawnBounds:
-    m_Center: {x: -0.41997218, y: 0.43501282, z: -0.26789594}
-    m_Extent: {x: 0.9199722, y: 1.4889872, z: 1.2635747}
+    m_Center: {x: -0.41997218, y: 0.4737761, z: -0.31689823}
+    m_Extent: {x: 0.9199722, y: 1.5037506, z: 1.314574}
 --- !u!114 &11490112
 MonoBehaviour:
   m_ObjectHideFlags: 1

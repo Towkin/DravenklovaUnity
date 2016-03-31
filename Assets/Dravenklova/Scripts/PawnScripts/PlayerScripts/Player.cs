@@ -58,6 +58,12 @@ public class Player : Pawn {
 
     #region Player components
     [Header("Player Components")]
+    /*[SerializeField]
+    private GameObject m_PlayerParent;
+    public GameObject PlayerParent
+    {
+        get { return m_PlayerParent; }
+    }*/
     [SerializeField]
     private GameObject m_PlayerHands;
     public GameObject PlayerHands
@@ -292,7 +298,7 @@ public class Player : Pawn {
         HealthBar.Initialize();
         
 
-        Controller.transform.parent = null;
+        //PlayerParent.transform.parent = null;
         if (Fader)
             Fader.FadeIn();
     }

@@ -9,6 +9,12 @@ public class GhoulAnimationCallback : MonoBehaviour {
     GameObject m_AttackEvent;
 
     private float m_LastFootstep = 0f;
+    private GameObject m_Player;
+
+    public void Start()
+    {
+        m_Player = FindObjectOfType<Player>().gameObject;
+    }
 
     public void Attack()
     {
@@ -34,8 +40,11 @@ public class GhoulAnimationCallback : MonoBehaviour {
     {
         if (Time.timeSinceLevelLoad - m_LastFootstep > 0.1f)
         {
-            m_LastFootstep = Time.timeSinceLevelLoad;
-            Instantiate(m_FootstepEvent, transform.position, transform.rotation);
+            if (Vector3.Distance(transform.position, m_Player.transform.position) < 20f)
+            {
+                m_LastFootstep = Time.timeSinceLevelLoad;
+                Instantiate(m_FootstepEvent, transform.position, transform.rotation);
+            }
         }
     }
 }

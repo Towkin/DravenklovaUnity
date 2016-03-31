@@ -16,6 +16,23 @@ public class Crossbow : Weapon
     {
         get { return m_BoltSpawnLocation; }
     }
+    [SerializeField]
+    private Transform m_StringTransform;
+    private Transform StringTransform
+    {
+        get { return m_StringTransform; }
+    }
+    private Vector3 m_StringLoadedLocalPosition;
+    private Vector3 StringLoadedLocalPosition
+    {
+        get { return m_StringLoadedLocalPosition; }
+        set { m_StringLoadedLocalPosition = value; }
+    }
+    private Vector3 m_StringFiredOffset = new Vector3(0.09f, 0.01f, 0.0f);
+    private Vector3 StringFiredLocalPosition
+    {
+        get { return m_StringLoadedLocalPosition + m_StringFiredOffset; }
+    }
 
     private GameObject m_LoadedBolt;
     private GameObject LoadedBolt
@@ -53,6 +70,14 @@ public class Crossbow : Weapon
         set { m_IsLoaded = value; }
     }
 
+    protected override void Start()
+    {
+        base.Start();
+
+        StringLoadedLocalPosition = StringTransform.localPosition;
+        StringTransform.localPosition = StringFiredLocalPosition;
+    }
+
     public override void Attack()
     {
         if(IsLoaded)
@@ -68,6 +93,7 @@ public class Crossbow : Weapon
 
             Instantiate(BoltFireAudioEvent, transform.position, transform.rotation);
 
+            StringTransform.localPosition = StringFiredLocalPosition;
             IsLoaded = false;
         }
         else
@@ -88,8 +114,8 @@ public class Crossbow : Weapon
             LoadedBolt.transform.rotation = BoltSpawnLocation.transform.rotation * LoadedBolt.transform.rotation;
             LoadedBolt.transform.parent = transform;
             SetPrefabRenderLayer(LoadedBolt.transform, gameObject.layer);
-            
 
+            StringTransform.localPosition = StringLoadedLocalPosition;
             IsLoaded = true;
         }
     }

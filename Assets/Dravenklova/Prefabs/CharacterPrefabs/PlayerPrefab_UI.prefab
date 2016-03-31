@@ -2666,8 +2666,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135414}
-  m_LocalRotation: {x: -0.008164836, y: -0.7070597, z: -0.008164836, w: 0.7070597}
-  m_LocalPosition: {x: -0.29339543, y: 2.9212744e-17, z: -1.02140514e-16}
+  m_LocalRotation: {x: 0, y: 0.7071066, z: 0, w: -0.70710695}
+  m_LocalPosition: {x: -0.2943, y: -0.0019, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 419472}
@@ -3184,7 +3184,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177280}
   m_LocalRotation: {x: 0.025371842, y: -0.0002929834, z: 0.99961144, w: 0.011543094}
-  m_LocalPosition: {x: -0.16534, y: -0.033749957, z: -0.36797}
+  m_LocalPosition: {x: -0.194, y: -0.033, z: -0.338}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 419472}
@@ -4042,6 +4042,7 @@ MonoBehaviour:
   m_GlowShader: {fileID: 0}
   m_BoltTemplateWood: {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
   m_BoltSpawnLocation: {fileID: 162412}
+  m_StringTransform: {fileID: 440758}
   m_BoltFireAudioEvent: {fileID: 194660, guid: b395573769ddb6244afab628d63f0eaa, type: 2}
   m_ReloadAudioEvent: {fileID: 0}
   m_BoltImpulse: 50

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_TrackingData: {fileID: 0}
   m_Seed: 665341182
   m_Cube: {fileID: 0}
-  m_LevelLength: 7
+  m_LevelLength: 4
   m_FirstRoom: {fileID: 158396, guid: 57c227fc1177c034499841a6b1ca43a3, type: 2}
   m_BranchingRooms:
   - {fileID: 105892, guid: 8693fbdc613a7fd49bf72a1f664650b0, type: 2}
@@ -91,10 +91,10 @@ MonoBehaviour:
   - {fileID: 180310, guid: c2fd923fbf7e11640a0f881202dc9a16, type: 2}
   - {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
   - {fileID: 136544, guid: 93d59f43c0cbbf34ebc70f1e3e0517dd, type: 2}
-  m_ItemCount: 5
+  m_ItemMultiplier: 2
   m_EnemyPrefabs:
   - {fileID: 160680, guid: 6a3b32e7e0bfe544189b0fa1c6ab3bf8, type: 2}
-  m_EnemyCount: 5
+  m_EnemyMultiplier: 0.75
   m_PathfinderMask:
     serializedVersion: 2
     m_Bits: 7169

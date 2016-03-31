@@ -30,7 +30,9 @@ public class RandomTemplateInspector : Editor
         EditorGUI.BeginChangeCheck();
 
         DrawTemplateButtons();
-        
+
+        Creator.CopyParent = GUILayout.Toggle(Creator.CopyParent, "Copy Parent");
+
         if(EditorGUI.EndChangeCheck())
         {
             RefreshCreator();
@@ -144,6 +146,13 @@ public class RandomTemplate : MonoBehaviour
     {
         get { return m_EditorTestObject; }
         set { m_EditorTestObject = value; }
+    }
+    [SerializeField]
+    private bool m_CopyParent = true;
+    public bool CopyParent
+    {
+        get { return m_CopyParent; }
+        set { m_CopyParent = value; }
     }
 
     [SerializeField]
@@ -445,8 +454,10 @@ public class RandomTemplate : MonoBehaviour
         {
             Agent.enabled = false;
         }
-
-        a_Target.parent = a_Source.parent;
+        if (CopyParent)
+        {
+            a_Target.parent = a_Source.parent;
+        }
         //aTarget.localPosition += aSource.localPosition;
         a_Target.position = a_Source.position;
         a_Target.localRotation = a_Source.localRotation;
