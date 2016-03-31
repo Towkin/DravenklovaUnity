@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EnemyPrefabs:
   - {fileID: 160680, guid: 6a3b32e7e0bfe544189b0fa1c6ab3bf8, type: 2}
   m_EnemyMultiplier: 0.75
+  m_EnemyMultiplierAdd: 0.35
   m_PathfinderMask:
     serializedVersion: 2
     m_Bits: 7169

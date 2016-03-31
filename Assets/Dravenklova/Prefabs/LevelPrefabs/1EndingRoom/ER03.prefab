@@ -5584,7 +5584,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 2
-  m_Color: {r: 0.42155063, g: 0.8308824, b: 0.42437357, a: 1}
+  m_Color: {r: 0.9558824, g: 0.64711106, b: 0.31628463, a: 1}
   m_Intensity: 2
   m_Range: 5
   m_SpotAngle: 30
@@ -5617,7 +5617,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 2
-  m_Color: {r: 0.41960785, g: 0.827451, b: 0.42352942, a: 1}
+  m_Color: {r: 0.9558824, g: 0.64711106, b: 0.31628463, a: 1}
   m_Intensity: 2
   m_Range: 5
   m_SpotAngle: 30
@@ -5734,7 +5734,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 3.7
+      scalar: 1.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5895,7 +5895,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4282634805
+        rgba: 4285314033
       minMaxState: 0
     startSize:
       scalar: 1.1
@@ -7233,7 +7233,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 3.7
+      scalar: 1.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7394,7 +7394,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4282634805
+        rgba: 4285314033
       minMaxState: 0
     startSize:
       scalar: 1.1

@@ -117,10 +117,7 @@ public class NPC : Pawn
         get { return m_IsHunting; }
         protected set
         {
-            if (!WasHit && !IsHunting && value)
-            {
-                Instantiate(IdleVoiceEvent, transform.position, transform.rotation);
-            }
+            IdleVoiceEmitter.SetParameter("detectionLevel", value ? 1f : 0f);
             m_IsHunting = value;
         }
     }
@@ -181,7 +178,6 @@ public class NPC : Pawn
         protected set
         {
             m_IdleTimerActive = value;
-            Instantiate(IdleVoiceEvent, transform.position, transform.rotation);
         }
     }
 
@@ -310,11 +306,17 @@ public class NPC : Pawn
     #region Audio Objects
     [Header("Audio Prefabs")]
     [SerializeField]
+    private FMODUnity.StudioEventEmitter m_IdleVoiceEmitter;
+    public FMODUnity.StudioEventEmitter IdleVoiceEmitter
+    {
+        get { return m_IdleVoiceEmitter; }
+    }
+    /*[SerializeField]
     private GameObject m_IdleVoiceEvent;
     public GameObject IdleVoiceEvent
     {
         get { return m_IdleVoiceEvent; }
-    }
+    }*/
     [SerializeField]
     private GameObject m_HitVoiceEvent;
     public GameObject HitVoiceEvent
@@ -554,5 +556,6 @@ public class NPC : Pawn
     {
         Controller.enabled = false;
         Instantiate(DeathVoiceEvent, transform.position, transform.rotation);
+        Destroy(IdleVoiceEmitter);
     }
 }

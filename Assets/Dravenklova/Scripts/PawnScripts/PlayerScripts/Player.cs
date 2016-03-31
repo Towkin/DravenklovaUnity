@@ -296,7 +296,8 @@ public class Player : Pawn {
         Cursor.lockState = CursorLockMode.Locked;
 
         HealthBar.Initialize();
-        
+
+        Time.timeScale = 1f;
 
         //PlayerParent.transform.parent = null;
         if (Fader)

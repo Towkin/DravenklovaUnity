@@ -135,6 +135,13 @@ public class LevelDigger : MonoBehaviour {
     }
     [SerializeField]
     private float m_EnemyMultiplier = 0.75f;
+    public float EnemyMultiplier
+    {
+        get { return m_EnemyMultiplier; }
+        set { m_EnemyMultiplier = value; }
+    }
+    [SerializeField]
+    private float m_EnemyMultiplierAdd = 0.35f;
     public int EnemyCount
     {
         get { return Mathf.RoundToInt(LevelLength * m_EnemyMultiplier); }
@@ -274,7 +281,11 @@ public class LevelDigger : MonoBehaviour {
     public void LoadNextLevel()
     {
         ClearLastLevel();
-        BuildLevel(RoomBranch, LevelObjects, ++LevelLength, LastShrine, new GameObject("Level Objects"));
+
+        LevelLength++;
+        EnemyMultiplier += m_EnemyMultiplierAdd;
+
+        BuildLevel(RoomBranch, LevelObjects, LevelLength, LastShrine, new GameObject("Level Objects"));
     }
 
     private void ClearLastLevel()

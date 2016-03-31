@@ -4,20 +4,24 @@ using System.Collections;
 
 public class HealthBar : MonoBehaviour
 {
+    [SerializeField]
     private Player m_Player;
+    public Player PlayerCharacter
+    {
+        get { return m_Player; }
+    }
+    [SerializeField]
+    private Image m_HealthImage;
+    public Image HealthImage
+    {
+        get { return m_HealthImage; }
+    }
 
     void FixedUpdate ()
     {
-        if(m_Player == null)
+        if(PlayerCharacter && HealthImage)
         {
-            m_Player = FindObjectOfType<Player>();
-            if(m_Player == null)
-            {
-                return;
-            }
+            HealthImage.fillAmount = PlayerCharacter.HealthPercentage;
         }
-        Image m_HealthBar = GetComponent<Image>();
-        m_HealthBar.fillAmount = m_Player.Health;
-        
     }
 }

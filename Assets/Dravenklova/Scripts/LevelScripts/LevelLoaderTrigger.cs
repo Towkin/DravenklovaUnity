@@ -11,6 +11,7 @@ public class LevelLoaderTrigger : MonoBehaviour {
     }
 
     bool m_IsLoadingLevel = false;
+    float m_LoadLevelStart = 0f;
 	
 	void Start () {
         LevelGenerator = FindObjectOfType<LevelDigger>();
@@ -27,21 +28,22 @@ public class LevelLoaderTrigger : MonoBehaviour {
     public void StartLoadProcess()
     {
         m_IsLoadingLevel = true;
-        if(transform.childCount > 0)
-        {
-            transform.GetChild(0).gameObject.SetActive(true);
-        }
-        
+        m_LoadLevelStart = Time.realtimeSinceStartup;
+
+        FindObjectOfType<IngameLoadingScript>().ShowLoadingUI();
     }
     public void EndLoadProcess()
     {
         LevelGenerator.LoadNextLevel();
+
+        FindObjectOfType<IngameLoadingScript>().HideLoadingUI();
+
         Destroy(gameObject);
     }
 
     public void Update()
     {
-        if(m_IsLoadingLevel)
+        if(m_IsLoadingLevel && Time.realtimeSinceStartup - m_LoadLevelStart >= Time.deltaTime)
         {
             EndLoadProcess();
         }

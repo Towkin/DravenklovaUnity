@@ -45,6 +45,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &102760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 437010}
+  - 114: {fileID: 11489330}
+  m_Layer: 0
+  m_Name: IdleVoice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &102810
 GameObject:
   m_ObjectHideFlags: 1
@@ -1447,6 +1463,18 @@ Transform:
   - {fileID: 402260}
   m_Father: {fileID: 437224}
   m_RootOrder: 1
+--- !u!4 &437010
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102760}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.521, z: 0.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 474256}
+  m_RootOrder: 3
 --- !u!4 &437224
 Transform:
   m_ObjectHideFlags: 1
@@ -1798,6 +1826,7 @@ Transform:
   - {fileID: 418706}
   - {fileID: 467234}
   - {fileID: 408962}
+  - {fileID: 437010}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &475638
@@ -2104,7 +2133,7 @@ MonoBehaviour:
     m_Bits: 3585
   m_HeadTransform: {fileID: 470206}
   m_BaseTransform: {fileID: 408962}
-  m_IdleVoiceEvent: {fileID: 152690, guid: f86f2f612181e0a4b949158ef25bbba6, type: 2}
+  m_IdleVoiceEmitter: {fileID: 11489330}
   m_HitVoiceEvent: {fileID: 103016, guid: 203d57323c1b6224a9e43765c74384fd, type: 2}
   m_DeathVoiceEvent: {fileID: 118052, guid: f1dd7e73637653842ab77684bc1ab776, type: 2}
 --- !u!114 &11445870
@@ -2140,6 +2169,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FootstepEvent: {fileID: 120750, guid: 0ae1be66bd5053c4da257563509da820, type: 2}
   m_AttackEvent: {fileID: 187848, guid: 8eab788fd5af0534894331eb57556e21, type: 2}
+--- !u!114 &11489330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Npcs/Ghoul/idle
+  PlayEvent: 1
+  StopEvent: 2
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Params: []
 --- !u!114 &11495630
 MonoBehaviour:
   m_ObjectHideFlags: 1
