@@ -267,6 +267,13 @@ public class NPC : Pawn
         get { return m_BaseTransform; }
     }
 
+    private bool m_WasHit = false;
+    public bool WasHit
+    {
+        get { return m_WasHit; }
+        set { m_WasHit = value; }
+    }
+
 
     #endregion
 
@@ -289,9 +296,7 @@ public class NPC : Pawn
         PawnAnaimator.SetFloat("SpeedX", Mathf.Lerp(PawnAnaimator.GetFloat("SpeedX"), ForwardVelocity.x, 0.5f));
         PawnAnaimator.SetFloat("SpeedZ", Mathf.Lerp(PawnAnaimator.GetFloat("SpeedZ"), ForwardVelocity.z, 0.5f));
         PawnAnaimator.SetBool("Attack", InputAttack);
-        
-        
-        //PawnAnaimator.SetBool("WasHit", )
+        PawnAnaimator.SetBool("WasHit", WasHit); WasHit = false;
     }
 
     protected override void UpdateInput()

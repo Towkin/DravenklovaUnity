@@ -59,6 +59,10 @@ public class Bolt : Consumable
                 if(HitPawn)
                 {
                     HitPawn.Health -= DamageAmount;
+                    if(HitPawn.GetType() == typeof(NPC))
+                    {
+                        (HitPawn as NPC).WasHit = true;
+                    }
                     if(BoltAudioHitFleshEvent)
                         Instantiate(BoltAudioHitFleshEvent, transform.position, transform.rotation);
                     

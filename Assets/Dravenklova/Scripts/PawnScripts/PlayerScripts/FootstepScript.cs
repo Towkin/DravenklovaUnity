@@ -86,7 +86,7 @@ public class FootstepScript : MonoBehaviour {
             return;
         }
 
-        if(PawnScript.IsGrounded && PawnScript.PlanarSpeed > FootstepSpeedThreshold)
+        if(Time.timeScale > 0 && PawnScript.IsGrounded && PawnScript.PlanarSpeed > FootstepSpeedThreshold)
         {
             if((Time.realtimeSinceStartup - LastFootstep) > FootstepDelta)
             {

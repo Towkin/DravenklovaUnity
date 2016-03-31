@@ -708,7 +708,7 @@ public abstract class Pawn : MonoBehaviour
         float TestRadius = Controller.radius;
 
         //Collider[] AllColliders = Physics.OverlapSphere(TestPos, TestRadius);
-        RaycastHit[] GroundHits = Physics.SphereCastAll(TestPos, TestRadius, Vector3.down, 0.05f, LayerMask.GetMask("Default"));
+        RaycastHit[] GroundHits = Physics.SphereCastAll(TestPos, TestRadius, Vector3.down, 0.075f, LayerMask.GetMask("Default"));
 
         PlanarNormal = Vector3.up;
 
