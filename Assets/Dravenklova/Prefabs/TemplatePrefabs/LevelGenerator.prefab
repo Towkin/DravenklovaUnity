@@ -90,7 +90,7 @@ MonoBehaviour:
   m_ItemPrefabs:
   - {fileID: 180310, guid: c2fd923fbf7e11640a0f881202dc9a16, type: 2}
   - {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
-  - {fileID: 100000, guid: 6614987377af2e442bca5c9841d8e4ad, type: 3}
+  - {fileID: 136544, guid: 93d59f43c0cbbf34ebc70f1e3e0517dd, type: 2}
   m_ItemCount: 5
   m_EnemyPrefabs:
   - {fileID: 160680, guid: 6a3b32e7e0bfe544189b0fa1c6ab3bf8, type: 2}

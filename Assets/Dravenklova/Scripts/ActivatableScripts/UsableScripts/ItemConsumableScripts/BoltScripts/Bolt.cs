@@ -5,6 +5,18 @@ using System;
 public class Bolt : Consumable
 {
     private Rigidbody BoltBody;
+    [SerializeField]
+    private GameObject m_BoltAudioHitWallEvent;
+    public GameObject BoltAudioHitWallEvent
+    {
+        get { return m_BoltAudioHitWallEvent; }
+    }
+    [SerializeField]
+    private GameObject m_BoltAudioHitFleshEvent;
+    public GameObject BoltAudioHitFleshEvent
+    {
+        get { return m_BoltAudioHitFleshEvent; }
+    }
 
     private float m_DamageSpeedThreshold = 1f;
     protected float DamageSpeedThreshold
@@ -36,8 +48,10 @@ public class Bolt : Consumable
         Destroy(gameObject);
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if(BoltBody != null && BoltBody.velocity.magnitude > DamageSpeedThreshold)
         {
             RaycastHit BoltHit;
@@ -47,9 +61,22 @@ public class Bolt : Consumable
                 if(HitPawn)
                 {
                     HitPawn.Health -= DamageAmount;
+                    if(HitPawn.GetType() == typeof(NPC))
+                    {
+                        (HitPawn as NPC).WasHit = true;
+                    }
+                    if(BoltAudioHitFleshEvent)
+                        Instantiate(BoltAudioHitFleshEvent, transform.position, transform.rotation);
+                    
                     Destroy(gameObject);
                 }
             }
         }
+    }
+
+    void OnCollisionEnter()
+    {
+        if (BoltAudioHitWallEvent)
+            Instantiate(BoltAudioHitWallEvent, transform.position, transform.rotation);
     }
 }

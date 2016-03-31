@@ -3,33 +3,43 @@ using System.Collections;
 
 public class PauseMenu : MenuParent {
 
+    [SerializeField]
+    private GameObject m_PauseMenuObject;
+    public GameObject PauseMenuObject
+    {
+        get { return m_PauseMenuObject; }
+    }
+    
     private bool m_IsPaused = false;
     public bool IsPaused
     {
         get { return m_IsPaused; }
-        set { m_IsPaused = value; }
+        set
+        {
+            m_IsPaused = value;
+            Cursor.lockState = value ? CursorLockMode.Confined : CursorLockMode.Locked;
+            Cursor.visible = value;
+            Time.timeScale = value? 0f : 1f;
+            PauseMenuObject.SetActive(value);
+        }
     }
 
     public void Pause()
     {
         IsPaused = !IsPaused;
     }
-
-    void Update()
+    
+    public void ResumeButtonPressed()
     {
-        if(IsPaused)
-        {
-            Cursor.visible = true;
-            Time.timeScale = .0f;
-        }
-        else
-        {
-            Cursor.visible = false;
-            Time.timeScale = 1f;
-        }
+        IsPaused = false;
     }
 
-    void OnGUI()
+    public void QuitButtonPressed()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
+    /*void OnGUI()
     {
         if(IsPaused)
         {
@@ -43,5 +53,7 @@ public class PauseMenu : MenuParent {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
             }
         }
-    }
+    }*/
+
+
 }

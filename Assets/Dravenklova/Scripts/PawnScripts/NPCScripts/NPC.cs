@@ -76,8 +76,8 @@ public class NPC : Pawn
         get { return (TargetLocation - transform.position).magnitude; }
     }
 
-
-    // Daniel Fucking around with variables
+    
+    
 
     [Header("Hunt Attributes")]
     [SerializeField]
@@ -86,7 +86,11 @@ public class NPC : Pawn
     {
         get { return m_AttackRange; }
     }
-
+    private float m_AggroRange = 3f;
+    public float AggroRange
+    {
+        get { return m_AggroRange; }
+    }
     [SerializeField]
     private GameObject m_Prey;
     public GameObject Prey
@@ -101,14 +105,24 @@ public class NPC : Pawn
     public bool PreyDetected
     {
         get { return m_PreyDetected; }
-        protected set { m_PreyDetected = value; }
+        protected set
+        {
+            m_PreyDetected = value;
+        }
     }
 
     private bool m_IsHunting;
     public bool IsHunting
     {
         get { return m_IsHunting; }
-        protected set { m_IsHunting = value; }
+        protected set
+        {
+            if (!WasHit && !IsHunting && value)
+            {
+                Instantiate(IdleVoiceEvent, transform.position, transform.rotation);
+            }
+            m_IsHunting = value;
+        }
     }
 
     private float m_TargetRadius = 2.5f;
@@ -138,6 +152,10 @@ public class NPC : Pawn
     {
         get { return TargetDistance < AttackRange; }
     }
+    public bool InAggroRange
+    {
+        get { return TargetDistance < AggroRange; }
+    }
 
     #region IdleTimer
     [Header("Idle attributes")]
@@ -160,7 +178,11 @@ public class NPC : Pawn
     public bool IdleTimerActive
     {
         get { return m_IdleTimerActive; }
-        protected set { m_IdleTimerActive = value; }
+        protected set
+        {
+            m_IdleTimerActive = value;
+            Instantiate(IdleVoiceEvent, transform.position, transform.rotation);
+        }
     }
 
     private float m_OnTimer;
@@ -253,7 +275,58 @@ public class NPC : Pawn
     {
         get { return m_HeadTransform; }
     }
+    [SerializeField]
+    private Transform m_BaseTransform;
+    public Transform BaseTransform
+    {
+        get { return m_BaseTransform; }
+    }
 
+    private float m_WasHitTime = 0f;
+    private bool m_WasHit = false;
+    public bool WasHit
+    {
+        get { return m_WasHit; }
+        set
+        {
+            if (Time.realtimeSinceStartup - m_WasHitTime > 0.15f)
+            {
+                m_WasHit = value;
+                if (value)
+                {
+                    m_WasHitTime = Time.realtimeSinceStartup;
+                    if (IsAlive)
+                    {
+                        Instantiate(HitVoiceEvent, transform.position, transform.rotation);
+                    }
+                }
+            }
+        }
+    }
+
+
+    #endregion
+
+    #region Audio Objects
+    [Header("Audio Prefabs")]
+    [SerializeField]
+    private GameObject m_IdleVoiceEvent;
+    public GameObject IdleVoiceEvent
+    {
+        get { return m_IdleVoiceEvent; }
+    }
+    [SerializeField]
+    private GameObject m_HitVoiceEvent;
+    public GameObject HitVoiceEvent
+    {
+        get { return m_HitVoiceEvent; }
+    }
+    [SerializeField]
+    private GameObject m_DeathVoiceEvent;
+    public GameObject DeathVoiceEvent
+    {
+        get { return m_DeathVoiceEvent; }
+    }
 
     #endregion
 
@@ -266,17 +339,20 @@ public class NPC : Pawn
 
     protected override void Update()
     {
-        base.Update();
-        UpdateAnimator();
+        if (Time.timeScale > 0)
+        {
+            base.Update();
+            UpdateAnimator();
+        }
     }
 
     protected virtual void UpdateAnimator()
     {
         PawnAnaimator.SetBool("IsDead", !IsAlive);
-        PawnAnaimator.SetFloat("SpeedX", ForwardVelocity.x);
-        PawnAnaimator.SetFloat("SpeedZ", ForwardVelocity.z);
+        PawnAnaimator.SetFloat("SpeedX", Mathf.Lerp(PawnAnaimator.GetFloat("SpeedX"), ForwardVelocity.x, 0.5f));
+        PawnAnaimator.SetFloat("SpeedZ", Mathf.Lerp(PawnAnaimator.GetFloat("SpeedZ"), ForwardVelocity.z, 0.5f));
         PawnAnaimator.SetBool("Attack", InputAttack);
-        //PawnAnaimator.SetBool("WasHit", )
+        PawnAnaimator.SetBool("WasHit", WasHit); WasHit = false;
     }
 
     protected override void UpdateInput()
@@ -291,7 +367,7 @@ public class NPC : Pawn
 
         InputAttack = false;
 
-        if(PreyDetected)
+        if (PreyDetected)
         {
             if(IsHunting)
             {
@@ -350,8 +426,10 @@ public class NPC : Pawn
 
         // Note: In the UpdatePathDirection-function must be run at least once per frame.
         Vector3 MoveDirection = MovePath.UpdatePathDirection(transform.position, Controller.radius);
-        if (UseStraightLine && !Physics.Raycast(HeadTransform.position, (TargetLocation - HeadTransform.position).normalized, (TargetLocation - HeadTransform.position).magnitude, ViewBlockers))
+        if (UseStraightLine && !Physics.Raycast(HeadTransform.position, (TargetLocation - HeadTransform.position).normalized, (TargetLocation - HeadTransform.position).magnitude, ViewBlockers)
+            && !Physics.Raycast(BaseTransform.position, (TargetLocation - BaseTransform.position).normalized, (TargetLocation - BaseTransform.position).magnitude, ViewBlockers))
         {
+            
             MoveDirection = TargetDirection;
         }
 
@@ -398,6 +476,13 @@ public class NPC : Pawn
             {
                 Prey = GameObject.FindGameObjectWithTag("Player");
             }
+            return;
+        }
+
+        // Override PreyDetection if hit
+        if(WasHit)
+        {
+            PreyDetected = true;
             return;
         }
 
@@ -464,8 +549,10 @@ public class NPC : Pawn
 
     }
 
+
     protected void StartNPCDeath()
     {
         Controller.enabled = false;
+        Instantiate(DeathVoiceEvent, transform.position, transform.rotation);
     }
 }
