@@ -59,6 +59,12 @@ public class Player : Pawn {
     #region Player components
     [Header("Player Components")]
     [SerializeField]
+    private GameObject m_PlayerHands;
+    public GameObject PlayerHands
+    {
+        get { return m_PlayerHands; }
+    }
+    [SerializeField]
     private PauseMenu m_PauseScript;
     private PauseMenu PauseScript
     {
@@ -291,12 +297,13 @@ public class Player : Pawn {
             Fader.FadeIn();
     }
 	
+    
+
 	protected override void Update ()
     {
         base.Update();
 
         UseItems();
-        UpdateHeadBob();
 
         if (InputPause)
         {
@@ -316,8 +323,18 @@ public class Player : Pawn {
             Debug.Log(Health.ToString());
         }
     }
-    
-    
+    protected override void FixedUpdate()
+    {
+
+        
+        base.FixedUpdate();
+
+        UpdatePlayerView();
+
+
+        Fatigue += (IsRunning ? 0.25f : -0.15f) * Time.fixedDeltaTime;
+    }
+
     protected override void UpdateInput()
     {
         if (!IsAlive || (PauseScript != null && PauseScript.IsPaused))
@@ -346,12 +363,7 @@ public class Player : Pawn {
         InputPause = Input.GetButtonDown("Menu");
 
     }
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
-
-        Fatigue += (IsRunning ? 0.25f : -0.15f) * Time.fixedDeltaTime;
-    }
+    
 
     protected virtual void UseItems()
     {
@@ -404,7 +416,7 @@ public class Player : Pawn {
         }
     }
     
-    protected void UpdateHeadBob()
+    protected void UpdatePlayerView()
     {
         Quaternion HeadBob = HeadBobAnchor;
 
@@ -412,8 +424,24 @@ public class Player : Pawn {
         EulerBob.x += Mathf.Sin(Time.realtimeSinceStartup * HeadBobFrequency) * HeadBobAngle;
 
         HeadBob.eulerAngles = EulerBob;
-
+        
         Cam.transform.rotation = HeadBob;
+
+
+        Vector3 HandsTargetPos = Cam.transform.position;
+        Quaternion HandsTargetRot = Cam.transform.rotation;
+
+        if(IsRunning)
+        {
+            HandsTargetRot.eulerAngles += new Vector3(6f, 0f, 0f);
+            //HandsTargetPos += new Vector3(0f, -0.1f, 0f);
+        }
+
+        PlayerHands.transform.position = Vector3.Lerp(PlayerHands.transform.position, HandsTargetPos, 1.0f);
+        // Limit the rotation from the Camera by 25 degrees
+        PlayerHands.transform.rotation = Quaternion.RotateTowards(HandsTargetRot, PlayerHands.transform.rotation, 25f);
+        // Lerp towards the camera rotation by 18%
+        PlayerHands.transform.rotation = Quaternion.Slerp(PlayerHands.transform.rotation, HandsTargetRot, 0.18f);
     }
 
     public void DamagePlayer(float a_RawDamage, Vector3 a_FromPosition)

@@ -483,6 +483,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &125836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 425588}
+  m_Layer: 14
+  m_Name: Hands
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &125884
 GameObject:
   m_ObjectHideFlags: 1
@@ -880,7 +895,7 @@ GameObject:
   - 23: {fileID: 2395740}
   - 54: {fileID: 5478568}
   m_Layer: 0
-  m_Name: stick
+  m_Name: LanternPivotConnection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1979,6 +1994,7 @@ Transform:
   m_Children:
   - {fileID: 495488}
   - {fileID: 444016}
+  - {fileID: 425588}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &401500
@@ -2305,7 +2321,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.712, z: -0.099998474}
+  m_LocalPosition: {x: 0, y: 0.7, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449570}
@@ -2396,13 +2412,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.054, y: -1.951, z: 0.049}
+  m_LocalPosition: {x: -0.054, y: -1.939, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 415806}
   - {fileID: 450742}
   - {fileID: 424888}
-  m_Father: {fileID: 449570}
+  m_Father: {fileID: 425588}
   m_RootOrder: 0
 --- !u!4 &422720
 Transform:
@@ -2429,7 +2445,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 449570}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!4 &424888
 Transform:
   m_ObjectHideFlags: 1
@@ -2455,6 +2471,20 @@ Transform:
   - {fileID: 425950}
   m_Father: {fileID: 471026}
   m_RootOrder: 0
+--- !u!4 &425588
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.712, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 422350}
+  - {fileID: 459894}
+  m_Father: {fileID: 400248}
+  m_RootOrder: 2
 --- !u!4 &425928
 Transform:
   m_ObjectHideFlags: 1
@@ -2824,8 +2854,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 422350}
-  - {fileID: 459894}
   - {fileID: 424338}
   m_Father: {fileID: 418016}
   m_RootOrder: 0
@@ -2953,10 +2981,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143092}
   m_LocalRotation: {x: 0.08104223, y: 0, z: 0, w: -0.99671066}
-  m_LocalPosition: {x: -0.551, y: -0.223, z: -0.928}
+  m_LocalPosition: {x: -0.551, y: 0.48900002, z: -1.0279984}
   m_LocalScale: {x: 1, y: 1, z: 2.2550268}
   m_Children: []
-  m_Father: {fileID: 449570}
+  m_Father: {fileID: 425588}
   m_RootOrder: 1
 --- !u!4 &460392
 Transform:
@@ -3818,7 +3846,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5137363, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.12799963, y: -0.083274424, z: 0.60418075}
+  m_ConnectedAnchor: {x: 0.12799963, y: -0.790396, z: 0.59823227}
   m_UseSpring: 1
   m_Spring:
     spring: 350
@@ -4686,6 +4714,7 @@ MonoBehaviour:
   m_ItemLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  m_PlayerHands: {fileID: 125836}
   m_PauseScript: {fileID: 11494136}
   m_GameOverScript: {fileID: 11441382}
   m_HealthBar:

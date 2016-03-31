@@ -600,7 +600,7 @@ public abstract class Pawn : MonoBehaviour
         Vector2 MoveAdd = InputMoveDirection * Acceleration * a_DeltaTime * (IsGrounded ? 1.00f : AirControl);
         PlanarSpeed *= Mathf.Pow(1f - Decay * (IsGrounded ? 1.00f : AirControl), a_DeltaTime);
 
-        if (MoveAdd == Vector2.zero || PlanarSpeed > MaxSpeed)
+        if (MoveAdd == Vector2.zero || PlanarSpeed > MaxSpeed || (InputSprint && PlanarForwardVelocity.y < -((MaxSpeed - 0.05f) / SprintSpeedMultiplier)))
         {
             if (IsGrounded)
             {
