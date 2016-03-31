@@ -18,6 +18,7 @@ public class GameOverMenu : MonoBehaviour {
         {
             m_Visible = value;
             Cursor.visible = value;
+            Cursor.lockState = value ? CursorLockMode.Confined : CursorLockMode.Locked;
             GameOverMenuObject.SetActive(value);
         }
     }
