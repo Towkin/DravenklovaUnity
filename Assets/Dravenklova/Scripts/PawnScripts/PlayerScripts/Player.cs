@@ -215,6 +215,48 @@ public class Player : Pawn {
     }
     #endregion
 
+    #region Player weapon attributes
+    [Header("Player Weapon Attributes")]
+    [SerializeField]
+    private Transform m_WeaponArm;
+    public Transform WeaponArm
+    {
+        get { return m_WeaponArm; }
+    }
+    [SerializeField]
+    private Transform m_WeaponArmDefault;
+    [SerializeField]
+    private Transform m_WeaponArmReload;
+    [SerializeField]
+    private Transform m_WeaponArmAim;
+
+    public Transform WeaponArmTarget
+    {
+        get
+        {
+            if (EquippedWeapon)
+            {
+                if (EquippedWeapon.IsReloading)
+                {
+                    return m_WeaponArmReload;
+                }
+                else if (IsAiming)
+                {
+                    return m_WeaponArmAim;
+                }
+                else
+                {
+                    return m_WeaponArmDefault;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+    #endregion
+
     #region Player headbob
     [Header("Headbobbing effects")]
     [SerializeField]
@@ -352,7 +394,8 @@ public class Player : Pawn {
             InputAim = false;
             InputUse = false;
             InputAttack = false;
-            InputReload = false;
+            InputReloadBegin = false;
+            InputReloadEnd = false;
             InputView = Vector2.zero;
         }
         else
@@ -363,7 +406,8 @@ public class Player : Pawn {
             InputAim = Input.GetButton("Aim");
             InputUse = Input.GetButtonDown("Use");
             InputAttack = Input.GetButtonDown("Attack");
-            InputReload = Input.GetButtonDown("Reload");
+            InputReloadBegin = Input.GetButtonDown("Reload");
+            InputReloadEnd = Input.GetButtonUp("Reload");
             InputView = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
 
@@ -449,6 +493,12 @@ public class Player : Pawn {
         PlayerHands.transform.rotation = Quaternion.RotateTowards(HandsTargetRot, PlayerHands.transform.rotation, 25f);
         // Lerp towards the camera rotation by 18%
         PlayerHands.transform.rotation = Quaternion.Slerp(PlayerHands.transform.rotation, HandsTargetRot, 0.18f);
+
+
+
+        WeaponArm.localPosition = Vector3.Lerp(WeaponArm.localPosition, WeaponArmTarget.localPosition, 0.25f);
+        WeaponArm.localRotation = Quaternion.Slerp(WeaponArm.localRotation, WeaponArmTarget.localRotation, 0.25f);
+
     }
 
     public void DamagePlayer(float a_RawDamage, Vector3 a_FromPosition)

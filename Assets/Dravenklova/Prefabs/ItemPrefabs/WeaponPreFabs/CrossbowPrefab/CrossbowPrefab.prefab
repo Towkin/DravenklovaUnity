@@ -48,7 +48,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &156844
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -101,6 +101,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 407840}
   - 114: {fileID: 11421370}
+  - 114: {fileID: 11458174}
   m_Layer: 0
   m_Name: CrossbowPrefab
   m_TagString: Untagged
@@ -134,7 +135,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 422242}
-  - {fileID: 426366}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &419550
@@ -170,12 +170,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156102}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.04538032, y: 0.010177262, z: 0.0004623327, w: 0.9989179}
+  m_LocalPosition: {x: 0.0126, y: 0.0356, z: -0.195}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 420216}
   - {fileID: 443058}
+  - {fileID: 426366}
   m_Father: {fileID: 407840}
   m_RootOrder: 0
 --- !u!4 &426366
@@ -184,20 +185,20 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156844}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0, y: 0.0427, z: -0.0628}
+  m_LocalRotation: {x: -0.000047122878, y: 0.9999895, z: 0.0045884117, w: -0.000000011818517}
+  m_LocalPosition: {x: 0.0013000005, y: 0.0413, z: -0.063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 407840}
-  m_RootOrder: 1
+  m_Father: {fileID: 422242}
+  m_RootOrder: 2
 --- !u!4 &430676
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132706}
-  m_LocalRotation: {x: 0.025371842, y: -0.0002929834, z: 0.99961144, w: 0.011543094}
-  m_LocalPosition: {x: -0.16534, y: -0.033749957, z: -0.36797}
+  m_LocalRotation: {x: 0.11299025, y: -0.0013048432, z: 0.993529, w: 0.011472894}
+  m_LocalPosition: {x: -0.21, y: -0.033, z: -0.343}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 420216}
@@ -256,13 +257,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GlowRenderers: []
   m_HighLightTimerMax: 0.1
-  m_GlowShader: {fileID: 0}
+  m_GlowShader: {fileID: 101, guid: 0000000000000000f000000000000000, type: 0}
+  m_Handle: {fileID: 407840}
   m_BoltTemplateWood: {fileID: 101778, guid: 6e26289f2cb443d4bac7e0c402c3c18d, type: 2}
   m_BoltSpawnLocation: {fileID: 156844}
+  m_StringTransform: {fileID: 419550}
+  m_ReloadTime: 2
   m_BoltFireAudioEvent: {fileID: 194660, guid: b395573769ddb6244afab628d63f0eaa, type: 2}
-  m_ReloadAudioEvent: {fileID: 0}
-  m_BoltImpulse: 50
-  m_IsLoaded: 0
+  m_ReloadAudioEvent: {fileID: 11458174}
+  m_BoltImpulse: 40
+--- !u!114 &11458174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Weapon/Crossbow/reload
+  PlayEvent: 0
+  StopEvent: 2
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Params: []
 --- !u!137 &13726108
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

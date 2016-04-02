@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 public class Crossbow : Weapon
 {
+    #region Bolt and String
     [SerializeField]
     private GameObject m_BoltTemplateWood;
     public GameObject BoltTemplateWood
@@ -15,6 +15,12 @@ public class Crossbow : Weapon
     private GameObject BoltSpawnLocation
     {
         get { return m_BoltSpawnLocation; }
+    }
+    private GameObject m_LoadedBolt;
+    private GameObject LoadedBolt
+    {
+        get { return m_LoadedBolt; }
+        set { m_LoadedBolt = value; }
     }
     [SerializeField]
     private Transform m_StringTransform;
@@ -33,13 +39,29 @@ public class Crossbow : Weapon
     {
         get { return m_StringLoadedLocalPosition + m_StringFiredOffset; }
     }
-
-    private GameObject m_LoadedBolt;
-    private GameObject LoadedBolt
+    private Vector3 CurrentStringTarget
     {
-        get { return m_LoadedBolt; }
-        set { m_LoadedBolt = value; }
+        get { return IsLoaded ? StringLoadedLocalPosition : StringFiredLocalPosition; }
     }
+    #endregion
+
+    #region Reload
+    private float m_ReloadStartTime = 0f;
+    public float ReloadStartTime
+    {
+        get { return m_ReloadStartTime; }
+        protected set { m_ReloadStartTime = value; }
+    }
+    [SerializeField]
+    private float m_ReloadTime = 2f;
+    public float ReloadTime
+    {
+        get { return m_ReloadTime; }
+    }
+    
+    #endregion
+
+    #region Audio
     [SerializeField]
     private GameObject m_BoltFireAudioEvent;
     public GameObject BoltFireAudioEvent
@@ -47,12 +69,12 @@ public class Crossbow : Weapon
         get { return m_BoltFireAudioEvent; }
     }
     [SerializeField]
-    private GameObject m_ReloadAudioEvent;
-    public GameObject ReloadAudioEvent
+    private FMODUnity.StudioEventEmitter m_ReloadAudioEvent;
+    public FMODUnity.StudioEventEmitter ReloadAudioEvent
     {
         get { return m_ReloadAudioEvent; }
     }
-
+    #endregion
 
     [SerializeField]
     private float m_BoltImpulse = 50f;
@@ -62,14 +84,7 @@ public class Crossbow : Weapon
         set { m_BoltImpulse = value; }
     }
 
-    [SerializeField]
-    private bool m_IsLoaded = false;
-    public bool IsLoaded
-    {
-        get { return m_IsLoaded; }
-        set { m_IsLoaded = value; }
-    }
-
+    
     protected override void Start()
     {
         base.Start();
@@ -93,7 +108,9 @@ public class Crossbow : Weapon
 
             Instantiate(BoltFireAudioEvent, transform.position, transform.rotation);
 
-            StringTransform.localPosition = StringFiredLocalPosition;
+            // Notch the string up.
+            StringTransform.localPosition += new Vector3(0.0f, 0.01f, 0.0f);
+
             IsLoaded = false;
         }
         else
@@ -103,23 +120,60 @@ public class Crossbow : Weapon
         }
     }
 
-    public override void Reload()
+    public override void BeginReload()
     {
-        if(!IsLoaded)
+        if(!IsLoaded && User.CrossbowAmmo > 0)
         {
-            LoadedBolt = Instantiate<GameObject>(BoltTemplateWood);
-            LoadedBolt.GetComponent<Rigidbody>().isKinematic = true;
-            LoadedBolt.GetComponent<Collider>().enabled = false;
-            LoadedBolt.transform.position = BoltSpawnLocation.transform.position;
-            LoadedBolt.transform.rotation = BoltSpawnLocation.transform.rotation * LoadedBolt.transform.rotation;
-            LoadedBolt.transform.parent = transform;
-            SetPrefabRenderLayer(LoadedBolt.transform, gameObject.layer);
+            IsReloading = true;
+            ReloadStartTime = Time.realtimeSinceStartup;
 
-            StringTransform.localPosition = StringLoadedLocalPosition;
-            IsLoaded = true;
+            // Normal Reload sound: 0.
+            ReloadAudioEvent.SetParameter("reload", 0f);
+            ReloadAudioEvent.Play();
         }
     }
-    
+    public override void StopReload()
+    {
+        if(IsReloading)
+        {
+            if(Time.realtimeSinceStartup - ReloadStartTime > ReloadTime)
+            {
+                User.CrossbowAmmo -= 1;
+                LoadedBolt = Instantiate<GameObject>(BoltTemplateWood);
+                LoadedBolt.GetComponent<Rigidbody>().isKinematic = true;
+                LoadedBolt.GetComponent<Collider>().enabled = false;
+                LoadedBolt.transform.position = BoltSpawnLocation.transform.position;
+                LoadedBolt.transform.rotation = BoltSpawnLocation.transform.rotation * LoadedBolt.transform.rotation;
+                LoadedBolt.transform.parent = transform;
+                SetPrefabRenderLayer(LoadedBolt.transform, gameObject.layer);
+
+                StringTransform.localPosition = StringLoadedLocalPosition;
+                IsLoaded = true;
+                IsReloading = false;
+            }
+            // Failed reload
+            else
+            {
+                // Reload fail sound: 1.
+                ReloadAudioEvent.SetParameter("reload", 1f);
+                IsReloading = false;
+            }
+        }
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        
+        StringTransform.localPosition = Vector3.LerpUnclamped(StringTransform.localPosition, CurrentStringTarget, 1.65f);
+
+        if (IsReloading && Time.realtimeSinceStartup - ReloadStartTime > ReloadTime)
+        {
+            StopReload();
+        }
+    }
+
+
     private void SetPrefabRenderLayer(Transform a_Parent, int a_Layer)
     {
         a_Parent.gameObject.layer = a_Layer;

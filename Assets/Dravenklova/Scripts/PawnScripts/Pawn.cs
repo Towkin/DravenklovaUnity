@@ -52,8 +52,8 @@ public abstract class Pawn : MonoBehaviour
         get
         {
             float Mult = 1f;
-            Mult *= InputSprint ? m_SprintSpeedMultiplier : 1f;
-            Mult *= InputAim ? m_AimSpeedMultiplier : 1f;
+            Mult *= (InputSprint && !IsAiming && (EquippedWeapon == null || !EquippedWeapon.IsReloading)) ? m_SprintSpeedMultiplier : 1f;
+            Mult *= IsAiming ? m_AimSpeedMultiplier : 1f;
             return Mult;
         }
     }
@@ -433,11 +433,17 @@ public abstract class Pawn : MonoBehaviour
         get { return m_InputAttack; }
         protected set { m_InputAttack = value; }
     }
-    private bool m_InputReload = false;
-    public bool InputReload
+    private bool m_InputReloadBegin = false;
+    public bool InputReloadBegin
     {
-        get { return m_InputReload; }
-        protected set { m_InputReload = value; }
+        get { return m_InputReloadBegin; }
+        protected set { m_InputReloadBegin = value; }
+    }
+    private bool m_InputReloadEnd = false;
+    public bool InputReloadEnd
+    {
+        get { return m_InputReloadEnd; }
+        protected set { m_InputReloadEnd = value; }
     }
     private bool m_InputAim = false;
     public bool InputAim
@@ -478,16 +484,44 @@ public abstract class Pawn : MonoBehaviour
         set { m_AimPrecision = value; }
     }
 
-    
+
     #endregion
 
     #region Weapon Data
+
+    [SerializeField]
+    private Transform m_WeaponSlot;
+    public Transform WeaponSlot
+    {
+        get { return m_WeaponSlot; }
+        protected set { m_WeaponSlot = value; }
+    }
+
 
     private Weapon m_EquippedWeapon;
     public Weapon EquippedWeapon
     {
         get { return m_EquippedWeapon; }
-        set { m_EquippedWeapon = value; }
+        set
+        {
+            if (EquippedWeapon)
+            {
+                // Unequip current weapon and put it on the same place the other weapon was at.
+                EquippedWeapon.Handle.parent = value.Handle.parent;
+                EquippedWeapon.Handle.position = value.Handle.position;
+                EquippedWeapon.User = null;
+            }
+
+            // Set the new weapon as equipped weapon.
+            m_EquippedWeapon = value;
+
+            // Set the newly equipped weapons transform.
+            EquippedWeapon.Handle.parent = WeaponSlot;
+            EquippedWeapon.Handle.localPosition = Vector3.zero;
+            EquippedWeapon.Handle.localRotation = new Quaternion();
+
+            EquippedWeapon.User = this;
+        }
     }
 
     private enum WeaponType : int { None, Crossbow, Claws }
@@ -553,7 +587,7 @@ public abstract class Pawn : MonoBehaviour
     }
 
 
-    public enum WeaponAction : int { Attack, Reload };
+    public enum WeaponAction : int { Attack, ReloadBegin, ReloadEnd };
     protected void UseWeapon(WeaponAction a_Action)
     {
         if(EquippedWeapon == null)
@@ -564,31 +598,31 @@ public abstract class Pawn : MonoBehaviour
         switch(a_Action)
         {
             case WeaponAction.Attack:
-                {
-                    EquippedWeapon.Attack();
-                    break;
-                }
-            case WeaponAction.Reload:
-                {
-                    // TODO: Refine this.
-                    if (EquippedAmmo > 0)
-                    {
-                        EquippedWeapon.Reload();
-                        EquippedAmmo--;
-                    }
-                    break;
-                }
+            {
+                EquippedWeapon.Attack();
+                break;
+            }
+            case WeaponAction.ReloadBegin:
+            {
+                EquippedWeapon.BeginReload();
+                break;
+            }
+            case WeaponAction.ReloadEnd:
+            {
+                EquippedWeapon.StopReload();
+                break;
+            }
             default:
-                {
-                    Debug.Log("You shouldn't be here... How the hell did you input an invalid enum value?");
-                    break;
-                }
+            {
+                Debug.Log("You shouldn't be here... How the hell did you input an invalid enum value?");
+                break;
+            }
         }
     }
 
     protected virtual void Aim()
     {
-        
+        IsAiming = InputAim;
     }
 
     protected abstract void UpdateInput();
@@ -632,8 +666,6 @@ public abstract class Pawn : MonoBehaviour
         {
             Velocity += PawnGravity * a_DeltaTime;
         }
-        
-        
         
         if (IsJumping)
         {
@@ -728,9 +760,13 @@ public abstract class Pawn : MonoBehaviour
         {
             UseWeapon(WeaponAction.Attack);
         }
-        else if (InputReload)
+        else if (InputReloadBegin)
         {
-            UseWeapon(WeaponAction.Reload);
+            UseWeapon(WeaponAction.ReloadBegin);
+        }
+        else if (InputReloadEnd)
+        {
+            UseWeapon(WeaponAction.ReloadEnd);
         }
     }
 }
