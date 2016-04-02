@@ -139,6 +139,12 @@ public class Player : Pawn {
     {
         get { return m_PlayerZoomAudio; }
     }
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter m_PlayerLanternFireAudio;
+    private FMODUnity.StudioEventEmitter PlayerLanternFireAudio
+    {
+        get { return m_PlayerLanternFireAudio; }
+    }
 
     public override float Health
     {
@@ -382,6 +388,7 @@ public class Player : Pawn {
 
 
         Fatigue += (IsRunning ? 0.25f : -0.15f) * Time.fixedDeltaTime;
+        PlayerLanternFireAudio.SetParameter("speed", IsRunning ? 1f : 0f);
     }
 
     protected override void UpdateInput()
@@ -484,7 +491,7 @@ public class Player : Pawn {
 
         if(IsRunning)
         {
-            HandsTargetRot.eulerAngles += new Vector3(6f, 0f, 0f);
+            HandsTargetRot.eulerAngles += new Vector3(7f, 0f, 0f);
             //HandsTargetPos += new Vector3(0f, -0.1f, 0f);
         }
 

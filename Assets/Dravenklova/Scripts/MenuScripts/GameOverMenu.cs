@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameOverMenu : MonoBehaviour {
+public class GameOverMenu : DravenklovaMenu {
 
     [SerializeField]
     private GameObject m_GameOverMenuObject;
@@ -26,11 +26,13 @@ public class GameOverMenu : MonoBehaviour {
     
     public void RestartButtonPressed()
     {
+        ButtonPressAudio.Play();
         UnityEngine.SceneManagement.SceneManager.LoadScene("LoadingScene");
     }
 
     public void QuitButtonPressed()
     {
+        ButtonPressAudio.Play();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }

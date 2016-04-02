@@ -1090,6 +1090,7 @@ GameObject:
   - 114: {fileID: 11494136}
   - 114: {fileID: 11441382}
   - 114: {fileID: 11471988}
+  - 114: {fileID: 11484596}
   m_Layer: 0
   m_Name: PlayerScript
   m_TagString: Untagged
@@ -1425,6 +1426,22 @@ GameObject:
   - 114: {fileID: 11430722}
   m_Layer: 0
   m_Name: AmbianceAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162380
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 434994}
+  - 114: {fileID: 11456320}
+  m_Layer: 8
+  m_Name: LanternFireAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2737,8 +2754,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136436}
-  m_LocalRotation: {x: 0.1751531, y: -0.044581972, z: 0.013253356, w: 0.983442}
-  m_LocalPosition: {x: -0.0007991076, y: -0.0022719242, z: 0.036299042}
+  m_LocalRotation: {x: 0.32534003, y: 0.05823787, z: 0.032311723, w: 0.94324875}
+  m_LocalPosition: {x: -0.0007816474, y: -0.002260225, z: 0.036305785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 446024}
@@ -2805,6 +2822,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 402296}
   m_RootOrder: 0
+--- !u!4 &434994
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162380}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 478818}
+  m_RootOrder: 1
 --- !u!4 &435864
 Transform:
   m_ObjectHideFlags: 1
@@ -3436,8 +3465,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114442}
-  m_LocalRotation: {x: 0.21930896, y: -0.4614292, z: -0.056721404, w: 0.85777}
-  m_LocalPosition: {x: -0.023391753, y: -0.006980383, z: 0.03805596}
+  m_LocalRotation: {x: 0.17180158, y: -0.55471927, z: -0.0176158, w: 0.8139168}
+  m_LocalPosition: {x: -0.023393031, y: -0.0069775013, z: 0.038060557}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404870}
@@ -3454,6 +3483,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449088}
+  - {fileID: 434994}
   m_Father: {fileID: 440740}
   m_RootOrder: 1
 --- !u!4 &479390
@@ -4776,6 +4806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58826fe1ec14d1240a7bd6790b0b34d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ButtonPressAudio: {fileID: 11484596}
   m_GameOverMenuObject: {fileID: 188546}
 --- !u!114 &11449760
 MonoBehaviour:
@@ -4792,6 +4823,24 @@ MonoBehaviour:
   m_TrackerDeltaTime: 0.5
   m_PlayerCameraObject: {fileID: 161634}
   m_LevelGenerator: {fileID: 0}
+--- !u!114 &11456320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Lamp/fire
+  PlayEvent: 1
+  StopEvent: 2
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Params: []
 --- !u!114 &11460666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5018,6 +5067,7 @@ MonoBehaviour:
   m_Controller: {fileID: 14373188}
   m_SprintSpeedMultiplier: 1.9
   m_AimSpeedMultiplier: 0.164
+  m_ReloadSpeedMultipler: 0.37
   m_MaxSpeed: 2.5
   m_Acceleration: 25
   m_Deacceleration: 80
@@ -5057,6 +5107,7 @@ MonoBehaviour:
   m_PlayerHurtAudio: {fileID: 11477584}
   m_PlayerDeathAudio: {fileID: 11409964}
   m_PlayerZoomAudio: {fileID: 11467674}
+  m_PlayerLanternFireAudio: {fileID: 11456320}
   m_StartingWeapon: {fileID: 11432660}
   m_StartingWeaponAmmo: 5
   m_Cam: {fileID: 2021882}
@@ -5073,6 +5124,24 @@ MonoBehaviour:
   m_HeadBobIdle: 0
   m_HeadBobWalk: 0.25
   m_HeadBobRun: 1
+--- !u!114 &11484596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Ui/buttonClick
+  PlayEvent: 0
+  StopEvent: 0
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Params: []
 --- !u!114 &11485416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5236,6 +5305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3e6b3869696f64ebe340127ff739e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ButtonPressAudio: {fileID: 11484596}
   m_PauseMenuObject: {fileID: 173922}
 --- !u!114 &11498200
 MonoBehaviour:

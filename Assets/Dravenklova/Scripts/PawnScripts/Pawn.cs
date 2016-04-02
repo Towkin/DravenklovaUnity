@@ -46,14 +46,22 @@ public abstract class Pawn : MonoBehaviour
     {
         get { return m_AimSpeedMultiplier; }
     }
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float m_ReloadSpeedMultipler = 0.5f;
+    private float ReloadSpeedMultiplier
+    {
+        get { return m_ReloadSpeedMultipler; }
+    }
 
     private float MaxSpeedMultiplier
     {
         get
         {
             float Mult = 1f;
-            Mult *= (InputSprint && !IsAiming && (EquippedWeapon == null || !EquippedWeapon.IsReloading)) ? m_SprintSpeedMultiplier : 1f;
-            Mult *= IsAiming ? m_AimSpeedMultiplier : 1f;
+            Mult *= (InputSprint && !IsAiming && (EquippedWeapon == null || !EquippedWeapon.IsReloading)) ? SprintSpeedMultiplier : 1f;
+            Mult *= IsAiming ? AimSpeedMultiplier : 1f;
+            Mult *= (EquippedWeapon != null && EquippedWeapon.IsReloading) ? ReloadSpeedMultiplier : 1f;
             return Mult;
         }
     }

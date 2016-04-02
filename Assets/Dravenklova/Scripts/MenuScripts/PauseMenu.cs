@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PauseMenu : MenuParent {
+public class PauseMenu : DravenklovaMenu {
 
     [SerializeField]
     private GameObject m_PauseMenuObject;
@@ -31,11 +31,13 @@ public class PauseMenu : MenuParent {
     
     public void ResumeButtonPressed()
     {
+        ButtonPressAudio.Play();
         IsPaused = false;
     }
 
     public void QuitButtonPressed()
     {
+        ButtonPressAudio.Play();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
