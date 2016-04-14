@@ -434,7 +434,7 @@ public class LevelDigger : MonoBehaviour {
         }
 
         Graph.searchTag = "AINode";
-        Graph.maxDistance = 25f;
+        Graph.maxDistance = 5f;
         Graph.limits = new Vector3(0.0f, 1.0f, 0.0f);
         Graph.raycast = true;
         Graph.thickRaycast = true;

@@ -60,6 +60,9 @@ MonoBehaviour:
   - {fileID: 148464, guid: 18fecd6eab50cd94dab0058012e171ed, type: 2}
   - {fileID: 147656, guid: f4780a6e4d619354399f250c3599a407, type: 2}
   - {fileID: 129560, guid: b874e2654dd802e488fbfde8af42542f, type: 2}
+  - {fileID: 121540, guid: ba5a6575c09d2a7408e1caf772931d02, type: 2}
+  - {fileID: 121266, guid: 6754682506ce5614e9f9ea73c7d1c5c9, type: 2}
+  - {fileID: 164608, guid: 06ee8f15860c16f42bfe9cc412bb3c3a, type: 2}
   - {fileID: 101382, guid: e5e7b9493c7ac8d4aa17cb714ca990b8, type: 2}
   - {fileID: 177596, guid: 55130ecb9b40f224e8abd0f22bc78e3b, type: 2}
   - {fileID: 196070, guid: 555ee10c7de3e274483a5dad2351d2e7, type: 2}
@@ -71,6 +74,10 @@ MonoBehaviour:
   - {fileID: 127708, guid: 4fa65a644d8609b47877218e12c6ec71, type: 2}
   - {fileID: 119058, guid: 5a7b6a7d826ca4d4c8d21c80d9ba315c, type: 2}
   - {fileID: 193450, guid: 05ac203ac790afd4296b11c13cdcd245, type: 2}
+  - {fileID: 144522, guid: 35dee134f959f4c44971cbd06e72b2d3, type: 2}
+  - {fileID: 187598, guid: 6fd2d8324fb0a654fa5d77749be047c4, type: 2}
+  - {fileID: 130828, guid: cb7b798b4bec8f746899118ff506809c, type: 2}
+  - {fileID: 181628, guid: 8157f1172fcdd224e93b08ed0f3a4869, type: 2}
   m_EndRooms:
   - {fileID: 193092, guid: ef3cdb51db8e39e48bab9774d408c4da, type: 2}
   - {fileID: 117482, guid: 738107428ae2dfb49abde5da9ca6420c, type: 2}
@@ -78,6 +85,8 @@ MonoBehaviour:
   - {fileID: 189438, guid: d0dda9b3aa73f6f42ae75d425c15de4c, type: 2}
   - {fileID: 186144, guid: a1207f14df84a1f4d99ed1bdf9132f61, type: 2}
   - {fileID: 128200, guid: 83900a4404c87fc48be54ddaba5c0b04, type: 2}
+  - {fileID: 144340, guid: 5c651a5d744ab274b9e93f9f418a02fb, type: 2}
+  - {fileID: 125382, guid: 467bda2e504112743abf54c0a2f87815, type: 2}
   m_EndWalls:
   - {fileID: 128100, guid: 0f47475b1f419874f91111accaceef1c, type: 2}
   - {fileID: 164088, guid: f0c9c91551e848b4e8aa6d6aed50e0bb, type: 2}
@@ -94,8 +103,8 @@ MonoBehaviour:
   m_ItemMultiplier: 2
   m_EnemyPrefabs:
   - {fileID: 160680, guid: 6a3b32e7e0bfe544189b0fa1c6ab3bf8, type: 2}
-  m_EnemyMultiplier: 0.75
-  m_EnemyMultiplierAdd: 0.35
+  m_EnemyMultiplier: 0.35
+  m_EnemyMultiplierAdd: 0.55
   m_PathfinderMask:
     serializedVersion: 2
     m_Bits: 7169
