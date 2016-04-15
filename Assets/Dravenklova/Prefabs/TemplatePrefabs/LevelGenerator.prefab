@@ -78,6 +78,9 @@ MonoBehaviour:
   - {fileID: 187598, guid: 6fd2d8324fb0a654fa5d77749be047c4, type: 2}
   - {fileID: 130828, guid: cb7b798b4bec8f746899118ff506809c, type: 2}
   - {fileID: 181628, guid: 8157f1172fcdd224e93b08ed0f3a4869, type: 2}
+  - {fileID: 114278, guid: 53fcc3fa33e83ed4fae46605774f4575, type: 2}
+  - {fileID: 179322, guid: bf23373686b48e848ac259ca09450efb, type: 2}
+  - {fileID: 136308, guid: ea463029c346e124785db2e6df1c7448, type: 2}
   m_EndRooms:
   - {fileID: 193092, guid: ef3cdb51db8e39e48bab9774d408c4da, type: 2}
   - {fileID: 117482, guid: 738107428ae2dfb49abde5da9ca6420c, type: 2}
