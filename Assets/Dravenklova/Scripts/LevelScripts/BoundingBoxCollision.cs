@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Emanuel Strömgren
+
 public static class BoundingBoxCollision {
 
     public static bool TestCollision(Transform aBoxTransformA, Vector3 aBoxSizeA, Transform aBoxTransformB, Vector3 aBoxSizeB)

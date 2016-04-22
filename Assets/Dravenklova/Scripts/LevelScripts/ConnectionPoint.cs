@@ -2,6 +2,8 @@
 //using System.Collections.Generic;
 using System;
 
+// Emanuel Strömgren
+
 public class ConnectionPoint : MonoBehaviour, IComparable<ConnectionPoint> {
 
     private bool m_Linked = false;

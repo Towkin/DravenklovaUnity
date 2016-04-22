@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Jens Bak
+// Emanuel Strömgren
+
 public class GameOverMenu : DravenklovaMenu {
 
     [SerializeField]

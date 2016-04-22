@@ -3,6 +3,8 @@ using System.Collections;
 using FMODUnity;
 using FMOD.Studio;
 
+// Emanuel Strömgren
+
 public class EmitterScript : MonoBehaviour {
     [EventRef]
     [SerializeField]

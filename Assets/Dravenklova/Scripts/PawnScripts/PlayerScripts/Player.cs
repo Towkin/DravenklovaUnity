@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Emanuel Strömgren
+// Jens Bak
+// Samuel Einheri
+
 public class Player : Pawn {
 
     public override Quaternion ViewRotation
@@ -371,12 +375,13 @@ public class Player : Pawn {
 //#endif
 //            
         }
-
+#if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.B))
         {
             Health -= 0.5f;
             Debug.Log(Health.ToString());
         }
+#endif
     }
     protected override void FixedUpdate()
     {

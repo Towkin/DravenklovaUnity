@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Jens Bak
+// Emanuel Strömgren
+
 public class Crossbow : Weapon
 {
     #region Bolt and String

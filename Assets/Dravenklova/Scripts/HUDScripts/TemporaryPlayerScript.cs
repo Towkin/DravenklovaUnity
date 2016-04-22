@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Samuel Einheri
+
 public class TemporaryPlayerScript : MonoBehaviour {
 
     [SerializeField]

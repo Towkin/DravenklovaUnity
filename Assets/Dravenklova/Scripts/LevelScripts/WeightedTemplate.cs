@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// Emanuel Strömgren
+
 #if UNITY_EDITOR
 using UnityEditor;
 

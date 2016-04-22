@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// Samuel Einheri
+
 public class BarScript : MonoBehaviour
 {
 

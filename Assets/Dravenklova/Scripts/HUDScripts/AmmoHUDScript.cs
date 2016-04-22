@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
+// Emanuel Strömgren
+
 public class AmmoHUDScript : MonoBehaviour {
 
     [SerializeField]

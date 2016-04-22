@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Samuel Einheri
+// Emanuel Strömgren
+
 [RequireComponent(typeof(Collider))]
 public class TriggerActivatable : MonoBehaviour
 {

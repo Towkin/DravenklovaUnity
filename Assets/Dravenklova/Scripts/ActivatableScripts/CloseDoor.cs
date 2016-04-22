@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Samuel Einheri
+
 public class CloseDoor : Activatable
 {
     private Quaternion m_TargetRotation;

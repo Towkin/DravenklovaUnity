@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Jens Bak
+// Emanuel Strömgren
+
 public abstract class Weapon : ItemEquip
 {
     private bool m_IsLoaded = false;

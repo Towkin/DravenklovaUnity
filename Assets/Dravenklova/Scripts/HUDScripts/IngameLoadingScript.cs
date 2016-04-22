@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Emanuel Strömgren
+
 public class IngameLoadingScript : MonoBehaviour {
     [SerializeField]
     private GameObject m_LoadingUI;

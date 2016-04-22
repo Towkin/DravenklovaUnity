@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Emanuel Strömgren
+// Jens Bak
+// Samuel Einheri
+// Daniel Samuelsson
+
+
 public abstract class Pawn : MonoBehaviour
 {
     #region Pawn components

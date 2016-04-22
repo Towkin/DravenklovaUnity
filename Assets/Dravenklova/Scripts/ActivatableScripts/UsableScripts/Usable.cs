@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+// Jens Bak
+// Emanuel Strömgren
+
 public abstract class Usable : Activatable
 {
     [SerializeField]

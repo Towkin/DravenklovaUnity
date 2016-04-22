@@ -2,6 +2,9 @@
 using Pathfinding;
 using System.Collections;
 
+// Daniel Samuelsson
+// Emanuel Strömgren
+
 [RequireComponent(typeof(Seeker))]
 public class PathMoveBehaviour : MonoBehaviour
 {

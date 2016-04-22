@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Emanuel Strömgren
+
 public class DamageTrigger : MonoBehaviour {
 
     [SerializeField]

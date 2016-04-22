@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+// Daniel Samuelsson
+// Emanuel Strömgren
+
 [RequireComponent(typeof(Animator))]
 public class NPC : Pawn
 {

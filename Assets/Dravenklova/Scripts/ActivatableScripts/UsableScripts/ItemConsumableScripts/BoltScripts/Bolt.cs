@@ -2,6 +2,9 @@
 using System.Collections;
 using System;
 
+// Jens Bak
+// Emanuel Strömgren
+
 public class Bolt : Consumable
 {
     private Rigidbody BoltBody;

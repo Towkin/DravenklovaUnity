@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Jens Bak
+
 public abstract class MenuParent : MonoBehaviour {
 
     protected int m_ButtonWidth = 200;

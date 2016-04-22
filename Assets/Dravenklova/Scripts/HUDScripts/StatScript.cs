@@ -2,6 +2,9 @@
 using System.Collections;
 using System;
 
+// Samuel Einheri
+
+
 // Doesn't need to be in MonoBehavior, else it won't work the way we want it to do.
 [Serializable]
 public class StatScript 

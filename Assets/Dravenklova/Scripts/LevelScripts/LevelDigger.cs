@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Pathfinding;
 
+// Emanuel Strömgren
+
 public class LevelDigger : MonoBehaviour {
     [SerializeField]
     private bool m_IgnoreBlockerTests = false;

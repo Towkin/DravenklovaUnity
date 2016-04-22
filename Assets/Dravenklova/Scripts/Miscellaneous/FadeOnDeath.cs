@@ -2,6 +2,8 @@
 using System.Collections;
 using System;
 
+// Samuel Einheri (based on guide)
+
 public class FadeOnDeath : MonoBehaviour
 {
     #region Version 1

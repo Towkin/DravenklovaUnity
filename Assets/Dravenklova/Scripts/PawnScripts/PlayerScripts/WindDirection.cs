@@ -4,6 +4,8 @@ using FMODUnity;
 using FMOD.Studio;
 using Pathfinding;
 
+// Emanuel Strömgren
+
 [RequireComponent(typeof(Seeker))]
 public class WindDirection : MonoBehaviour {
 

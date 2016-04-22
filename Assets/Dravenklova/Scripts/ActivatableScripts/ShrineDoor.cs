@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// Emanuel Strömgren
+
 [RequireComponent(typeof(Animator))]
 public class ShrineDoor : Activatable
 {

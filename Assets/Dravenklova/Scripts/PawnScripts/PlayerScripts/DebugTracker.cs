@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 
+// Emanuel Strömgren
+
 public class DebugTracker : MonoBehaviour {
 
     [SerializeField]

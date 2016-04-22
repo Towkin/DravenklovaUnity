@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 
+// Emanuel Strömgren
+
 public class DebugTrackerVisualizer : MonoBehaviour {
     private BinaryFormatter m_Formatter = new BinaryFormatter();
     private BinaryFormatter Formatter

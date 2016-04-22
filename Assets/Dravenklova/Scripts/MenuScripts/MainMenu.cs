@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Jens Bak
+// Emanuel Strömgren
+
 public class MainMenu : DravenklovaMenu
 {
     public void PlayButtonPressed()
